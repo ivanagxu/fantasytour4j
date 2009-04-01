@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- 
 	one job is one table to migrate.
-	every table on mssql with has same name will be dropped and created again.
+	every table on mssql has same name will be dropped and created again.
 	
 	fromTable - mysql table name
 	toTable - mssql table name
