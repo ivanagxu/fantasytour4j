@@ -11,7 +11,7 @@ public class Main {
 	public static void main(String[] args) {
 		Main main = new Main();
 		main.start();
-		System.out.println("update by ubuntu");
+		System.out.println("update by Ivan");
 	}
 
 	public void start() {
