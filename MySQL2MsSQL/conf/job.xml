@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+	one job is one table to migrate.
+	every table on mssql with has same name will be dropped and created again.
+	
+	fromTable - mysql table name
+	toTable - mssql table name
+	field - column of table
+	column - column name
+	type - data type
+	size - data size
+ -->
+<jobs>
+   <job>
+      <fromTable>FORM</fromTable>
+      <toTable>FORM</toTable>
+      <field>
+         <column>id</column>
+         <type>int</type>
+         <size>10</size>
+      </field>
+      <field>
+         <column>barcode</column>
+         <type>String</type>
+         <size>100</size>
+      </field>
+      <field>
+         <column>Print</column>
+         <type>String</type>
+         <size>10</size>
+      </field>
+   </job>   
+   <job>
+      <fromTable>USER</fromTable>
+      <toTable>USER</toTable>
+      <field>
+         <column>UserID</column>
+         <type>String</type>
+         <size>30</size>
+      </field>
+      <field>
+         <column>UserPassword</column>
+         <type>String</type>
+         <size>50</size>
+      </field>
+      <field>
+         <column>UserLevel</column>
+         <type>String</type>
+         <size>50</size>
+      </field>
+      <field>
+         <column>ImageFile</column>
+         <type>String</type>
+         <size>50</size>
+      </field>
+      <field>
+         <column>IDNumber</column>
+         <type>String</type>
+         <size>20</size>
+      </field>
+      <field>
+         <column>DOB</column>
+         <type>String</type>
+         <size>20</size>
+      </field>
+      <field>
+         <column>Gender</column>
+         <type>String</type>
+         <size>10</size>
+      </field>
+      <field>
+         <column>Status</column>
+         <type>String</type>
+         <size>20</size>
+      </field>
+      <field>
+         <column>ErrorCount</column>
+         <type>int</type>
+         <size>1</size>
+      </field>
+      <field>
+         <column>Photo</column>
+         <type>blob</type>
+         <size>1000</size>
+      </field>
+   </job>
+</jobs>

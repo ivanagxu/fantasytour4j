@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Packaging Generator" default="_packaging_generation_">
+<target name="_packaging_generation_" depends="N65540"/>
+<target name="N65540" description="datasync_mysql2mssql.jar">
+<jar destfile="datasync_mysql2mssql.jar" manifest="META-INF/MANIFEST.MF">
+<zipfileset dir="bin"/>
+</jar>
+</target>
+</project>

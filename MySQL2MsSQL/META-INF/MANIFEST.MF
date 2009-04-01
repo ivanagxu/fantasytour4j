@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Created-By: 1.6.0_01 (Sun Microsystems Inc.)
+Main-Class: com.ivan.dbm.DataSynchronization
+Class-Path: ./lib/concurrent-1.3.2.jar ./lib/log4j-1.2.11.jar ./lib/dom4j-1.6.1.jar ./lib/mysql-connector-java-3.1.13-bin.jar ./lib/sqljdbc.jar
+
