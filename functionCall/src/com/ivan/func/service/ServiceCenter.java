@@ -3,7 +3,7 @@ package com.ivan.func.service;
 import java.util.HashMap;
 
 
-public class ServiceCenter {
+public class ServiceCenter implements IServiceCenter{
 	private HashMap<String,Object> services = new HashMap<String,Object>();
 	
 	public Object getServiceByName(String serviceName)

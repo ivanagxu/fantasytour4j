@@ -2,12 +2,13 @@ package com.ivan.func.execute;
 
 import java.lang.reflect.Method;
 
+import com.ivan.func.service.IServiceCenter;
 import com.ivan.func.service.ServiceCenter;
 
 
 public abstract class BaseExecuter implements Executer{
 	
-	protected ServiceCenter serviceCenter = new ServiceCenter();
+	protected IServiceCenter serviceCenter = new ServiceCenter();
 	
 	public Object execute(String serviceName, String methodName,
 			Object[] prameters) {
@@ -44,7 +45,7 @@ public abstract class BaseExecuter implements Executer{
 			String methodName, Object[] prameters) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
 		Object instance = null;
 		Object res = null;
-		instance = getService(className,serviceName,true);
+		instance = getService(className,serviceName,false);
 		
 		if(instance == null) return null;
 
@@ -140,5 +141,9 @@ public abstract class BaseExecuter implements Executer{
 	}
 	protected Object getServiceByName(String serviceName){
 		return serviceCenter.getServiceByName(serviceName);
+	}
+	public void setServiceCenter(IServiceCenter serviceCenter)
+	{
+		this.serviceCenter = serviceCenter;
 	}
 }
