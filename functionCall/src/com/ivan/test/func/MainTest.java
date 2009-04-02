@@ -64,5 +64,23 @@ public class MainTest extends TestCase{
 			if(res != null)
 				System.out.println("result : " + res);
 		}
+		
+		//change service center;
+		
+		simpleExecuter.setServiceCenter(SpringServiceCenter.getInstance());
+		for (int i = 0; i < serverName.length; i++) {
+			Object res = null;
+			try {
+				res = simpleExecuter.execute(classes[i],serverName[i], methods[i], new Object[] { params[i] });
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (InstantiationException e) {
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				e.printStackTrace();
+			}
+			if(res != null)
+				System.out.println("result : " + res);
+		}
 	}
 }
