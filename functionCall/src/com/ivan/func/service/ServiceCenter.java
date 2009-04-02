@@ -4,58 +4,29 @@ import java.util.HashMap;
 
 
 public class ServiceCenter {
-	private static ServiceCenter instance = null;
-	private HashMap services = new HashMap();
-	private ServiceCenter()
+	private HashMap<String,Object> services = new HashMap<String,Object>();
+	
+	public Object getServiceByName(String serviceName)
 	{
-		
-	}
-	public Object getService(String serviceName, boolean create)
-	{
-		if (serviceName.equals("yahooEmailServer"))
-		{
-			Object service = null;
-			synchronized (services) {
-				service = services.get("yahooEmailServer");
-				if (service == null) {
-					service = new YahooEmailServer();
-					services.put("yahooEmailServer", service);
-				}
-			}
-			if(create)
-				return new YahooEmailServer();
-			else
-				return service;
-		}
-		else if(serviceName.equals("swotEmailServer"))
-		{
-			Object service = null;
-			synchronized (services) {
-				service = services.get("swotEmailServer");
-				if (service == null) {
-					service = new SWOTEmailServer();
-					services.put("swotEmailServer", service);
-				}
-			}
-			if(create)
-				return new SWOTEmailServer();
-			else
-				return service;
-		}
-		else
-		{
-			return null;
-		}
-		
+		Object service = null;
+		service = services.get(serviceName);
+		return service;
 	}
 	
-	public static ServiceCenter getInstance()
+	public Object getService(String className, String serviceName, boolean create) throws ClassNotFoundException, InstantiationException, IllegalAccessException
 	{
-		synchronized (ServiceCenter.class) {
-			if (instance == null) {
-				instance = new ServiceCenter();
+		Object service = null;
+		synchronized (services) {
+			service = services.get(serviceName);
+			if (service == null) {
+				Class.forName(className);
+				service = Class.forName(className).newInstance();
+				services.put(serviceName, service);
 			}
 		}
-		return instance;
+		if(create)
+			return service = Class.forName(className).newInstance();
+		else
+			return service;
 	}
 }

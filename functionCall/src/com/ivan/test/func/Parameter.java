@@ -1,6 +1,9 @@
-package com.ivan.func.param;
+package com.ivan.test.func;
 
-public class Parameter {
+import java.io.Serializable;
+
+public class Parameter implements Serializable{
+	private static final long serialVersionUID = 1L;
 	private String msg = "";
 
 	public String getMsg() {

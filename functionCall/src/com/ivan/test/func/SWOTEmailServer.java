@@ -1,6 +1,5 @@
-package com.ivan.func.service;
+package com.ivan.test.func;
 
-import com.ivan.func.param.Parameter;
 
 
 public class SWOTEmailServer implements EmailServer {
