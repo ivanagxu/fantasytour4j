@@ -24,7 +24,7 @@ public class MainTest extends TestCase{
 				"com.ivan.test.func.SWOTEmailServer"
 		};
 		
-		String[] serverName = new String[] { 
+		String[] serviceName = new String[] { 
 				"yahooEmailServer",
 				"yahooEmailServer",
 				"swotEmailServer",
@@ -50,10 +50,10 @@ public class MainTest extends TestCase{
 		 */
 		
 		SimpleExecuter simpleExecuter = new SimpleExecuter();
-		for (int i = 0; i < serverName.length; i++) {
+		for (int i = 0; i < serviceName.length; i++) {
 			Object res = null;
 			try {
-				res = simpleExecuter.execute(classes[i],serverName[i], methods[i], new Object[] { params[i] });
+				res = simpleExecuter.execute(classes[i],serviceName[i], methods[i], new Object[] { params[i] });
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			} catch (InstantiationException e) {
@@ -68,10 +68,10 @@ public class MainTest extends TestCase{
 		//change service center;
 		
 		simpleExecuter.setServiceCenter(SpringServiceCenter.getInstance());
-		for (int i = 0; i < serverName.length; i++) {
+		for (int i = 0; i < serviceName.length; i++) {
 			Object res = null;
 			try {
-				res = simpleExecuter.execute(classes[i],serverName[i], methods[i], new Object[] { params[i] });
+				res = simpleExecuter.execute(classes[i],serviceName[i], methods[i], new Object[] { params[i] });
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			} catch (InstantiationException e) {
