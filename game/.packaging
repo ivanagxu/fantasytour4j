@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<configurations>
+<archive destination="" exploded="false" name="game.jar" used="true">
+<folder excludes="" includes="" location="bin" name="bin" prefix="" project="" projectLocation="bin" used="true"/>
+<file location="META-INF/MANIFEST.MF" name="MANIFEST.MF" prefix="META-INF" project="" projectLocation="META-INF/MANIFEST.MF" used="true"/>
+<folder excludes="" includes="" location="lib" name="lib" prefix="lib" project="" projectLocation="lib" used="true"/>
+</archive>
+</configurations>
