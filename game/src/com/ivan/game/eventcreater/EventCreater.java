@@ -8,6 +8,6 @@ public class EventCreater {
 	{
 		CreaterFrame frame = new CreaterFrame();
 		//frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
-		frame.show();
+		frame.setVisible(true);
 	}
 }
