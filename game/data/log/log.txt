@@ -56,3 +56,22 @@
 [main][2009-04-29 15:44:10] INFO:Game Init
 [main][2009-04-29 15:48:30] INFO:Game Init
 [main][2009-04-29 16:47:44] INFO:Game Init
+[main][2009-04-29 16:57:30] INFO:Game Init
+[main][2009-04-29 16:57:38] INFO:执行事件:回花园|backtogarden.dat
+[main][2009-04-29 16:57:40] INFO:执行事件:到博达市|toboda.dat
+[main][2009-04-29 16:57:41] INFO:执行事件:回花园|backtogarden.dat
+[main][2009-04-29 16:57:42] INFO:执行事件:回家|backhome.dat
+[main][2009-04-29 16:57:42] INFO:执行事件:出门|tohomeouside.dat
+[main][2009-04-29 16:57:44] INFO:执行事件:到博达市|toboda.dat
+[main][2009-04-29 17:35:48] INFO:Game Init
+[main][2009-04-29 17:36:01] INFO:执行事件:回花园|backtogarden.dat
+[main][2009-04-29 17:36:02] INFO:执行事件:回家|backhome.dat
+[main][2009-04-29 17:36:29] INFO:执行事件:出门|tohomeouside.dat
+[main][2009-04-29 17:36:30] INFO:执行事件:到博达市|toboda.dat
+[main][2009-04-29 17:38:41] INFO:Game Init
+[main][2009-04-29 17:41:13] INFO:Game Init
+[main][2009-04-29 17:41:52] INFO:Game Init
+[main][2009-04-29 17:43:33] INFO:Game Init
+[main][2009-04-29 17:48:23] INFO:Game Init
+[main][2009-04-29 17:48:38] INFO:Game Init
+[main][2009-04-29 17:50:19] INFO:Game Init
