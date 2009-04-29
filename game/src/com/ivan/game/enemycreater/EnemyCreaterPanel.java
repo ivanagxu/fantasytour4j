@@ -266,7 +266,7 @@ public class EnemyCreaterPanel extends JPanel {
 		try {
 			//FileInputStream in = new FileInputStream(f);
 			BufferedReader in = new BufferedReader(new InputStreamReader(
-					new FileInputStream(f)));
+					new FileInputStream(f),"GBK"));
 
 			name = in.readLine();
 			property = in.readLine();
@@ -482,7 +482,7 @@ public class EnemyCreaterPanel extends JPanel {
 					saveData += "#\n                                                              \n";
 					try {
 						FileOutputStream out = new FileOutputStream(f);
-						out.write(saveData.getBytes(), 0, saveData.length());
+						out.write(saveData.getBytes("GBK"), 0, saveData.length());
 						out.close();
 						track("±£´æ³É¹¦...");
 					} catch (FileNotFoundException e) {

@@ -25,7 +25,7 @@ public class Enemy {
 		magic = new ArrayList();
 		try{
 			FileInputStream fin = new FileInputStream(f);
-			InputStreamReader in = new InputStreamReader(fin);
+			InputStreamReader in = new InputStreamReader(fin,"GBK");
 			BufferedReader inf = new BufferedReader(in);
 			name = inf.readLine();
 			property = inf.readLine();

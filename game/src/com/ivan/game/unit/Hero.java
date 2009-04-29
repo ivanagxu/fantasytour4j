@@ -35,7 +35,7 @@ public class Hero {
 		battlemagic = new Magic[4];
 		try {
 			BufferedReader in = new BufferedReader(new InputStreamReader(
-					new FileInputStream(f)));
+					new FileInputStream(f),"GBK"));
 			name = in.readLine();
 			property = in.readLine();
 			hp = Integer.parseInt(in.readLine());
@@ -60,7 +60,7 @@ public class Hero {
 
 			File elf = new File(f.getPath() + "el");
 			in = new BufferedReader(new InputStreamReader(new FileInputStream(
-					elf)));
+					elf),"GBK"));
 			String event = "";
 			event = in.readLine();
 			while (event.length() != 0) {
@@ -71,7 +71,7 @@ public class Hero {
 
 			File ilf = new File(f.getPath() + "il");
 			in = new BufferedReader(new InputStreamReader(new FileInputStream(
-					ilf)));
+					ilf),"GBK"));
 			String item = "";
 			item = in.readLine();
 			while (item.length() != 0) {
@@ -83,7 +83,7 @@ public class Hero {
 
 			File mlf = new File(f.getPath() + "ml");
 			in = new BufferedReader(new InputStreamReader(new FileInputStream(
-					mlf)));
+					mlf),"GBK"));
 			String magic = "";
 			magic = in.readLine();
 			int i = 0;
@@ -102,7 +102,7 @@ public class Hero {
 
 			File nlf = new File(f.getPath() + "nl");
 			in = new BufferedReader(new InputStreamReader(new FileInputStream(
-					nlf)));
+					nlf),"GBK"));
 			String npcname = "";
 			npcname = in.readLine();
 			while (npcname.length() != 0) {
@@ -324,7 +324,7 @@ public class Hero {
 			 * 保存基本数据
 			 */
 			FileOutputStream out = new FileOutputStream(f);
-			out.write(saveData.getBytes(), 0, saveData.length());
+			out.write(saveData.getBytes("GBK"), 0, saveData.length());
 			out.close();
 			/*
 			 * 保存事件列表
@@ -333,10 +333,10 @@ public class Hero {
 			FileOutputStream out1 = new FileOutputStream(f);
 			for (int i = 0; i < eventlist.size(); i++) {
 				saveData = (String) eventlist.get(i) + "\n";
-				out1.write(saveData.getBytes(), 0, saveData.length());
+				out1.write(saveData.getBytes("GBK"), 0, saveData.length());
 			}
 			saveData = "\n                                                                                                                                         ";
-			out1.write(saveData.getBytes(), 0, saveData.length());
+			out1.write(saveData.getBytes("GBK"), 0, saveData.length());
 			out1.close();
 			/*
 			 * 保存物品列表
@@ -346,10 +346,10 @@ public class Hero {
 			for (int i = 0; i < itemlist.size(); i++) {
 				saveData = (String) itemnumlist.get(i)
 						+ (String) itemlist.get(i) + "\n";
-				out2.write(saveData.getBytes(), 0, saveData.length());
+				out2.write(saveData.getBytes("GBK"), 0, saveData.length());
 			}
 			saveData = "\n                                                                                                                                         ";
-			out2.write(saveData.getBytes(), 0, saveData.length());
+			out2.write(saveData.getBytes("GBK"), 0, saveData.length());
 			out2.close();
 			/*
 			 * 保存技能列表
@@ -375,10 +375,10 @@ public class Hero {
 				} else {
 					saveData = (String) magiclist.get(i) + "\n";
 				}
-				out3.write(saveData.getBytes(), 0, saveData.length());
+				out3.write(saveData.getBytes("GBK"), 0, saveData.length());
 			}
 			saveData = "\n                                                                                                                                                                       ";
-			out3.write(saveData.getBytes(), 0, saveData.length());
+			out3.write(saveData.getBytes("GBK"), 0, saveData.length());
 			out3.close();
 
 			/*
@@ -389,10 +389,10 @@ public class Hero {
 
 			for (int i = 0; i < leavenpclist.size(); i++) {
 				saveData = (String) leavenpclist.get(i) + "\n";
-				out4.write(saveData.getBytes(), 0, saveData.getBytes().length);
+				out4.write(saveData.getBytes("GBK"), 0, saveData.getBytes("GBK").length);
 			}
 			saveData = "\n                                                                                                                                                                       ";
-			out4.write(saveData.getBytes(), 0, saveData.length());
+			out4.write(saveData.getBytes("GBK"), 0, saveData.length());
 			out4.close();
 
 			track("主角记录保存完毕.\n");

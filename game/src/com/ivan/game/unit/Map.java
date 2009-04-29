@@ -22,7 +22,7 @@ public class Map {
 			BufferedReader(new 
 					InputStreamReader(new 
 							FileInputStream(f)
-							));
+							,"GBK"));
 			soundfile = in.readLine();
 			soundfile.replace(' ','\0');
 			String tablex = in.readLine();

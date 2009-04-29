@@ -16,7 +16,7 @@ public class Magic {
 	{
 		try{
 			FileInputStream fin = new FileInputStream(f);
-			BufferedReader in = new BufferedReader(new InputStreamReader(fin));
+			BufferedReader in = new BufferedReader(new InputStreamReader(fin,"GBK"));
 			
 			magicname = in.readLine();
 			magictype = in.readLine();

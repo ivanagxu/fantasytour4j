@@ -19,7 +19,7 @@ public class Event {
 			BufferedReader(new 
 					InputStreamReader(new 
 							FileInputStream(f)
-							));
+					,"GBK"));
 			
 			filename = in.readLine();
 			eventname = in.readLine();

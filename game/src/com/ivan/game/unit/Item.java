@@ -21,7 +21,7 @@ public class Item {
 			BufferedReader(new 
 					InputStreamReader(new 
 							FileInputStream(f)
-							));
+							,"GBK"));
 			
 			filename = in.readLine();
 			itemname = in.readLine();

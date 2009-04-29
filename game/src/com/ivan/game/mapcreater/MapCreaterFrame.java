@@ -325,7 +325,7 @@ public class MapCreaterFrame extends JFrame{
 			BufferedReader(new 
 					InputStreamReader(new 
 							FileInputStream(f)
-							));
+							,"GBK"));
 			soundfile = in.readLine();
 			soundfile.replace(' ','\0');
 			//System.out.println(soundfile + "asdasdasd");
@@ -528,7 +528,7 @@ public class MapCreaterFrame extends JFrame{
 						FileOutputStream out = new FileOutputStream(savefile);
 						String saveData = "";
 						saveData = soundfile + "\n" + map.length + "\n" + map[0].length + "\n" + "                        ";
-						out.write(saveData.getBytes(),0,saveData.length());
+						out.write(saveData.getBytes("GBK"),0,saveData.length());
 						
 						for(int i = 0; i < map.length; i++)
 						{
@@ -537,7 +537,7 @@ public class MapCreaterFrame extends JFrame{
 								saveData = null;
 								//saveData = new String();
 								saveData = map[i][j].toString();
-								out.write(saveData.getBytes(),0,saveData.length());
+								out.write(saveData.getBytes("GBK"),0,saveData.length());
 							}
 						}
 						System.out.println("has saved!");

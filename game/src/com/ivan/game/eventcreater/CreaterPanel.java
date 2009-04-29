@@ -463,7 +463,7 @@ public class CreaterPanel extends JPanel {
 			 */
 
 			BufferedReader in = new BufferedReader(new InputStreamReader(
-					new FileInputStream(f)));
+					new FileInputStream(f),"GBK"));
 
 			filename = in.readLine();
 			eventname = in.readLine();
@@ -647,7 +647,7 @@ public class CreaterPanel extends JPanel {
 					+ "                                                   #\n";
 			try {
 				FileOutputStream out = new FileOutputStream(savefile);
-				out.write(saveData.getBytes(), 0, saveData.length());
+				out.write(saveData.getBytes("GBK"), 0, saveData.length());
 				out.close();
 				JOptionPane.showMessageDialog(CreaterPanel.this, "文件保存成功",
 						"保存", JOptionPane.INFORMATION_MESSAGE);

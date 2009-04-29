@@ -26,7 +26,7 @@ public class Npc {
 			BufferedReader(new 
 					InputStreamReader(new 
 							FileInputStream(f)
-							));
+							,"GBK"));
 			
 			name = in.readLine();
 			npctype = in.readLine();
@@ -105,7 +105,7 @@ public class Npc {
 			BufferedReader(new 
 					InputStreamReader(new 
 							FileInputStream(f)
-							));
+							,"GBK"));
 			
 			name = in.readLine();
 			npctype = in.readLine();

@@ -18,7 +18,7 @@ public class Motion {
 			FileInputStream in = new FileInputStream(f);
 			byte[] readbuff = new byte[(int)f.length()];
 			in.read(readbuff,0,(int)f.length());
-			String readData = new String(readbuff);
+			String readData = new String(readbuff,"GBK");
 			int i = 0;
 			while(readData.charAt(i) != '\n')
 			{
