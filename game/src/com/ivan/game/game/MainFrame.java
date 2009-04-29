@@ -2,13 +2,11 @@ package com.ivan.game.game;
 
 import java.awt.Color;
 import java.awt.Container;
-import java.awt.Desktop;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
-import java.net.URI;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
