@@ -11,10 +11,10 @@ public class Msg {
 	{
 		if(hasMsg)
 		{
-			if(msg.length() > 20)
+			if(msg.length() > 18)
 			{
-				String s = msg.substring(0,20);
-				msg = msg.substring(20);
+				String s = msg.substring(0,18);
+				msg = msg.substring(18);
 				return s;
 			}
 			else

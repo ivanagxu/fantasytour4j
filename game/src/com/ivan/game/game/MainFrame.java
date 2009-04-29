@@ -43,9 +43,9 @@ public class MainFrame extends JFrame
 
 		setJMenuBar(menuBar);
 
-		JMenu gamemenu = new JMenu("开始");
-		JMenu toolmenu = new JMenu("工具");
-		JMenu aboutmenu = new JMenu("帮助");
+		JMenu gamemenu = new JMenu("Start");
+		JMenu toolmenu = new JMenu("Tools");
+		JMenu aboutmenu = new JMenu("Help");
 
 		menuBar.add(gamemenu);
 

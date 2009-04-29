@@ -1,60 +1,57 @@
-[main][2009-04-03 11:42:26] INFO:Game Init
-[main][2009-04-03 11:42:50] INFO:执行事件:到博达市|toboda.dat
-[main][2009-04-03 11:43:08] INFO:执行事件:博达到博达广场|bodatobodaground.dat
-[main][2009-04-03 11:43:11] INFO:执行事件:博达广场到博达|bodagroundtoboda.dat
-[main][2009-04-03 11:43:14] INFO:执行事件:回花园|backtogarden.dat
-[main][2009-04-03 11:43:15] INFO:执行事件:回家|backhome.dat
-[main][2009-04-03 11:43:17] INFO:执行事件:出门|tohomeouside.dat
-[main][2009-04-03 11:43:18] INFO:执行事件:回家|backhome.dat
-[main][2009-04-03 11:43:30] INFO:执行事件:出门|tohomeouside.dat
-[main][2009-04-03 11:43:31] INFO:执行事件:到博达市|toboda.dat
-[main][2009-04-03 11:43:40] INFO:执行事件:回花园|backtogarden.dat
-[main][2009-04-03 11:43:41] INFO:执行事件:回家|backhome.dat
-[main][2009-04-03 11:43:46] INFO:执行事件:出门|tohomeouside.dat
-[main][2009-04-03 11:43:48] INFO:执行事件:到博达市|toboda.dat
-[main][2009-04-03 11:43:52] INFO:执行事件:博达到后山|bodatohill.dat
-[main][2009-04-03 11:43:59] INFO:执行事件:后山回博达|hilltoboda.dat
-[main][2009-04-03 11:44:55] INFO:Game Init
-[main][2009-04-03 11:45:11] INFO:执行事件:到博达市|toboda.dat
-[main][2009-04-03 11:45:15] INFO:执行事件:博达到博达广场|bodatobodaground.dat
-[main][2009-04-03 11:45:16] INFO:执行事件:博达广场到博达|bodagroundtoboda.dat
-[main][2009-04-03 11:45:20] INFO:执行事件:博达到后山|bodatohill.dat
-[main][2009-04-03 11:45:22] INFO:执行事件:后山回博达|hilltoboda.dat
-[main][2009-04-03 11:46:28] INFO:Game Init
-[main][2009-04-03 11:48:30] INFO:执行事件:回家|backhome.dat
-[main][2009-04-03 11:48:32] INFO:执行事件:出门|tohomeouside.dat
-[main][2009-04-03 11:48:33] INFO:执行事件:到博达市|toboda.dat
-[main][2009-04-03 11:48:36] INFO:执行事件:博达到后山|bodatohill.dat
-[main][2009-04-03 11:48:37] INFO:执行事件:后山回博达|hilltoboda.dat
-[main][2009-04-03 11:49:37] INFO:Game Init
-[main][2009-04-03 11:49:54] INFO:执行事件:到博达市|toboda.dat
-[main][2009-04-03 11:49:57] INFO:执行事件:博达到后山|bodatohill.dat
-[main][2009-04-03 11:49:59] INFO:执行事件:后山回博达|hilltoboda.dat
-[main][2009-04-03 11:49:59] INFO:执行事件:博达到后山|bodatohill.dat
-[main][2009-04-03 11:50:05] INFO:执行事件:后山回博达|hilltoboda.dat
-[main][2009-04-03 11:50:13] INFO:执行事件:博达到博达广场|bodatobodaground.dat
-[main][2009-04-03 11:50:18] INFO:执行事件:博达广场回博达1|bodagroundtoboda1.dat
-[main][2009-04-03 11:50:42] INFO:执行事件:博达到博达广场1|bodatobodaground1.dat
-[main][2009-04-03 11:50:46] INFO:执行事件:博达广场到博达|bodagroundtoboda.dat
-[main][2009-04-03 11:50:52] INFO:执行事件:回花园|backtogarden.dat
-[main][2009-04-03 11:50:54] INFO:执行事件:回家|backhome.dat
-[main][2009-04-03 11:50:55] INFO:执行事件:出门|tohomeouside.dat
-[main][2009-04-03 11:50:56] INFO:执行事件:到博达市|toboda.dat
-[main][2009-04-03 11:54:26] INFO:执行事件:博达到后山|bodatohill.dat
-[main][2009-04-03 11:55:20] INFO:Game Init
-[main][2009-04-03 11:56:20] INFO:Game Init
-[main][2009-04-03 12:41:01] INFO:Game Init
-[main][2009-04-03 12:41:10] INFO:执行事件:博达到后山|bodatohill.dat
-[main][2009-04-03 12:41:13] INFO:执行事件:后山回博达|hilltoboda.dat
-[main][2009-04-03 12:41:21] INFO:执行事件:回花园|backtogarden.dat
-[main][2009-04-03 12:41:22] INFO:执行事件:回家|backhome.dat
-[main][2009-04-03 12:42:37] INFO:Game Init
-[main][2009-04-03 12:45:48] INFO:Game Init
-[main][2009-04-03 12:46:26] INFO:Game Init
-[main][2009-04-03 12:47:07] INFO:Game Init
-[main][2009-04-03 12:50:48] INFO:Game Init
-[main][2009-04-03 12:52:18] INFO:Game Init
-[main][2009-04-03 12:53:07] INFO:Game Init
-[main][2009-04-03 12:53:33] INFO:Game Init
-[main][2009-04-03 12:53:40] INFO:执行事件:博达到后山|bodatohill.dat
-[main][2009-04-03 12:53:42] INFO:执行事件:后山回博达|hilltoboda.dat
+[main][2009-04-29 13:22:21] INFO:Game Init
+[main][2009-04-29 13:24:02] INFO:Game Init
+[main][2009-04-29 13:28:01] INFO:Game Init
+[main][2009-04-29 13:29:55] INFO:Game Init
+[main][2009-04-29 13:31:30] INFO:Game Init
+[main][2009-04-29 13:31:41] INFO:Game Init
+[main][2009-04-29 13:31:59] INFO:执行事件:后山回博达|hilltoboda.dat
+[main][2009-04-29 13:32:07] INFO:执行事件:博达到博达广场|bodatobodaground.dat
+[main][2009-04-29 13:32:08] INFO:执行事件:博达广场到博达|bodagroundtoboda.dat
+[main][2009-04-29 13:57:55] INFO:Game Init
+[main][2009-04-29 13:58:24] INFO:执行事件:后山回博达|hilltoboda.dat
+[main][2009-04-29 14:00:28] INFO:Game Init
+[main][2009-04-29 14:00:40] INFO:执行事件:后山回博达|hilltoboda.dat
+[main][2009-04-29 14:01:07] INFO:Game Init
+[main][2009-04-29 14:01:29] INFO:Game Init
+[main][2009-04-29 14:03:48] INFO:Game Init
+[main][2009-04-29 14:04:07] INFO:执行事件:后山回博达|hilltoboda.dat
+[main][2009-04-29 14:10:07] INFO:Game Init
+[main][2009-04-29 14:10:33] INFO:Game Init
+[main][2009-04-29 14:10:50] INFO:Game Init
+[main][2009-04-29 14:11:11] INFO:Game Init
+[main][2009-04-29 14:11:58] INFO:Game Init
+[main][2009-04-29 14:12:08] INFO:Game Init
+[main][2009-04-29 14:14:04] INFO:Game Init
+[main][2009-04-29 14:15:05] INFO:Game Init
+[main][2009-04-29 14:16:09] INFO:Game Init
+[main][2009-04-29 14:22:41] INFO:Game Init
+[main][2009-04-29 14:23:42] INFO:Game Init
+[main][2009-04-29 14:26:31] INFO:Game Init
+[main][2009-04-29 14:28:33] INFO:Game Init
+[main][2009-04-29 14:30:12] INFO:Game Init
+[main][2009-04-29 14:32:57] INFO:Game Init
+[main][2009-04-29 14:34:02] INFO:Game Init
+[main][2009-04-29 14:35:56] INFO:Game Init
+[main][2009-04-29 14:36:14] INFO:执行事件:回花园|backtogarden.dat
+[main][2009-04-29 14:36:15] INFO:执行事件:回家|backhome.dat
+[main][2009-04-29 14:36:18] INFO:执行事件:出门|tohomeouside.dat
+[main][2009-04-29 14:36:18] INFO:执行事件:到博达市|toboda.dat
+[main][2009-04-29 14:55:40] INFO:Game Init
+[main][2009-04-29 14:58:35] INFO:Game Init
+[main][2009-04-29 15:05:12] INFO:Game Init
+[main][2009-04-29 15:06:52] INFO:Game Init
+[main][2009-04-29 15:11:22] INFO:Game Init
+[main][2009-04-29 15:12:41] INFO:执行事件:博达到后山|bodatohill.dat
+[main][2009-04-29 15:15:13] INFO:Game Init
+[main][2009-04-29 15:17:40] INFO:Game Init
+[main][2009-04-29 15:19:47] INFO:Game Init
+[main][2009-04-29 15:21:19] INFO:Game Init
+[main][2009-04-29 15:23:51] INFO:Game Init
+[main][2009-04-29 15:25:30] INFO:Game Init
+[main][2009-04-29 15:27:32] INFO:Game Init
+[main][2009-04-29 15:36:42] INFO:Game Init
+[main][2009-04-29 15:37:00] INFO:执行事件:博达到博达广场|bodatobodaground.dat
+[main][2009-04-29 15:37:01] INFO:执行事件:博达广场到博达|bodagroundtoboda.dat
+[main][2009-04-29 15:40:56] INFO:Game Init
+[main][2009-04-29 15:44:10] INFO:Game Init
+[main][2009-04-29 15:48:30] INFO:Game Init

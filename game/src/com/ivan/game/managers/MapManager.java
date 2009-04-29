@@ -117,15 +117,16 @@ public class MapManager {
 					g2.fillRect(0, 0, 260, 260);
 					paint(g2, t, tx, ty);
 
-					g2.dispose();
+					
 
 					//canvas.drawImage(hero.getCurrentImage(), 120, 120, null);
-					canvas.drawImage(doubleBuffer, 0, 0, null);
-					if(t > 6 && t < 14)
-						canvas.drawImage(hero.getCurrentImage2(), 120, 120, null);
-					else
-						canvas.drawImage(hero.getCurrentImage(), 120, 120, null);
 					
+					if(t > 6 && t < 14)
+						g2.drawImage(hero.getCurrentImage2(), 120, 120, null);
+					else
+						g2.drawImage(hero.getCurrentImage(), 120, 120, null);
+					canvas.drawImage(doubleBuffer, 0, 0, null);
+					g2.dispose();
 					/*
 					 * 主角坐标没变,只画一次,返回
 					 */

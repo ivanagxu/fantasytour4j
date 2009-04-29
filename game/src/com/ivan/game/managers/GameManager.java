@@ -7,6 +7,7 @@ import com.ivan.game.game.GameCanvas;
 import com.ivan.game.game.MainFrame;
 import com.ivan.game.unit.Hero;
 import com.ivan.game.unit.Msg;
+import com.ivan.game.unit.SimFonts;
 
 
 public class GameManager {
@@ -105,7 +106,7 @@ public class GameManager {
 					menu.draw(canvas,display);
 				}
 			}
-			input = gamecanvas.getInput();
+			input = gamecanvas.getInput(true);
 			display = menu.getDisplay(display);
 			if(display != GameManager.SHOW_MENU)
 				break;
@@ -179,6 +180,7 @@ public class GameManager {
 						display == GameManager.SHOW_BUYMENU)
 				{
 					menu.action(input,display);
+					gamecanvas.getInput(true);
 				}
 				else if(display == GameManager.EXIT_GAME)
 				{
@@ -219,7 +221,7 @@ public class GameManager {
 					menu.draw(canvas,display);
 				}
 			}
-			input = gamecanvas.getInput();
+			input = gamecanvas.getInput(false);
 			sleep(1);
 		}while(true);
 		

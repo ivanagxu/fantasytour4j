@@ -158,7 +158,7 @@ public class MenuManager {
 					}
 
 					int choose = select + (page-1)*10 -1;
-					boolean yes = showYesNoMenu(gamecanvas,"使用  取消");
+					boolean yes = showYesNoMenu(gamecanvas,"使用 取消");
 					if(yes)
 					{
 						Item item = itmmgr.getItem((String)hero.getItemList().get(choose));
@@ -188,7 +188,7 @@ public class MenuManager {
 			}
 			else if(menu == 8)//所有技能菜单
 			{
-				if(showYesNoMenu(gamecanvas,"使用  取消"))
+				if(showYesNoMenu(gamecanvas,"使用 取消"))
 				{
 					int choose =hero.getMagicList().size() -( select + (page-1)*10 -1) -1;
 					//System.out.println(choose);
@@ -1427,7 +1427,7 @@ public class MenuManager {
 		
 		
 		do{
-			input = gamecanvas.getInput();
+			input = gamecanvas.getInput(true);
 			if(input != ' ')
 			{
 				if(input == 'a')
@@ -1496,11 +1496,11 @@ public class MenuManager {
 		char input = '#';
 		Graphics canvas = gamecanvas.getGraphics();
 		canvas.setColor(Color.WHITE);
-		canvas.fillRect(92,115,60,20);
+		canvas.fillRect(92,115,65,20);
 		canvas.setColor(Color.YELLOW);
-		canvas.drawRect(93,116,58,18);
+		canvas.drawRect(93,116,63,18);
 		do{
-			input = gamecanvas.getInput();
+			input = gamecanvas.checkInput();
 			canvas.setColor(Color.BLACK);
 			canvas.drawString(s,96,129);
 			if(b)
@@ -1508,12 +1508,12 @@ public class MenuManager {
 				canvas.setColor(Color.ORANGE);
 				canvas.drawRect(94,117,25,15);
 				canvas.setColor(Color.WHITE);
-				canvas.drawRect(124,117,25,15);
+				canvas.drawRect(129,117,25,15);
 			}
 			else
 			{
 				canvas.setColor(Color.ORANGE);
-				canvas.drawRect(124,117,25,15);
+				canvas.drawRect(129,117,25,15);
 				canvas.setColor(Color.WHITE);
 				canvas.drawRect(94,117,25,15);
 			}
@@ -1523,23 +1523,27 @@ public class MenuManager {
 				if(input == 'a')
 				{
 					b = true;
+					gamecanvas.getInput(true);
 				}
 				else if(input == 'd')
 				{
 					b = false;
+					gamecanvas.getInput(true);
 				}
 				else if(input == 'j')
 				{
-					sleep(200);
+					gamecanvas.getInput(true);
 					break;
 				}
 				else if(input == 'k')
 				{
+					gamecanvas.getInput(true);
 					b = false;
-					sleep(200);
 					break;
 				}
 			}
+			
+			sleep(1);
 		}while(true);
 		return b;
 	}

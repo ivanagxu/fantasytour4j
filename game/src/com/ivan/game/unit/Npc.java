@@ -130,8 +130,8 @@ public class Npc {
 			
 			for(int i = 0; i < itemlist.size(); i++)
 			{
-				System.out.println((String)itemlist.get(i));
-				System.out.println(itmmgr == null);
+				//System.out.println((String)itemlist.get(i));
+				//System.out.println(itmmgr == null);
 				sellitemlist.add(itmmgr.getItem((String)itemlist.get(i)));
 			}
 		}

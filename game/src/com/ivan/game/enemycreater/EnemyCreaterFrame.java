@@ -20,7 +20,7 @@ public class EnemyCreaterFrame extends JFrame{
 	private static final long serialVersionUID = -2822793287368579290L;
 	public EnemyCreaterFrame()
 	{
-		setTitle("怪物制作器");
+		setTitle("MonstorCreator");
 		setResizable(false);
 
 		this.setBounds(312,184,DEFAULT_WIDTH,DEFAULT_HEIGHT);
@@ -65,8 +65,8 @@ public class EnemyCreaterFrame extends JFrame{
 						int NotExit = 0;
 						NotExit = JOptionPane.showConfirmDialog(
 								EnemyCreaterFrame.this,
-								"是否退出?",
-								"等待确认",
+								"Quit?",
+								"Waiting Operation",
 								JOptionPane.YES_NO_OPTION,
 								JOptionPane.INFORMATION_MESSAGE);
 						if(NotExit == 0)
