@@ -31,13 +31,13 @@ public class GameCanvas extends JPanel {
 
 	public char getInput(boolean resetInput) {
 		char returnChar = input;
-
+		System.out.println(keyCount);
 		if(resetInput)
 			input = ' ';
 		return returnChar;
 	}
 	public char checkInput() {
-
+		
 		return input;
 	}
 
@@ -55,12 +55,16 @@ public class GameCanvas extends JPanel {
 		private char prekey = ' ';
 
 		public void keyPressed(KeyEvent e) {
-			keyCount ++;
-			prekey = input;
+			if(e.getKeyChar() != prekey)
+			{
+				keyCount ++;
+			}
 			input = e.getKeyChar();
+			prekey = input;
 		}
 
 		public void keyReleased(KeyEvent e) {
+			
 			keyCount -- ;
 			if(e.getKeyChar() == input)
 			{
@@ -71,8 +75,9 @@ public class GameCanvas extends JPanel {
 			{
 				prekey = input;
 			}
-			if(keyCount == 0)
+			if(keyCount <= 0)
 			{
+				keyCount = 0;
 				input = ' ';
 				prekey = ' ';
 			}
