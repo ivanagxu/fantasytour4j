@@ -42,12 +42,13 @@ public class MessageManager {
 				while(gamecanvas.checkInput() != 'j' && s != null)
 				{
 					gamecanvas.getInput(true);
-					sleep(1);
+					sleep(10);
 				}
 				s = msg.getLine();
 			}
 			else
 			{
+				gamecanvas.getInput(true);
 				break;
 			}
 			

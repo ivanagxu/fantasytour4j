@@ -870,7 +870,7 @@ public class Hero {
 			bt.setMp(bt.getMp() + e.getRecoverMp());
 		} else if(e.getItemType() == Item.BATTLE_ITEM && !inbattle){
 			return false;
-		} else if(e.getItemType() != Item.NORMAL_ITEM && inbattle)
+		} else if((e.getItemType() == Item.NORMAL_ITEM || e.getItemType() == Item.BATTLE_ITEM)  && inbattle)
 		{
 			return false;
 		}

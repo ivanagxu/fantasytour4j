@@ -60,7 +60,7 @@ public class MenuManager {
 	public void Select(boolean b)
 	{
 		if (b == true) {
-			java.awt.Toolkit.getDefaultToolkit();
+			//java.awt.Toolkit.getDefaultToolkit();
 			if(menu == 1)//是开始界面菜单
 			{
 				if (select == 1) //开始新游戏
@@ -166,7 +166,7 @@ public class MenuManager {
 							msgmgr.showMessage(new Msg(item.getInstruction()));
 						else
 							msgmgr.showMessage(new Msg("现在不能使用."));
-						sleep(200);
+						//sleep(200);
 					}
 					else
 					{
@@ -199,7 +199,7 @@ public class MenuManager {
 							if(hero.getBattleMagic()[i].getName().equals(hero.getMagicNameList().get(choose)))
 							{
 								msgmgr.showMessage(new Msg("该技能已经使用"));
-								sleep(200);
+								//sleep(200);
 								return;
 							}
 						}
@@ -217,7 +217,7 @@ public class MenuManager {
 					if(seller.getSellItemList().size() == 0)
 					{
 						msgmgr.showMessage(new Msg(seller.getName()+":我没有物品可以出售."));
-						sleep(200);
+						//sleep(200);
 					}
 					else
 					{
@@ -230,7 +230,7 @@ public class MenuManager {
 					if(hero.getItemList().size() == 0)
 					{
 						msgmgr.showMessage(new Msg(seller.getName()+":你没有物品."));
-						sleep(200);
+						//sleep(200);
 					}
 					else
 					{
@@ -283,7 +283,7 @@ public class MenuManager {
 				else//钱不够
 				{
 					msgmgr.showMessage(new Msg(seller.getName()+":你的钱不够.."));
-					sleep(200);
+					//sleep(200);
 				}
 			}
 			else if(menu == 11)
@@ -1446,24 +1446,24 @@ public class MenuManager {
 				{
 					if(s != 1)
 						n = 0;
-					sleep(200);
+					//sleep(200);
 					break;
 				}
 				else if(input == 'k')
 				{
 					n = 0;
-					sleep(200);
+					//sleep(200);
 					break;
 				}
 				else if(input == 'w')
 				{
 					s = 3 - s;
-					sleep(200);
+					//sleep(200);
 				}
 				else if(input == 's')
 				{
 					s = 3 - s;
-					sleep(200);
+					//sleep(200);
 				}
 				canvas.drawImage(buynumimage, 77, 108, null);
 				canvas.drawImage(item.getImage(), 84, 115, null);
@@ -1480,8 +1480,9 @@ public class MenuManager {
 					canvas.drawRect(152, 114, 27, 17);
 				else
 					canvas.drawRect(152, 131, 27, 17);
-				sleep(100);
+				sleep(10);
 			}
+			sleep(10);
 		}while(true);
 		return n;
 	}
@@ -1543,7 +1544,7 @@ public class MenuManager {
 				}
 			}
 			
-			sleep(1);
+			sleep(10);
 		}while(true);
 		return b;
 	}

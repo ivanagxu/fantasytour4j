@@ -31,7 +31,6 @@ public class GameCanvas extends JPanel {
 
 	public char getInput(boolean resetInput) {
 		char returnChar = input;
-		System.out.println(keyCount);
 		if(resetInput)
 			input = ' ';
 		return returnChar;

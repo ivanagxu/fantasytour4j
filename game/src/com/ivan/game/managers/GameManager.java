@@ -180,7 +180,7 @@ public class GameManager {
 						display == GameManager.SHOW_BUYMENU)
 				{
 					menu.action(input,display);
-					gamecanvas.getInput(true);
+					//gamecanvas.getInput(true);
 				}
 				else if(display == GameManager.EXIT_GAME)
 				{

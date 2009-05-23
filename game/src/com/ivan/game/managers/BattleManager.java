@@ -50,9 +50,12 @@ public class BattleManager
 
 	public void battleloop()
 	{
-		input = '#';
+		drawBattle();
+		draw();
+		//input = '#';
 		while (true)
 		{
+			input = gamecanvas.getInput(true);
 			if (input != ' ' || heroattack == 0)
 			{
 				action(input);
@@ -60,8 +63,7 @@ public class BattleManager
 				draw();
 				if (finish) break;
 			}
-			input = gamecanvas.getInput(true);
-			sleep(1);
+			sleep(10);
 		}
 	}
 
@@ -177,12 +179,12 @@ public class BattleManager
 						if(hero.getBattleMagic()[select - 1] == null)
 						{
 							msgmgr.showMessage(new Msg("你放弃攻击."));
-							sleep(200);
+							//sleep(200);
 						}
 						else
 						{
 							msgmgr.showMessage(new Msg("MP不足!没能使用技能!"));
-							sleep(200);
+							//sleep(200);
 						}
 						draw();
 						heroattack = 0;
@@ -959,7 +961,6 @@ public class BattleManager
 	 */
 	public boolean showYesNoMenu(GameCanvas g, String s)
 	{
-		sleep(200);
 		gamecanvas = g;
 		boolean b = true;
 		char input = '#';
@@ -1007,7 +1008,9 @@ public class BattleManager
 					b = false;
 					break;
 				}
+				
 			}
+			sleep(10);
 		} while (true);
 		return b;
 	}
