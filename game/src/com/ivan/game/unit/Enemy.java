@@ -17,7 +17,7 @@ import com.ivan.game.managers.MagicManager;
 public class Enemy {
 	
 	/*
-	 * ´ÓÎÄ¼şÊı¾İ½øĞĞ¹¹Ôì
+	 * ä»æ–‡ä»¶æ•°æ®è¿›è¡Œæ„é€ 
 	 * @param f a enemy file at data\enemy\
 	 */
 	public Enemy(File f)
@@ -25,7 +25,7 @@ public class Enemy {
 		magic = new ArrayList();
 		try{
 			FileInputStream fin = new FileInputStream(f);
-			InputStreamReader in = new InputStreamReader(fin,"GBK");
+			InputStreamReader in = new InputStreamReader(fin,"utf-8");
 			BufferedReader inf = new BufferedReader(in);
 			name = inf.readLine();
 			property = inf.readLine();
@@ -46,7 +46,7 @@ public class Enemy {
 			
 			String amagic;
 			amagic = inf.readLine();
-			while (!amagic.equals("#"))
+			while (!amagic.startsWith("#"))
 			{
 				magic.add(amagic);
 				amagic = inf.readLine();
@@ -55,11 +55,11 @@ public class Enemy {
 		}
 		catch(FileNotFoundException e)
 		{
-			abort("ÕÒ²»µ½enemyÎÄ¼ş!");
+			abort("æ‰¾ä¸åˆ°enemyæ–‡ä»¶!");
 		}
 		catch(IOException e)
 		{
-			abort("¶ÁenemyÎÄ¼ş³öÏÖioÒì³£!");
+			abort("è¯»enemyæ–‡ä»¶å‡ºç°ioå¼‚å¸¸!");
 		}
 		
 		if(Integer.parseInt(money) != 0)
@@ -80,7 +80,7 @@ public class Enemy {
 		images[2] = new ImageIcon(attackimage).getImage();
 		if(images[0] == null || images[1] == null || images[2] == null)
 		{
-			abort("¹ÖÎï: " + name + " ÌùÍ¼¶ªÊ§!");
+			abort("æ€ªç‰©: " + name + " è´´å›¾ä¸¢å¤±!");
 		}
 	}
 	/*
@@ -96,7 +96,7 @@ public class Enemy {
 			if(amagic != null)
 				magiclist.add(amagic);
 			else{
-				abort("Enemy: " + name + " ³öÏÖ¼¼ÄÜ¶ªÊ§,¹À¼ÆÓĞÎÄ¼ş³ö´í!");
+				abort("Enemy: " + name + " å‡ºç°æŠ€èƒ½ä¸¢å¤±,ä¼°è®¡æœ‰æ–‡ä»¶å‡ºé”™!");
 			}
 		}
 		return magiclist;
@@ -128,18 +128,18 @@ public class Enemy {
 	{
 		BattleState state = new 
 		BattleState(
-				name,								//Ãû×Ö
-				property,							//ÊôĞÔ
-				Integer.parseInt(hp), 				//Ñª
-				Integer.parseInt(hp), 				//ÑªÉÏÏŞ
-				Integer.parseInt(mp), 				//·¨Á¦
-				Integer.parseInt(mp), 				//·¨Á¦ÉÏÏŞ
-				Integer.parseInt(str),				//¹¥»÷Á¦
-				Integer.parseInt(def), 				//·ÀÓùÁ¦
-				Integer.parseInt(mstr),				//Ä§Á¦
-				Integer.parseInt(mdef),				//Ä§·À
-				Integer.parseInt(hs),				//ÖÂÃü
-				Integer.parseInt(jouk)				//¶ãÉÁÂÊ
+				name,								//åå­—
+				property,							//å±æ€§
+				Integer.parseInt(hp), 				//è¡€
+				Integer.parseInt(hp), 				//è¡€ä¸Šé™
+				Integer.parseInt(mp), 				//æ³•åŠ›
+				Integer.parseInt(mp), 				//æ³•åŠ›ä¸Šé™
+				Integer.parseInt(str),				//æ”»å‡»åŠ›
+				Integer.parseInt(def), 				//é˜²å¾¡åŠ›
+				Integer.parseInt(mstr),				//é­”åŠ›
+				Integer.parseInt(mdef),				//é­”é˜²
+				Integer.parseInt(hs),				//è‡´å‘½
+				Integer.parseInt(jouk)				//èº²é—ªç‡
 				);
 
 		return state;
@@ -197,8 +197,8 @@ public class Enemy {
 		return hasMoney;
 	}
 	/*
-	 * Òì³£ÖĞÖ¹³ÌĞò
-	 * @param s Êä³ö³ö´íÔ­Òò
+	 * å¼‚å¸¸ä¸­æ­¢ç¨‹åº
+	 * @param s è¾“å‡ºå‡ºé”™åŸå› 
 	 */
 	private void abort(String s)
 	{

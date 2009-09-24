@@ -19,11 +19,11 @@ public class MotionPanel extends JPanel{
 		//delaytime = 1000;
 	}
 	/*
-	 * ¿ªÊ¼²¥·Å¶¯»­
-	 * @param ts Ê±¼ä¼ä¸ô
-	 * @param dt Í£ÁôÊ±¼ä
-	 * @param ty ¶¯»­ÀàĞÍ
-	 * @param list Í¼Æ¬×é
+	 * å¼€å§‹æ’­æ”¾åŠ¨ç”»
+	 * @param ts æ—¶é—´é—´éš”
+	 * @param dt åœç•™æ—¶é—´
+	 * @param ty åŠ¨ç”»ç±»å‹
+	 * @param list å›¾ç‰‡ç»„
 	 */
 	public void start(int ts,int dt,String ty,ArrayList list)
 	{
@@ -31,7 +31,7 @@ public class MotionPanel extends JPanel{
 		//delaytime = dt;
 		imagelist = list;
 		motiontype = ty;
-		if(motiontype.equals("±ä»»"))
+		if(motiontype.equals("å˜æ¢"))
 		{
 			t = new Timer(timespace,new ActionListener()
 					{
@@ -74,7 +74,7 @@ public class MotionPanel extends JPanel{
 			
 	}
 	/*
-	 * Í£Ö¹²¥·Å¶¯»­
+	 * åœæ­¢æ’­æ”¾åŠ¨ç”»
 	 */
 	public void stop()
 	{
@@ -89,7 +89,7 @@ public class MotionPanel extends JPanel{
 		super.paintComponent(g);
 		if(image != null)
 		{
-			if(motiontype.equals("±ä»»"))
+			if(motiontype.equals("å˜æ¢"))
 			{
 				track("draw...");
 				int i = this.getWidth()/2-50;
@@ -103,8 +103,8 @@ public class MotionPanel extends JPanel{
 		}
 	}
 	/*
-	 * µ÷ÊÔ
-	 * param s ÓÃĞÅÏ¢¿òÊä³öµÄĞÅÏ¢
+	 * è°ƒè¯•
+	 * param s ç”¨ä¿¡æ¯æ¡†è¾“å‡ºçš„ä¿¡æ¯
 	 */
 	public void track(String s)
 	{

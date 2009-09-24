@@ -8,7 +8,7 @@ import com.ivan.game.unit.Npc;
 public class NpcManager {
 	public NpcManager(ItemManager itmmgr)
 	{
-		track("ÕıÔÚÉú³ÉNPC¹ÜÀíÆ÷...");
+		track("æ­£åœ¨ç”ŸæˆNPCç®¡ç†å™¨...");
 		npclist = new ArrayList();
 		npcnamelist = new ArrayList();
 		File f = new File("data/npc/");
@@ -20,16 +20,16 @@ public class NpcManager {
 		{
 			if(filelist[i].getName().toLowerCase().endsWith(".dat"))
 			{
-				track("ÕıÔÚ¶ÁÈ¡NPCÎÄ¼ş: " + filelist[i].getName());
+				track("æ­£åœ¨è¯»å–NPCæ–‡ä»¶: " + filelist[i].getName());
 				npclist.add(new Npc(filelist[i],itmmgr));
 				npcnamelist.add(filelist[i].getName());
 			}
 		}
 		if(npclist.size() == 0 || npcnamelist.size() == 0 || npclist.size()!=npcnamelist.size())
 		{
-			abort("NPC¹ÜÀíÆ÷ÎŞ·¨¶ÁÈ¡ÈÎºÎNPCÎÄ¼ş,ÓÎÏ·ÎŞ·¨½øĞĞ!");
+			abort("NPCç®¡ç†å™¨æ— æ³•è¯»å–ä»»ä½•NPCæ–‡ä»¶,æ¸¸æˆæ— æ³•è¿›è¡Œ!");
 		}
-		track("NPC¹ÜÀíÆ÷Éú³ÉÍê±Ï\n");
+		track("NPCç®¡ç†å™¨ç”Ÿæˆå®Œæ¯•\n");
 	}
 	/*
 	 * get a npc by npc name

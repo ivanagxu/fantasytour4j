@@ -6,7 +6,7 @@ import com.ivan.menu.Menu;
 import com.ivan.menu.MenuItem;
 import com.ivan.menu.MenuSystem;
 /*
- * Ò»¸ö²Ëµ¥Ê¹ÓÃÀı×Ó
+ * ä¸€ä¸ªèœå•ä½¿ç”¨ä¾‹å­
  */
 public class MenuTest {
 	public static void main(String[] args)
@@ -17,17 +17,17 @@ public class MenuTest {
 		
 		
 		/*
-		 * ÏÂÃæ¹¹½¨Ò»¸ö²Ëµ¥:
-		 *  ¸ù²Ëµ¥
+		 * ä¸‹é¢æ„å»ºä¸€ä¸ªèœå•:
+		 *  æ ¹èœå•
 		 * |item0|
 		 * |item1|
-		 * |item2|(Òş²ØÑ¡Ïî)
-		 * |item3|	    ×Ó²Ëµ¥
-		 * |item4| -> |item5|(ÎŞĞ§Ñ¡Ïî)
+		 * |item2|(éšè—é€‰é¡¹)
+		 * |item3|	    å­èœå•
+		 * |item4| -> |item5|(æ— æ•ˆé€‰é¡¹)
 		 * 			  |item6|
 		 * 			  |item7|
 		 */
-		//´´½¨¸ù²Ëµ¥
+		//åˆ›å»ºæ ¹èœå•
 		Menu rootmenu = new Menu("root");
 		MenuItem[] il = new MenuItem[5];
 		for(int i = 0; i < 5; i++)
@@ -35,7 +35,7 @@ public class MenuTest {
 			il[i] = new MenuItem();
 		}
 		rootmenu.setItemList(il, 5);
-		//´´½¨×Ó²Ëµ¥1
+		//åˆ›å»ºå­èœå•1
 		Menu submenu = new Menu("submenu");
 		MenuItem[] sil = new MenuItem[3];
 		for(int i = 0; i < 3; i++)
@@ -44,7 +44,7 @@ public class MenuTest {
 		}
 		submenu.setItemList(sil, 3);
 		submenu.setFatherMenu(rootmenu);
-		//´´½¨×Ó²Ëµ¥2
+		//åˆ›å»ºå­èœå•2
 		Menu submenu2 = new Menu("submenu2");
 		MenuItem[] sil2 = new MenuItem[10];
 		for(int i = 0; i < 10; i++)
@@ -53,16 +53,16 @@ public class MenuTest {
 		}
 		submenu2.setItemList(sil2,10);
 		submenu2.setFatherMenu(rootmenu);
-		//½¨Á¢²Ëµ¥ÁªÏµ,ÉèÖÃÎªÓÉitem4Ñ¡Ïî´ò¿ª×Ó²Ëµ¥
+		//å»ºç«‹èœå•è”ç³»,è®¾ç½®ä¸ºç”±item4é€‰é¡¹æ‰“å¼€å­èœå•
 		il[4].setSubMenu(submenu);
-		//ÉèÖÃitem2ÎªÒş²ØÑ¡Ïî,²¢ÉèÖÃÆä×Ó²Ëµ¥Îªsubmenu2
+		//è®¾ç½®item2ä¸ºéšè—é€‰é¡¹,å¹¶è®¾ç½®å…¶å­èœå•ä¸ºsubmenu2
 		//il[2].setVisible(false);
 		il[2].setSubMenu(submenu2);
-		//ÉèÖÃitem5ÎªÎŞĞ§Ñ¡Ïî
+		//è®¾ç½®item5ä¸ºæ— æ•ˆé€‰é¡¹
 		sil[0].setSelectable(false);
-		//½¨Á¢²Ëµ¥ÏµÍ³
+		//å»ºç«‹èœå•ç³»ç»Ÿ
 		MenuSystem ms = new MenuSystem(rootmenu);
-		//´ò¿ª²Ëµ¥
+		//æ‰“å¼€èœå•
 		ms.Open();
 		
 		System.out.println("now you selected " + ms.getCurrentItem().getName());

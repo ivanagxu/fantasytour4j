@@ -20,7 +20,7 @@ public class MapPoint {
 		probability = "0";
 		imagepath = "data/images/world/ground.gif";
 		image = new ImageIcon(imagepath).getImage();
-		walkable = "ÊÇ";
+		walkable = "æ˜¯";
 		anpc = null;
 		aevent = null;
 		aenemy = null;
@@ -112,15 +112,15 @@ public class MapPoint {
 		image = new ImageIcon(imagepath).getImage();
 		
 		if(image == null)
-			abort("µØÍ¼" + mapname + " ×ø±ê:(" + x + "," + y + ")ÌùÍ¼¶ªÊ§!");
+			abort("åœ°å›¾" + mapname + " åæ ‡:(" + x + "," + y + ")è´´å›¾ä¸¢å¤±!");
 		
-		if(walkable.equals("ÊÇ"))
+		if(walkable.equals("æ˜¯"))
 			iswalkable = true;
-		else if(walkable.equals("·ñ"))
+		else if(walkable.equals("å¦"))
 			iswalkable = false;
 		else
 		{
-			abort("µØÍ¼" + mapname + " ×ø±ê:(" + x + "," + y + ")ĞĞ×ßÊôĞÔÎŞ·¨Ê¶±ğ!");
+			abort("åœ°å›¾" + mapname + " åæ ‡:(" + x + "," + y + ")è¡Œèµ°å±æ€§æ— æ³•è¯†åˆ«!");
 		}
 	}
 	public void init()

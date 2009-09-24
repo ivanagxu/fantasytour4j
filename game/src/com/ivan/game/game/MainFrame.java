@@ -134,7 +134,7 @@ public class MainFrame extends JFrame
 			{
 				/*
 				 * JOptionPane.showMessageDialog(MainFrame.this, "love IvAn",
-				 * "¹ØÓÚ", JOptionPane.INFORMATION_MESSAGE);
+				 * "å…³äº", JOptionPane.INFORMATION_MESSAGE);
 				 * 
 				 */
 				try
@@ -157,7 +157,7 @@ public class MainFrame extends JFrame
 			{
 				int NotExit = 0;
 				NotExit = JOptionPane.showConfirmDialog(MainFrame.this,
-						"ÊÇ·ñÍË³ö?", "µÈ´ıÈ·ÈÏ", JOptionPane.YES_NO_OPTION,
+						"æ˜¯å¦é€€å‡º?", "ç­‰å¾…ç¡®è®¤", JOptionPane.YES_NO_OPTION,
 						JOptionPane.INFORMATION_MESSAGE);
 				if (NotExit == 0)
 					System.exit(0);

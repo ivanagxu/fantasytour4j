@@ -16,7 +16,7 @@ public class Magic {
 	{
 		try{
 			FileInputStream fin = new FileInputStream(f);
-			BufferedReader in = new BufferedReader(new InputStreamReader(fin,"GBK"));
+			BufferedReader in = new BufferedReader(new InputStreamReader(fin,"utf-8"));
 			
 			magicname = in.readLine();
 			magictype = in.readLine();
@@ -48,9 +48,9 @@ public class Magic {
 			debuffhs = in.readLine();
 			debuffjouk = in.readLine();
 			
-			if(magictype.equals("¹¥»÷"))
+			if(magictype.equals("æ”»å‡»"))
 				type = ATTACK_MAGIC;
-			else if(magictype.equals("ÖÎÁÆ"))
+			else if(magictype.equals("æ²»ç–—"))
 				type = HEAL_MAGIC;
 			else if(magictype.equals("buff"))
 				type = BUFF_MAGIC;
@@ -59,39 +59,39 @@ public class Magic {
 			else
 				type = -1;
 			
-			if(attacktype.equals("ÆÕÍ¨¹¥»÷"))
+			if(attacktype.equals("æ™®é€šæ”»å‡»"))
 				actype = NORMAL_ATTACK;
-			else if(attacktype.equals("Ä§·¨¹¥»÷"))
+			else if(attacktype.equals("é­”æ³•æ”»å‡»"))
 				actype = MAGIC_ATTACK;
 			else
 				actype = -1;
 			
-			if(magicproperty.equals("ÆÕ"))
+			if(magicproperty.equals("æ™®"))
 				property = NORMAL_PROPERTY;
-			else if(magicproperty.equals("È«"))
+			else if(magicproperty.equals("å…¨"))
 				property = ALL_PROPERTY;
-			else if(magicproperty.equals("»ğ"))
+			else if(magicproperty.equals("ç«"))
 				property = FIRE_PROPERTY;
-			else if(magicproperty.equals("±ù"))
+			else if(magicproperty.equals("å†°"))
 				property = ICE_PROPERTY;
-			else if(magictype.equals("Ë®"))
+			else if(magictype.equals("æ°´"))
 				property = WATER_PROPERTY;
 			else
 				property = -1;
 			
 			if(property == -1 || actype == -1 || type == -1)
 			{
-				abort("ÎŞ·¨·ÖÎö¼¼ÄÜÀàĞÍ!");
+				abort("æ— æ³•åˆ†ææŠ€èƒ½ç±»å‹!");
 			}
 			in.close();
 		}
 		catch(FileNotFoundException e)
 		{
-			abort("ÕÒ²»µ½magicÎÄ¼ş!");
+			abort("æ‰¾ä¸åˆ°magicæ–‡ä»¶!");
 		}
 		catch(IOException e)
 		{
-			abort("¶ÁmagicÎÄ¼ş³öÏÖioÒì³£!");
+			abort("è¯»magicæ–‡ä»¶å‡ºç°ioå¼‚å¸¸!");
 		}
 	}
 	
@@ -256,25 +256,25 @@ public class Magic {
 	}
 	public boolean isAntidotal()
 	{
-		if(antidotal.equals("ÊÇ"))
+		if(antidotal.equals("æ˜¯"))
 			return true;
-		else if(antidotal.equals("·ñ"))
+		else if(antidotal.equals("å¦"))
 			return false;
 		else
 		{
-			abort("¼¼ÄÜ: " + magicname + " µÄantidotalÊôĞÔ³öÏÖÒì³£!");
+			abort("æŠ€èƒ½: " + magicname + " çš„antidotalå±æ€§å‡ºç°å¼‚å¸¸!");
 			return false;
 		}
 	}
 	public boolean isClearDebuff()
 	{
-		if(cleardebuff.equals("ÊÇ"))
+		if(cleardebuff.equals("æ˜¯"))
 			return true;
-		else if(cleardebuff.equals("·ñ"))
+		else if(cleardebuff.equals("å¦"))
 			return false;
 		else
 		{
-			abort("¼¼ÄÜ " + magicname + " µÄcleardebuffÊôĞÔ³öÏÖÒì³£!");
+			abort("æŠ€èƒ½ " + magicname + " çš„cleardebuffå±æ€§å‡ºç°å¼‚å¸¸!");
 			return false;
 		}
 	}
@@ -288,7 +288,7 @@ public class Magic {
 			return true;
 		else
 		{
-			abort("¼¼ÄÜ: "+magicname+" ·Ç·¨Ê¹ÓÃ!");
+			abort("æŠ€èƒ½: "+magicname+" éæ³•ä½¿ç”¨!");
 			return false;
 		}
 			
@@ -322,12 +322,12 @@ public class Magic {
 		String s = null;
 		switch(property)
 		{
-		case Magic.NORMAL_PROPERTY:s="ÆÕÍ¨";break;
-		case Magic.FIRE_PROPERTY:s="»ğ";break;
-		case Magic.WATER_PROPERTY:s="Ë®";break;
-		case Magic.ICE_PROPERTY:s="±ù";break;
-		case Magic.ALL_PROPERTY:s="È«ÄÜ";break;
-		default:s="Î´Öª";break;
+		case Magic.NORMAL_PROPERTY:s="æ™®é€š";break;
+		case Magic.FIRE_PROPERTY:s="ç«";break;
+		case Magic.WATER_PROPERTY:s="æ°´";break;
+		case Magic.ICE_PROPERTY:s="å†°";break;
+		case Magic.ALL_PROPERTY:s="å…¨èƒ½";break;
+		default:s="æœªçŸ¥";break;
 		}
 		return s;
 	}

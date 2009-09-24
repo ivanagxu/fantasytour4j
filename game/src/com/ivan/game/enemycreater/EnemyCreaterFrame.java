@@ -82,7 +82,7 @@ public class EnemyCreaterFrame extends JFrame{
 					{
 						/*
 						 * JOptionPane.showMessageDialog(MainFrame.this, "love IvAn",
-						 * "¹ØÓÚ", JOptionPane.INFORMATION_MESSAGE);
+						 * "å…³äºŽ", JOptionPane.INFORMATION_MESSAGE);
 						 * 
 						 */
 						try

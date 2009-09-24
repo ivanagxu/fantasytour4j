@@ -33,25 +33,25 @@ public class Menu {
 		menucount++;
 	}
 	/*
-	 * ÉèÖÃ¸¸²Ëµ¥
-	 * @param fm ¸¸²Ëµ¥
+	 * è®¾ç½®çˆ¶èœå•
+	 * @param fm çˆ¶èœå•
 	 */
 	public void setFatherMenu(Menu fm)
 	{
 		fatherMenu = fm;
 	}
 	/*
-	 * »ñÈ¡ÏîÄ¿ÁĞ±í
-	 * @return itemlist ÏîÄ¿ÁĞ±í
+	 * è·å–é¡¹ç›®åˆ—è¡¨
+	 * @return itemlist é¡¹ç›®åˆ—è¡¨
 	 */
 	public MenuItem[] getItemList()
 	{
 		return itemlist;
 	}
 	/*
-	 * ÉèÖÃÏîÄ¿ÁĞ±í
-	 * @param il ÏîÄ¿ÁĞ±íÊı×é
-	 * @param length ÏîÄ¿ÁĞ±íÊı×é³¤¶È
+	 * è®¾ç½®é¡¹ç›®åˆ—è¡¨
+	 * @param il é¡¹ç›®åˆ—è¡¨æ•°ç»„
+	 * @param length é¡¹ç›®åˆ—è¡¨æ•°ç»„é•¿åº¦
 	 */
 	public void setItemList(MenuItem[] il,int length)
 	{
@@ -71,14 +71,14 @@ public class Menu {
 		return length;
 	}
 	/*
-	 * ÉèÖÃÄ¬ÈÏÑ¡Ïî
-	 * @param itemindex Ä¬ÈÏÑ¡ÏîÔÚÏîÄ¿ÁĞ±íÖĞµÄÏÂ±ê
+	 * è®¾ç½®é»˜è®¤é€‰é¡¹
+	 * @param itemindex é»˜è®¤é€‰é¡¹åœ¨é¡¹ç›®åˆ—è¡¨ä¸­çš„ä¸‹æ ‡
 	 */
 	public void setDefaultItemIndex(int itemindex)
 	{
 		if(itemindex > length - 1)
 		{
-			System.out.println("²Ëµ¥Òì³£:²Ëµ¥" + getName() + "Ö¸¶¨Ä¬ÈÏÑ¡ÏîÊ±,Êı×éÔ½½ç,ÏÖÉèÖÃÎªµÚÒ»Ïî.");
+			System.out.println("èœå•å¼‚å¸¸:èœå•" + getName() + "æŒ‡å®šé»˜è®¤é€‰é¡¹æ—¶,æ•°ç»„è¶Šç•Œ,ç°è®¾ç½®ä¸ºç¬¬ä¸€é¡¹.");
 			defaultItem = 0;
 			return;
 		}
@@ -92,7 +92,7 @@ public class Menu {
 	{
 		if(index >length - 1)
 		{
-			System.out.println("²Ëµ¥Òì³£:²Ëµ¥" + getName() + "Ö¸¶¨µ±Ç°Ñ¡ÏîÊ±,Êı×éÔ½½ç,ÏÖÉèÖÃÎªµÚÒ»Ïî.");
+			System.out.println("èœå•å¼‚å¸¸:èœå•" + getName() + "æŒ‡å®šå½“å‰é€‰é¡¹æ—¶,æ•°ç»„è¶Šç•Œ,ç°è®¾ç½®ä¸ºç¬¬ä¸€é¡¹.");
 			currentItem = 0;
 			return;
 		}
@@ -143,8 +143,8 @@ public class Menu {
 		}
 	}
 	/*
-	 * Ñ¡¶¨,»ò´ò¿ª×Ó²Ëµ¥
-	 * @return ±»Ñ¡¶¨µÄ²Ëµ¥ÏîÄ¿
+	 * é€‰å®š,æˆ–æ‰“å¼€å­èœå•
+	 * @return è¢«é€‰å®šçš„èœå•é¡¹ç›®
 	 */
 	public MenuItem Select()
 	{
@@ -184,15 +184,15 @@ public class Menu {
 	private String name;
 	private int selectMode = CYCLICALABLE_SELECT;
 	/*
-	 * CYCLICALABLE_SELECT ÎªÑ­»·Ñ¡ÔñÄ£Ê½
-	 * NON_CYCLICALABLE_SELECT Îª·ÇÑ­»·Ñ¡ÔñÄ£Ê½
+	 * CYCLICALABLE_SELECT ä¸ºå¾ªç¯é€‰æ‹©æ¨¡å¼
+	 * NON_CYCLICALABLE_SELECT ä¸ºéå¾ªç¯é€‰æ‹©æ¨¡å¼
 	 */
 	public static final int CYCLICALABLE_SELECT = 0;
 	public static final int NON_CYCLICALABLE_SELECT = 1;
 	
 	/*
-	 * SHOW_DISABLE_SELECTION ÎªÏÔÊ¾ÎŞĞ§Ñ¡ÏîÄ£Ê½
-	 * HIDE_DISABLE_SELECTION ÎªÒş²ØÎŞĞ§Ñ¡ÏîÄ£Ê½
+	 * SHOW_DISABLE_SELECTION ä¸ºæ˜¾ç¤ºæ— æ•ˆé€‰é¡¹æ¨¡å¼
+	 * HIDE_DISABLE_SELECTION ä¸ºéšè—æ— æ•ˆé€‰é¡¹æ¨¡å¼
 	 */
 	private int displayMode = HIDE_DISABLE_SELECTION;
 	public static final int SHOW_DISABLE_SELECTION = 0;

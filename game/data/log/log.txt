@@ -69,3 +69,4 @@
 [AWT-EventQueue-0][2009-05-23 19:44:27] INFO:ItemCreater|更新控件...
 [main][2009-05-23 19:45:31] INFO:Game Init
 [main][2009-05-23 19:45:47] INFO:执行事件:与怪鸟决斗|birdbattle.dat
+[main][2009-09-24 09:44:12] INFO:Game Init

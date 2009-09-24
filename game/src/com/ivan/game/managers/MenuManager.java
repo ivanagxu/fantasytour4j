@@ -18,13 +18,13 @@ import com.ivan.game.unit.Npc;
 
 /*
  * menu								select
- * 1½øÈëÓÎÏ·Ö÷²Ëµ¥						1½øÈëÓÎÏ·
- * 									2¶ÁÈ¡½ø¶È
- * 									3ÍË³öÓÎÏ·
- * 2Ö÷²Ëµ¥							1×´Ì¬
- * 									2µÀ¾ß
- * 									3¼¼ÄÜ
- * 									4ÏµÍ³
+ * 1è¿›å…¥æ¸¸æˆä¸»èœå•						1è¿›å…¥æ¸¸æˆ
+ * 									2è¯»å–è¿›åº¦
+ * 									3é€€å‡ºæ¸¸æˆ
+ * 2ä¸»èœå•							1çŠ¶æ€
+ * 									2é“å…·
+ * 									3æŠ€èƒ½
+ * 									4ç³»ç»Ÿ
  */
 public class MenuManager {
 	public MenuManager()
@@ -32,7 +32,7 @@ public class MenuManager {
 		menu = 1;
 		select = 1;
 		/*
-		 * ÔØÈë²Ëµ¥ÌùÍ¼
+		 * è½½å…¥èœå•è´´å›¾
 		 */
 		cursor = new ImageIcon("data/images/cursor.gif").getImage();
 		mainmenuimage = new ImageIcon("data/images/menu2.gif").getImage();
@@ -61,19 +61,19 @@ public class MenuManager {
 	{
 		if (b == true) {
 			//java.awt.Toolkit.getDefaultToolkit();
-			if(menu == 1)//ÊÇ¿ªÊ¼½çÃæ²Ëµ¥
+			if(menu == 1)//æ˜¯å¼€å§‹ç•Œé¢èœå•
 			{
-				if (select == 1) //¿ªÊ¼ĞÂÓÎÏ·
+				if (select == 1) //å¼€å§‹æ–°æ¸¸æˆ
 				{
 					display = GameManager.SHOW_MAP;
 					dplmgr.setDisplay(GameManager.SHOW_MAP);
 				}
-				if (select == 2) //¶ÁÈ¡½ø¶È
+				if (select == 2) //è¯»å–è¿›åº¦
 				{
 					File f = new File("data/save/IvAn.sav");
 					if (!f.exists()) 
 					{
-						msgmgr.showMessage(new Msg("ÏÖÔÚÃ»ÓĞ¼ÇÂ¼."));
+						msgmgr.showMessage(new Msg("ç°åœ¨æ²¡æœ‰è®°å½•."));
 						return;
 					}
 					else 
@@ -82,9 +82,9 @@ public class MenuManager {
 						dplmgr.setDisplay(GameManager.SHOW_MAP);
 					}
 				}
-				if (select == 3) //ÍË³ö
+				if (select == 3) //é€€å‡º
 				{
-					msgmgr.showMessage(new Msg("×÷Õß:Ivan QQ:175300750"));
+					msgmgr.showMessage(new Msg("ä½œè€…:Ivan QQ:175300750"));
 					dplmgr.playExitMovie();
 					display = GameManager.GAME_FINISH;
 					dplmgr.setDisplay(GameManager.GAME_FINISH);
@@ -95,47 +95,47 @@ public class MenuManager {
 				menu = 2;
 				select = 1;
 			}
-			else if(menu == 2)//ÊÇÖ÷²Ëµ¥
+			else if(menu == 2)//æ˜¯ä¸»èœå•
 			{
-				if(select == 4)//ÏµÍ³
+				if(select == 4)//ç³»ç»Ÿ
 				{
 					menu = 6;
 					select = 1;
 				}
-				else if(select == 2)//µÀ¾ß
+				else if(select == 2)//é“å…·
 				{
 					menu = 4;
 					select = 1;
 					page = 1;
 					pages = (hero.getItemNameList().size()-1)/10+1;
 				}
-				else if(select == 1)//×´Ì¬
+				else if(select == 1)//çŠ¶æ€
 				{
 					menu = 7;
 				}
-				else if(select == 3)//¼¼ÄÜ
+				else if(select == 3)//æŠ€èƒ½
 				{
 					menu = 5;
 					select = 1;
 					selectmagic = 0;
 				}
 			}
-			else if(menu == 6)//ÏµÍ³²Ëµ¥
+			else if(menu == 6)//ç³»ç»Ÿèœå•
 			{
-				if(select == 1)//±£´æ
+				if(select == 1)//ä¿å­˜
 				{
 					dplmgr.setDisplay(GameManager.SAVE_GAME);
 					menu = 0;
 					select = 0;
 				}
-				else if(select == 2)//ÍË³ö
+				else if(select == 2)//é€€å‡º
 				{
 					dplmgr.setDisplay(GameManager.EXIT_GAME);
 					menu = 1;
 					select = 1;
 				}
 			}
-			else if(menu == 4)//µÀ¾ß²Ëµ¥
+			else if(menu == 4)//é“å…·èœå•
 			{
 				if(hero.getItemList().size() > 0)
 				{
@@ -158,14 +158,14 @@ public class MenuManager {
 					}
 
 					int choose = select + (page-1)*10 -1;
-					boolean yes = showYesNoMenu(gamecanvas,"Ê¹ÓÃ È¡Ïû");
+					boolean yes = showYesNoMenu(gamecanvas,"ä½¿ç”¨ å–æ¶ˆ");
 					if(yes)
 					{
 						Item item = itmmgr.getItem((String)hero.getItemList().get(choose));
 						if(hero.useItem(item,choose))
 							msgmgr.showMessage(new Msg(item.getInstruction()));
 						else
-							msgmgr.showMessage(new Msg("ÏÖÔÚ²»ÄÜÊ¹ÓÃ."));
+							msgmgr.showMessage(new Msg("ç°åœ¨ä¸èƒ½ä½¿ç”¨."));
 						//sleep(200);
 					}
 					else
@@ -175,7 +175,7 @@ public class MenuManager {
 					//System.out.println("select item " + choose);
 				}
 			}
-			else if(menu == 5)//ÒÑÓĞ¼¼ÄÜ²Ëµ¥
+			else if(menu == 5)//å·²æœ‰æŠ€èƒ½èœå•
 			{
 				if(hero.getMagicList().size() > 0)
 				{
@@ -186,9 +186,9 @@ public class MenuManager {
 					page = 1;
 				}
 			}
-			else if(menu == 8)//ËùÓĞ¼¼ÄÜ²Ëµ¥
+			else if(menu == 8)//æ‰€æœ‰æŠ€èƒ½èœå•
 			{
-				if(showYesNoMenu(gamecanvas,"Ê¹ÓÃ È¡Ïû"))
+				if(showYesNoMenu(gamecanvas,"ä½¿ç”¨ å–æ¶ˆ"))
 				{
 					int choose =hero.getMagicList().size() -( select + (page-1)*10 -1) -1;
 					//System.out.println(choose);
@@ -198,7 +198,7 @@ public class MenuManager {
 						{
 							if(hero.getBattleMagic()[i].getName().equals(hero.getMagicNameList().get(choose)))
 							{
-								msgmgr.showMessage(new Msg("¸Ã¼¼ÄÜÒÑ¾­Ê¹ÓÃ"));
+								msgmgr.showMessage(new Msg("è¯¥æŠ€èƒ½å·²ç»ä½¿ç”¨"));
 								//sleep(200);
 								return;
 							}
@@ -216,7 +216,7 @@ public class MenuManager {
 				{
 					if(seller.getSellItemList().size() == 0)
 					{
-						msgmgr.showMessage(new Msg(seller.getName()+":ÎÒÃ»ÓĞÎïÆ·¿ÉÒÔ³öÊÛ."));
+						msgmgr.showMessage(new Msg(seller.getName()+":æˆ‘æ²¡æœ‰ç‰©å“å¯ä»¥å‡ºå”®."));
 						//sleep(200);
 					}
 					else
@@ -229,7 +229,7 @@ public class MenuManager {
 				{
 					if(hero.getItemList().size() == 0)
 					{
-						msgmgr.showMessage(new Msg(seller.getName()+":ÄãÃ»ÓĞÎïÆ·."));
+						msgmgr.showMessage(new Msg(seller.getName()+":ä½ æ²¡æœ‰ç‰©å“."));
 						//sleep(200);
 					}
 					else
@@ -267,7 +267,7 @@ public class MenuManager {
 					else
 					{
 						max = 99;
-						GameLogger.logger.warn("ÎïÆ·¼Û¸ñ²»ºÏÀí!:"+ item.getFileName());
+						GameLogger.logger.warn("ç‰©å“ä»·æ ¼ä¸åˆç†!:"+ item.getFileName());
 					}
 					
 					n = showBuyNumMenu(gamecanvas,max);
@@ -280,9 +280,9 @@ public class MenuManager {
 						hero.useMoney(n * item.getPrice());
 					}
 				}
-				else//Ç®²»¹»
+				else//é’±ä¸å¤Ÿ
 				{
-					msgmgr.showMessage(new Msg(seller.getName()+":ÄãµÄÇ®²»¹».."));
+					msgmgr.showMessage(new Msg(seller.getName()+":ä½ çš„é’±ä¸å¤Ÿ.."));
 					//sleep(200);
 				}
 			}
@@ -564,7 +564,7 @@ public class MenuManager {
 						select = optionnum;
 					}
 				}
-				else if(menu == 11)//ÊÛÂô²Ëµ¥
+				else if(menu == 11)//å”®å–èœå•
 				{
 					pages = (hero.getItemList().size()-1)/10+1;
 					if(page == pages)
@@ -847,7 +847,7 @@ public class MenuManager {
 		}
 	}
 	/*
-	 * Ö÷²Ëµ¥
+	 * ä¸»èœå•
 	 */
 	public void paintMainMenu(Graphics canvas)
 	{
@@ -873,7 +873,7 @@ public class MenuManager {
 		}
 	}
 	/*
-	 * ÏµÍ³Ñ¡Ïî²Ëµ¥
+	 * ç³»ç»Ÿé€‰é¡¹èœå•
 	 */
 	public void paintSystemMenu(Graphics canvas)
 	{
@@ -889,7 +889,7 @@ public class MenuManager {
 		}
 	}
 	/*
-	 * ¿ªÍ·²Ëµ¥
+	 * å¼€å¤´èœå•
 	 */
 	public void paintLogin(Graphics canvas)
 	{
@@ -898,28 +898,28 @@ public class MenuManager {
 		if(select == 1)
 		{
 			canvas.drawImage(cursor,80,123,null);
-			canvas.drawString("¿ªÊ¼ĞÂÓÎÏ·",100,230);
+			canvas.drawString("å¼€å§‹æ–°æ¸¸æˆ",100,230);
 		}
 		else if(select == 2)
 		{
 			canvas.drawImage(cursor,80,139,null);
-			canvas.drawString("´Ó¼ÇÂ¼¿ªÊ¼",100,230);
+			canvas.drawString("ä»è®°å½•å¼€å§‹",100,230);
 		}
 		else if(select == 3)
 		{
 			canvas.drawImage(cursor,80,155,null);
-			canvas.drawString("²»ÍæÁËÂğ?",100,230);
+			canvas.drawString("ä¸ç©äº†å—?",100,230);
 		}
 	}
 	/*
-	 * ÎïÆ·²Ëµ¥
+	 * ç‰©å“èœå•
 	 */
 	public void paintItemMenu(Graphics canvas,int page)
 	{
 		canvas.fillRect(0,0,260,160);
 		canvas.drawImage(itemmenuimage,0,0,null);
 		canvas.setColor(Color.WHITE);
-		//canvas.drawString("ÎïÆ·ÁĞ±í",100,20);
+		//canvas.drawString("ç‰©å“åˆ—è¡¨",100,20);
 		canvas.setColor(Color.BLACK);
 		ArrayList itemlist = hero.getItemNameList();
 		ArrayList itemnumlist = hero.getItemNumList();
@@ -958,7 +958,7 @@ public class MenuManager {
 			shownum = 10;
 		if(num == 0)
 		{
-			canvas.drawString("Ã»ÓĞÎïÆ·.",100,100);
+			canvas.drawString("æ²¡æœ‰ç‰©å“.",100,100);
 			return;
 		}
 		else
@@ -1011,7 +1011,7 @@ public class MenuManager {
 		if(magic[select - 1] != null)
 		{
 			String info = magic[select -1].getInfo()+
-			"[ÊôĞÔ:"+magic[select -1].getPropertyString()+"]";
+			"[å±æ€§:"+magic[select -1].getPropertyString()+"]";
 			canvas.setColor(magic[select -1].getMagicColor());
 			if(info.length() < 16)
 				canvas.drawString(info,30,223);
@@ -1041,7 +1041,7 @@ public class MenuManager {
 		}
 		if(shownum == 0)
 		{
-			canvas.drawString("Ã»ÓĞÑ§µ½¼¼ÄÜ",140,130);
+			canvas.drawString("æ²¡æœ‰å­¦åˆ°æŠ€èƒ½",140,130);
 			return;
 		}
 		for(int i = 0; i < shownum; i++)
@@ -1114,7 +1114,7 @@ public class MenuManager {
 		
 		
 		String info = mgcmgr.getMagic((String)magiclist.get(choose)).getInfo()+
-		"[ÊôĞÔ:"+mgcmgr.getMagic((String)magiclist.get(choose)).getPropertyString()+"]";
+		"[å±æ€§:"+mgcmgr.getMagic((String)magiclist.get(choose)).getPropertyString()+"]";
 		canvas.setColor(Color.BLACK);
 		if(info.length() < 16)
 			canvas.drawString(info,30,223);
@@ -1125,7 +1125,7 @@ public class MenuManager {
 		}
 	}
 	/*
-	 * Ö÷½Ç×´Ì¬²Ëµ¥
+	 * ä¸»è§’çŠ¶æ€èœå•
 	 */
 	public void paintStateMenu(Graphics canvas)
 	{
@@ -1167,14 +1167,14 @@ public class MenuManager {
 		canvas.drawLine(11, 59, 52, 59);
 		
 		canvas.setColor(Color.BLACK);
-		canvas.drawString("¹ºÂò",17,18);
-		canvas.drawString("³öÊÛ",17,35);
-		canvas.drawString("È¡Ïû",17,52);
+		canvas.drawString("è´­ä¹°",17,18);
+		canvas.drawString("å‡ºå”®",17,35);
+		canvas.drawString("å–æ¶ˆ",17,52);
 		
 		canvas.setColor(Color.RED);
 		canvas.drawRect(11, 6+17*(select - 1), 39, 17);
 	}
-	public void paintBuyMenu(Graphics canvas)//¹ºÂò²Ëµ¥
+	public void paintBuyMenu(Graphics canvas)//è´­ä¹°èœå•
 	{
 		//System.out.println("page = "+ page+" select = "+select+" money = "+hero.getMoney());
 		canvas.drawImage(buyitemimage,0,0,null);
@@ -1182,7 +1182,7 @@ public class MenuManager {
 		canvas.setColor(Color.BLACK);
 		
 		canvas.drawString(seller.getMsg(),20,58);
-		canvas.drawString("½ğ:", 160, 248);
+		canvas.drawString("é‡‘:", 160, 248);
 		canvas.setColor(Color.RED);
 		canvas.drawString(""+hero.getMoney()+"G",176,248);
 		canvas.setColor(Color.BLACK);
@@ -1208,7 +1208,7 @@ public class MenuManager {
 		Item item;
 		String price;
 		
-		//npcÎïÆ·
+		//npcç‰©å“
 		for(int i = 0; i < shownum; i++)
 		{
 			if(i % 2 == 0)
@@ -1233,7 +1233,7 @@ public class MenuManager {
 		{
 			shownum = 10;
 		}
-		//Ö÷½ÇÎïÆ·
+		//ä¸»è§’ç‰©å“
 		for(int i = 0; i < shownum; i++)
 		{
 			if(i % 2 == 0)
@@ -1248,11 +1248,11 @@ public class MenuManager {
 			canvas.drawString("x"+(String)hero.getItemNumList().get(i), 220, 61+17*i);
 		}
 		
-		//Ñ¡Ôñ¿ò
+		//é€‰æ‹©æ¡†
 		canvas.setColor(Color.ORANGE);
 		canvas.drawRect(18, 53+17*select, 97, 14);
 		int choose = select + (page-1)*10 -1;
-		//ÎïÆ·ËµÃ÷
+		//ç‰©å“è¯´æ˜
 		if(select % 2 == 0)
 		{
 			canvas.setColor(Color.ORANGE);
@@ -1263,15 +1263,15 @@ public class MenuManager {
 		}
 		canvas.drawString(((Item)itemlist.get(choose)).getInstruction(), 49, 30);
 	}
-	public void paintSellMenu(Graphics canvas)//ÊÛÂô²Ëµ¥
+	public void paintSellMenu(Graphics canvas)//å”®å–èœå•
 	{
 		//System.out.println("page = "+ page+" select = "+select+" money = "+hero.getMoney());
 		canvas.drawImage(buyitemimage,0,0,null);
 		canvas.drawImage(seller.getImages()[0],12,12,null);
 		canvas.setColor(Color.BLACK);
 		
-		canvas.drawString("ÄãÒª³öÊÛÊ²Ã´",20,58);
-		canvas.drawString("½ğ:", 160, 248);
+		canvas.drawString("ä½ è¦å‡ºå”®ä»€ä¹ˆ",20,58);
+		canvas.drawString("é‡‘:", 160, 248);
 		canvas.setColor(Color.RED);
 		canvas.drawString(""+hero.getMoney()+"G",176,248);
 		canvas.setColor(Color.BLACK);
@@ -1313,7 +1313,7 @@ public class MenuManager {
 			shownum = 10;
 		if(num == 0)
 		{
-			canvas.drawString("Ã»ÓĞÎïÆ·.",100,100);
+			canvas.drawString("æ²¡æœ‰ç‰©å“.",100,100);
 			return;
 		}
 		else
@@ -1341,7 +1341,7 @@ public class MenuManager {
 		shownum = seller.getSellItemList().size();
 		if(shownum > 10)
 			shownum = 10;
-		//npcÎïÆ·
+		//npcç‰©å“
 		Item item;
 		String price;
 		itemlist = seller.getSellItemList();
@@ -1363,11 +1363,11 @@ public class MenuManager {
 			canvas.drawString(item.getName(), 20, 81+17*i);
 			canvas.drawString(price, pos, 81+17*i);
 		}
-		//Ñ¡Ôñ¿ò
+		//é€‰æ‹©æ¡†
 		canvas.setColor(Color.ORANGE);
 		canvas.drawRect(145, 33+17*select, 95, 14);
 		int choose = select + (page-1)*10 -1;
-		//ÎïÆ·ËµÃ÷
+		//ç‰©å“è¯´æ˜
 		if(select % 2 == 0)
 		{
 			canvas.setColor(Color.ORANGE);
@@ -1380,8 +1380,8 @@ public class MenuManager {
 				(String)hero.getItemList().get(choose)).getInstruction(), 49, 30);
 	}
 	/*
-	 * @param max ¿ÉÒÔ¹ºÂòµÄ×î¶àÊıÁ¿
-	 * @return n ¹ºÂòÊıÁ¿
+	 * @param max å¯ä»¥è´­ä¹°çš„æœ€å¤šæ•°é‡
+	 * @return n è´­ä¹°æ•°é‡
 	 */
 	public int showBuyNumMenu(GameCanvas g, int max)
 	{
@@ -1487,8 +1487,8 @@ public class MenuManager {
 		return n;
 	}
 	/*
-	 * yes no ²Ëµ¥
-	 * @param s ÊäÈë²ÎÊı¸ñÊ½Îª"XX  YY",XXÎªÕæ,YYÎª¼Ù
+	 * yes no èœå•
+	 * @param s è¾“å…¥å‚æ•°æ ¼å¼ä¸º"XX  YY",XXä¸ºçœŸ,YYä¸ºå‡
 	 */
 	public boolean showYesNoMenu(GameCanvas g,String s)
 	{

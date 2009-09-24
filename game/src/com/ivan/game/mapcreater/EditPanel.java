@@ -34,10 +34,10 @@ public class EditPanel extends JPanel{
 		
 		setLayout(new GridLayout(7,2));
 		
-		add(new JLabel("µØÍ¼:"+ p.mapname));
-		add(new JLabel("×ø±ê:("+p.x+","+p.y+")"));
+		add(new JLabel("åœ°å›¾:"+ p.mapname));
+		add(new JLabel("åæ ‡:("+p.x+","+p.y+")"));
 		
-		add(new JLabel("µØÍ¼ÊÂ¼ş:"));
+		add(new JLabel("åœ°å›¾äº‹ä»¶:"));
 		eventtext = new JTextField(p.event);
 		eventtext.addMouseListener(new
 				MouseAdapter()
@@ -62,7 +62,7 @@ public class EditPanel extends JPanel{
 				});
 		add(eventtext);
 		
-		add(new JLabel("µØÍ¼Npc:"));
+		add(new JLabel("åœ°å›¾Npc:"));
 		npctext = new JTextField(p.npc);
 		npctext.addMouseListener(new
 				MouseAdapter()
@@ -87,7 +87,7 @@ public class EditPanel extends JPanel{
 				});
 		add(npctext);
 		
-		add(new JLabel("µØÍ¼¹ÖÎï:"));
+		add(new JLabel("åœ°å›¾æ€ªç‰©:"));
 		enemytext = new JTextField(p.enemy);
 		enemytext.addMouseListener(new
 				MouseAdapter()
@@ -112,11 +112,11 @@ public class EditPanel extends JPanel{
 				});
 		add(enemytext);
 		
-		add(new JLabel("Ï®»÷¸ÅÂÊ:"));
+		add(new JLabel("è¢­å‡»æ¦‚ç‡:"));
 		probabilitytext = new JTextField(new Integer(p.probability).toString());
 		add(probabilitytext);
 		
-		add(new JLabel("ÌùÍ¼ÎÄ¼ş:"));
+		add(new JLabel("è´´å›¾æ–‡ä»¶:"));
 		imagepathtext = new JTextField(p.imagepath);
 		imagepathtext.addMouseListener(new
 				MouseAdapter()
@@ -141,13 +141,13 @@ public class EditPanel extends JPanel{
 				});
 		add(imagepathtext);
 		
-		add(new JLabel("ÄÜ·ñĞĞ×ß:"));
+		add(new JLabel("èƒ½å¦è¡Œèµ°:"));
 		walkablecombo = new JComboBox();
-		walkablecombo.addItem("ÊÇ");
-		walkablecombo.addItem("·ñ");
-		if(p.walkable.equals("ÊÇ"))
+		walkablecombo.addItem("æ˜¯");
+		walkablecombo.addItem("å¦");
+		if(p.walkable.equals("æ˜¯"))
 			walkablecombo.setSelectedIndex(0);
-		else if(p.walkable.equals("·ñ"))
+		else if(p.walkable.equals("å¦"))
 			walkablecombo.setSelectedIndex(1);
 		add(walkablecombo);
 	}
@@ -183,27 +183,27 @@ public class EditPanel extends JPanel{
 		
 		if(!event.endsWith(".dat"))
 		{
-			errormsg += "ÊÂ¼şÎÄ¼şÓĞÎó\n";
+			errormsg += "äº‹ä»¶æ–‡ä»¶æœ‰è¯¯\n";
 			wrong = true;
 		}
 		if(!npc.endsWith(".dat"))
 		{
-			errormsg += "NpcÎÄ¼şÓĞÎó\n";
+			errormsg += "Npcæ–‡ä»¶æœ‰è¯¯\n";
 			wrong = true;
 		}
 		if(!enemy.endsWith(".dat"))
 		{
-			errormsg += "¹ÖÎïÎÄ¼şÓĞÎó\n";
+			errormsg += "æ€ªç‰©æ–‡ä»¶æœ‰è¯¯\n";
 			wrong = true;
 		}
 		if(!tester.test(probability) || tester.getInt(probability) > 100)
 		{
-			errormsg += "¸ÅÂÊÓĞÎó(0~100)\n";
+			errormsg += "æ¦‚ç‡æœ‰è¯¯(0~100)\n";
 			wrong = true;
 		}
 		if(imagepath.length() == 0 || !imagepath.endsWith(".gif"))
 		{
-			errormsg += "ÌùÍ¼ÎÄ¼şÓĞÎó\n";
+			errormsg += "è´´å›¾æ–‡ä»¶æœ‰è¯¯\n";
 			wrong = true;
 		}
 		
@@ -211,7 +211,7 @@ public class EditPanel extends JPanel{
 		{
 			JOptionPane.showMessageDialog(
 					EditPanel.this,
-					errormsg,"´íÎó",
+					errormsg,"é”™è¯¯",
 					JOptionPane.ERROR_MESSAGE);
 			return;
 		}

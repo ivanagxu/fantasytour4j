@@ -23,7 +23,7 @@ public class EditFrame extends JFrame{
 		mappoint = p;
 		Container content = getContentPane();
 		content.add(panel = new EditPanel(a,mappoint,map));
-		JButton submit = new JButton("�ύ�޸�");
+		JButton submit = new JButton("提交修改");
 		submit.addActionListener(new ActionListener()
 				{
 					public void actionPerformed(ActionEvent e)

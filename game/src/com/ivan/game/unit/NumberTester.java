@@ -1,6 +1,6 @@
 package com.ivan.game.unit;
 /*
- * 检测字符串是否只有数字的类
+ * 妫�娴嬪瓧绗︿覆鏄惁鍙湁鏁板瓧鐨勭被
  */
 public class NumberTester {
 	public NumberTester(String s)

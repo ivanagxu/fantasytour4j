@@ -19,7 +19,7 @@ public class Event {
 			BufferedReader(new 
 					InputStreamReader(new 
 							FileInputStream(f)
-					,"GBK"));
+					,"utf-8"));
 			
 			filename = in.readLine();
 			eventname = in.readLine();
@@ -49,7 +49,7 @@ public class Event {
 		
 		if(!filename.equals(f.getName()))
 		{
-			abort("ÊÂ¼ş:"+f.getName()+"ÎÄ¼şÃû²»Æ¥Åä");
+			abort("äº‹ä»¶:"+f.getName()+"æ–‡ä»¶åä¸åŒ¹é…");
 		}
 		if(!needevent.endsWith("default.dat"))
 		{
@@ -63,19 +63,19 @@ public class Event {
 		{
 			isneeditem = true;
 		}
-		if(eventtype.equals("´«ËÍÊÂ¼ş"))
+		if(eventtype.equals("ä¼ é€äº‹ä»¶"))
 			type = TRANS_EVENT;
-		else if(eventtype.equals("Õ½¶·ÊÂ¼ş"))
+		else if(eventtype.equals("æˆ˜æ–—äº‹ä»¶"))
 			type = BATTLE_EVENT;
-		else if(eventtype.equals("ÎïÆ·ÊÂ¼ş"))
+		else if(eventtype.equals("ç‰©å“äº‹ä»¶"))
 			type = ITEM_EVENT;
-		else if(eventtype.equals("½ğÇ®ÊÂ¼ş"))
+		else if(eventtype.equals("é‡‘é’±äº‹ä»¶"))
 			type = MONEY_EVENT;
-		else if(eventtype.equals("Ñ§Ï°ÊÂ¼ş"))
+		else if(eventtype.equals("å­¦ä¹ äº‹ä»¶"))
 			type = LEARN_EVENT;
 		else
 		{
-			abort("ÊÂ¼ş: " + eventname + " ÀàĞÍÎŞ·¨Ê¶±ğ!");
+			abort("äº‹ä»¶: " + eventname + " ç±»å‹æ— æ³•è¯†åˆ«!");
 		}
 		
 	}
@@ -137,7 +137,7 @@ public class Event {
 		if(type == BATTLE_EVENT)
 			return manager.getEnemy(enemyname);
 		else
-			abort("ÊÂ¼ş: " + eventname + " ²»ÊÇÕ½¶·ÊÂ¼ş,²»ÄÜÌá¹©¹ÖÎï×ÊÁÏ!");
+			abort("äº‹ä»¶: " + eventname + " ä¸æ˜¯æˆ˜æ–—äº‹ä»¶,ä¸èƒ½æä¾›æ€ªç‰©èµ„æ–™!");
 		return null;
 	}
 	public String getEnemy()
@@ -149,7 +149,7 @@ public class Event {
 		if(type == ITEM_EVENT)
 			return manager.getItem(itemname);
 		else
-			abort("ÊÂ¼ş: " + eventname + " ²»ÊÇÎïÆ·ÊÂ¼ş,²»ÄÜÌá¹©ÎïÆ·×ÊÁÏ!");
+			abort("äº‹ä»¶: " + eventname + " ä¸æ˜¯ç‰©å“äº‹ä»¶,ä¸èƒ½æä¾›ç‰©å“èµ„æ–™!");
 		return null;
 	}
 	public Map getMap(MapManager manager)
@@ -157,7 +157,7 @@ public class Event {
 		if(type == TRANS_EVENT)
 			return manager.getMap(targetmapname);
 		else
-			abort("ÊÂ¼ş: " + eventname + " ²»ÊÇ´«ËÍÊÂ¼ş,²»ÄÜÌá¹©µØÍ¼×ÊÁÏ!");
+			abort("äº‹ä»¶: " + eventname + " ä¸æ˜¯ä¼ é€äº‹ä»¶,ä¸èƒ½æä¾›åœ°å›¾èµ„æ–™!");
 		return null;
 	}
 	public String getMapFileName()
@@ -169,7 +169,7 @@ public class Event {
 		if(type == TRANS_EVENT)
 			return Integer.parseInt(targetx);
 		else
-			abort("ÊÂ¼ş: " + eventname + " ²»ÊÇ´«ËÍÊÂ¼ş,²»ÄÜÌá¹©µØÍ¼×ø±ê×ÊÁÏ!");
+			abort("äº‹ä»¶: " + eventname + " ä¸æ˜¯ä¼ é€äº‹ä»¶,ä¸èƒ½æä¾›åœ°å›¾åæ ‡èµ„æ–™!");
 		return -1;
 	}
 	public int getTargetMapY()
@@ -177,7 +177,7 @@ public class Event {
 		if(type == TRANS_EVENT)
 			return Integer.parseInt(targety);
 		else
-			abort("ÊÂ¼ş: " + eventname + " ²»ÊÇ´«ËÍÊÂ¼ş,²»ÄÜÌá¹©µØÍ¼×ø±ê×ÊÁÏ!");
+			abort("äº‹ä»¶: " + eventname + " ä¸æ˜¯ä¼ é€äº‹ä»¶,ä¸èƒ½æä¾›åœ°å›¾åæ ‡èµ„æ–™!");
 		return -1;
 	}
 	public int getMoney()
@@ -185,7 +185,7 @@ public class Event {
 		if(type == MONEY_EVENT)
 			return Integer.parseInt(money);
 		else
-			abort("ÊÂ¼ş: " + eventname + " ²»ÊÇ½ğÇ®ÊÂ¼ş,²»ÄÜÌá¹©½ğÇ®×ÊÁÏ!");
+			abort("äº‹ä»¶: " + eventname + " ä¸æ˜¯é‡‘é’±äº‹ä»¶,ä¸èƒ½æä¾›é‡‘é’±èµ„æ–™!");
 		return -1;
 	}
 	public String getMagic()

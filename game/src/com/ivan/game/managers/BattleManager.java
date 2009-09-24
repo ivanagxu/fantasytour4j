@@ -75,7 +75,7 @@ public class BattleManager
 			{
 				dplmgr.playFailMovie();
 				dplmgr.setDisplay(GameManager.EXIT_GAME);
-				msgmgr.showMessage(new Msg("Ê§°ÜÄË³É¹¦Ö®Ä¸,Å¬Á¦!"));
+				msgmgr.showMessage(new Msg("å¤±è´¥ä¹ƒæˆåŠŸä¹‹æ¯,åŠªåŠ›!"));
 				hero.setBattle(null, false);
 				sleep(200);
 				finish = true;
@@ -84,26 +84,26 @@ public class BattleManager
 			else
 			{
 				double a = 100 * Math.random();
-				msgmgr.showMessage(new Msg("Õ½¶·Ê¤Àû!"));
+				msgmgr.showMessage(new Msg("æˆ˜æ–—èƒœåˆ©!"));
 
 				if (a < enemy.getItemDropProbability())
 				{
-					msgmgr.showMessage(new Msg("»ñµÃÎïÆ·:"
+					msgmgr.showMessage(new Msg("è·å¾—ç‰©å“:"
 							+ enemy.getItem(itmmgr).getName()));
 					hero.addItem(enemy.getItem(itmmgr));
 				}
 				int getMoney = enemy.getHp()/100 + 1;
 				int getExp = enemy.getStr();
 				hero.addMoney(getMoney);
-				msgmgr.showMessage(new Msg("»ñµÃ¾­Ñé:"
-						+ getExp + "µã,½ğ:" + getMoney+"G"));
+				msgmgr.showMessage(new Msg("è·å¾—ç»éªŒ:"
+						+ getExp + "ç‚¹,é‡‘:" + getMoney+"G"));
 				
 				dplmgr.setDisplay(GameManager.SHOW_MAP);
 				hero.setBattle(null, false);
 				hero.setState(hbstate);
 				if (hero.increaseExp(enemy.getStr()))
 				{
-					msgmgr.showMessage(new Msg("µÈ¼¶ÌáÉı!"));
+					msgmgr.showMessage(new Msg("ç­‰çº§æå‡!"));
 				}
 				sleep(200);
 				finish = true;
@@ -149,7 +149,7 @@ public class BattleManager
 											((DelayMagic) delaymagic.get(i)).magic
 													.getName()))
 							{
-								msgmgr.showMessage(new Msg("¸Ã¼¼ÄÜÒÑ¾­Ê¹ÓÃ!"));
+								msgmgr.showMessage(new Msg("è¯¥æŠ€èƒ½å·²ç»ä½¿ç”¨!"));
 								return;
 							}
 						}
@@ -161,7 +161,7 @@ public class BattleManager
 							}
 							else
 							{
-								msgmgr.showMessage(new Msg("È±ÉÙÎïÆ·:"+needItem.getName()));
+								msgmgr.showMessage(new Msg("ç¼ºå°‘ç‰©å“:"+needItem.getName()));
 								return;
 							}
 						}
@@ -178,12 +178,12 @@ public class BattleManager
 					{
 						if(hero.getBattleMagic()[select - 1] == null)
 						{
-							msgmgr.showMessage(new Msg("Äã·ÅÆú¹¥»÷."));
+							msgmgr.showMessage(new Msg("ä½ æ”¾å¼ƒæ”»å‡»."));
 							//sleep(200);
 						}
 						else
 						{
-							msgmgr.showMessage(new Msg("MP²»×ã!Ã»ÄÜÊ¹ÓÃ¼¼ÄÜ!"));
+							msgmgr.showMessage(new Msg("MPä¸è¶³!æ²¡èƒ½ä½¿ç”¨æŠ€èƒ½!"));
 							//sleep(200);
 						}
 						draw();
@@ -228,7 +228,7 @@ public class BattleManager
 						}
 
 						int choose = select + (page - 1) * 10 - 1;
-						boolean yes = showYesNoMenu(gamecanvas, "Ê¹ÓÃ È¡Ïû");
+						boolean yes = showYesNoMenu(gamecanvas, "ä½¿ç”¨ å–æ¶ˆ");
 						if (yes)
 						{
 							Item item = itmmgr.getItem((String) hero
@@ -241,7 +241,7 @@ public class BattleManager
 								select = 1;
 								heroattack = 0;
 							}
-							else msgmgr.showMessage(new Msg("ÏÖÔÚ²»ÄÜÊ¹ÓÃ¸ÃÎïÆ·."));
+							else msgmgr.showMessage(new Msg("ç°åœ¨ä¸èƒ½ä½¿ç”¨è¯¥ç‰©å“."));
 							sleep(200);
 						}
 						else
@@ -404,7 +404,7 @@ public class BattleManager
 			canUseList = emagic;
 		else
 		{
-			//ËÑË÷AIÄÜÓÃµÄ¼¼ÄÜ
+			//æœç´¢AIèƒ½ç”¨çš„æŠ€èƒ½
 			for(int i = 0; i < emagic.size(); i++)
 			{
 				for(int j = 0; j < delaymagic.size(); j++)
@@ -447,7 +447,7 @@ public class BattleManager
 							((DelayMagic) delaymagic.get(i)).magic
 									.getName()))
 			{
-				//msgmgr.showMessage(new Msg("¸Ã¼¼ÄÜÒÑ¾­Ê¹ÓÃ!"));
+				//msgmgr.showMessage(new Msg("è¯¥æŠ€èƒ½å·²ç»ä½¿ç”¨!"));
 				return null;
 			}
 		}
@@ -720,17 +720,17 @@ public class BattleManager
 				if (hit < hbstate.getHs())
 				{
 					hurt = hurt * 2;
-					msgmgr.showMessage(new Msg("Äã·¢³öÖÂÃüÒ»»÷"));
+					msgmgr.showMessage(new Msg("ä½ å‘å‡ºè‡´å‘½ä¸€å‡»"));
 				}
 				hit = 100 * Math.random();
 				if (hit > ebstate.getJouk())
 				{
 					ebstate.setHp(ebstate.getHp() - hurt);
-					msgmgr.showMessage(new Msg("Äã»÷ÖĞµĞÈËÔì³É" + hurt + "µãÉËº¦!"));
+					msgmgr.showMessage(new Msg("ä½ å‡»ä¸­æ•Œäººé€ æˆ" + hurt + "ç‚¹ä¼¤å®³!"));
 				}
 				else
 				{
-					msgmgr.showMessage(new Msg("ÄãµÄ¹¥»÷±»µĞÈË¶ã¿ªÁË- -!"));
+					msgmgr.showMessage(new Msg("ä½ çš„æ”»å‡»è¢«æ•Œäººèº²å¼€äº†- -!"));
 				}
 			}
 			else
@@ -801,17 +801,17 @@ public class BattleManager
 				if (hit < ebstate.getHs())
 				{
 					hurt = hurt * 2;
-					msgmgr.showMessage(new Msg("µĞÈË·¢³öÖÂÃüÒ»»÷!"));
+					msgmgr.showMessage(new Msg("æ•Œäººå‘å‡ºè‡´å‘½ä¸€å‡»!"));
 				}
 				hit = 100 * Math.random();
 				if (hit > hbstate.getJouk())
 				{
-					msgmgr.showMessage(new Msg("µĞÈË»÷ÖĞÄãÔì³É" + hurt + "µãÉËº¦!"));
+					msgmgr.showMessage(new Msg("æ•Œäººå‡»ä¸­ä½ é€ æˆ" + hurt + "ç‚¹ä¼¤å®³!"));
 					hbstate.setHp(hbstate.getHp() - hurt);
 				}
 				else
 				{
-					msgmgr.showMessage(new Msg("Äã¶ã¿ªÁË¹¥»÷!"));
+					msgmgr.showMessage(new Msg("ä½ èº²å¼€äº†æ”»å‡»!"));
 				}
 			}
 
@@ -880,14 +880,14 @@ public class BattleManager
 	}
 
 	/*
-	 * ÎïÆ·²Ëµ¥
+	 * ç‰©å“èœå•
 	 */
 	public void drawItemMenu()
 	{
 		canvas.fillRect(0, 0, 260, 160);
 		canvas.drawImage(itemmenuimage, 0, 0, null);
 		canvas.setColor(Color.WHITE);
-		// canvas.drawString("ÎïÆ·ÁĞ±í",100,20);
+		// canvas.drawString("ç‰©å“åˆ—è¡¨",100,20);
 		canvas.setColor(Color.BLACK);
 		ArrayList itemlist = hero.getItemNameList();
 		ArrayList itemnumlist = hero.getItemNumList();
@@ -921,7 +921,7 @@ public class BattleManager
 		if (shownum == 0) shownum = 10;
 		if (num == 0)
 		{
-			canvas.drawString("Ã»ÓĞÎïÆ·.", 100, 100);
+			canvas.drawString("æ²¡æœ‰ç‰©å“.", 100, 100);
 			return;
 		}
 		else
@@ -957,7 +957,7 @@ public class BattleManager
 	}
 
 	/*
-	 * yes no ²Ëµ¥ @param s ÊäÈë²ÎÊı¸ñÊ½Îª"XX YY",XXÎªÕæ,YYÎª¼Ù
+	 * yes no èœå• @param s è¾“å…¥å‚æ•°æ ¼å¼ä¸º"XX YY",XXä¸ºçœŸ,YYä¸ºå‡
 	 */
 	public boolean showYesNoMenu(GameCanvas g, String s)
 	{

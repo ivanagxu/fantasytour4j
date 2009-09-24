@@ -1,39 +1,39 @@
 package com.ivan.game.unit;
 
 
-/* Õ½¶·ÖĞÈËÎïµÄ×´Ì¬ĞÅÏ¢
- * ÔÚÕ½¶·ÖĞÓÃÓÚ¼¼ÄÜÊ¹ÓÃºó×öÊı¾İ·ÖÎö´¦Àí
+/* æˆ˜æ–—ä¸­äººç‰©çš„çŠ¶æ€ä¿¡æ¯
+ * åœ¨æˆ˜æ–—ä¸­ç”¨äºæŠ€èƒ½ä½¿ç”¨ååšæ•°æ®åˆ†æå¤„ç†
  */
 public class BattleState {
 
 	/*
-	 * ÒÔ»ù´¡Êı¾İ½øĞĞ¹¹Ôì
+	 * ä»¥åŸºç¡€æ•°æ®è¿›è¡Œæ„é€ 
 	 */
 	public BattleState(
 			String name,
-			String property,		//ÊôĞÔ
-			int hp, 				//Ñª
-			int	hpmx, 				//ÑªÉÏÏŞ
-			int mp, 				//·¨Á¦
-			int mpmx, 				//·¨Á¦ÉÏÏŞ
-			int ap,					//¹¥»÷Á¦
-			int d, 					//·ÀÓùÁ¦
-			int mstr,				//Ä§Á¦
-			int mdef,				//Ä§·À
-			int hs,					//ÖÂÃüÂÊ
-			int jouk				//¶ãÉÁÂÊ
+			String property,		//å±æ€§
+			int hp, 				//è¡€
+			int	hpmx, 				//è¡€ä¸Šé™
+			int mp, 				//æ³•åŠ›
+			int mpmx, 				//æ³•åŠ›ä¸Šé™
+			int ap,					//æ”»å‡»åŠ›
+			int d, 					//é˜²å¾¡åŠ›
+			int mstr,				//é­”åŠ›
+			int mdef,				//é­”é˜²
+			int hs,					//è‡´å‘½ç‡
+			int jouk				//èº²é—ªç‡
 			)
 	{
 		this.name = name.substring(0);
-		if(property.equals("ÆÕ"))
+		if(property.equals("æ™®"))
 			this.property = NORMAL_PROPERTY;
-		else if(property.equals("È«"))
+		else if(property.equals("å…¨"))
 			this.property = ALL_PROPERTY;
-		else if(property.equals("»ğ"))
+		else if(property.equals("ç«"))
 			this.property = FIRE_PROPERTY;
-		else if(property.equals("±ù"))
+		else if(property.equals("å†°"))
 			this.property = ICE_PROPERTY;
-		else if(property.equals("Ë®"))
+		else if(property.equals("æ°´"))
 			this.property = WATER_PROPERTY;
 		
 		this.str = ap;
@@ -51,7 +51,7 @@ public class BattleState {
 		
 	}
 	/*
-	 * ÒÔÒÑÓĞ¶ÔÏó¹¹Ôì,ÓĞµãËÆclone
+	 * ä»¥å·²æœ‰å¯¹è±¡æ„é€ ,æœ‰ç‚¹ä¼¼clone
 	 */
 	public BattleState(BattleState state)
 	{
@@ -71,7 +71,7 @@ public class BattleState {
 		this.win =state.getWin();
 	}
 	/*
-	 * Ä¬ÈÏ¹¹Ôì
+	 * é»˜è®¤æ„é€ 
 	 */
 	public BattleState()
 	{
@@ -89,116 +89,116 @@ public class BattleState {
 		win = true;
 	}
 	/*
-	 * @return Ãû×Ö
+	 * @return åå­—
 	 */
 	public String getName()
 	{
 		return name;
 	}
 	/*
-	 * @return Ä§Á¦
+	 * @return é­”åŠ›
 	 */
 	public int getMstr()
 	{
 		return mstr;
 	}
 	/*
-	 * @return Ä§·À
+	 * @return é­”é˜²
 	 */
 	public int getMdef()
 	{
 		return mdef;
 	}
 	/*
-	 * @return ÊôĞÔÃû³Æ
+	 * @return å±æ€§åç§°
 	 */
 	public String getPropertyString()
 	{
 		if(property == 0)
-			return new String("ÆÕ");
+			return new String("æ™®");
 		else if(property == 1)
-			return new String("È«");
+			return new String("å…¨");
 		else if(property == 2)
-			return new String("»ğ");
+			return new String("ç«");
 		else if(property == 3)
-			return new String("±ù");
+			return new String("å†°");
 		else if(property == 4)
-			return new String("Ë®");
+			return new String("æ°´");
 		else
 			return null;
 	}
 	/*
-	 * @return ÊôĞÔÖµ
+	 * @return å±æ€§å€¼
 	 */
 	public int getProperty()
 	{
 		return property;
 	}
 	/*
-	 * @return Á¦Á¿
+	 * @return åŠ›é‡
 	 */
 	public int getStr()
 	{
 		return str;
 	}
 	/*
-	 * @return ·ÀÓù
+	 * @return é˜²å¾¡
 	 */
 	public int getDef()
 	{
 		return def;
 	}
 	/*
-	 * @return ÉúÃü
+	 * @return ç”Ÿå‘½
 	 */
 	public int getHp()
 	{
 		return hp;
 	}
 	/*
-	 * @return ÉúÃüÉÏÏŞ
+	 * @return ç”Ÿå‘½ä¸Šé™
 	 */
 	public int getHpmx()
 	{
 		return hpmx;
 	}
 	/*
-	 * @return ·¨Á¦
+	 * @return æ³•åŠ›
 	 */
 	public int getMp()
 	{
 		return mp;
 	}
 	/*
-	 * @return ·¨Á¦ÉÏÏŞ
+	 * @return æ³•åŠ›ä¸Šé™
 	 */
 	public int getMpmx()
 	{
 		return mpmx;
 	}
 	/*
-	 * @return ¶ãÉÁ
+	 * @return èº²é—ª
 	 */
 	public int getJouk()
 	{
 		return jouk;
 	}
 	/*
-	 * @return ÖÂÃüÂÊ
+	 * @return è‡´å‘½ç‡
 	 */
 	public int getHs()
 	{
 		return hs;
 	}
 	/*
-	 * @return »ñÊ¤
+	 * @return è·èƒœ
 	 */
 	public boolean getWin()
 	{
 		return win;
 	}
 	/*
-	 * @param ap ¹¥»÷Á¦
+	 * @param ap æ”»å‡»åŠ›
 	 */
 	public void setstr(int ap)
 	{
@@ -207,7 +207,7 @@ public class BattleState {
 			this.str = 0;
 	}
 	/*
-	 * @param d ·ÀÓùÁ¦
+	 * @param d é˜²å¾¡åŠ›
 	 */
 	public void setDef(int d)
 	{
@@ -216,7 +216,7 @@ public class BattleState {
 			this.def = 0;
 	}
 	/*
-	 * @param hp ÉúÃü
+	 * @param hp ç”Ÿå‘½
 	 */
 	public void setHp(int hp)
 	{
@@ -235,7 +235,7 @@ public class BattleState {
 		mp = mpmx;
 	}
 	/*
-	 * @param hpmx ÉúÃüÉÏÏŞ
+	 * @param hpmx ç”Ÿå‘½ä¸Šé™
 	 */
 	public void setHpmx(int hpmx)
 	{
@@ -246,7 +246,7 @@ public class BattleState {
 			this.hpmx = 0;
 	}
 	/*
-	 * @param mp ·¨Á¦
+	 * @param mp æ³•åŠ›
 	 */
 	public void setMp(int mp)
 	{
@@ -257,7 +257,7 @@ public class BattleState {
 			this.mp = 0;
 	}
 	/*
-	 * @param mpmx ·¨Á¦ÉÏÏŞ
+	 * @param mpmx æ³•åŠ›ä¸Šé™
 	 */
 	public void setMpmx(int mpmx)
 	{
@@ -268,7 +268,7 @@ public class BattleState {
 			this.mpmx =0;
 	}
 	/*
-	 * @param jouk ¶ãÉÁ
+	 * @param jouk èº²é—ª
 	 */
 	public void setHitp(int jouk)
 	{
@@ -279,7 +279,7 @@ public class BattleState {
 			this.jouk = 100;
 	}
 	/*
-	 * @param hs ÖÂÃüÂÊ
+	 * @param hs è‡´å‘½ç‡
 	 */
 	public void setHs(int hs)
 	{
@@ -290,17 +290,17 @@ public class BattleState {
 			this.hs = 100;
 	}
 	/*
-	 * @param win Ê¤Àû
+	 * @param win èƒœåˆ©
 	 */
 	public void setWin(boolean win)
 	{
 		this.win = win;
 	}
 	/*
-	 * »Ø¸´
-	 * @param ahp »Ø¸´µÄÉúÃüÖµ
-	 * @param amp »Ø¸´µÄ·¨Á¦Öµ
-	 * @param an ½â¶¾
+	 * å›å¤
+	 * @param ahp å›å¤çš„ç”Ÿå‘½å€¼
+	 * @param amp å›å¤çš„æ³•åŠ›å€¼
+	 * @param an è§£æ¯’
 	 */
 	public void recover(int ahp,int amp,boolean an)
 	{
@@ -325,29 +325,29 @@ public class BattleState {
 			mdef = 0;
 	}
 	/*
-	 * @param b ÖĞ¶¾
+	 * @param b ä¸­æ¯’
 	 */
 	public void setAntidotal(boolean b)
 	{
 		antidotal = b;
 	}
 	/*
-	 * @param b ÖĞdebuff
-	 * @param m debuffµÄ¼¼ÄÜ
+	 * @param b ä¸­debuff
+	 * @param m debuffçš„æŠ€èƒ½
 	 */
 	public void setDebuffed(boolean b,Magic m)
 	{
 		debuffed = b;
 	}
 	/*
-	 * @return ÖĞ¶¾×´Ì¬
+	 * @return ä¸­æ¯’çŠ¶æ€
 	 */
 	public boolean isAntidotal()
 	{
 		return antidotal;
 	}
 	/*
-	 * @return ÖĞdebuff×´Ì¬
+	 * @return ä¸­debuffçŠ¶æ€
 	 */
 	public boolean isDebuffed()
 	{
@@ -373,12 +373,12 @@ public class BattleState {
 	private boolean win = true;
 	
 	/*
-	 * ÊôĞÔ
-	 * 0	ÆÕÍ¨
-	 * 1	È«²¿
-	 * 2	»ğ
-	 * 3	±ù
-	 * 4	Ë®
+	 * å±æ€§
+	 * 0	æ™®é€š
+	 * 1	å…¨éƒ¨
+	 * 2	ç«
+	 * 3	å†°
+	 * 4	æ°´
 	 */
 	public final static int NORMAL_PROPERTY = 0;
 	public final static int ALL_PROPERTY = 1;

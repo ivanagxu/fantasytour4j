@@ -20,7 +20,7 @@ public class MagicCreaterFrame extends JFrame{
 	private static final long serialVersionUID = -5262261338244594406L;
 	public MagicCreaterFrame()
 	{
-		setTitle("¼¼ÄÜÖÆ×÷Æ÷");
+		setTitle("æŠ€èƒ½åˆ¶ä½œå™¨");
 		setResizable(false);
 		
 		this.setBounds(312,10,DEFAULT_WIDTH,DEFAULT_HEIGHT);
@@ -65,8 +65,8 @@ public class MagicCreaterFrame extends JFrame{
 						int NotExit = 0;
 						NotExit = JOptionPane.showConfirmDialog(
 								MagicCreaterFrame.this,
-								"ÊÇ·ñÍË³ö?",
-								"µÈ´ıÈ·ÈÏ",
+								"æ˜¯å¦é€€å‡º?",
+								"ç­‰å¾…ç¡®è®¤",
 								JOptionPane.YES_NO_OPTION,
 								JOptionPane.INFORMATION_MESSAGE);
 						if(NotExit == 0)
@@ -82,7 +82,7 @@ public class MagicCreaterFrame extends JFrame{
 					{
 						/*
 						 * JOptionPane.showMessageDialog(MainFrame.this, "love IvAn",
-						 * "¹ØÓÚ", JOptionPane.INFORMATION_MESSAGE);
+						 * "å…³äº", JOptionPane.INFORMATION_MESSAGE);
 						 * 
 						 */
 						try

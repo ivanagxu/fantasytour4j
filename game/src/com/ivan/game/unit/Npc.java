@@ -26,7 +26,7 @@ public class Npc {
 			BufferedReader(new 
 					InputStreamReader(new 
 							FileInputStream(f)
-							,"GBK"));
+							,"utf-8"));
 			
 			name = in.readLine();
 			npctype = in.readLine();
@@ -57,15 +57,15 @@ public class Npc {
 		{
 			e.printStackTrace();
 		}
-		if(npctype.equals("ĞÅÏ¢"))
+		if(npctype.equals("ä¿¡æ¯"))
 			type = MESSAGE_NPC;
-		else if(npctype.equals("ÖÎÁÆ"))
+		else if(npctype.equals("æ²»ç–—"))
 			type = HEAL_NPC;
-		else if(npctype.equals("³öÊÛ"))
+		else if(npctype.equals("å‡ºå”®"))
 			type = SELL_NPC;
 		else
 		{
-			abort("NPC: " + name + " µÄÀàĞÍÎŞ·¨Ê¶±ğ!");
+			abort("NPC: " + name + " çš„ç±»å‹æ— æ³•è¯†åˆ«!");
 		}
 		if(!event.endsWith("default.dat"))
 			hasevent = true;
@@ -75,10 +75,10 @@ public class Npc {
 		{
 			images[i] = new ImageIcon(imagename[i]).getImage();
 			if(images[i] == null)
-				abort("NPC: " + name + " ÌùÍ¼¶ªÊ§!");
+				abort("NPC: " + name + " è´´å›¾ä¸¢å¤±!");
 		}
 		
-		if(leaveable.equals("ÊÇ"))
+		if(leaveable.equals("æ˜¯"))
 			isleaveable = true;
 		else
 			isleaveable = false;
@@ -105,7 +105,7 @@ public class Npc {
 			BufferedReader(new 
 					InputStreamReader(new 
 							FileInputStream(f)
-							,"GBK"));
+							,"utf-8"));
 			
 			name = in.readLine();
 			npctype = in.readLine();
@@ -143,15 +143,15 @@ public class Npc {
 		{
 			e.printStackTrace();
 		}
-		if(npctype.equals("ĞÅÏ¢"))
+		if(npctype.equals("ä¿¡æ¯"))
 			type = MESSAGE_NPC;
-		else if(npctype.equals("ÖÎÁÆ"))
+		else if(npctype.equals("æ²»ç–—"))
 			type = HEAL_NPC;
-		else if(npctype.equals("³öÊÛ"))
+		else if(npctype.equals("å‡ºå”®"))
 			type = SELL_NPC;
 		else
 		{
-			abort("NPC: " + name + " µÄÀàĞÍÎŞ·¨Ê¶±ğ!");
+			abort("NPC: " + name + " çš„ç±»å‹æ— æ³•è¯†åˆ«!");
 		}
 		if(!event.endsWith("default.dat"))
 			hasevent = true;
@@ -161,10 +161,10 @@ public class Npc {
 		{
 			images[i] = new ImageIcon(imagename[i]).getImage();
 			if(images[i] == null)
-				abort("NPC: " + name + " ÌùÍ¼¶ªÊ§!");
+				abort("NPC: " + name + " è´´å›¾ä¸¢å¤±!");
 		}
 		
-		if(leaveable.equals("ÊÇ"))
+		if(leaveable.equals("æ˜¯"))
 			isleaveable = true;
 		else
 			isleaveable = false;

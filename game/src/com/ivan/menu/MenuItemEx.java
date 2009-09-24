@@ -35,7 +35,7 @@ public class MenuItemEx extends MenuItem{
 	{
 		if(index > length - 1)
 		{
-			System.out.print("菜单异常:菜单" + this.getName() + "没有指定的子菜单,只返回空菜单");
+			System.out.print("鑿滃崟寮傚父:鑿滃崟" + this.getName() + "娌℃湁鎸囧畾鐨勫瓙鑿滃崟,鍙繑鍥炵┖鑿滃崟");
 			return null;
 		}
 		else

@@ -1,9 +1,9 @@
 package com.ivan.menu;
 /*
- * ¼òµ¥²Ëµ¥ÏµÍ³
- * ¹¦ÄÜÓĞ:
- * 		Ç°ºóÑ¡Ôñ
- * 		´ò¿ª×Ó²Ëµ¥
+ * ç®€å•èœå•ç³»ç»Ÿ
+ * åŠŸèƒ½æœ‰:
+ * 		å‰åé€‰æ‹©
+ * 		æ‰“å¼€å­èœå•
  */
 public class MenuSystem {
 	public MenuSystem()

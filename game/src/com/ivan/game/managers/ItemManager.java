@@ -8,7 +8,7 @@ import com.ivan.game.unit.Item;
 public class ItemManager {
 	public ItemManager()
 	{
-		track("ÕıÔÚÉú³ÉÎïÆ·¹ÜÀíÆ÷...");
+		track("æ­£åœ¨ç”Ÿæˆç‰©å“ç®¡ç†å™¨...");
 		itemlist = new ArrayList();
 		itemnamelist = new ArrayList();
 		
@@ -18,16 +18,16 @@ public class ItemManager {
 		{
 			if(filelist[i].getPath().toLowerCase().endsWith(".dat"))
 			{
-				track("ÕıÔÚ¶ÁÈ¡ÎïÆ·ÎÄ¼ş: " + filelist[i].getName());
+				track("æ­£åœ¨è¯»å–ç‰©å“æ–‡ä»¶: " + filelist[i].getName());
 				itemlist.add(new Item(filelist[i]));
 				itemnamelist.add(filelist[i].getName());
 			}
 		}
 		if(itemlist.size() == 0 || itemnamelist.size() == 0 || itemlist.size()!=itemnamelist.size())
 		{
-			abort("ÎïÆ·¹ÜÀíÆ÷Ã»ÓĞ¶ÁÈ¡µ½ÈÎºÎÎïÆ·ÎÄ¼ş,ÎŞ·¨½øĞĞÓÎÏ·!");
+			abort("ç‰©å“ç®¡ç†å™¨æ²¡æœ‰è¯»å–åˆ°ä»»ä½•ç‰©å“æ–‡ä»¶,æ— æ³•è¿›è¡Œæ¸¸æˆ!");
 		}
-		track("ÎïÆ·¹ÜÀíÆ÷Éú³ÉÍê±Ï\n");
+		track("ç‰©å“ç®¡ç†å™¨ç”Ÿæˆå®Œæ¯•\n");
 	}
 	
 	/*

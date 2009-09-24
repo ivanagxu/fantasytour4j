@@ -8,7 +8,7 @@ import com.ivan.game.unit.Enemy;
 public class EnemyManager {
 	public EnemyManager()
 	{
-		track("ÕıÔÚÉú³É¹ÖÎï¹ÜÀíÆ÷...");
+		track("æ­£åœ¨ç”Ÿæˆæ€ªç‰©ç®¡ç†å™¨...");
 		enemylist = new ArrayList();
 		enemynamelist = new ArrayList();
 		
@@ -21,7 +21,7 @@ public class EnemyManager {
 		{
 			if(filelist[i].getName().toLowerCase().endsWith(".dat"))
 			{
-				track("ÕıÔÚ¶ÁÈ¡¹ÖÎïÎÄ¼ş: "+filelist[i].getName());
+				track("æ­£åœ¨è¯»å–æ€ªç‰©æ–‡ä»¶: "+filelist[i].getName());
 				enemylist.add(new Enemy(filelist[i]));
 				enemynamelist.add(filelist[i].getName());
 			}
@@ -29,9 +29,9 @@ public class EnemyManager {
 		if(enemylist.size() == 0 || enemynamelist.size() == 0 
 				|| enemylist.size()!=enemynamelist.size())
 		{
-			abort("¹ÖÎï¹ÜÀíÆ÷Ã»ÓĞ¶ÁÈ¡µ½ÈÎºÎ¹ÖÎïÎÄ¼ş,ÎŞ·¨½øĞĞÓÎÏ·!");
+			abort("æ€ªç‰©ç®¡ç†å™¨æ²¡æœ‰è¯»å–åˆ°ä»»ä½•æ€ªç‰©æ–‡ä»¶,æ— æ³•è¿›è¡Œæ¸¸æˆ!");
 		}
-		track("¹ÖÎï¹ÜÀíÆ÷Éú³ÉÍê±Ï\n");
+		track("æ€ªç‰©ç®¡ç†å™¨ç”Ÿæˆå®Œæ¯•\n");
 	}
 	/*
 	 * get a enemy whitch is named enemyname

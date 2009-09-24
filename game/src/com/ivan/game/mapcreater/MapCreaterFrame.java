@@ -46,7 +46,7 @@ public class MapCreaterFrame extends JFrame{
 	private static final long serialVersionUID = 2670465050582015834L;
 	public MapCreaterFrame(String filename,boolean b)
 	{
-		setTitle("µØÍ¼ÖÆ×÷Æ÷");
+		setTitle("åœ°å›¾åˆ¶ä½œå™¨");
 		//setResizable(false);
 		this.setBounds(0,0,DEFAULT_WIDTH,DEFAULT_HEIGHT);
 		runonce = b;
@@ -89,8 +89,8 @@ public class MapCreaterFrame extends JFrame{
 						int NotExit = 0;
 						NotExit = JOptionPane.showConfirmDialog(
 								MapCreaterFrame.this,
-								"ÊÇ·ñÍË³ö?",
-								"µÈ´ıÈ·ÈÏ",
+								"æ˜¯å¦é€€å‡º?",
+								"ç­‰å¾…ç¡®è®¤",
 								JOptionPane.YES_NO_OPTION,
 								JOptionPane.INFORMATION_MESSAGE);
 						if(NotExit == 0)
@@ -106,7 +106,7 @@ public class MapCreaterFrame extends JFrame{
 					{
 						/*
 						 * JOptionPane.showMessageDialog(MainFrame.this, "love IvAn",
-						 * "¹ØÓÚ", JOptionPane.INFORMATION_MESSAGE);
+						 * "å…³äº", JOptionPane.INFORMATION_MESSAGE);
 						 * 
 						 */
 						try
@@ -192,9 +192,9 @@ public class MapCreaterFrame extends JFrame{
 		{
 			while(true)
 			{
-				mapname = JOptionPane.showInputDialog(MapCreaterFrame.this,"ÊäÈëµØÍ¼Ãû³Æ");
-				tablex = JOptionPane.showInputDialog(MapCreaterFrame.this,"ÊäÈëµØÍ¼¿í¶È");
-				tabley = JOptionPane.showInputDialog(MapCreaterFrame.this,"ÊäÈëµØÍ¼¸ß¶È");
+				mapname = JOptionPane.showInputDialog(MapCreaterFrame.this,"è¾“å…¥åœ°å›¾åç§°");
+				tablex = JOptionPane.showInputDialog(MapCreaterFrame.this,"è¾“å…¥åœ°å›¾å®½åº¦");
+				tabley = JOptionPane.showInputDialog(MapCreaterFrame.this,"è¾“å…¥åœ°å›¾é«˜åº¦");
 
 				if(tablex != null && tabley != null)
 				{
@@ -211,7 +211,7 @@ public class MapCreaterFrame extends JFrame{
 				}
 				JOptionPane.showMessageDialog(
 						MapCreaterFrame.this,
-						"µØÍ¼size´íÎó","´íÎó",
+						"åœ°å›¾sizeé”™è¯¯","é”™è¯¯",
 						JOptionPane.ERROR_MESSAGE);
 			}
 			runonce = false;
@@ -325,7 +325,7 @@ public class MapCreaterFrame extends JFrame{
 			BufferedReader(new 
 					InputStreamReader(new 
 							FileInputStream(f)
-							,"GBK"));
+							,"utf-8"));
 			soundfile = in.readLine();
 			soundfile.replace(' ','\0');
 			//System.out.println(soundfile + "asdasdasd");
@@ -459,11 +459,11 @@ public class MapCreaterFrame extends JFrame{
 	}
 	public void newFile()
 	{
-		//track("µÈ´ı½¨Á¢ĞÂÎÄ¼ş...");
+		//track("ç­‰å¾…å»ºç«‹æ–°æ–‡ä»¶...");
 		int result = JOptionPane.showConfirmDialog(
 				MapCreaterFrame.this,
-				"ÊÇ·ñ±£´æµ±Ç°µØÍ¼?",
-				"µÈ´ıÈ·ÈÏ",
+				"æ˜¯å¦ä¿å­˜å½“å‰åœ°å›¾?",
+				"ç­‰å¾…ç¡®è®¤",
 				JOptionPane.YES_NO_CANCEL_OPTION);
 		if(result == 0)
 		{
@@ -517,8 +517,8 @@ public class MapCreaterFrame extends JFrame{
 			{
 				int save = JOptionPane.showConfirmDialog(
 						MapCreaterFrame.this,
-						"´ËµØÍ¼ÒÑ¾­´æÔÚ,ÊÇ·ñ¸²¸Ç?",
-						"µÈ´ıÈ·ÈÏ",
+						"æ­¤åœ°å›¾å·²ç»å­˜åœ¨,æ˜¯å¦è¦†ç›–?",
+						"ç­‰å¾…ç¡®è®¤",
 						JOptionPane.YES_NO_CANCEL_OPTION);
 				if(save == 0)
 				{
@@ -528,7 +528,7 @@ public class MapCreaterFrame extends JFrame{
 						FileOutputStream out = new FileOutputStream(savefile);
 						String saveData = "";
 						saveData = soundfile + "\n" + map.length + "\n" + map[0].length + "\n" + "                        ";
-						out.write(saveData.getBytes("GBK"),0,saveData.length());
+						out.write(saveData.getBytes("utf-8"),0,saveData.length());
 						
 						for(int i = 0; i < map.length; i++)
 						{
@@ -537,7 +537,7 @@ public class MapCreaterFrame extends JFrame{
 								saveData = null;
 								//saveData = new String();
 								saveData = map[i][j].toString();
-								out.write(saveData.getBytes("GBK"),0,saveData.length());
+								out.write(saveData.getBytes("utf-8"),0,saveData.length());
 							}
 						}
 						System.out.println("has saved!");

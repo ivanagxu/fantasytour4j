@@ -27,7 +27,7 @@ public class CreaterFrame extends JFrame{
 	public CreaterFrame()
 	{
 		//setSize(DEFAULT_WIDTH,DEFAULT_HEIGHT);
-		setTitle("ÊÂ¼şÖÆ×÷Æ÷");
+		setTitle("äº‹ä»¶åˆ¶ä½œå™¨");
 		setResizable(false);
 
 		this.setBounds(312,184,DEFAULT_WIDTH,DEFAULT_HEIGHT);
@@ -72,8 +72,8 @@ public class CreaterFrame extends JFrame{
 						int NotExit = 0;
 						NotExit = JOptionPane.showConfirmDialog(
 								CreaterFrame.this,
-								"ÊÇ·ñÍË³ö?",
-								"µÈ´ıÈ·ÈÏ",
+								"æ˜¯å¦é€€å‡º?",
+								"ç­‰å¾…ç¡®è®¤",
 								JOptionPane.YES_NO_OPTION,
 								JOptionPane.INFORMATION_MESSAGE);
 						if(NotExit == 0)
@@ -89,7 +89,7 @@ public class CreaterFrame extends JFrame{
 					{
 						/*
 						 * JOptionPane.showMessageDialog(MainFrame.this, "love IvAn",
-						 * "¹ØÓÚ", JOptionPane.INFORMATION_MESSAGE);
+						 * "å…³äº", JOptionPane.INFORMATION_MESSAGE);
 						 * 
 						 */
 						try

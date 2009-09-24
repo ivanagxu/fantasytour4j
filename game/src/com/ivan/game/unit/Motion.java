@@ -18,7 +18,7 @@ public class Motion {
 			FileInputStream in = new FileInputStream(f);
 			byte[] readbuff = new byte[(int)f.length()];
 			in.read(readbuff,0,(int)f.length());
-			String readData = new String(readbuff,"GBK");
+			String readData = new String(readbuff,"utf-8");
 			int i = 0;
 			while(readData.charAt(i) != '\n')
 			{
@@ -75,17 +75,17 @@ public class Motion {
 			e.printStackTrace();
 		}
 		
-		if(motiontype.equals("变换"))
+		if(motiontype.equals("鍙樻崲"))
 			type = CHANGE_MOTION;
-		else if(motiontype.equals("平移"))
+		else if(motiontype.equals("骞崇Щ"))
 			type = MOVE_MOTION;
 		else
 		{
-			abort("动画: " + motionname + " 类型无法识别!");
+			abort("鍔ㄧ敾: " + motionname + " 绫诲瀷鏃犳硶璇嗗埆!");
 		}
 		
 		if(imagelist.size() == 0 || imagenamelist.size() == 0)
-			abort("动画: " + motionname + " 贴图丢失!");
+			abort("鍔ㄧ敾: " + motionname + " 璐村浘涓㈠け!");
 		
 	}
 	public String getName()

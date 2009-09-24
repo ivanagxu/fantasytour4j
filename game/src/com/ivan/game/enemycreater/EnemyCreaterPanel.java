@@ -38,17 +38,17 @@ public class EnemyCreaterPanel extends JPanel {
 		this.setBackground(Color.CYAN);
 		setLayout(new GridLayout(18, 2));
 
-		add(new JLabel("Ãû³Æ:"));
+		add(new JLabel("åç§°:"));
 		nametext = new JTextField(10);
 		add(nametext);
 
-		add(new JLabel("ÊôĞÔ:"));
+		add(new JLabel("å±æ€§:"));
 		propertycombo = new JComboBox();
-		propertycombo.addItem("ÆÕ");
-		propertycombo.addItem("È«");
-		propertycombo.addItem("»ğ");
-		propertycombo.addItem("±ù");
-		propertycombo.addItem("Ë®");
+		propertycombo.addItem("æ™®");
+		propertycombo.addItem("å…¨");
+		propertycombo.addItem("ç«");
+		propertycombo.addItem("å†°");
+		propertycombo.addItem("æ°´");
 		add(propertycombo);
 
 		add(new JLabel("HP:"));
@@ -59,31 +59,31 @@ public class EnemyCreaterPanel extends JPanel {
 		mptext = new JTextField("1");
 		add(mptext);
 
-		add(new JLabel("¹¥»÷Á¦:"));
+		add(new JLabel("æ”»å‡»åŠ›:"));
 		strtext = new JTextField("1");
 		add(strtext);
 
-		add(new JLabel("·ÀÓùÁ¦:"));
+		add(new JLabel("é˜²å¾¡åŠ›:"));
 		deftext = new JTextField("1");
 		add(deftext);
 
-		add(new JLabel("Ä§Á¦:"));
+		add(new JLabel("é­”åŠ›:"));
 		mstrtext = new JTextField("1");
 		add(mstrtext);
 
-		add(new JLabel("Ä§·À:"));
+		add(new JLabel("é­”é˜²:"));
 		mdeftext = new JTextField("1");
 		add(mdeftext);
 
-		add(new JLabel("ÖÂÃüÂÊ:"));
+		add(new JLabel("è‡´å‘½ç‡:"));
 		hstext = new JTextField("0");
 		add(hstext);
 
-		add(new JLabel("¶ãÉÁÂÊ:"));
+		add(new JLabel("èº²é—ªç‡:"));
 		jouktext = new JTextField("0");
 		add(jouktext);
 
-		JButton addmagic = new JButton("Ìí¼Ó¼¼ÄÜ");
+		JButton addmagic = new JButton("æ·»åŠ æŠ€èƒ½");
 		magiclist = new ArrayList();
 		magiccombo = new JComboBox();
 		addmagic.addActionListener(new ActionListener() {
@@ -106,12 +106,12 @@ public class EnemyCreaterPanel extends JPanel {
 
 		add(magiccombo);
 
-		add(new JLabel("½ğÇ®:"));
+		add(new JLabel("é‡‘é’±:"));
 		moneytext = new JTextField("0");
 		add(moneytext);
 
-		add(new JLabel("ÎïÆ·:"));
-		itemtext = new JTextField("Ë«»÷´ò¿ªÎÄ¼ş");
+		add(new JLabel("ç‰©å“:"));
+		itemtext = new JTextField("åŒå‡»æ‰“å¼€æ–‡ä»¶");
 		itemtext.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent event) {
 				if (event.getClickCount() >= 2) {
@@ -133,12 +133,12 @@ public class EnemyCreaterPanel extends JPanel {
 		itemtext.setEditable(false);
 		add(itemtext);
 
-		add(new JLabel("ÎïÆ·µôÂÊ:"));
+		add(new JLabel("ç‰©å“æ‰ç‡:"));
 		dropprobabilitytext = new JTextField("0");
 		add(dropprobabilitytext);
 
-		add(new JLabel("ÌùÍ¼:"));
-		imagetext = new JTextField("Ë«»÷´ò¿ªÎÄ¼ş");
+		add(new JLabel("è´´å›¾:"));
+		imagetext = new JTextField("åŒå‡»æ‰“å¼€æ–‡ä»¶");
 		imagetext.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent event) {
 				if (event.getClickCount() >= 2) {
@@ -160,8 +160,8 @@ public class EnemyCreaterPanel extends JPanel {
 		imagetext.setEditable(false);
 		add(imagetext);
 
-		add(new JLabel("ÊÜÉËÌùÍ¼:"));
-		hurtimagetext = new JTextField("Ë«»÷´ò¿ªÎÄ¼ş");
+		add(new JLabel("å—ä¼¤è´´å›¾:"));
+		hurtimagetext = new JTextField("åŒå‡»æ‰“å¼€æ–‡ä»¶");
 		hurtimagetext.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent event) {
 				if (event.getClickCount() >= 2) {
@@ -183,8 +183,8 @@ public class EnemyCreaterPanel extends JPanel {
 		hurtimagetext.setEditable(false);
 		add(hurtimagetext);
 
-		add(new JLabel("¹¥»÷ÌùÍ¼:"));
-		attackimagetext = new JTextField("Ë«»÷´ò¿ªÎÄ¼ş");
+		add(new JLabel("æ”»å‡»è´´å›¾:"));
+		attackimagetext = new JTextField("åŒå‡»æ‰“å¼€æ–‡ä»¶");
 		attackimagetext.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent event) {
 				if (event.getClickCount() >= 2) {
@@ -209,7 +209,7 @@ public class EnemyCreaterPanel extends JPanel {
 
 	public void init() {
 		name = "";
-		property = "ÆÕ";
+		property = "æ™®";
 		hp = "1";
 		mp = "1";
 		str = "1";
@@ -238,17 +238,17 @@ public class EnemyCreaterPanel extends JPanel {
 		jouktext.setText(jouk);
 		magiccombo.removeAllItems();
 		moneytext.setText(money);
-		itemtext.setText("Ë«»÷´ò¿ªÎÄ¼ş");
+		itemtext.setText("åŒå‡»æ‰“å¼€æ–‡ä»¶");
 		dropprobabilitytext.setText(dropprobability);
-		imagetext.setText("Ë«»÷´ò¿ªÎÄ¼ş");
-		hurtimagetext.setText("Ë«»÷´ò¿ªÎÄ¼ş");
-		attackimagetext.setText("Ë«»÷´ò¿ªÎÄ¼ş");
+		imagetext.setText("åŒå‡»æ‰“å¼€æ–‡ä»¶");
+		hurtimagetext.setText("åŒå‡»æ‰“å¼€æ–‡ä»¶");
+		attackimagetext.setText("åŒå‡»æ‰“å¼€æ–‡ä»¶");
 	}
 
 	public void newFile() {
-		track("µÈ´ı½¨Á¢ĞÂÎÄ¼ş...");
+		track("ç­‰å¾…å»ºç«‹æ–°æ–‡ä»¶...");
 		int result = JOptionPane.showConfirmDialog(EnemyCreaterPanel.this,
-				"ÊÇ·ñ±£´æµ±Ç°µĞÈË?", "µÈ´ıÈ·ÈÏ", JOptionPane.YES_NO_CANCEL_OPTION);
+				"æ˜¯å¦ä¿å­˜å½“å‰æ•Œäºº?", "ç­‰å¾…ç¡®è®¤", JOptionPane.YES_NO_CANCEL_OPTION);
 		//System.out.println(result);
 		if (result == 0) {
 			save();
@@ -261,12 +261,12 @@ public class EnemyCreaterPanel extends JPanel {
 	}
 
 	public void readFile(File f) {
-		track("¶ÁÈ¡ÎÄ¼ş...");
+		track("è¯»å–æ–‡ä»¶...");
 		init();
 		try {
 			//FileInputStream in = new FileInputStream(f);
 			BufferedReader in = new BufferedReader(new InputStreamReader(
-					new FileInputStream(f),"GBK"));
+					new FileInputStream(f),"utf-8"));
 
 			name = in.readLine();
 			property = in.readLine();
@@ -322,7 +322,7 @@ public class EnemyCreaterPanel extends JPanel {
 	}
 
 	public boolean checkfalse() {
-		track("¼ì²âÊı¾İ...");
+		track("æ£€æµ‹æ•°æ®...");
 		boolean error = false;
 		String errormsg = "";
 
@@ -363,84 +363,84 @@ public class EnemyCreaterPanel extends JPanel {
 			money = "0";
 		if (dropprobability.length() == 0)
 			dropprobability = "0";
-		if (item.length() == 0 || item.equals("Ë«»÷´ò¿ªÎÄ¼ş"))
+		if (item.length() == 0 || item.equals("åŒå‡»æ‰“å¼€æ–‡ä»¶"))
 			item = "data/item/default.dat";
 
-		if (image.length() == 0 || image.equals("Ë«»÷´ò¿ªÎÄ¼ş"))
+		if (image.length() == 0 || image.equals("åŒå‡»æ‰“å¼€æ–‡ä»¶"))
 			image = "";
-		if (hurtimage.length() == 0 || image.equals("Ë«»÷´ò¿ªÎÄ¼ş"))
+		if (hurtimage.length() == 0 || image.equals("åŒå‡»æ‰“å¼€æ–‡ä»¶"))
 			hurtimage = "";
-		if (attackimage.length() == 0 || image.equals("Ë«»÷´ò¿ªÎÄ¼ş"))
+		if (attackimage.length() == 0 || image.equals("åŒå‡»æ‰“å¼€æ–‡ä»¶"))
 			attackimage = "";
 
 		NumberTester test = new NumberTester();
 		if (name.length() == 0) {
-			errormsg += "ÇëÊäÈëÃû³Æ\n";
+			errormsg += "è¯·è¾“å…¥åç§°\n";
 			error = true;
 		}
 		if (!test.test(hp) || test.getInt(hp) < 1) {
-			errormsg += "HPÊı¾İ²»ÕıÈ·(´óÓÚ1)\n";
+			errormsg += "HPæ•°æ®ä¸æ­£ç¡®(å¤§äº1)\n";
 			error = true;
 		}
 		if (!test.test(mp) || test.getInt(mp) < 1) {
-			errormsg += "MpÊı¾İ²»ÕıÈ·(´óÓÚ1)\n";
+			errormsg += "Mpæ•°æ®ä¸æ­£ç¡®(å¤§äº1)\n";
 			error = true;
 		}
 		if (!test.test(str) || test.getInt(str) < 1) {
-			errormsg += "¹¥»÷Á¦Êı¾İ²»ÕıÈ·(´óÓÚ1)\n";
+			errormsg += "æ”»å‡»åŠ›æ•°æ®ä¸æ­£ç¡®(å¤§äº1)\n";
 			error = true;
 		}
 		if (!test.test(def) || test.getInt(def) < 1) {
-			errormsg += "·ÀÓùÁ¦Êı¾İ²»ÕıÈ·(´óÓÚ1)\n";
+			errormsg += "é˜²å¾¡åŠ›æ•°æ®ä¸æ­£ç¡®(å¤§äº1)\n";
 			error = true;
 		}
 		if (!test.test(mstr) || test.getInt(mstr) < 1) {
-			errormsg += "Ä§Á¦Êı¾İ²»ÕıÈ·(´óÓÚ1)\n";
+			errormsg += "é­”åŠ›æ•°æ®ä¸æ­£ç¡®(å¤§äº1)\n";
 			error = true;
 		}
 		if (!test.test(mdef) || test.getInt(mdef) < 1) {
-			errormsg += "Ä§·ÀÊı¾İ²»ÕıÈ·(´óÓÚ1)\n";
+			errormsg += "é­”é˜²æ•°æ®ä¸æ­£ç¡®(å¤§äº1)\n";
 			error = true;
 		}
 		if (!test.test(hs) || test.getInt(hs) > 100) {
-			errormsg += "ÖÂÃüÂÊÊı¾İ²»ÕıÈ·(0~100)\n";
+			errormsg += "è‡´å‘½ç‡æ•°æ®ä¸æ­£ç¡®(0~100)\n";
 			error = true;
 		}
 		if (!test.test(jouk) || test.getInt(jouk) > 100) {
-			errormsg += "¶ãÉÁÂÊÊı¾İ²»ÕıÈ·(0~100)\n";
+			errormsg += "èº²é—ªç‡æ•°æ®ä¸æ­£ç¡®(0~100)\n";
 			error = true;
 		}
 		if (!test.test(dropprobability) || test.getInt(dropprobability) > 100) {
-			errormsg += "µôÂÊÊı¾İ²»ÕıÈ·(0~100)\n";
+			errormsg += "æ‰ç‡æ•°æ®ä¸æ­£ç¡®(0~100)\n";
 			error = true;
 		}
 		if (image.length() == 0 || !image.endsWith(".gif")) {
-			errormsg += "ÌùÍ¼²»ÕıÈ·\n";
+			errormsg += "è´´å›¾ä¸æ­£ç¡®\n";
 			error = true;
 		}
 		if (hurtimage.length() == 0 || !hurtimage.endsWith(".gif")) {
-			errormsg += "ÊÜÉËÌùÍ¼²»ÕıÈ·\n";
+			errormsg += "å—ä¼¤è´´å›¾ä¸æ­£ç¡®\n";
 			error = true;
 		}
 		if (attackimage.length() == 0 || !attackimage.endsWith(".gif")) {
-			errormsg += "¹¥»÷ÌùÍ¼²»ÕıÈ·\n";
+			errormsg += "æ”»å‡»è´´å›¾ä¸æ­£ç¡®\n";
 			error = true;
 		}
 		if (!test.test(money)) {
-			errormsg += "½ğÇ®Êı¾İ²»ÕıÈ·(0~100)\n";
+			errormsg += "é‡‘é’±æ•°æ®ä¸æ­£ç¡®(0~100)\n";
 			error = true;
 		}
 		if (!item.endsWith(".dat")) {
-			errormsg += "ÎïÆ·¸ñÊ½²»ÕıÈ·(.dat)\n";
+			errormsg += "ç‰©å“æ ¼å¼ä¸æ­£ç¡®(.dat)\n";
 			error = true;
 		}
 		if (magiclist.size() == 0) {
-			errormsg += "Ã»Ìí¼Ó¼¼ÄÜ!\n";
+			errormsg += "æ²¡æ·»åŠ æŠ€èƒ½!\n";
 			error = true;
 		}
 		if (error) {
 			JOptionPane.showMessageDialog(EnemyCreaterPanel.this, errormsg,
-					"´íÎó", JOptionPane.ERROR_MESSAGE);
+					"é”™è¯¯", JOptionPane.ERROR_MESSAGE);
 			return error;
 		}
 
@@ -464,7 +464,7 @@ public class EnemyCreaterPanel extends JPanel {
 				int save = 0;
 				if (f.exists()) {
 					save = JOptionPane.showConfirmDialog(
-							EnemyCreaterPanel.this, "´Ë¹ÖÎïÒÑ¾­´æÔÚ,ÊÇ·ñ¸²¸Ç?", "µÈ´ıÈ·ÈÏ",
+							EnemyCreaterPanel.this, "æ­¤æ€ªç‰©å·²ç»å­˜åœ¨,æ˜¯å¦è¦†ç›–?", "ç­‰å¾…ç¡®è®¤",
 							JOptionPane.YES_NO_CANCEL_OPTION);
 				}
 				if (save == 0) {
@@ -482,9 +482,9 @@ public class EnemyCreaterPanel extends JPanel {
 					saveData += "#\n                                                              \n";
 					try {
 						FileOutputStream out = new FileOutputStream(f);
-						out.write(saveData.getBytes("GBK"), 0, saveData.length());
+						out.write(saveData.getBytes("utf-8"), 0, saveData.length());
 						out.close();
-						track("±£´æ³É¹¦...");
+						track("ä¿å­˜æˆåŠŸ...");
 					} catch (FileNotFoundException e) {
 						e.printStackTrace();
 					} catch (IOException e) {

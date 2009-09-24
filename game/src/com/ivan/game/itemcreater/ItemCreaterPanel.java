@@ -36,36 +36,36 @@ public class ItemCreaterPanel extends JPanel {
 
 	public ItemCreaterPanel() {
 		setBackground(Color.YELLOW);
-		filenamelabel = new JLabel("ÎÄ¼şÃû³Æ:");
-		itemnamelabel = new JLabel("ÎïÆ·Ãû³Æ:");
-		itemtypelabel = new JLabel("ÎïÆ·Àà±ğ:");
-		oneofflabel = new JLabel("ÊÇ·ñÒ»´ÎĞÔ:");
-		acteventlabel = new JLabel("¼¤»îÊÂ¼şÎÄ¼ş:");
-		hplabel = new JLabel("»Ø¸´HPÖµ:");
-		mplabel = new JLabel("»Ø¸´MPÖµ:");
-		antidotallabel = new JLabel("ÊÇ·ñ½â¶¾:");
-		imagenamelabel = new JLabel("Í¼±êÎÄ¼ş(Ä¬ÈÏÎªdefault.gif):");
-		instructionlabel = new JLabel("ÎïÆ·ËµÃ÷(ÇëË«»÷ĞŞ¸Ä):");
-		sellablelabel = new JLabel("ÄÜ·ñ³öÊÛ:");
-		itempricelabel = new JLabel("ÎïÆ·¼Û¸ñ(²»ÄÜ³öÊÛÄ¬ÈÏÎª0):");
+		filenamelabel = new JLabel("æ–‡ä»¶åç§°:");
+		itemnamelabel = new JLabel("ç‰©å“åç§°:");
+		itemtypelabel = new JLabel("ç‰©å“ç±»åˆ«:");
+		oneofflabel = new JLabel("æ˜¯å¦ä¸€æ¬¡æ€§:");
+		acteventlabel = new JLabel("æ¿€æ´»äº‹ä»¶æ–‡ä»¶:");
+		hplabel = new JLabel("å›å¤HPå€¼:");
+		mplabel = new JLabel("å›å¤MPå€¼:");
+		antidotallabel = new JLabel("æ˜¯å¦è§£æ¯’:");
+		imagenamelabel = new JLabel("å›¾æ ‡æ–‡ä»¶(é»˜è®¤ä¸ºdefault.gif):");
+		instructionlabel = new JLabel("ç‰©å“è¯´æ˜(è¯·åŒå‡»ä¿®æ”¹):");
+		sellablelabel = new JLabel("èƒ½å¦å‡ºå”®:");
+		itempricelabel = new JLabel("ç‰©å“ä»·æ ¼(ä¸èƒ½å‡ºå”®é»˜è®¤ä¸º0):");
 
 		filenametext = new JTextField(10);
 		itemnametext = new JTextField(10);
 		itemtypecombo = new JComboBox();
-		itemtypecombo.addItem("Ò»°ãÎïÆ·");
-		itemtypecombo.addItem("Õ½¶·ÎïÆ·");
-		itemtypecombo.addItem("ÊÂ¼şÎïÆ·");
+		itemtypecombo.addItem("ä¸€èˆ¬ç‰©å“");
+		itemtypecombo.addItem("æˆ˜æ–—ç‰©å“");
+		itemtypecombo.addItem("äº‹ä»¶ç‰©å“");
 		oneoffcombo = new JComboBox();
-		oneoffcombo.addItem("ÊÇ");
-		oneoffcombo.addItem("·ñ");
-		acteventtext = new JTextField("Ë«»÷´ò¿ªÎÄ¼ş", 10);
+		oneoffcombo.addItem("æ˜¯");
+		oneoffcombo.addItem("å¦");
+		acteventtext = new JTextField("åŒå‡»æ‰“å¼€æ–‡ä»¶", 10);
 		acteventtext.setEditable(false);
 		hptext = new JTextField(10);
 		mptext = new JTextField(10);
 		antidotalcombo = new JComboBox();
-		antidotalcombo.addItem("·ñ");
-		antidotalcombo.addItem("ÊÇ");
-		imagenametext = new JTextField("Ë«»÷´ò¿ªÎÄ¼ş", 10);
+		antidotalcombo.addItem("å¦");
+		antidotalcombo.addItem("æ˜¯");
+		imagenametext = new JTextField("åŒå‡»æ‰“å¼€æ–‡ä»¶", 10);
 		imagenametext.setEditable(false);
 
 		acteventtext.addMouseListener(new MouseAdapter() {
@@ -105,7 +105,7 @@ public class ItemCreaterPanel extends JPanel {
 				}
 			}
 		});
-		instructiontext = new JTextField("Ğ§¹ûÈçÎïÆ·Ãû³ÆËùËµ.");
+		instructiontext = new JTextField("æ•ˆæœå¦‚ç‰©å“åç§°æ‰€è¯´.");
 		instructiontext.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent event) {
 				if (event.getClickCount() > 1)
@@ -113,24 +113,24 @@ public class ItemCreaterPanel extends JPanel {
 			}
 		});
 		sellablecombo = new JComboBox();
-		sellablecombo.addItem("ÊÇ");
-		sellablecombo.addItem("·ñ");
+		sellablecombo.addItem("æ˜¯");
+		sellablecombo.addItem("å¦");
 
 		itempricetext = new JTextField("0", 10);
 
-		//Ìí¼Ó±£´æÊÂ¼ş
-		JButton savebutton = new JButton("±£´æÎïÆ·");
+		//æ·»åŠ ä¿å­˜äº‹ä»¶
+		JButton savebutton = new JButton("ä¿å­˜ç‰©å“");
 		savebutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				//±£´æ
+				//ä¿å­˜
 				save();
 			}
 		});
-		//Ìí¼ÓÖØÖÃÊÂ¼ş
-		JButton resetbutton = new JButton("ÖØÖÃÊı¾İ");
+		//æ·»åŠ é‡ç½®äº‹ä»¶
+		JButton resetbutton = new JButton("é‡ç½®æ•°æ®");
 		resetbutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				//ÖØÖÃ
+				//é‡ç½®
 				init();
 			}
 		});
@@ -178,10 +178,10 @@ public class ItemCreaterPanel extends JPanel {
 	}
 
 	/*
-	 * ³õÊ¼»¯
+	 * åˆå§‹åŒ–
 	 */
 	public void init() {
-		track("³õÊ¼»¯...");
+		track("åˆå§‹åŒ–...");
 
 		filename = "";
 		itemname = "";
@@ -200,22 +200,22 @@ public class ItemCreaterPanel extends JPanel {
 		itemnametext.setText(itemname);
 		itemtypecombo.setSelectedIndex(0);
 		oneoffcombo.setSelectedIndex(0);
-		acteventtext.setText("Ë«»÷´ò¿ªÎÄ¼ş");
+		acteventtext.setText("åŒå‡»æ‰“å¼€æ–‡ä»¶");
 		hptext.setText(hp);
 		mptext.setText(mp);
 		antidotalcombo.setSelectedIndex(0);
-		imagenametext.setText("Ë«»÷´ò¿ªÎÄ¼ş");
-		instructiontext.setText("Ğ§¹ûÈçÎïÆ·Ãû³ÆËùËµ");
+		imagenametext.setText("åŒå‡»æ‰“å¼€æ–‡ä»¶");
+		instructiontext.setText("æ•ˆæœå¦‚ç‰©å“åç§°æ‰€è¯´");
 		sellablecombo.setSelectedIndex(0);
 		itempricetext.setText(itemprice);
 	}
 
 	/*
-	 * ¶ÁÎÄ¼ş
-	 * @param f Òª¶ÁµÄÎÄ¼ş
+	 * è¯»æ–‡ä»¶
+	 * @param f è¦è¯»çš„æ–‡ä»¶
 	 */
 	public void readFile(File f) {
-		track("¶ÁÈ¡ÎÄ¼ş...");
+		track("è¯»å–æ–‡ä»¶...");
 		init();
 		filename = f.getName();
 		//String filepath = f.getPath();
@@ -302,7 +302,7 @@ public class ItemCreaterPanel extends JPanel {
 			 */
 
 			BufferedReader in = new BufferedReader(new InputStreamReader(
-					new FileInputStream(f),"GBK"));
+					new FileInputStream(f),"utf-8"));
 
 			filename = in.readLine();
 			itemname = in.readLine();
@@ -327,12 +327,12 @@ public class ItemCreaterPanel extends JPanel {
 	}
 
 	/*
-	 * ĞÂ½¨ÎÄ¼ş
+	 * æ–°å»ºæ–‡ä»¶
 	 */
 	public void newFile() {
-		track("µÈ´ı½¨Á¢ĞÂÎÄ¼ş...");
+		track("ç­‰å¾…å»ºç«‹æ–°æ–‡ä»¶...");
 		int result = JOptionPane.showConfirmDialog(ItemCreaterPanel.this,
-				"ÊÇ·ñ±£´æµ±Ç°ÊÂ¼ş?", "µÈ´ıÈ·ÈÏ", JOptionPane.YES_NO_CANCEL_OPTION);
+				"æ˜¯å¦ä¿å­˜å½“å‰äº‹ä»¶?", "ç­‰å¾…ç¡®è®¤", JOptionPane.YES_NO_CANCEL_OPTION);
 		//System.out.println(result);
 		if (result == 0) {
 			save();
@@ -346,7 +346,7 @@ public class ItemCreaterPanel extends JPanel {
 
 	public boolean check() {
 		boolean error = false;
-		track("´¦ÀíÊı¾İ...");
+		track("å¤„ç†æ•°æ®...");
 		String errormsg = "";
 
 		filename = filenametext.getText();
@@ -360,7 +360,7 @@ public class ItemCreaterPanel extends JPanel {
 		imagename = imagenametext.getText();
 		instruction = instructiontext.getText();
 		sellable = (String) sellablecombo.getSelectedItem();
-		if (sellable.equals("ÊÇ"))
+		if (sellable.equals("æ˜¯"))
 			itemprice = itempricetext.getText();
 		else
 			itemprice = "0";
@@ -370,76 +370,76 @@ public class ItemCreaterPanel extends JPanel {
 		if (mp.length() == 0)
 			mp = "0";
 
-		if (actevent.equals("Ë«»÷´ò¿ªÎÄ¼ş") || actevent.length() == 0)
+		if (actevent.equals("åŒå‡»æ‰“å¼€æ–‡ä»¶") || actevent.length() == 0)
 			actevent = "data/default.dat";
-		if (imagename.equals("Ë«»÷´ò¿ªÎÄ¼ş"))
+		if (imagename.equals("åŒå‡»æ‰“å¼€æ–‡ä»¶"))
 			imagename = "";
 
 		if (filename.length() == 0) {
-			errormsg += "ÇëÊäÈëÎÄ¼şÃû\n";
+			errormsg += "è¯·è¾“å…¥æ–‡ä»¶å\n";
 			error = true;
 		}
 		if (filename.length() > 0 && !filename.endsWith(".dat")) {
-			errormsg += "ÎÄ¼şÃû¸ñÊ½²»¶Ô(.dat)\n";
+			errormsg += "æ–‡ä»¶åæ ¼å¼ä¸å¯¹(.dat)\n";
 			error = true;
 		}
 		if (itemname.length() == 0) {
-			errormsg += "ÇëÊäÈëÎïÆ·Ãû\n";
+			errormsg += "è¯·è¾“å…¥ç‰©å“å\n";
 			error = true;
 		}
 		if (actevent.length() != 0 && !actevent.endsWith(".dat")) {
-			errormsg += "¼¤»îÊÂ¼ş¸ñÊ½²»¶Ô(.dat)\n";
+			errormsg += "æ¿€æ´»äº‹ä»¶æ ¼å¼ä¸å¯¹(.dat)\n";
 			error = true;
 		}
 		NumberTester tester = new NumberTester();
 		if (hp.length() != 0 && !tester.test(hp)) {
-			errormsg += "»Ø¸´HPÇëÊäÈëÕûÊı\n";
+			errormsg += "å›å¤HPè¯·è¾“å…¥æ•´æ•°\n";
 			error = true;
 		}
 		if (mp.length() != 0 && !tester.test(mp)) {
-			errormsg += "»Ø¸´MPÇëÊäÈëÕûÊı\n";
+			errormsg += "å›å¤MPè¯·è¾“å…¥æ•´æ•°\n";
 			error = true;
 		}
 		if (imagename.length() == 0) {
-			errormsg += "ÎïÆ·Í¼±ê×Ô¶¯ÉèÖÃÎªdefaultitem.gif\n";
+			errormsg += "ç‰©å“å›¾æ ‡è‡ªåŠ¨è®¾ç½®ä¸ºdefaultitem.gif\n";
 			imagename = "data/images/defaultitem.gif";
 		}
 		if (!imagename.endsWith(".gif")) {
-			errormsg += "µØÍ¼ÎÄ¼ş¸ñÊ½²»¶Ô(.gif)\n";
+			errormsg += "åœ°å›¾æ–‡ä»¶æ ¼å¼ä¸å¯¹(.gif)\n";
 			error = true;
 		}
 		if (instruction.length() == 0) {
-			errormsg += "ÇëÊäÈëÎïÆ·ËµÃ÷\n";
+			errormsg += "è¯·è¾“å…¥ç‰©å“è¯´æ˜\n";
 			error = true;
 		}
 		if (!tester.test(itemprice)) {
-			errormsg += "ÎïÆ·¼Û¸ñ¸ÃÎªÕûÊı\n";
+			errormsg += "ç‰©å“ä»·æ ¼è¯¥ä¸ºæ•´æ•°\n";
 			error = true;
 		}
 		if (error) {
 			JOptionPane.showMessageDialog(ItemCreaterPanel.this, errormsg,
-					"´íÎó", JOptionPane.ERROR_MESSAGE);
+					"é”™è¯¯", JOptionPane.ERROR_MESSAGE);
 			return error;
 		}
 		return error;
 	}
 
 	/*
-	 * ±£´æ¹¤×÷
+	 * ä¿å­˜å·¥ä½œ
 	 */
 	public void save() {
 		if (check()) {
 			return;
 		}
 
-		track("±£´æÎÄ¼ş...");
+		track("ä¿å­˜æ–‡ä»¶...");
 		String saveData = "";
 		savefile = new File("data/item/" + filename);
 		int save = 0;
 		if(savefile.exists())
 		{
 			save = JOptionPane.showConfirmDialog(ItemCreaterPanel.this,
-				"´ËÎïÆ·ÒÑ¾­´æÔÚ,ÊÇ·ñ¸²¸Ç?", "µÈ´ıÈ·ÈÏ", JOptionPane.YES_NO_CANCEL_OPTION);
+				"æ­¤ç‰©å“å·²ç»å­˜åœ¨,æ˜¯å¦è¦†ç›–?", "ç­‰å¾…ç¡®è®¤", JOptionPane.YES_NO_CANCEL_OPTION);
 		}
 		if (save == 0) {
 			
@@ -470,10 +470,10 @@ public class ItemCreaterPanel extends JPanel {
 				+ "                                                                 ";
 		try {
 			FileOutputStream out = new FileOutputStream(savefile);
-			out.write(saveData.getBytes("GBK"), 0, saveData.length());
+			out.write(saveData.getBytes("utf-8"), 0, saveData.length());
 			out.close();
-			JOptionPane.showMessageDialog(ItemCreaterPanel.this, "ÎÄ¼ş±£´æ³É¹¦",
-					"±£´æ", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(ItemCreaterPanel.this, "æ–‡ä»¶ä¿å­˜æˆåŠŸ",
+					"ä¿å­˜", JOptionPane.INFORMATION_MESSAGE);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -484,44 +484,44 @@ public class ItemCreaterPanel extends JPanel {
 	}
 
 	/*
-	 * ¸üĞÂ¿Ø¼ş
+	 * æ›´æ–°æ§ä»¶
 	 */
 	public void update() {
-		track("¸üĞÂ¿Ø¼ş...");
+		track("æ›´æ–°æ§ä»¶...");
 
 		filenametext.setText(filename);
 		itemnametext.setText(itemname);
 		if (actevent.length() > 0)
 			acteventtext.setText(actevent);
 		else
-			acteventtext.setText("Ë«»÷´ò¿ªÎÄ¼ş");
+			acteventtext.setText("åŒå‡»æ‰“å¼€æ–‡ä»¶");
 		hptext.setText(hp);
 		mptext.setText(mp);
 		imagenametext.setText(imagename);
 
-		if (oneoff.equals("ÊÇ"))
+		if (oneoff.equals("æ˜¯"))
 			oneoffcombo.setSelectedIndex(0);
 		else
 			oneoffcombo.setSelectedIndex(1);
 
-		if (antidotal.equals("·ñ"))
+		if (antidotal.equals("å¦"))
 			antidotalcombo.setSelectedIndex(0);
 		else
 			antidotalcombo.setSelectedIndex(1);
 
-		if (itemtype.equals("Ò»°ãÎïÆ·"))
+		if (itemtype.equals("ä¸€èˆ¬ç‰©å“"))
 			itemtypecombo.setSelectedIndex(0);
-		else if (itemtype.equals("Õ½¶·ÎïÆ·"))
+		else if (itemtype.equals("æˆ˜æ–—ç‰©å“"))
 			itemtypecombo.setSelectedIndex(1);
-		else if (itemtype.equals("ÊÂ¼şÎïÆ·"))
+		else if (itemtype.equals("äº‹ä»¶ç‰©å“"))
 			itemtypecombo.setSelectedIndex(2);
 
 		if (instruction.length() == 0)
-			instructiontext.setText("Ğ§¹ûÈçÎïÆ·Ãû³ÆËùËµ");
+			instructiontext.setText("æ•ˆæœå¦‚ç‰©å“åç§°æ‰€è¯´");
 		else
 			instructiontext.setText(instruction);
 
-		if (sellable.equals("ÊÇ"))
+		if (sellable.equals("æ˜¯"))
 			sellablecombo.setSelectedIndex(0);
 		else
 			sellablecombo.setSelectedIndex(1);
@@ -530,8 +530,8 @@ public class ItemCreaterPanel extends JPanel {
 	}
 
 	/*
-	 * ¸ú×ÙÆ÷
-	 * @param s ¿ØÖÆÌ¨Êä³öĞÅÏ¢
+	 * è·Ÿè¸ªå™¨
+	 * @param s æ§åˆ¶å°è¾“å‡ºä¿¡æ¯
 	 */
 	public void track(String s) {
 		GameLogger.logger.info("ItemCreater|" + s);

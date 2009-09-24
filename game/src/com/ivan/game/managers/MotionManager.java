@@ -9,7 +9,7 @@ import com.ivan.game.unit.Motion;
 public class MotionManager {
 	public MotionManager()
 	{
-		track("ÕıÔÚÉú³É¶¯»­¹ÜÀíÆ÷...");
+		track("æ­£åœ¨ç”ŸæˆåŠ¨ç”»ç®¡ç†å™¨...");
 		File f = new File("data/motion/");
 		File filelist[] = f.listFiles();
 		motionlist = new ArrayList();
@@ -21,16 +21,16 @@ public class MotionManager {
 		{
 			if(filelist[i].getPath().toLowerCase().endsWith(".dat"))
 			{
-				track("ÕıÔÚ¶ÁÈ¡¶¯»­ÎÄ¼ş: " + filelist[i].getName());
+				track("æ­£åœ¨è¯»å–åŠ¨ç”»æ–‡ä»¶: " + filelist[i].getName());
 				motionlist.add(new Motion(filelist[i]));
 				motionnamelist.add(filelist[i].getName());
 			}
 		}
 		if(motionlist.size() == 0 || motionnamelist.size() == 0 || motionlist.size()!=motionnamelist.size())
 		{
-			abort("¶¯»­¹ÜÀíÆ÷Ã»ÓĞ¶ÁÈ¡µ½ÈÎºÎ¶¯»­ÎÄ¼ş,ÓÎÏ·ÎŞ·¨½øĞĞ!");
+			abort("åŠ¨ç”»ç®¡ç†å™¨æ²¡æœ‰è¯»å–åˆ°ä»»ä½•åŠ¨ç”»æ–‡ä»¶,æ¸¸æˆæ— æ³•è¿›è¡Œ!");
 		}
-		track("¶¯»­¹ÜÀíÆ÷Éú³ÉÍê±Ï.\n");
+		track("åŠ¨ç”»ç®¡ç†å™¨ç”Ÿæˆå®Œæ¯•.\n");
 	}
 	/*
 	 * get a motion object from a motion path

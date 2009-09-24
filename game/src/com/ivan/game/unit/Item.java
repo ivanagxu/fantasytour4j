@@ -21,7 +21,7 @@ public class Item {
 			BufferedReader(new 
 					InputStreamReader(new 
 							FileInputStream(f)
-							,"GBK"));
+							,"utf-8"));
 			
 			filename = in.readLine();
 			itemname = in.readLine();
@@ -48,27 +48,27 @@ public class Item {
 		}
 		if (!f.getName().equals(filename))
 		{
-			abort("¼ÓÔØÎïÆ·ÎÄ¼ş: " + f.getName() + " ³öÏÖÒì³£!ÎÄ¼şÃû²»Æ¥Åä");
+			abort("åŠ è½½ç‰©å“æ–‡ä»¶: " + f.getName() + " å‡ºç°å¼‚å¸¸!æ–‡ä»¶åä¸åŒ¹é…");
 		}
 		
-		if(itemtype.equals("Ò»°ãÎïÆ·"))
+		if(itemtype.equals("ä¸€èˆ¬ç‰©å“"))
 			type = NORMAL_ITEM;
-		else if(itemtype.equals("Õ½¶·ÎïÆ·"))
+		else if(itemtype.equals("æˆ˜æ–—ç‰©å“"))
 			type = BATTLE_ITEM;
-		else if(itemtype.equals("ÊÂ¼şÎïÆ·"))
+		else if(itemtype.equals("äº‹ä»¶ç‰©å“"))
 			type = EVENT_ITEM;
 		else
 		{
-			abort("ÎïÆ·: " + itemname + " ÀàĞÍÎŞ·¨Ê¶±ğ!");
+			abort("ç‰©å“: " + itemname + " ç±»å‹æ— æ³•è¯†åˆ«!");
 		}
 		
-		if(oneoff.equals("ÊÇ"))
+		if(oneoff.equals("æ˜¯"))
 			isoneoff = true;
-		else if(oneoff.equals("·ñ"))
+		else if(oneoff.equals("å¦"))
 			isoneoff = false;
 		else
 		{
-			abort("ÎïÆ·: "+ itemname + " Ê¹ÓÃĞÔÖÊÎŞ·¨Ê¶±ğ!");
+			abort("ç‰©å“: "+ itemname + " ä½¿ç”¨æ€§è´¨æ— æ³•è¯†åˆ«!");
 		}
 		
 		if(!actevent.endsWith("default.dat"))
@@ -76,28 +76,28 @@ public class Item {
 		else
 			hasevent = true;
 		
-		if(antidotal.equals("ÊÇ"))
+		if(antidotal.equals("æ˜¯"))
 			isantidotal = true;
-		else if(antidotal.equals("·ñ"))
+		else if(antidotal.equals("å¦"))
 			isantidotal = false;
 		else
 		{
-			abort("ÎïÆ·: " + itemname + " ½â¶¾ÊôĞÔÎŞ·¨Ê¶±ğ!");
+			abort("ç‰©å“: " + itemname + " è§£æ¯’å±æ€§æ— æ³•è¯†åˆ«!");
 		}
 		
 		itemimage = new ImageIcon(imagename).getImage();
 		if(itemimage == null)
 		{
-			abort("ÎïÆ·: "+ itemname + " Í¼±ê¶ªÊ§!");
+			abort("ç‰©å“: "+ itemname + " å›¾æ ‡ä¸¢å¤±!");
 		}
 		
-		if(sellable.equals("ÊÇ"))
+		if(sellable.equals("æ˜¯"))
 			issellable = true;
-		else if (sellable.equals("·ñ"))
+		else if (sellable.equals("å¦"))
 			issellable = false;
 		else
 		{
-			abort("ÎïÆ·: "+ itemname + " ³öÊÛÊôĞÔÎŞ·¨Ê¶±ğ!");
+			abort("ç‰©å“: "+ itemname + " å‡ºå”®å±æ€§æ— æ³•è¯†åˆ«!");
 		}
 		
 		if(!hp.equals("0"))

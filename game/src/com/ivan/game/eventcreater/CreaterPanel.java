@@ -37,32 +37,32 @@ public class CreaterPanel extends JPanel {
 	public CreaterPanel() {
 		this.setBackground(Color.CYAN);
 
-		//ÊÂ¼şÃû³Æ
-		JLabel filenamelabel = new JLabel("ÎÄ¼şÃû:");
-		JLabel eventnamelabel = new JLabel("ÊÂ¼şÃû:");
-		JLabel eventinfolabel = new JLabel("ÊÂ¼şÃèÊö:");
-		//ÊÂ¼ş¼¤»îÌõ¼ş
-		JLabel needeventlabel = new JLabel("Ç°ĞøÊÂ¼şÎÄ¼ş:");
-		JLabel followeventlabel = new JLabel("ºóĞøÊÂ¼şÎÄ¼ş");
-		JLabel needitemlabel = new JLabel("ĞèÒªÎïÆ·ÎÄ¼ş:");
-		//ÊÂ¼şÀàĞÍ
-		JLabel eventtypelabel = new JLabel("ÊÂ¼şÀàĞÍ:");
-		//ÊÂ¼ş¼¤»î²ÎÊı
-		JLabel enemynamelabel = new JLabel("¹ÖÎïÎÄ¼ş:");
-		JLabel itemnamelabel = new JLabel("ÎïÆ·ÎÄ¼ş:");
-		JLabel moneylabel = new JLabel("½ğÇ®ÊıÁ¿");
-		JLabel targetmaplabel = new JLabel("Ä¿±êµØÍ¼ÎÄ¼ş:");
-		JLabel targetxlabel = new JLabel("×ø±êX:");
-		JLabel targetylabel = new JLabel("×ø±êY:");
-		JLabel magiclabel = new JLabel("Ï°µÃ¼¼ÄÜ:");
+		//äº‹ä»¶åç§°
+		JLabel filenamelabel = new JLabel("æ–‡ä»¶å:");
+		JLabel eventnamelabel = new JLabel("äº‹ä»¶å:");
+		JLabel eventinfolabel = new JLabel("äº‹ä»¶æè¿°:");
+		//äº‹ä»¶æ¿€æ´»æ¡ä»¶
+		JLabel needeventlabel = new JLabel("å‰ç»­äº‹ä»¶æ–‡ä»¶:");
+		JLabel followeventlabel = new JLabel("åç»­äº‹ä»¶æ–‡ä»¶");
+		JLabel needitemlabel = new JLabel("éœ€è¦ç‰©å“æ–‡ä»¶:");
+		//äº‹ä»¶ç±»å‹
+		JLabel eventtypelabel = new JLabel("äº‹ä»¶ç±»å‹:");
+		//äº‹ä»¶æ¿€æ´»å‚æ•°
+		JLabel enemynamelabel = new JLabel("æ€ªç‰©æ–‡ä»¶:");
+		JLabel itemnamelabel = new JLabel("ç‰©å“æ–‡ä»¶:");
+		JLabel moneylabel = new JLabel("é‡‘é’±æ•°é‡");
+		JLabel targetmaplabel = new JLabel("ç›®æ ‡åœ°å›¾æ–‡ä»¶:");
+		JLabel targetxlabel = new JLabel("åæ ‡X:");
+		JLabel targetylabel = new JLabel("åæ ‡Y:");
+		JLabel magiclabel = new JLabel("ä¹ å¾—æŠ€èƒ½:");
 
 		filenametext = new JTextField(10);
 		eventnametext = new JTextField(10);
 		eventinfotext = new JTextField(10);
 
-		needeventtext = new JTextField("Ë«»÷´ò¿ªÎÄ¼ş", 10);
+		needeventtext = new JTextField("åŒå‡»æ‰“å¼€æ–‡ä»¶", 10);
 		needeventtext.setEditable(false);
-		//Ìí¼Ó"Ç°ĞøÊÂ¼ş"ÎÄ±¾¿òË«»÷ÊÂ¼ş
+		//æ·»åŠ "å‰ç»­äº‹ä»¶"æ–‡æœ¬æ¡†åŒå‡»äº‹ä»¶
 		needeventtext.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent event) {
 				if (event.getClickCount() >= 2) {
@@ -82,9 +82,9 @@ public class CreaterPanel extends JPanel {
 			}
 		});
 
-		needitemtext = new JTextField("Ë«»÷´ò¿ªÎÄ¼ş", 10);
+		needitemtext = new JTextField("åŒå‡»æ‰“å¼€æ–‡ä»¶", 10);
 		needitemtext.setEditable(false);
-		//Ìí¼Ó"ĞèÒªÎïÆ·"ÎÄ±¾¿òË«»÷ÊÂ¼ş
+		//æ·»åŠ "éœ€è¦ç‰©å“"æ–‡æœ¬æ¡†åŒå‡»äº‹ä»¶
 		needitemtext.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent event) {
 				if (event.getClickCount() >= 2) {
@@ -103,9 +103,9 @@ public class CreaterPanel extends JPanel {
 				}
 			}
 		});
-		followeventtext = new JTextField("Ë«»÷´ò¿ªÎÄ¼ş", 10);
+		followeventtext = new JTextField("åŒå‡»æ‰“å¼€æ–‡ä»¶", 10);
 		followeventtext.setEditable(false);
-		//Ìí¼Ó"ĞèÒªÎïÆ·"ÎÄ±¾¿òË«»÷ÊÂ¼ş
+		//æ·»åŠ "éœ€è¦ç‰©å“"æ–‡æœ¬æ¡†åŒå‡»äº‹ä»¶
 		followeventtext.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent event) {
 				if (event.getClickCount() >= 2) {
@@ -126,7 +126,7 @@ public class CreaterPanel extends JPanel {
 		});
 
 		eventtypecombo = new JComboBox();
-		//Ìí¼Ó"ÊÂ¼şÀàĞÍ"×éºÏ¿ò¸Ä±äÊÂ¼ş
+		//æ·»åŠ "äº‹ä»¶ç±»å‹"ç»„åˆæ¡†æ”¹å˜äº‹ä»¶
 		/*
 		 eventtypecombo.addActionListener(new
 		 ActionListener()
@@ -135,18 +135,18 @@ public class CreaterPanel extends JPanel {
 		 {
 		 //eventtype = (String)eventtypecombo.getSelectedItem();
 		 //System.out.println(
-		 //"Ñ¡ÔñµÄÊÂ¼şÀàĞÍÊÇ:" + 
+		 //"é€‰æ‹©çš„äº‹ä»¶ç±»å‹æ˜¯:" + 
 		 //(String)eventtypecombo.getSelectedItem());
 		 }
 		 });
 		 */
-		eventtypecombo.addItem("´«ËÍÊÂ¼ş");
-		eventtypecombo.addItem("Õ½¶·ÊÂ¼ş");
-		eventtypecombo.addItem("ÎïÆ·ÊÂ¼ş");
-		eventtypecombo.addItem("½ğÇ®ÊÂ¼ş");
-		eventtypecombo.addItem("Ñ§Ï°ÊÂ¼ş");
+		eventtypecombo.addItem("ä¼ é€äº‹ä»¶");
+		eventtypecombo.addItem("æˆ˜æ–—äº‹ä»¶");
+		eventtypecombo.addItem("ç‰©å“äº‹ä»¶");
+		eventtypecombo.addItem("é‡‘é’±äº‹ä»¶");
+		eventtypecombo.addItem("å­¦ä¹ äº‹ä»¶");
 
-		enemynametext = new JTextField("Ë«»÷´ò¿ªÎÄ¼ş", 10);
+		enemynametext = new JTextField("åŒå‡»æ‰“å¼€æ–‡ä»¶", 10);
 		enemynametext.setEditable(false);
 		enemynametext.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent event) {
@@ -166,7 +166,7 @@ public class CreaterPanel extends JPanel {
 				}
 			}
 		});
-		itemnametext = new JTextField("Ë«»÷´ò¿ªÎÄ¼ş", 10);
+		itemnametext = new JTextField("åŒå‡»æ‰“å¼€æ–‡ä»¶", 10);
 		itemnametext.setEditable(false);
 		itemnametext.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent event) {
@@ -189,7 +189,7 @@ public class CreaterPanel extends JPanel {
 
 		moneytext = new JTextField("0", 10);
 
-		targetmaptext = new JTextField("Ë«»÷´ò¿ªÎÄ¼ş", 10);
+		targetmaptext = new JTextField("åŒå‡»æ‰“å¼€æ–‡ä»¶", 10);
 		targetmaptext.setEditable(false);
 		targetmaptext.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent event) {
@@ -212,7 +212,7 @@ public class CreaterPanel extends JPanel {
 		targetxtext = new JTextField(10);
 		targetytext = new JTextField(10);
 
-		magictext = new JTextField("Ë«»÷´ò¿ªÎÄ¼ş");
+		magictext = new JTextField("åŒå‡»æ‰“å¼€æ–‡ä»¶");
 		magictext.setEditable(false);
 		magictext.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent event) {
@@ -232,27 +232,27 @@ public class CreaterPanel extends JPanel {
 				}
 			}
 		});
-		//Ìí¼Ó±£´æÊÂ¼ş
-		JButton savebutton = new JButton("±£´æÊÂ¼ş");
+		//æ·»åŠ ä¿å­˜äº‹ä»¶
+		JButton savebutton = new JButton("ä¿å­˜äº‹ä»¶");
 		savebutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				//±£´æ
+				//ä¿å­˜
 				save();
 			}
 		});
-		//Ìí¼ÓÖØÖÃÊÂ¼ş
-		JButton resetbutton = new JButton("ÖØÖÃÊı¾İ");
+		//æ·»åŠ é‡ç½®äº‹ä»¶
+		JButton resetbutton = new JButton("é‡ç½®æ•°æ®");
 		resetbutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				//ÖØÖÃ
+				//é‡ç½®
 				init();
 			}
 		});
-		//Ìí¼Ó¸üĞÂ¿Ø¼şÊÂ¼ş
-		JButton updatebutton = new JButton("¸üĞÂÊı¾İ");
+		//æ·»åŠ æ›´æ–°æ§ä»¶äº‹ä»¶
+		JButton updatebutton = new JButton("æ›´æ–°æ•°æ®");
 		updatebutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				//¸üĞÂ
+				//æ›´æ–°
 				update();
 			}
 		});
@@ -307,10 +307,10 @@ public class CreaterPanel extends JPanel {
 	}
 
 	/*
-	 * ³õÊ¼»¯
+	 * åˆå§‹åŒ–
 	 */
 	public void init() {
-		track("³õÊ¼»¯...");
+		track("åˆå§‹åŒ–...");
 		openfile = null;
 
 		filename = "";
@@ -331,26 +331,26 @@ public class CreaterPanel extends JPanel {
 		filenametext.setText(filename);
 		eventnametext.setText(eventname);
 		eventinfotext.setText(eventinfo);
-		needeventtext.setText("Ë«»÷´ò¿ªÎÄ¼ş");
-		needitemtext.setText("Ë«»÷´ò¿ªÎÄ¼ş");
-		followeventtext.setText("Ë«»÷´ò¿ªÎÄ¼ş");
-		enemynametext.setText("Ë«»÷´ò¿ªÎÄ¼ş");
-		itemnametext.setText("Ë«»÷´ò¿ªÎÄ¼ş");
-		targetmaptext.setText("Ë«»÷´ò¿ªÎÄ¼ş");
+		needeventtext.setText("åŒå‡»æ‰“å¼€æ–‡ä»¶");
+		needitemtext.setText("åŒå‡»æ‰“å¼€æ–‡ä»¶");
+		followeventtext.setText("åŒå‡»æ‰“å¼€æ–‡ä»¶");
+		enemynametext.setText("åŒå‡»æ‰“å¼€æ–‡ä»¶");
+		itemnametext.setText("åŒå‡»æ‰“å¼€æ–‡ä»¶");
+		targetmaptext.setText("åŒå‡»æ‰“å¼€æ–‡ä»¶");
 		targetxtext.setText(targetx);
 		targetytext.setText(targety);
 		eventtypecombo.setSelectedIndex(0);
 		moneytext.setText(money);
-		magictext.setText("Ë«»÷´ò¿ªÎÄ¼ş");
+		magictext.setText("åŒå‡»æ‰“å¼€æ–‡ä»¶");
 	}
 
 	/*
-	 * ĞÂ½¨ÎÄ¼ş
+	 * æ–°å»ºæ–‡ä»¶
 	 */
 	public void newFile() {
-		track("µÈ´ı½¨Á¢ĞÂÎÄ¼ş...");
+		track("ç­‰å¾…å»ºç«‹æ–°æ–‡ä»¶...");
 		int result = JOptionPane.showConfirmDialog(CreaterPanel.this,
-				"ÊÇ·ñ±£´æµ±Ç°ÊÂ¼ş?", "µÈ´ıÈ·ÈÏ", JOptionPane.YES_NO_CANCEL_OPTION);
+				"æ˜¯å¦ä¿å­˜å½“å‰äº‹ä»¶?", "ç­‰å¾…ç¡®è®¤", JOptionPane.YES_NO_CANCEL_OPTION);
 		//System.out.println(result);
 		if (result == 0) {
 			save();
@@ -363,11 +363,11 @@ public class CreaterPanel extends JPanel {
 	}
 
 	/*
-	 * ¶ÁÈ¡ÎÄ¼ş
-	 * @param f Òª¶ÁÈ¡µÄÎÄ¼ş
+	 * è¯»å–æ–‡ä»¶
+	 * @param f è¦è¯»å–çš„æ–‡ä»¶
 	 */
 	public void readFile(File f) {
-		track("¶ÁÈ¡ÎÄ¼ş...");
+		track("è¯»å–æ–‡ä»¶...");
 		init();
 		money = "";
 		filename = f.getName();
@@ -491,10 +491,10 @@ public class CreaterPanel extends JPanel {
 	}
 
 	/*
-	 * Êı¾İ¼ì²â,Êı¾İ²»¶Ô·µ»Øtrue
+	 * æ•°æ®æ£€æµ‹,æ•°æ®ä¸å¯¹è¿”å›true
 	 */
 	public boolean check() {
-		track("¼ì²âÊı¾İ...");
+		track("æ£€æµ‹æ•°æ®...");
 
 		String errormsg = "";
 		boolean error = false;
@@ -515,22 +515,22 @@ public class CreaterPanel extends JPanel {
 		magic = magictext.getText();
 
 		if (eventinfo.length() == 0) {
-			eventinfo = "·¢Éú" + eventname + "ÊÂ¼ş.";
+			eventinfo = "å‘ç”Ÿ" + eventname + "äº‹ä»¶.";
 		}
 
-		if (needevent.equals(new String("Ë«»÷´ò¿ªÎÄ¼ş")))
+		if (needevent.equals(new String("åŒå‡»æ‰“å¼€æ–‡ä»¶")))
 			needevent = "data/default.dat";
-		if (followevent.equals(new String("Ë«»÷´ò¿ªÎÄ¼ş")))
+		if (followevent.equals(new String("åŒå‡»æ‰“å¼€æ–‡ä»¶")))
 			followevent = "data/default.dat";
-		if (needitem.equals(new String("Ë«»÷´ò¿ªÎÄ¼ş")))
+		if (needitem.equals(new String("åŒå‡»æ‰“å¼€æ–‡ä»¶")))
 			needitem = "data/default.dat";
-		if (itemname.equals(new String("Ë«»÷´ò¿ªÎÄ¼ş")))
+		if (itemname.equals(new String("åŒå‡»æ‰“å¼€æ–‡ä»¶")))
 			itemname = "data/default.dat";
-		if (enemyname.equals(new String("Ë«»÷´ò¿ªÎÄ¼ş")))
+		if (enemyname.equals(new String("åŒå‡»æ‰“å¼€æ–‡ä»¶")))
 			enemyname = "data/default.dat";
-		if (targetmapname.equals(new String("Ë«»÷´ò¿ªÎÄ¼ş")))
+		if (targetmapname.equals(new String("åŒå‡»æ‰“å¼€æ–‡ä»¶")))
 			targetmapname = "data/default.dat";
-		if (magic.equals("Ë«»÷´ò¿ªÎÄ¼ş"))
+		if (magic.equals("åŒå‡»æ‰“å¼€æ–‡ä»¶"))
 			magic = "data/default.dat";
 
 		if (money.length() == 0)
@@ -543,79 +543,79 @@ public class CreaterPanel extends JPanel {
 
 		NumberTester tester = new NumberTester();
 		if (filename.length() == 0) {
-			errormsg += "ÇëÊäÈëÎÄ¼şÃû\n";
+			errormsg += "è¯·è¾“å…¥æ–‡ä»¶å\n";
 			error = true;
 		}
 		if (filename.length() > 0 && !filename.endsWith(".dat")) {
-			errormsg += "ÎÄ¼şÃû¸ñÊ½²»¶Ô(.dat)\n";
+			errormsg += "æ–‡ä»¶åæ ¼å¼ä¸å¯¹(.dat)\n";
 			error = true;
 		}
 		if (eventname.length() == 0) {
-			errormsg += "ÇëÊäÈëÊÂ¼şÃû\n";
+			errormsg += "è¯·è¾“å…¥äº‹ä»¶å\n";
 			error = true;
 		}
 		if (needevent.length() != 0 && !needevent.endsWith(".dat")) {
-			errormsg += "Ç°ĞøÊÂ¼ş¸ñÊ½²»¶Ô(.dat)\n";
+			errormsg += "å‰ç»­äº‹ä»¶æ ¼å¼ä¸å¯¹(.dat)\n";
 			error = true;
 		}
 		if (followevent.length() != 0 && !followevent.endsWith(".dat")) {
-			errormsg += "ºóĞøÊÂ¼ş¸ñÊ½²»¶Ô(.dat)\n";
+			errormsg += "åç»­äº‹ä»¶æ ¼å¼ä¸å¯¹(.dat)\n";
 			error = true;
 		}
 		if (magic.length() != 0 && !magic.endsWith(".dat")) {
-			errormsg += "¼¼ÄÜÎÄ¼ş¸ñÊ½²»¶Ô(.dat)\n";
+			errormsg += "æŠ€èƒ½æ–‡ä»¶æ ¼å¼ä¸å¯¹(.dat)\n";
 			error = true;
 		}
-		if (eventtype.equals("ÎïÆ·ÊÂ¼ş") && itemname.equals("default.dat")) {
-			errormsg += "ÎïÆ·ÊÂ¼ş±ØĞëÓĞÎïÆ·\n";
+		if (eventtype.equals("ç‰©å“äº‹ä»¶") && itemname.equals("default.dat")) {
+			errormsg += "ç‰©å“äº‹ä»¶å¿…é¡»æœ‰ç‰©å“\n";
 			error = true;
 		}
-		if (eventtype.equals("´«ËÍÊÂ¼ş") && targetmapname.equals("default.dat")) {
-			errormsg += "´«ËÍÊÂ¼ş±ØĞëÓĞÄ¿±êµØÍ¼\n";
+		if (eventtype.equals("ä¼ é€äº‹ä»¶") && targetmapname.equals("default.dat")) {
+			errormsg += "ä¼ é€äº‹ä»¶å¿…é¡»æœ‰ç›®æ ‡åœ°å›¾\n";
 			error = true;
 		}
-		if (eventtype.equals("Õ½¶·ÊÂ¼ş") && enemyname.equals("default.dat")) {
-			errormsg += "Õ½¶·ÊÂ¼ş±ØĞëÓĞµĞÈË\n";
+		if (eventtype.equals("æˆ˜æ–—äº‹ä»¶") && enemyname.equals("default.dat")) {
+			errormsg += "æˆ˜æ–—äº‹ä»¶å¿…é¡»æœ‰æ•Œäºº\n";
 			error = true;
 		}
-		if (eventtype.equals("½ğÇ®ÊÂ¼ş")) {
+		if (eventtype.equals("é‡‘é’±äº‹ä»¶")) {
 			if (!tester.test(money)) {
-				errormsg += "½ğÇ®ÊÂ¼ş±ØĞëÖ¸¶¨½ğÇ®ÊıÁ¿\n";
+				errormsg += "é‡‘é’±äº‹ä»¶å¿…é¡»æŒ‡å®šé‡‘é’±æ•°é‡\n";
 				error = true;
 			}
 		}
-		if (eventtype.equals("Ñ§Ï°ÊÂ¼ş") && magic.equals("default.dat")) {
-			errormsg += "Ñ§Ï°ÊÂ¼ş±ØĞëÓĞ¼¼ÄÜ\n";
+		if (eventtype.equals("å­¦ä¹ äº‹ä»¶") && magic.equals("default.dat")) {
+			errormsg += "å­¦ä¹ äº‹ä»¶å¿…é¡»æœ‰æŠ€èƒ½\n";
 			error = true;
 		}
 		if (needitem.length() != 0 && !needitem.endsWith(".dat")) {
-			errormsg += "ĞèÒªÎïÆ·ÎÄ¼ş¸ñÊ½²»¶Ô(.dat)\n";
+			errormsg += "éœ€è¦ç‰©å“æ–‡ä»¶æ ¼å¼ä¸å¯¹(.dat)\n";
 			error = true;
 		}
 		if (itemname.length() != 0 && !itemname.endsWith(".dat")) {
-			errormsg += "ÎïÆ·ÎÄ¼ş¸ñÊ½²»¶Ô(.dat)\n";
+			errormsg += "ç‰©å“æ–‡ä»¶æ ¼å¼ä¸å¯¹(.dat)\n";
 			error = true;
 		}
 		if (enemyname.length() != 0 && !enemyname.endsWith(".dat")) {
-			errormsg += "¹ÖÎïÎÄ¼ş¸ñÊ½²»¶Ô(.dat)\n";
+			errormsg += "æ€ªç‰©æ–‡ä»¶æ ¼å¼ä¸å¯¹(.dat)\n";
 			error = true;
 		}
 		if (!targetmapname.equals("data/default.dat")) {
 			if (!targetmapname.endsWith(".dat")) {
-				errormsg += "µØÍ¼¸ñÊ½²»¶Ô(.dat)\n";
+				errormsg += "åœ°å›¾æ ¼å¼ä¸å¯¹(.dat)\n";
 				error = true;
 			}
 			if (targetx.length() == 0 || targety.length() == 0) {
-				errormsg += "ÇëÊäÈë´«ËÍ×ø±ê\n";
+				errormsg += "è¯·è¾“å…¥ä¼ é€åæ ‡\n";
 				error = true;
 			}
 			if (!tester.test(targetx) || !tester.test(targety)) {
-				errormsg += "×ø±êÇëÊäÈëÕûÊı\n";
+				errormsg += "åæ ‡è¯·è¾“å…¥æ•´æ•°\n";
 				error = true;
 			}
 		}
 		if (error) {
-			JOptionPane.showMessageDialog(CreaterPanel.this, errormsg, "´íÎó",
+			JOptionPane.showMessageDialog(CreaterPanel.this, errormsg, "é”™è¯¯",
 					JOptionPane.ERROR_MESSAGE);
 			return error;
 		}
@@ -623,20 +623,20 @@ public class CreaterPanel extends JPanel {
 	}
 
 	/*
-	 * ×ö±£´æ¹¤×÷
+	 * åšä¿å­˜å·¥ä½œ
 	 */
 	public void save() {
 		if (check()) {
 			return;
 		}
-			track("±£´æÎÄ¼ş...");
+			track("ä¿å­˜æ–‡ä»¶...");
 			String saveData = "";
 			savefile = new File("data/event/" + filename);
 			int save = 0;
 			if(savefile.exists())
 			{
 				save = JOptionPane.showConfirmDialog(CreaterPanel.this,
-					"´ËÊÂ¼şÒÑ¾­´æÔÚ,ÊÇ·ñ¸²¸Ç?", "µÈ´ıÈ·ÈÏ", JOptionPane.YES_NO_CANCEL_OPTION);
+					"æ­¤äº‹ä»¶å·²ç»å­˜åœ¨,æ˜¯å¦è¦†ç›–?", "ç­‰å¾…ç¡®è®¤", JOptionPane.YES_NO_CANCEL_OPTION);
 			}
 			if (save == 0) {
 			saveData = filename + "\n" + eventname + "\n" + eventinfo + "\n"
@@ -647,10 +647,10 @@ public class CreaterPanel extends JPanel {
 					+ "                                                   #\n";
 			try {
 				FileOutputStream out = new FileOutputStream(savefile);
-				out.write(saveData.getBytes("GBK"), 0, saveData.length());
+				out.write(saveData.getBytes("utf-8"), 0, saveData.length());
 				out.close();
-				JOptionPane.showMessageDialog(CreaterPanel.this, "ÎÄ¼ş±£´æ³É¹¦",
-						"±£´æ", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(CreaterPanel.this, "æ–‡ä»¶ä¿å­˜æˆåŠŸ",
+						"ä¿å­˜", JOptionPane.INFORMATION_MESSAGE);
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
@@ -660,62 +660,62 @@ public class CreaterPanel extends JPanel {
 	}
 
 	/*
-	 * ×ö¸üĞÂ¹¤×÷
+	 * åšæ›´æ–°å·¥ä½œ
 	 */
 	public void update() {
-		track("¸üĞÂ¿Ø¼ş...");
+		track("æ›´æ–°æ§ä»¶...");
 		filenametext.setText(filename);
 		eventnametext.setText(eventname);
 		eventinfotext.setText(eventinfo);
 		if (needevent.length() > 0)
 			needeventtext.setText(needevent);
 		else
-			needeventtext.setText("Ë«»÷´ò¿ªÎÄ¼ş");
+			needeventtext.setText("åŒå‡»æ‰“å¼€æ–‡ä»¶");
 
 		if (followevent.length() > 0)
 			followeventtext.setText(followevent);
 		else
-			followeventtext.setText("Ë«»÷´ò¿ªÎÄ¼ş");
+			followeventtext.setText("åŒå‡»æ‰“å¼€æ–‡ä»¶");
 
 		if (needitem.length() > 0)
 			needitemtext.setText(needitem);
 		else
-			needitemtext.setText("Ë«»÷´ò¿ªÎÄ¼ş");
+			needitemtext.setText("åŒå‡»æ‰“å¼€æ–‡ä»¶");
 
 		if (itemname.length() > 0)
 			itemnametext.setText(itemname);
 		else
-			itemnametext.setText("Ë«»÷´ò¿ªÎÄ¼ş");
+			itemnametext.setText("åŒå‡»æ‰“å¼€æ–‡ä»¶");
 
 		if (enemyname.length() > 0)
 			enemynametext.setText(enemyname);
 		else
-			enemynametext.setText("Ë«»÷´ò¿ªÎÄ¼ş");
+			enemynametext.setText("åŒå‡»æ‰“å¼€æ–‡ä»¶");
 
 		if (targetmapname.length() > 0)
 			targetmaptext.setText(targetmapname);
 		else
-			targetmaptext.setText("Ë«»÷´ò¿ªÎÄ¼ş");
+			targetmaptext.setText("åŒå‡»æ‰“å¼€æ–‡ä»¶");
 		magictext.setText(magic);
 		targetxtext.setText(targetx);
 		targetytext.setText(targety);
-		if (eventtype.equals("´«ËÍÊÂ¼ş"))
+		if (eventtype.equals("ä¼ é€äº‹ä»¶"))
 			eventtypecombo.setSelectedIndex(0);
-		else if (eventtype.equals("Õ½¶·ÊÂ¼ş"))
+		else if (eventtype.equals("æˆ˜æ–—äº‹ä»¶"))
 			eventtypecombo.setSelectedIndex(1);
-		else if (eventtype.equals("ÎïÆ·ÊÂ¼ş"))
+		else if (eventtype.equals("ç‰©å“äº‹ä»¶"))
 			eventtypecombo.setSelectedIndex(2);
-		else if (eventtype.equals("½ğÇ®ÊÂ¼ş"))
+		else if (eventtype.equals("é‡‘é’±äº‹ä»¶"))
 			eventtypecombo.setSelectedIndex(3);
-		else if (eventtype.equals("Ñ§Ï°ÊÂ¼ş"))
+		else if (eventtype.equals("å­¦ä¹ äº‹ä»¶"))
 			eventtypecombo.setSelectedIndex(4);
 
 		moneytext.setText(money);
 	}
 
 	/*
-	 * ¸ú×ÙÆ÷,ÓÃÓÚµ÷ÊÔ
-	 * @param s ¿ØÖÆÌ¨Êä³öĞÅÏ¢
+	 * è·Ÿè¸ªå™¨,ç”¨äºè°ƒè¯•
+	 * @param s æ§åˆ¶å°è¾“å‡ºä¿¡æ¯
 	 */
 	public void track(String s) {
 		GameLogger.logger.info("EventCreater|" + s);

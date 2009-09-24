@@ -9,7 +9,7 @@ public class MagicManager {
 
 	public MagicManager()
 	{
-		track("ÕıÔÚÉú³É¼¼ÄÜ¹ÜÀíÆ÷...");
+		track("æ­£åœ¨ç”ŸæˆæŠ€èƒ½ç®¡ç†å™¨...");
 		magiclist = new ArrayList();
 		magicnamelist = new ArrayList();
 		
@@ -22,16 +22,16 @@ public class MagicManager {
 		{
 			if(filelist[i].getPath().toLowerCase().endsWith(".dat"))
 			{
-				track("ÕıÔÚ¶ÁÈ¡¼¼ÄÜÎÄ¼ş: " + filelist[i].getName());
+				track("æ­£åœ¨è¯»å–æŠ€èƒ½æ–‡ä»¶: " + filelist[i].getName());
 				magiclist.add(new Magic(filelist[i]));
 				magicnamelist.add(filelist[i].getName());
 			}
 		}
 		if(magiclist.size() == 0 || magicnamelist.size() == 0 || magiclist.size() != magicnamelist.size())
 		{
-			abort("¼¼ÄÜ¹ÜÀíÆ÷Ã»ÓĞ¶ÁÈ¡µ½ÈÎºÎ¼¼ÄÜÎÄ¼ş,ÓÎÏ·ÎŞ·¨½øĞĞ!");
+			abort("æŠ€èƒ½ç®¡ç†å™¨æ²¡æœ‰è¯»å–åˆ°ä»»ä½•æŠ€èƒ½æ–‡ä»¶,æ¸¸æˆæ— æ³•è¿›è¡Œ!");
 		}
-		track("¼¼ÄÜ¹ÜÀíÆ÷Éú³ÉÍê±Ï\n");
+		track("æŠ€èƒ½ç®¡ç†å™¨ç”Ÿæˆå®Œæ¯•\n");
 	}
 	/*
 	 * get a magic by offering the magic name

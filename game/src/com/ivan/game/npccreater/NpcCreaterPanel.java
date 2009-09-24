@@ -42,25 +42,25 @@ public class NpcCreaterPanel extends JPanel {
 		sellitemlist = new ArrayList();
 
 		setLayout(new GridLayout(15, 2));
-		add(new JLabel("NpcÃû³Æ:"));
+		add(new JLabel("Npcåç§°:"));
 		add(nametext = new JTextField(""));
 
-		add(new JLabel("NpcÀà±ğ:"));
+		add(new JLabel("Npcç±»åˆ«:"));
 		npctypecombo = new JComboBox();
-		npctypecombo.addItem("ĞÅÏ¢");
-		npctypecombo.addItem("ÖÎÁÆ");
-		npctypecombo.addItem("³öÊÛ");
+		npctypecombo.addItem("ä¿¡æ¯");
+		npctypecombo.addItem("æ²»ç–—");
+		npctypecombo.addItem("å‡ºå”®");
 		add(npctypecombo);
 
-		add(new JLabel("NpcÏûÏ¢:"));
+		add(new JLabel("Npcæ¶ˆæ¯:"));
 		msgtext = new JTextField();
 		add(msgtext);
 
-		add(new JLabel("Npc×îºóÏûÏ¢:"));
+		add(new JLabel("Npcæœ€åæ¶ˆæ¯:"));
 		add(lmsgtext = new JTextField(""));
 
-		add(new JLabel("NpcÊÂ¼ş:"));
-		add(eventtext = new JTextField("Ë«»÷´ò¿ªÎÄ¼ş"));
+		add(new JLabel("Npcäº‹ä»¶:"));
+		add(eventtext = new JTextField("åŒå‡»æ‰“å¼€æ–‡ä»¶"));
 		eventtext.setEditable(false);
 		eventtext.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
@@ -81,8 +81,8 @@ public class NpcCreaterPanel extends JPanel {
 			}
 		});
 
-		add(frontimagelabel = new JLabel("ÕıÃæÌùÍ¼:"));
-		add(imagefronttext = new JTextField("Ë«»÷´ò¿ªÎÄ¼ş"));
+		add(frontimagelabel = new JLabel("æ­£é¢è´´å›¾:"));
+		add(imagefronttext = new JTextField("åŒå‡»æ‰“å¼€æ–‡ä»¶"));
 		imagefronttext.setEditable(false);
 		imagefronttext.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
@@ -101,7 +101,7 @@ public class NpcCreaterPanel extends JPanel {
 							frontimagelabel.setIcon(image);
 							imagefronttext.setText(filename);
 							imagename[0] = path;
-							track("ÕıÃæÍ¼Æ¬Ìí¼Ó³É¹¦");
+							track("æ­£é¢å›¾ç‰‡æ·»åŠ æˆåŠŸ");
 						}
 
 					}
@@ -109,8 +109,8 @@ public class NpcCreaterPanel extends JPanel {
 			}
 		});
 
-		add(backimagelabel = new JLabel("±³ÃæÌùÍ¼:"));
-		add(imagebacktext = new JTextField("Ë«»÷´ò¿ªÎÄ¼ş"));
+		add(backimagelabel = new JLabel("èƒŒé¢è´´å›¾:"));
+		add(imagebacktext = new JTextField("åŒå‡»æ‰“å¼€æ–‡ä»¶"));
 		imagebacktext.setEditable(false);
 		imagebacktext.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
@@ -129,7 +129,7 @@ public class NpcCreaterPanel extends JPanel {
 							backimagelabel.setIcon(image);
 							imagebacktext.setText(filename);
 							imagename[1] = path;
-							track("±³ÃæÍ¼Æ¬Ìí¼Ó³É¹¦");
+							track("èƒŒé¢å›¾ç‰‡æ·»åŠ æˆåŠŸ");
 						}
 
 					}
@@ -137,8 +137,8 @@ public class NpcCreaterPanel extends JPanel {
 			}
 		});
 
-		add(leftimagelabel = new JLabel("×óÃæÌùÍ¼:"));
-		add(imagelefttext = new JTextField("Ë«»÷´ò¿ªÎÄ¼ş"));
+		add(leftimagelabel = new JLabel("å·¦é¢è´´å›¾:"));
+		add(imagelefttext = new JTextField("åŒå‡»æ‰“å¼€æ–‡ä»¶"));
 		imagelefttext.setEditable(false);
 		imagelefttext.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
@@ -157,7 +157,7 @@ public class NpcCreaterPanel extends JPanel {
 							leftimagelabel.setIcon(image);
 							imagelefttext.setText(filename);
 							imagename[2] = path;
-							track("×óÃæÍ¼Æ¬Ìí¼Ó³É¹¦");
+							track("å·¦é¢å›¾ç‰‡æ·»åŠ æˆåŠŸ");
 						}
 
 					}
@@ -165,8 +165,8 @@ public class NpcCreaterPanel extends JPanel {
 			}
 		});
 
-		add(rightimagelabel = new JLabel("ÓÒÃæÌùÍ¼:"));
-		add(imagerighttext = new JTextField("Ë«»÷´ò¿ªÎÄ¼ş"));
+		add(rightimagelabel = new JLabel("å³é¢è´´å›¾:"));
+		add(imagerighttext = new JTextField("åŒå‡»æ‰“å¼€æ–‡ä»¶"));
 		imagerighttext.setEditable(false);
 		imagerighttext.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
@@ -185,7 +185,7 @@ public class NpcCreaterPanel extends JPanel {
 							rightimagelabel.setIcon(image);
 							imagerighttext.setText(filename);
 							imagename[3] = path;
-							track("ÓÒÃæÍ¼Æ¬Ìí¼Ó³É¹¦");
+							track("å³é¢å›¾ç‰‡æ·»åŠ æˆåŠŸ");
 						}
 
 					}
@@ -193,17 +193,17 @@ public class NpcCreaterPanel extends JPanel {
 			}
 		});
 
-		add(new JLabel("¿É·ñ³·Àë:"));
+		add(new JLabel("å¯å¦æ’¤ç¦»:"));
 		leaveablecombo = new JComboBox();
-		leaveablecombo.addItem("·ñ");
-		leaveablecombo.addItem("ÊÇ");
+		leaveablecombo.addItem("å¦");
+		leaveablecombo.addItem("æ˜¯");
 		add(leaveablecombo);
 
-		add(new JLabel("³·ÀëÁôÑÔ:"));
+		add(new JLabel("æ’¤ç¦»ç•™è¨€:"));
 		add(leavemsgtext = new JTextField(""));
 
-		add(new JLabel("³·ÀëĞèÒªÎïÆ·:"));
-		add(leaveitemtext = new JTextField("Ë«»÷´ò¿ªÎÄ¼ş"));
+		add(new JLabel("æ’¤ç¦»éœ€è¦ç‰©å“:"));
+		add(leaveitemtext = new JTextField("åŒå‡»æ‰“å¼€æ–‡ä»¶"));
 		leaveitemtext.setEditable(false);
 		leaveitemtext.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
@@ -224,8 +224,8 @@ public class NpcCreaterPanel extends JPanel {
 			}
 		});
 
-		add(new JLabel("³·ÀëĞèÒªÊÂ¼ş:"));
-		add(leaveeventtext = new JTextField("Ë«»÷´ò¿ªÎÄ¼ş"));
+		add(new JLabel("æ’¤ç¦»éœ€è¦äº‹ä»¶:"));
+		add(leaveeventtext = new JTextField("åŒå‡»æ‰“å¼€æ–‡ä»¶"));
 		leaveeventtext.setEditable(false);
 		leaveeventtext.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
@@ -246,7 +246,7 @@ public class NpcCreaterPanel extends JPanel {
 			}
 		});
 
-		JButton additembutton = new JButton("Ìí¼Ó³öÊÛÎïÆ·:");
+		JButton additembutton = new JButton("æ·»åŠ å‡ºå”®ç‰©å“:");
 		additembutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JFileChooser chooser = new JFileChooser();
@@ -267,7 +267,7 @@ public class NpcCreaterPanel extends JPanel {
 		sellitemcombo = new JComboBox();
 		add(sellitemcombo);
 
-		JButton deleteitembutton = new JButton("É¾³ıÒÑÌí¼ÓÎïÆ·");
+		JButton deleteitembutton = new JButton("åˆ é™¤å·²æ·»åŠ ç‰©å“");
 		deleteitembutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				sellitemlist.clear();
@@ -305,25 +305,25 @@ public class NpcCreaterPanel extends JPanel {
 		npctypecombo.setSelectedIndex(0);
 		msgtext.setText(msg);
 		lmsgtext.setText(lmsg);
-		eventtext.setText("Ë«»÷´ò¿ªÎÄ¼ş");
-		imagefronttext.setText("Ë«»÷´ò¿ªÎÄ¼ş");
-		imagebacktext.setText("Ë«»÷´ò¿ªÎÄ¼ş");
-		imagelefttext.setText("Ë«»÷´ò¿ªÎÄ¼ş");
-		imagerighttext.setText("Ë«»÷´ò¿ªÎÄ¼ş");
+		eventtext.setText("åŒå‡»æ‰“å¼€æ–‡ä»¶");
+		imagefronttext.setText("åŒå‡»æ‰“å¼€æ–‡ä»¶");
+		imagebacktext.setText("åŒå‡»æ‰“å¼€æ–‡ä»¶");
+		imagelefttext.setText("åŒå‡»æ‰“å¼€æ–‡ä»¶");
+		imagerighttext.setText("åŒå‡»æ‰“å¼€æ–‡ä»¶");
 		leaveablecombo.setSelectedIndex(0);
 		leavemsgtext.setText(leavemsg);
-		leaveitemtext.setText("Ë«»÷´ò¿ªÎÄ¼ş");
-		leaveeventtext.setText("Ë«»÷´ò¿ªÎÄ¼ş");
+		leaveitemtext.setText("åŒå‡»æ‰“å¼€æ–‡ä»¶");
+		leaveeventtext.setText("åŒå‡»æ‰“å¼€æ–‡ä»¶");
 		sellitemcombo.removeAllItems();
 	}
 
 	public void readFile(File f) {
-		track("¶ÁÈ¡ÎÄ¼ş...");
+		track("è¯»å–æ–‡ä»¶...");
 		init();
 		try {
 			//FileInputStream in = new FileInputStream(f);
 			BufferedReader in = new BufferedReader(new InputStreamReader(
-					new FileInputStream(f),"GBK"));
+					new FileInputStream(f),"utf-8"));
 
 			name = in.readLine();
 			npctype = in.readLine();
@@ -355,7 +355,7 @@ public class NpcCreaterPanel extends JPanel {
 	}
 
 	public void update() {
-		track("¸üĞÂ¿Ø¼ş...");
+		track("æ›´æ–°æ§ä»¶...");
 
 		frontimagelabel.setIcon(new ImageIcon(imagename[0]));
 		backimagelabel.setIcon(new ImageIcon(imagename[1]));
@@ -363,11 +363,11 @@ public class NpcCreaterPanel extends JPanel {
 		rightimagelabel.setIcon(new ImageIcon(imagename[3]));
 
 		nametext.setText(name);
-		if (npctype.equals("ĞÅÏ¢"))
+		if (npctype.equals("ä¿¡æ¯"))
 			npctypecombo.setSelectedIndex(0);
-		else if (npctype.equals("ÖÎÁÆ"))
+		else if (npctype.equals("æ²»ç–—"))
 			npctypecombo.setSelectedIndex(1);
-		else if (npctype.equals("³öÊÛ"))
+		else if (npctype.equals("å‡ºå”®"))
 			npctypecombo.setSelectedIndex(2);
 		msgtext.setText(msg);
 		lmsgtext.setText(lmsg);
@@ -380,9 +380,9 @@ public class NpcCreaterPanel extends JPanel {
 				.lastIndexOf("images")));
 		imagerighttext.setText(imagename[3].substring(imagename[3]
 				.lastIndexOf("images")));
-		if (leaveable.equals("·ñ"))
+		if (leaveable.equals("å¦"))
 			leaveablecombo.setSelectedIndex(0);
-		else if (leaveable.equals("ÊÇ"))
+		else if (leaveable.equals("æ˜¯"))
 			leaveablecombo.setSelectedIndex(1);
 		leavemsgtext.setText(leavemsg);
 		leaveitemtext.setText(leaveitem);
@@ -393,9 +393,9 @@ public class NpcCreaterPanel extends JPanel {
 	}
 
 	public void newFile() {
-		track("µÈ´ı½¨Á¢ĞÂÎÄ¼ş...");
+		track("ç­‰å¾…å»ºç«‹æ–°æ–‡ä»¶...");
 		int result = JOptionPane.showConfirmDialog(NpcCreaterPanel.this,
-				"ÊÇ·ñ±£´æµ±Ç°Npc?", "µÈ´ıÈ·ÈÏ", JOptionPane.YES_NO_CANCEL_OPTION);
+				"æ˜¯å¦ä¿å­˜å½“å‰Npc?", "ç­‰å¾…ç¡®è®¤", JOptionPane.YES_NO_CANCEL_OPTION);
 		//System.out.println(result);
 		if (result == 0) {
 			save();
@@ -408,7 +408,7 @@ public class NpcCreaterPanel extends JPanel {
 	}
 
 	public boolean checkfalse() {
-		track("¼ì²âÊı¾İ...");
+		track("æ£€æµ‹æ•°æ®...");
 
 		boolean error = false;
 		String errormsg = "";
@@ -433,47 +433,47 @@ public class NpcCreaterPanel extends JPanel {
 		if (lmsg.length() == 0) {
 			lmsg = "...";
 		}
-		if (event.equals("Ë«»÷´ò¿ªÎÄ¼ş") || event.length() == 0) {
+		if (event.equals("åŒå‡»æ‰“å¼€æ–‡ä»¶") || event.length() == 0) {
 			event = "default.dat";
 		}
-		if (leaveitem.equals("Ë«»÷´ò¿ªÎÄ¼ş") || leaveitem.length() == 0) {
+		if (leaveitem.equals("åŒå‡»æ‰“å¼€æ–‡ä»¶") || leaveitem.length() == 0) {
 			leaveitem = "default.dat";
 		}
-		if (leaveevent.equals("Ë«»÷´ò¿ªÎÄ¼ş") || leaveevent.length() == 0) {
+		if (leaveevent.equals("åŒå‡»æ‰“å¼€æ–‡ä»¶") || leaveevent.length() == 0) {
 			leaveevent = "default.dat";
 		}
 		if (leavemsg.length() == 0) {
-			leavemsg = "ÔÙ¼û.";
+			leavemsg = "å†è§.";
 		}
 
 		if (name.length() == 0) {
-			errormsg += "ÇëÊäÈëNpcÃû³Æ\n";
+			errormsg += "è¯·è¾“å…¥Npcåç§°\n";
 			error = true;
 		}
 		if (imagename[0].length() == 0) {
-			errormsg += "ÇëÌí¼ÓÕıÃæÌùÍ¼\n";
+			errormsg += "è¯·æ·»åŠ æ­£é¢è´´å›¾\n";
 			error = true;
 		}
 		if (imagename[1].length() == 0) {
-			errormsg += "ÇëÌí¼Ó±³ÃæÌùÍ¼\n";
+			errormsg += "è¯·æ·»åŠ èƒŒé¢è´´å›¾\n";
 			error = true;
 		}
 		if (imagename[2].length() == 0) {
-			errormsg += "ÇëÌí¼Ó×óÃæÌùÍ¼\n";
+			errormsg += "è¯·æ·»åŠ å·¦é¢è´´å›¾\n";
 			error = true;
 		}
 		if (imagename[3].length() == 0) {
-			errormsg += "ÇëÌí¼ÓÓÒÃæÌùÍ¼\n";
+			errormsg += "è¯·æ·»åŠ å³é¢è´´å›¾\n";
 			error = true;
 		}
-		if (npctype.equals("³öÊÛ")) {
+		if (npctype.equals("å‡ºå”®")) {
 			if (sellitemlist.size() == 0) {
-				errormsg += "È±ÉÙ³öÊÛÎïÆ·\n";
+				errormsg += "ç¼ºå°‘å‡ºå”®ç‰©å“\n";
 				error = true;
 			}
 		}
 		if (error) {
-			JOptionPane.showMessageDialog(NpcCreaterPanel.this, errormsg, "´íÎó",
+			JOptionPane.showMessageDialog(NpcCreaterPanel.this, errormsg, "é”™è¯¯",
 					JOptionPane.ERROR_MESSAGE);
 			return error;
 		}
@@ -498,7 +498,7 @@ public class NpcCreaterPanel extends JPanel {
 				int save = 0;
 				if (f.exists()) {
 					save = JOptionPane.showConfirmDialog(NpcCreaterPanel.this,
-							"´ËNPCÒÑ¾­´æÔÚ,ÊÇ·ñ¸²¸Ç?", "µÈ´ıÈ·ÈÏ",
+							"æ­¤NPCå·²ç»å­˜åœ¨,æ˜¯å¦è¦†ç›–?", "ç­‰å¾…ç¡®è®¤",
 							JOptionPane.YES_NO_CANCEL_OPTION);
 				}
 				if (save == 0) {
@@ -517,9 +517,9 @@ public class NpcCreaterPanel extends JPanel {
 					saveData += "                                                                ";
 					try {
 						FileOutputStream out = new FileOutputStream(f);
-						out.write(saveData.getBytes("GBK"), 0, saveData.length());
+						out.write(saveData.getBytes("utf-8"), 0, saveData.length());
 						out.close();
-						track("±£´æ³É¹¦...");
+						track("ä¿å­˜æˆåŠŸ...");
 					} catch (FileNotFoundException e) {
 						e.printStackTrace();
 					} catch (IOException e) {

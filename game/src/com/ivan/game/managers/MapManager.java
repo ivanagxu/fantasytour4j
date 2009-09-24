@@ -33,8 +33,8 @@ public class MapManager {
 	public void CreateMap(Hero h)
 	{
 		if(h == null)
-			abort("²»ÄÜÉú³ÉµØÍ¼,Ô­Òò:Ã»Ö÷½Ç");
-		track("ÕıÔÚÉú³ÉµØÍ¼...");
+			abort("ä¸èƒ½ç”Ÿæˆåœ°å›¾,åŸå› :æ²¡ä¸»è§’");
+		track("æ­£åœ¨ç”Ÿæˆåœ°å›¾...");
 		mapfile = new File(h.getMapFile());
 		map = new Map(mapfile);
 		
@@ -47,7 +47,7 @@ public class MapManager {
 		dplmgr.changeMapMovie(map.getMapName(),map.getMusic());
 		x = h.getX();
 		y = h.getY();
-		track("µØÍ¼Éú³ÉÍê±Ï\n");
+		track("åœ°å›¾ç”Ÿæˆå®Œæ¯•\n");
 	}
 	public Map getMap()
 	{
@@ -73,18 +73,18 @@ public class MapManager {
 			int ty = y - hero.getY();
 
 			/*
-			 * µ±Ö÷½Ç×ø±ê·¢Éú·ÇÒÆ¶¯±ä»¯(Èç´«ËÍ),ÖØĞÂ»ñÈ¡Ö÷½Ç¸½½üµØÍ¼½øĞĞÖØ»­
+			 * å½“ä¸»è§’åæ ‡å‘ç”Ÿéç§»åŠ¨å˜åŒ–(å¦‚ä¼ é€),é‡æ–°è·å–ä¸»è§’é™„è¿‘åœ°å›¾è¿›è¡Œé‡ç”»
 			 */
 			if(Math.abs(tx)>1 || Math.abs(ty)>1)
 			{
 				if(display == GameManager.SHOW_MAP)
 				{
 					/*
-					 * »ñÈ¡Ö÷½Ç¸½½ü15*15µÄµØÍ¼²¿·Ö
+					 * è·å–ä¸»è§’é™„è¿‘15*15çš„åœ°å›¾éƒ¨åˆ†
 					 */
 					getPartMap(hero);
 					/*
-					 * »ñÈ¡»º³åÇødoubleBuffer;
+					 * è·å–ç¼“å†²åŒºdoubleBuffer;
 					 */
 					Graphics g2 = doubleBuffer.getGraphics();
 					g2.setColor(Color.BLACK);
@@ -101,7 +101,7 @@ public class MapManager {
 				}
 			}
 			/*
-			 * Ö÷½Ç×ø±êÖ»·¢ÉúÒÆ¶¯±ä»¯,ÏÈ»­Í¼ÔÙ»ñÈ¡Ö÷½Ç¸½½üµØÍ¼
+			 * ä¸»è§’åæ ‡åªå‘ç”Ÿç§»åŠ¨å˜åŒ–,å…ˆç”»å›¾å†è·å–ä¸»è§’é™„è¿‘åœ°å›¾
 			 */
 			else
 			{
@@ -110,7 +110,7 @@ public class MapManager {
 					sleep(10);
 
 					/*
-					 * »ñµÃºó»º´ædoubleBuffer
+					 * è·å¾—åç¼“å­˜doubleBuffer
 					 */
 					Graphics g2 = doubleBuffer.getGraphics();
 					g2.setColor(Color.BLACK);
@@ -128,7 +128,7 @@ public class MapManager {
 					canvas.drawImage(doubleBuffer, 0, 0, null);
 					g2.dispose();
 					/*
-					 * Ö÷½Ç×ø±êÃ»±ä,Ö»»­Ò»´Î,·µ»Ø
+					 * ä¸»è§’åæ ‡æ²¡å˜,åªç”»ä¸€æ¬¡,è¿”å›
 					 */
 					if(tx == 0 && ty == 0)
 					{
@@ -142,7 +142,7 @@ public class MapManager {
 			}
 		}
 		/*
-		 * Èç¹ûÏÔÊ¾²Ëµ¥,Ö±½Ó»­»º³åÇøÍ¼Ïñ
+		 * å¦‚æœæ˜¾ç¤ºèœå•,ç›´æ¥ç”»ç¼“å†²åŒºå›¾åƒ
 		 */
 		else if(display == GameManager.SHOW_MAP_MENU)
 		{
@@ -252,7 +252,7 @@ public class MapManager {
 						draw(display,hero,canvas);
 						msgmgr.showMessage(msg);
 						/*
-						 * ±ÜÃâÒ»´Î°´¼ü´¥·¢¶à´Îaction,Ïß³ÌË¯ÃßÒ»»á- -!
+						 * é¿å…ä¸€æ¬¡æŒ‰é”®è§¦å‘å¤šæ¬¡action,çº¿ç¨‹ç¡çœ ä¸€ä¼š- -!
 						 */
 						sleep(400);
 						if (npc.getType() == Npc.HEAL_NPC) 
@@ -318,7 +318,7 @@ public class MapManager {
 			}
 		}
 		/*
-		 * ¼ì²éµØÍ¼ÊÇ·ñÎªÖ÷½ÇËùÔÚµÄµØÍ¼,²»ÊÇÔòÖØ»­µØÍ¼
+		 * æ£€æŸ¥åœ°å›¾æ˜¯å¦ä¸ºä¸»è§’æ‰€åœ¨çš„åœ°å›¾,ä¸æ˜¯åˆ™é‡ç”»åœ°å›¾
 		 */
 		if(!mapfile.getName().equals(hero.getMapFile().substring(hero.getMapFile().lastIndexOf("/") + 1,hero.getMapFile().length())))
 		{

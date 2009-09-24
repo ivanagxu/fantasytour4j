@@ -36,33 +36,33 @@ public class ControlPanel extends JPanel {
 		setBackground(Color.ORANGE);
 
 		motionpanel = p;
-		motiontype = "±ä»»";
+		motiontype = "å˜æ¢";
 		timespacetext = new JTextField("1000", 10);
 		delaytimetext = new JTextField("1000", 10);
 		imagelistcombo = new JComboBox();
 		imagelist = new ArrayList();
 		imagenamelist = new ArrayList();
 
-		JButton addimagebutton = new JButton("Ôö¼ÓÍ¼Æ¬");
+		JButton addimagebutton = new JButton("å¢åŠ å›¾ç‰‡");
 		addimagebutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				addImage();
 			}
 		});
-		JButton deleteimagebutton = new JButton("É¾³ıÍ¼Æ¬");
+		JButton deleteimagebutton = new JButton("åˆ é™¤å›¾ç‰‡");
 		deleteimagebutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				deleteImage();
 			}
 		});
 
-		JButton startbutton = new JButton("ÑİÊ¾¶¯»­");
+		JButton startbutton = new JButton("æ¼”ç¤ºåŠ¨ç”»");
 		startbutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				start();
 			}
 		});
-		JButton closebutton = new JButton("Í£Ö¹¶¯»­");
+		JButton closebutton = new JButton("åœæ­¢åŠ¨ç”»");
 		closebutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				stop();
@@ -70,15 +70,15 @@ public class ControlPanel extends JPanel {
 		});
 
 		this.setLayout(new GridLayout(5, 2));
-		add(new JLabel("¼ä¸ôÊ±¼ä:"));
+		add(new JLabel("é—´éš”æ—¶é—´:"));
 		add(timespacetext);
-		//add(new JLabel("Í£ÁôÊ±¼ä:"));
+		//add(new JLabel("åœç•™æ—¶é—´:"));
 		//add(delaytimetext);
 
-		add(new JLabel("¶¯»­ÀàĞÍ:"));
+		add(new JLabel("åŠ¨ç”»ç±»å‹:"));
 		motiontypecombo = new JComboBox();
-		motiontypecombo.addItem("±ä»»");
-		motiontypecombo.addItem("Æ½ÒÆ");
+		motiontypecombo.addItem("å˜æ¢");
+		motiontypecombo.addItem("å¹³ç§»");
 		motiontypecombo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				motiontype = (String) motiontypecombo.getSelectedItem();
@@ -88,7 +88,7 @@ public class ControlPanel extends JPanel {
 
 		add(addimagebutton);
 		add(deleteimagebutton);
-		add(new JLabel("ÏÖÓĞÍ¼Æ¬:"));
+		add(new JLabel("ç°æœ‰å›¾ç‰‡:"));
 		add(imagelistcombo);
 		add(startbutton);
 		add(closebutton);
@@ -96,11 +96,11 @@ public class ControlPanel extends JPanel {
 	}
 
 	/*
-	 * Ìí¼ÓÍ¼Æ¬
+	 * æ·»åŠ å›¾ç‰‡
 	 */
 	public void addImage() {
 		if (started == true) {
-			JOptionPane.showMessageDialog(ControlPanel.this, "ÇëÏÈÍ£Ö¹¶¯»­", "´íÎó",
+			JOptionPane.showMessageDialog(ControlPanel.this, "è¯·å…ˆåœæ­¢åŠ¨ç”»", "é”™è¯¯",
 					JOptionPane.ERROR_MESSAGE);
 			return;
 		}
@@ -111,7 +111,7 @@ public class ControlPanel extends JPanel {
 		if (result == 0) {
 			String filename = chooser.getSelectedFile().getName();
 			String filepath = chooser.getSelectedFile().getPath();
-			//×ª»»ÎªÏà¶ÔÂ·¾¶
+			//è½¬æ¢ä¸ºç›¸å¯¹è·¯å¾„
 			String path = filepath.substring(filepath.lastIndexOf("data"));
 
 			Image image;
@@ -121,26 +121,26 @@ public class ControlPanel extends JPanel {
 				imagelistcombo.addItem(filename);
 				imagelist.add(image);
 				imagenamelist.add(path);
-				track("Ìí¼ÓÍ¼Æ¬³É¹¦...");
+				track("æ·»åŠ å›¾ç‰‡æˆåŠŸ...");
 			}
 		}
 	}
 
 	/*
-	 * É¾³ıËùÓĞ¼ÓÔØµÄÍ¼Æ¬
+	 * åˆ é™¤æ‰€æœ‰åŠ è½½çš„å›¾ç‰‡
 	 */
 	public void deleteImage() {
 		if (started == true) {
-			JOptionPane.showMessageDialog(ControlPanel.this, "ÇëÏÈÍ£Ö¹¶¯»­", "´íÎó",
+			JOptionPane.showMessageDialog(ControlPanel.this, "è¯·å…ˆåœæ­¢åŠ¨ç”»", "é”™è¯¯",
 					JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 		if (imagelistcombo.getItemCount() == 0) {
-			JOptionPane.showMessageDialog(ControlPanel.this, "ÏÖÔÚÃ»ÓĞÍ¼Æ¬", "´íÎó",
+			JOptionPane.showMessageDialog(ControlPanel.this, "ç°åœ¨æ²¡æœ‰å›¾ç‰‡", "é”™è¯¯",
 					JOptionPane.ERROR_MESSAGE);
 			return;
 		}
-		track("É¾³ıÍ¼Æ¬...");
+		track("åˆ é™¤å›¾ç‰‡...");
 		imagelistcombo.removeAllItems();
 		imagelistcombo.repaint();
 		imagelist.clear();
@@ -148,7 +148,7 @@ public class ControlPanel extends JPanel {
 	}
 
 	/*
-	 * ¿ªÊ¼²¥·Å¶¯»­,¸Ãº¯Êıµ÷ÓÃMotionPanelµÄstart()
+	 * å¼€å§‹æ’­æ”¾åŠ¨ç”»,è¯¥å‡½æ•°è°ƒç”¨MotionPanelçš„start()
 	 */
 	public void start() {
 		if (checkfalse()) {
@@ -156,11 +156,11 @@ public class ControlPanel extends JPanel {
 		}
 		if (started == false) {
 			started = true;
-			track("¶¯»­¿ªÊ¼...");
+			track("åŠ¨ç”»å¼€å§‹...");
 			motionpanel.start(Integer.parseInt(timespace), Integer
 					.parseInt(delaytime), motiontype, imagelist);
 		} else {
-			JOptionPane.showMessageDialog(ControlPanel.this, "¶¯»­ÒÑ¾­¿ªÊ¼", "´íÎó",
+			JOptionPane.showMessageDialog(ControlPanel.this, "åŠ¨ç”»å·²ç»å¼€å§‹", "é”™è¯¯",
 					JOptionPane.ERROR_MESSAGE);
 			return;
 		}
@@ -168,28 +168,28 @@ public class ControlPanel extends JPanel {
 	}
 
 	/*
-	 * Í£Ö¹¶¯»­
+	 * åœæ­¢åŠ¨ç”»
 	 */
 	public void stop() {
 		if (started == false) {
-			JOptionPane.showMessageDialog(ControlPanel.this, "¶¯»­»¹Ã»Æô¶¯", "´íÎó",
+			JOptionPane.showMessageDialog(ControlPanel.this, "åŠ¨ç”»è¿˜æ²¡å¯åŠ¨", "é”™è¯¯",
 					JOptionPane.ERROR_MESSAGE);
 			return;
 		} else {
 			started = false;
-			track("¶¯»­Í£Ö¹...");
+			track("åŠ¨ç”»åœæ­¢...");
 			motionpanel.stop();
 		}
 	}
 
 	/*
-	 * ³õÊ¼»¯Ë½ÓĞ³ÉÔ±±äÁ¿
+	 * åˆå§‹åŒ–ç§æœ‰æˆå‘˜å˜é‡
 	 */
 	public void init() {
 		imagelist.clear();
 		imagenamelist.clear();
 		motiontypecombo.setSelectedIndex(0);
-		motiontype = "±ä»»";
+		motiontype = "å˜æ¢";
 		motionname = "";
 		imagelistcombo.removeAllItems();
 		imagelistcombo.repaint();
@@ -200,17 +200,17 @@ public class ControlPanel extends JPanel {
 	}
 
 	/*
-	 * ÅĞ¶ÏÈçºÎ½¨Á¢ĞÂÎÄ¼ş
+	 * åˆ¤æ–­å¦‚ä½•å»ºç«‹æ–°æ–‡ä»¶
 	 */
 	public void newFile() {
 		if (started == true) {
-			JOptionPane.showMessageDialog(ControlPanel.this, "¶¯»­Ã»Í£Ö¹", "´íÎó",
+			JOptionPane.showMessageDialog(ControlPanel.this, "åŠ¨ç”»æ²¡åœæ­¢", "é”™è¯¯",
 					JOptionPane.ERROR_MESSAGE);
 			return;
 		}
-		track("µÈ´ı½¨Á¢ĞÂÎÄ¼ş...");
+		track("ç­‰å¾…å»ºç«‹æ–°æ–‡ä»¶...");
 		int result = JOptionPane.showConfirmDialog(ControlPanel.this,
-				"ÊÇ·ñ±£´æµ±Ç°ÊÂ¼ş?", "µÈ´ıÈ·ÈÏ", JOptionPane.YES_NO_CANCEL_OPTION);
+				"æ˜¯å¦ä¿å­˜å½“å‰äº‹ä»¶?", "ç­‰å¾…ç¡®è®¤", JOptionPane.YES_NO_CANCEL_OPTION);
 		//System.out.println(result);
 		if (result == 0) {
 			save();
@@ -223,7 +223,7 @@ public class ControlPanel extends JPanel {
 	}
 
 	/*
-	 * ¼ì²âÊı¾İ,Êı¾İÍ¨¹ıÔò·µ»Øfalse
+	 * æ£€æµ‹æ•°æ®,æ•°æ®é€šè¿‡åˆ™è¿”å›false
 	 */
 	public boolean checkfalse() {
 		timespace = timespacetext.getText();
@@ -232,31 +232,31 @@ public class ControlPanel extends JPanel {
 		boolean error = false;
 		NumberTester tester = new NumberTester();
 		if (timespace.length() == 0 || !tester.test(timespace)) {
-			errormsg += "¼ä¸ôÊ±¼ä²»¶Ô\n";
+			errormsg += "é—´éš”æ—¶é—´ä¸å¯¹\n";
 			error = true;
 		}
 		if (delaytime.length() == 0 || !tester.test(delaytime)) {
-			errormsg += "Í£ÁôÊ±¼ä²»¶Ô\n";
+			errormsg += "åœç•™æ—¶é—´ä¸å¯¹\n";
 			error = true;
 		}
 		if (imagelistcombo.getItemCount() == 0) {
-			errormsg += "ÇëÏÈÌí¼ÓÍ¼Æ¬\n";
+			errormsg += "è¯·å…ˆæ·»åŠ å›¾ç‰‡\n";
 			error = true;
 		}
 		if (error) {
-			JOptionPane.showMessageDialog(ControlPanel.this, errormsg, "´íÎó",
+			JOptionPane.showMessageDialog(ControlPanel.this, errormsg, "é”™è¯¯",
 					JOptionPane.ERROR_MESSAGE);
 		}
 		return error;
 	}
 
 	/*
-	 * ±£´æÎÄ¼ş
+	 * ä¿å­˜æ–‡ä»¶
 	 */
 	public void save() {
 		if (!checkfalse()) {
 			motionname = JOptionPane.showInputDialog(ControlPanel.this,
-					"ÇëÊäÈë¸Ã¶¯»­Ãû³Æ");
+					"è¯·è¾“å…¥è¯¥åŠ¨ç”»åç§°");
 			JFileChooser chooser = new JFileChooser();
 			chooser.setCurrentDirectory(new File(".//data//motion//"));
 			chooser.setFileFilter(new DatFilter());
@@ -272,7 +272,7 @@ public class ControlPanel extends JPanel {
 				int save = 0;
 				if (f.exists()) {
 					save = JOptionPane.showConfirmDialog(ControlPanel.this,
-							"´Ë¶¯»­ÒÑ¾­´æÔÚ,ÊÇ·ñ¸²¸Ç?", "µÈ´ıÈ·ÈÏ",
+							"æ­¤åŠ¨ç”»å·²ç»å­˜åœ¨,æ˜¯å¦è¦†ç›–?", "ç­‰å¾…ç¡®è®¤",
 							JOptionPane.YES_NO_CANCEL_OPTION);
 				}
 				if (save == 0) {
@@ -301,11 +301,11 @@ public class ControlPanel extends JPanel {
 	}
 
 	/*
-	 * ¶ÁÈ¡ÎÄ¼ş
-	 * @param f Òª¶ÁÈ¡µÄÎÄ¼ş
+	 * è¯»å–æ–‡ä»¶
+	 * @param f è¦è¯»å–çš„æ–‡ä»¶
 	 */
 	public void readFile(File f) {
-		track("¶ÁÈ¡ÎÄ¼ş...");
+		track("è¯»å–æ–‡ä»¶...");
 		init();
 		timespace = "";
 		delaytime = "";
@@ -352,18 +352,18 @@ public class ControlPanel extends JPanel {
 
 						imagelistcombo.addItem(imagefile.getName());
 						imagelist.add(image);
-						track("Ìí¼ÓÍ¼Æ¬³É¹¦...");
+						track("æ·»åŠ å›¾ç‰‡æˆåŠŸ...");
 						imagename = "";
 					}
 				}
 			}
 			timespacetext.setText(timespace);
-			if (motiontype.equals("±ä»»")) {
+			if (motiontype.equals("å˜æ¢")) {
 				motiontypecombo.setSelectedIndex(0);
-			} else if (motiontype.equals("Æ½ÒÆ")) {
+			} else if (motiontype.equals("å¹³ç§»")) {
 				motiontypecombo.setSelectedIndex(1);
 			} else {
-				JOptionPane.showMessageDialog(ControlPanel.this, "wrong", "´íÎó",
+				JOptionPane.showMessageDialog(ControlPanel.this, "wrong", "é”™è¯¯",
 						JOptionPane.ERROR_MESSAGE);
 			}
 
@@ -375,8 +375,8 @@ public class ControlPanel extends JPanel {
 	}
 
 	/*
-	 * µ÷ÊÔº¯Êı
-	 * @param s ĞÅÏ¢¿òÊä³öµÄĞÅÏ¢
+	 * è°ƒè¯•å‡½æ•°
+	 * @param s ä¿¡æ¯æ¡†è¾“å‡ºçš„ä¿¡æ¯
 	 */
 	public void track(String s) {
 		System.out.println(s);

@@ -19,13 +19,13 @@ import com.ivan.game.managers.MagicManager;
 
 public class Hero {
 	/*
-	 * ÒÔÎÄ¼ş´´½¨Ö÷½Ç(¶ÁÈ¡¼ÇÂ¼ÓÃ)
-	 * @param f ´æµµÎÄ¼ş
+	 * ä»¥æ–‡ä»¶åˆ›å»ºä¸»è§’(è¯»å–è®°å½•ç”¨)
+	 * @param f å­˜æ¡£æ–‡ä»¶
 	 */
 	public Hero(File f) {
-		track("ÕıÔÚ¶ÁÈ¡Ö÷½Ç´æµµ...");
+		track("æ­£åœ¨è¯»å–ä¸»è§’å­˜æ¡£...");
 		if (f == null) {
-			abort("¶ÁÈ¡´æµµ³ö´í!ÕÒ²»µ½´æµµ!");
+			abort("è¯»å–å­˜æ¡£å‡ºé”™!æ‰¾ä¸åˆ°å­˜æ¡£!");
 		}
 		itemlist = new ArrayList();
 		itemnumlist = new ArrayList();
@@ -35,7 +35,7 @@ public class Hero {
 		battlemagic = new Magic[4];
 		try {
 			BufferedReader in = new BufferedReader(new InputStreamReader(
-					new FileInputStream(f),"GBK"));
+					new FileInputStream(f),"utf-8"));
 			name = in.readLine();
 			property = in.readLine();
 			hp = Integer.parseInt(in.readLine());
@@ -60,7 +60,7 @@ public class Hero {
 
 			File elf = new File(f.getPath() + "el");
 			in = new BufferedReader(new InputStreamReader(new FileInputStream(
-					elf),"GBK"));
+					elf),"utf-8"));
 			String event = "";
 			event = in.readLine();
 			while (event.length() != 0) {
@@ -71,7 +71,7 @@ public class Hero {
 
 			File ilf = new File(f.getPath() + "il");
 			in = new BufferedReader(new InputStreamReader(new FileInputStream(
-					ilf),"GBK"));
+					ilf),"utf-8"));
 			String item = "";
 			item = in.readLine();
 			while (item.length() != 0) {
@@ -83,7 +83,7 @@ public class Hero {
 
 			File mlf = new File(f.getPath() + "ml");
 			in = new BufferedReader(new InputStreamReader(new FileInputStream(
-					mlf),"GBK"));
+					mlf),"utf-8"));
 			String magic = "";
 			magic = in.readLine();
 			int i = 0;
@@ -91,7 +91,7 @@ public class Hero {
 				if (magic.startsWith("@")) {
 					magic = magic.substring(1);
 					if (i > 3)
-						abort("Õ½¶·¼¼ÄÜ³¬¹ı4¸ö!!");
+						abort("æˆ˜æ–—æŠ€èƒ½è¶…è¿‡4ä¸ª!!");
 					battlemagic[i] = new Magic(new File(magic));
 					i++;
 				}
@@ -102,7 +102,7 @@ public class Hero {
 
 			File nlf = new File(f.getPath() + "nl");
 			in = new BufferedReader(new InputStreamReader(new FileInputStream(
-					nlf),"GBK"));
+					nlf),"utf-8"));
 			String npcname = "";
 			npcname = in.readLine();
 			while (npcname.length() != 0) {
@@ -131,7 +131,7 @@ public class Hero {
 
 			if (mapimage[0] == null || mapimage[1] == null
 					|| mapimage[2] == null || mapimage[3] == null) {
-				abort("Ö÷½ÇµØÍ¼ÌùÍ¼¶ªÊ§!");
+				abort("ä¸»è§’åœ°å›¾è´´å›¾ä¸¢å¤±!");
 			}
 
 			battleimage = new Image[6];
@@ -154,12 +154,12 @@ public class Hero {
 			if (battleimage[0] == null || battleimage[1] == null
 					|| battleimage[2] == null || battleimage[3] == null
 					|| battleimage[4] == null || battleimage[5] == null) {
-				abort("Ö÷½ÇÕ½¶·ÌùÍ¼¶ªÊ§!");
+				abort("ä¸»è§’æˆ˜æ–—è´´å›¾ä¸¢å¤±!");
 			}
 
 			state = new BattleState(name, property, hp, hpmx, mp, mpmx, str,
 					def, mstr, mdef, hs, jouk);
-			track("Ö÷½Ç´æµµ¶ÁÈ¡Íê³É.\n");
+			track("ä¸»è§’å­˜æ¡£è¯»å–å®Œæˆ.\n");
 		}
 		catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -170,20 +170,20 @@ public class Hero {
 	}
 
 	/*
-	 * ÒÔÄ¬ÈÏÖµ´´½¨Ö÷½Ç
+	 * ä»¥é»˜è®¤å€¼åˆ›å»ºä¸»è§’
 	 */
 	public Hero(String name) {
-		track("´´½¨ĞÂÖ÷½Ç...");
+		track("åˆ›å»ºæ–°ä¸»è§’...");
 		if (name == null) {
 			name = "defaultplayer";
-			track("Ö÷½ÇÃû×ÖÎª¿Õ!ÒÔÄ¬ÈÏÃûdefaultplayer´´½¨Ä¬ÈÏÖ÷½Ç...");
+			track("ä¸»è§’åå­—ä¸ºç©º!ä»¥é»˜è®¤ådefaultplayeråˆ›å»ºé»˜è®¤ä¸»è§’...");
 		}
 		if (name.length() == 0) {
 			name = "defaultplayer";
-			track("Ö÷½ÇÃû×ÖÎª¿Õ!ÒÔÄ¬ÈÏÃûdefaultplayer´´½¨Ä¬ÈÏÖ÷½Ç...");
+			track("ä¸»è§’åå­—ä¸ºç©º!ä»¥é»˜è®¤ådefaultplayeråˆ›å»ºé»˜è®¤ä¸»è§’...");
 		}
 		this.name = name;
-		property = "ÆÕ";
+		property = "æ™®";
 		hp = 10;
 		hpmx = 10;
 		mp = 10;
@@ -229,7 +229,7 @@ public class Hero {
 				.getImage();
 		if (mapimage[0] == null || mapimage[1] == null || mapimage[2] == null
 				|| mapimage[3] == null) {
-			abort("Ö÷½ÇµØÍ¼ÌùÍ¼¶ªÊ§!");
+			abort("ä¸»è§’åœ°å›¾è´´å›¾ä¸¢å¤±!");
 		}
 
 		battleimage = new Image[6];
@@ -252,7 +252,7 @@ public class Hero {
 		if (battleimage[0] == null || battleimage[1] == null
 				|| battleimage[2] == null || battleimage[3] == null
 				|| battleimage[4] == null || battleimage[5] == null) {
-			abort("Ö÷½ÇÕ½¶·ÌùÍ¼¶ªÊ§!");
+			abort("ä¸»è§’æˆ˜æ–—è´´å›¾ä¸¢å¤±!");
 		}
 
 		mapfile = "data/map/home.dat";
@@ -263,21 +263,21 @@ public class Hero {
 
 		state = new BattleState(name, property, hp, hpmx, mp, mpmx, str, def,
 				mstr, mdef, hs, jouk);
-		track("Ö÷½Ç´´½¨Íê³É.\n");
+		track("ä¸»è§’åˆ›å»ºå®Œæˆ.\n");
 	}
 
 	/*
-	 * »ñÈ¡Ö÷½ÇÕ½¶·Êı¾İ
+	 * è·å–ä¸»è§’æˆ˜æ–—æ•°æ®
 	 */
 	public BattleState getBattleState() {
 		return state;
 	}
 
 	/*
-	 * ±£´æÖ÷½Ç×ÊÁÏ
+	 * ä¿å­˜ä¸»è§’èµ„æ–™
 	 */
 	public void save() {
-		track("ÕıÔÚ±£´æ...");
+		track("æ­£åœ¨ä¿å­˜...");
 		File f = new File("data/save/" + name + ".sav");
 		String saveData = "";
 		saveData = name
@@ -321,38 +321,38 @@ public class Hero {
 				+ "                                                                        ";
 		try {
 			/*
-			 * ±£´æ»ù±¾Êı¾İ
+			 * ä¿å­˜åŸºæœ¬æ•°æ®
 			 */
 			FileOutputStream out = new FileOutputStream(f);
-			out.write(saveData.getBytes("GBK"), 0, saveData.length());
+			out.write(saveData.getBytes("utf-8"), 0, saveData.length());
 			out.close();
 			/*
-			 * ±£´æÊÂ¼şÁĞ±í
+			 * ä¿å­˜äº‹ä»¶åˆ—è¡¨
 			 */
 			f = new File("data/save/" + name + ".savel");
 			FileOutputStream out1 = new FileOutputStream(f);
 			for (int i = 0; i < eventlist.size(); i++) {
 				saveData = (String) eventlist.get(i) + "\n";
-				out1.write(saveData.getBytes("GBK"), 0, saveData.length());
+				out1.write(saveData.getBytes("utf-8"), 0, saveData.length());
 			}
 			saveData = "\n                                                                                                                                         ";
-			out1.write(saveData.getBytes("GBK"), 0, saveData.length());
+			out1.write(saveData.getBytes("utf-8"), 0, saveData.length());
 			out1.close();
 			/*
-			 * ±£´æÎïÆ·ÁĞ±í
+			 * ä¿å­˜ç‰©å“åˆ—è¡¨
 			 */
 			f = new File("data/save/" + name + ".savil");
 			FileOutputStream out2 = new FileOutputStream(f);
 			for (int i = 0; i < itemlist.size(); i++) {
 				saveData = (String) itemnumlist.get(i)
 						+ (String) itemlist.get(i) + "\n";
-				out2.write(saveData.getBytes("GBK"), 0, saveData.length());
+				out2.write(saveData.getBytes("utf-8"), 0, saveData.length());
 			}
 			saveData = "\n                                                                                                                                         ";
-			out2.write(saveData.getBytes("GBK"), 0, saveData.length());
+			out2.write(saveData.getBytes("utf-8"), 0, saveData.length());
 			out2.close();
 			/*
-			 * ±£´æ¼¼ÄÜÁĞ±í
+			 * ä¿å­˜æŠ€èƒ½åˆ—è¡¨
 			 */
 			f = new File("data/save/" + name + ".savml");
 			FileOutputStream out3 = new FileOutputStream(f);
@@ -375,27 +375,27 @@ public class Hero {
 				} else {
 					saveData = (String) magiclist.get(i) + "\n";
 				}
-				out3.write(saveData.getBytes("GBK"), 0, saveData.length());
+				out3.write(saveData.getBytes("utf-8"), 0, saveData.length());
 			}
 			saveData = "\n                                                                                                                                                                       ";
-			out3.write(saveData.getBytes("GBK"), 0, saveData.length());
+			out3.write(saveData.getBytes("utf-8"), 0, saveData.length());
 			out3.close();
 
 			/*
-			 * ±£´æNpcÁĞ±í
+			 * ä¿å­˜Npcåˆ—è¡¨
 			 */
 			f = new File("data/save/" + name + ".savnl");
 			FileOutputStream out4 = new FileOutputStream(f);
 
 			for (int i = 0; i < leavenpclist.size(); i++) {
 				saveData = (String) leavenpclist.get(i) + "\n";
-				out4.write(saveData.getBytes("GBK"), 0, saveData.getBytes("GBK").length);
+				out4.write(saveData.getBytes("utf-8"), 0, saveData.getBytes("utf-8").length);
 			}
 			saveData = "\n                                                                                                                                                                       ";
-			out4.write(saveData.getBytes("GBK"), 0, saveData.length());
+			out4.write(saveData.getBytes("utf-8"), 0, saveData.length());
 			out4.close();
 
-			track("Ö÷½Ç¼ÇÂ¼±£´æÍê±Ï.\n");
+			track("ä¸»è§’è®°å½•ä¿å­˜å®Œæ¯•.\n");
 		}
 		catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -406,17 +406,17 @@ public class Hero {
 	}
 
 	/*
-	 * »ñÈ¡Ö÷½Çµ±Ç°ÌùÍ¼
-	 * face = 0 ÕıÃæ
-	 * 1		±³Ãæ
-	 * 2		×ó
-	 * 3		ÓÒ
+	 * è·å–ä¸»è§’å½“å‰è´´å›¾
+	 * face = 0 æ­£é¢
+	 * 1		èƒŒé¢
+	 * 2		å·¦
+	 * 3		å³
 	 */
 	public Image getCurrentImage() {
 		if (face > -1 && face < 4)
 			return mapimage[face];
 		else {
-			abort("Ö÷½Ç·½Ïò´íÎó! now face = " + face);
+			abort("ä¸»è§’æ–¹å‘é”™è¯¯! now face = " + face);
 			return null;
 		}
 	}
@@ -425,14 +425,14 @@ public class Hero {
 		if (face > -1 && face < 4)
 			return mapimage[face + 4];
 		else {
-			abort("Ö÷½Ç·½Ïò´íÎó! now face = " + face);
+			abort("ä¸»è§’æ–¹å‘é”™è¯¯! now face = " + face);
 			return null;
 		}
 	}
 
 	/*
-	 * Ö÷½ÇÏòÉÏÒÆ¶¯
-	 * @param map ÒÆ¶¯ËùÔÚµÄµØÍ¼
+	 * ä¸»è§’å‘ä¸Šç§»åŠ¨
+	 * @param map ç§»åŠ¨æ‰€åœ¨çš„åœ°å›¾
 	 */
 	public void moveUp(Map map) {
 		setFace(1);
@@ -457,8 +457,8 @@ public class Hero {
 	}
 
 	/*
-	 * Ö÷½ÇÏòÏÂÒÆ¶¯
-	 * @param map ÒÆ¶¯ËùÔÚµÄµØÍ¼
+	 * ä¸»è§’å‘ä¸‹ç§»åŠ¨
+	 * @param map ç§»åŠ¨æ‰€åœ¨çš„åœ°å›¾
 	 */
 	public void moveDown(Map map) {
 		setFace(0);
@@ -482,8 +482,8 @@ public class Hero {
 	}
 
 	/*
-	 * Ö÷½ÇÏò×óÒÆ¶¯
-	 * @param map ÒÆ¶¯ËùÔÚµÄµØÍ¼
+	 * ä¸»è§’å‘å·¦ç§»åŠ¨
+	 * @param map ç§»åŠ¨æ‰€åœ¨çš„åœ°å›¾
 	 */
 	public void moveLeft(Map map) {
 		setFace(2);
@@ -507,8 +507,8 @@ public class Hero {
 	}
 
 	/*
-	 * Ö÷½ÇÏòÓÒÒÆ¶¯
-	 * @param map ÒÆ¶¯ËùÔÚµÄµØÍ¼
+	 * ä¸»è§’å‘å³ç§»åŠ¨
+	 * @param map ç§»åŠ¨æ‰€åœ¨çš„åœ°å›¾
 	 */
 	public void moveRight(Map map) {
 		setFace(3);
@@ -532,18 +532,18 @@ public class Hero {
 	}
 
 	/*
-	 * @param f ·½Ïò
+	 * @param f æ–¹å‘
 	 */
 	private void setFace(int f) {
 		if (f > -1 && f < 4)
 			face = f;
 		else {
-			abort("Ö÷½Ç·½ÏòÉèÖÃÓöµ½·Ç·¨±äÁ¿!f = " + f);
+			abort("ä¸»è§’æ–¹å‘è®¾ç½®é‡åˆ°éæ³•å˜é‡!f = " + f);
 		}
 	}
 
 	/*
-	 * @param e Ôö¼ÓµÄ¾­Ñé
+	 * @param e å¢åŠ çš„ç»éªŒ
 	 */
 	public boolean increaseExp(int e) {
 		boolean b = false;
@@ -557,56 +557,56 @@ public class Hero {
 	}
 
 	/*
-	 * @return ·µ»ØÖ÷½Ç·½Ïò
+	 * @return è¿”å›ä¸»è§’æ–¹å‘
 	 */
 	public int getFace() {
 		return face;
 	}
 
 	/*
-	 * @return ·µ»ØÖ÷½Ç¾­ÑéÖµ
+	 * @return è¿”å›ä¸»è§’ç»éªŒå€¼
 	 */
 	public int getExp() {
 		return exp;
 	}
 
 	/*
-	 * @return ·µ»ØÖ÷½ÇÏÂÒ»¼¶ËùĞè¾­ÑéÖµ
+	 * @return è¿”å›ä¸»è§’ä¸‹ä¸€çº§æ‰€éœ€ç»éªŒå€¼
 	 */
 	public int getExpNext() {
 		return expnext;
 	}
 
 	/*
-	 * @return ·µ»ØÖ÷½ÇµÈ¼¶
+	 * @return è¿”å›ä¸»è§’ç­‰çº§
 	 */
 	public int getLevel() {
 		return level;
 	}
 
 	/*
-	 * @return ·µ»ØÖ÷½ÇËù´¦µÄµØÍ¼ÎÄ¼şÃû
+	 * @return è¿”å›ä¸»è§’æ‰€å¤„çš„åœ°å›¾æ–‡ä»¶å
 	 */
 	public String getMapFile() {
 		return mapfile;
 	}
 
 	/*
-	 * @return ·µ»ØÖ÷½Çºá×ø±ê
+	 * @return è¿”å›ä¸»è§’æ¨ªåæ ‡
 	 */
 	public int getX() {
 		return x;
 	}
 
 	/*
-	 * @return ·µ»ØÖ÷½Ç×İ×ø±ê
+	 * @return è¿”å›ä¸»è§’çºµåæ ‡
 	 */
 	public int getY() {
 		return y;
 	}
 
 	/*
-	 * @param s ÉèÖÃÖ÷½ÇÕ½¶·Êı¾İ,Ò»°ãÕ½¶·ºóµ÷ÓÃ;
+	 * @param s è®¾ç½®ä¸»è§’æˆ˜æ–—æ•°æ®,ä¸€èˆ¬æˆ˜æ–—åè°ƒç”¨;
 	 */
 	public void setState(BattleState s) {
 		state = s;
@@ -624,12 +624,12 @@ public class Hero {
 		this.mdef = state.getMdef();
 
 		if (property == null) {
-			abort("´Óbattle stateµÃÀ´µÄstate³öÏÖÊôĞÔ±äÒì!");
+			abort("ä»battle stateå¾—æ¥çš„stateå‡ºç°å±æ€§å˜å¼‚!");
 		}
 	}
 
 	/*
-	 * ÈÃÖ÷½Ç»Ø¸´Ò»µãÉúÃüºÍ·¨Á¦
+	 * è®©ä¸»è§’å›å¤ä¸€ç‚¹ç”Ÿå‘½å’Œæ³•åŠ›
 	 */
 	public void recover() {
 		hp += 1;
@@ -641,7 +641,7 @@ public class Hero {
 	}
 
 	/*
-	 * ÈÃÖ÷½Ç»Ø¸´Ö¸¶¨ÉúÃüºÍ·¨Á¦
+	 * è®©ä¸»è§’å›å¤æŒ‡å®šç”Ÿå‘½å’Œæ³•åŠ›
 	 */
 	public void recover(int ahp, int amp) {
 		hp += ahp;
@@ -654,7 +654,7 @@ public class Hero {
 	}
 
 	/*
-	 * ÈÃÖ÷½ÇÉúÃüºÍ·¨Á¦ÍêÈ«»Ø¸´
+	 * è®©ä¸»è§’ç”Ÿå‘½å’Œæ³•åŠ›å®Œå…¨å›å¤
 	 */
 	public void fullyRecover() {
 		hp = hpmx;
@@ -663,7 +663,7 @@ public class Hero {
 	}
 
 	/*
-	 * ÌáÉıÖ÷½ÇµÈ¼¶
+	 * æå‡ä¸»è§’ç­‰çº§
 	 */
 	private void levelup() {
 		expnext = 20 + (int) Math.pow(1.3, (level + 1))
@@ -683,8 +683,8 @@ public class Hero {
 	}
 
 	/*
-	 * ÈÃÖ÷½ÇÖ´ĞĞÊÂ¼ş
-	 * @param e ÒªÖ´ĞĞµÄÊÂ¼ş
+	 * è®©ä¸»è§’æ‰§è¡Œäº‹ä»¶
+	 * @param e è¦æ‰§è¡Œçš„äº‹ä»¶
 	 * @return 
 	 */
 	public boolean executeEvent(Event e) {
@@ -716,7 +716,7 @@ public class Hero {
 			}
 			if (e.getType() == Event.TRANS_EVENT) {
 				if (!e.getMapFileName().endsWith("default.dat")) {
-					GameLogger.logger.info("Ö´ĞĞÊÂ¼ş:" + e.getName() + "|"
+					GameLogger.logger.info("æ‰§è¡Œäº‹ä»¶:" + e.getName() + "|"
 							+ e.getFilename());
 					mapfile = e.getMapFileName();
 					x = e.getTargetMapX();
@@ -724,30 +724,30 @@ public class Hero {
 				}
 			} else if (e.getType() == Event.ITEM_EVENT) {
 				for (int i = 0; i < eventnamelist.size(); i++) {
-					//ÎïÆ·ÊÂ¼şÒÑ¾­Íê³ÉÔò²»Ö´ĞĞ
+					//ç‰©å“äº‹ä»¶å·²ç»å®Œæˆåˆ™ä¸æ‰§è¡Œ
 					if (e.getName().equals((String) eventnamelist.get(i)))
 						return false;
 				}
-				GameLogger.logger.info("Ö´ĞĞÊÂ¼ş:" + e.getName() + "|"
+				GameLogger.logger.info("æ‰§è¡Œäº‹ä»¶:" + e.getName() + "|"
 						+ e.getFilename());
 				Item item = new Item(new File(e.getItem()));
 				addItem(item);
 			} else if (e.getType() == Event.BATTLE_EVENT) {
-				GameLogger.logger.info("Ö´ĞĞÊÂ¼ş:" + e.getName() + "|"
+				GameLogger.logger.info("æ‰§è¡Œäº‹ä»¶:" + e.getName() + "|"
 						+ e.getFilename());
 				Enemy aenemy = new Enemy(new File(e.getEnemy()));
 				setBattle(aenemy, true);
 			} else if (e.getType() == Event.MONEY_EVENT) {
-				GameLogger.logger.info("Ö´ĞĞÊÂ¼ş:" + e.getName() + "|"
+				GameLogger.logger.info("æ‰§è¡Œäº‹ä»¶:" + e.getName() + "|"
 						+ e.getFilename());
 				money += e.getMoney();
 			} else if (e.getType() == Event.LEARN_EVENT) {
-				//ÔÚlearnMagicº¯ÊıÀïÃæÅĞ¶ÏÊÇ·ñÒÑ¾­·¢Éú
+				//åœ¨learnMagicå‡½æ•°é‡Œé¢åˆ¤æ–­æ˜¯å¦å·²ç»å‘ç”Ÿ
 				Magic magic = new Magic(new File(e.getMagic()));
 				if (!learnMagic(e.getMagic(), magic.getName())) {
 					return false;
 				}
-				GameLogger.logger.info("Ö´ĞĞÊÂ¼ş:" + e.getName() + "|"
+				GameLogger.logger.info("æ‰§è¡Œäº‹ä»¶:" + e.getName() + "|"
 						+ e.getFilename());
 			}
 			for (int i = 0; i < eventlist.size(); i++) {
@@ -762,9 +762,9 @@ public class Hero {
 	}
 
 	/*
-	 * ÈÃÖ÷½ÇÑ§»áÒ»¸ö¼¼ÄÜ
-	 * @param magicfile ¼¼ÄÜÎÄ¼ş
-	 * @param magicname ¼¼ÄÜÃû³Æ
+	 * è®©ä¸»è§’å­¦ä¼šä¸€ä¸ªæŠ€èƒ½
+	 * @param magicfile æŠ€èƒ½æ–‡ä»¶
+	 * @param magicname æŠ€èƒ½åç§°
 	 */
 	public boolean learnMagic(String magicfile, String magicname) {
 		for (int i = 0; i < magiclist.size(); i++) {
@@ -786,8 +786,8 @@ public class Hero {
 	}
 
 	/*
-	 * ÈÃÖ÷½Ç»ñµÃÒ»¸öÎïÆ·
-	 * @param item Òª»ñµÃµÄÎïÆ·
+	 * è®©ä¸»è§’è·å¾—ä¸€ä¸ªç‰©å“
+	 * @param item è¦è·å¾—çš„ç‰©å“
 	 */
 	public void addItem(Item item) {
 		for (int i = 0; i < itemlist.size(); i++) {
@@ -823,9 +823,9 @@ public class Hero {
 	}
 
 	/*
-	 * ÈÃÖ÷½ÇÊ¹ÓÃÒ»¸öÖ¸¶¨µÄÎïÆ·
-	 * @param e Ê¹ÓÃµÄÎïÆ·
-	 * @param index ÎïÆ·ÔÚÎïÆ·ÁĞ±íµÄÎ»ÖÃ
+	 * è®©ä¸»è§’ä½¿ç”¨ä¸€ä¸ªæŒ‡å®šçš„ç‰©å“
+	 * @param e ä½¿ç”¨çš„ç‰©å“
+	 * @param index ç‰©å“åœ¨ç‰©å“åˆ—è¡¨çš„ä½ç½®
 	 */
 	public boolean useItem(Item e, int index) {
 		
@@ -841,7 +841,7 @@ public class Hero {
 			}
 			if (e.getItemType() == Item.EVENT_ITEM) {
 				executeEvent(new Event(new File(e.getEvent())));
-				//ºóĞøÊÂ¼ş±»ºöÂÔ!
+				//åç»­äº‹ä»¶è¢«å¿½ç•¥!
 			}
 			if (e.IsOneOff()) {
 				int num = Integer.parseInt((String) itemnumlist.get(index));
@@ -876,9 +876,9 @@ public class Hero {
 		}
 		if (e.getItemType() == Item.EVENT_ITEM) {
 			executeEvent(new Event(new File(e.getEvent())));
-			//ºóĞøÊÂ¼ş±»ºöÂÔ!
+			//åç»­äº‹ä»¶è¢«å¿½ç•¥!
 		}
-		//Èç¹ûÊÇÒ»´ÎĞÔÓÃÆ·,Ê¹ÓÃºó¼õÉÙ
+		//å¦‚æœæ˜¯ä¸€æ¬¡æ€§ç”¨å“,ä½¿ç”¨åå‡å°‘
 		if (e.IsOneOff()) {
 			int num = Integer.parseInt((String) itemnumlist.get(index));
 			num--;
@@ -898,9 +898,9 @@ public class Hero {
 	}
 
 	/*
-	 * ÉèÖÃÖ÷½ÇÕ½¶·×´Ì¬
-	 * @param e ¹ÖÎïÎÄ¼ş
-	 * @param b ÎªÕæÊ±Ö÷½Ç½øÈëÕ½¶·,¼ÙÊ±ÍË³ö
+	 * è®¾ç½®ä¸»è§’æˆ˜æ–—çŠ¶æ€
+	 * @param e æ€ªç‰©æ–‡ä»¶
+	 * @param b ä¸ºçœŸæ—¶ä¸»è§’è¿›å…¥æˆ˜æ–—,å‡æ—¶é€€å‡º
 	 */
 	public void setBattle(Enemy e, boolean b) {
 		enemy = e;
@@ -908,7 +908,7 @@ public class Hero {
 	}
 
 	/*
-	 * @return Ö÷½ÇµÄÕ½¶·×´Ì¬
+	 * @return ä¸»è§’çš„æˆ˜æ–—çŠ¶æ€
 	 */
 	public Enemy getEnemy() {
 		if (inbattle) {
@@ -923,26 +923,26 @@ public class Hero {
 
 	public void initEventName(EventManager manager) {
 		if (eventnamelist == null) {
-			track("ÕıÔÚ³õÊ¼»¯Ö÷½ÇÊÂ¼şÁĞ±í...");
+			track("æ­£åœ¨åˆå§‹åŒ–ä¸»è§’äº‹ä»¶åˆ—è¡¨...");
 			eventnamelist = new ArrayList();
 			for (int i = 0; i < eventlist.size(); i++) {
 				Event event = manager.getEvent((String) eventlist.get(i));
 				if (event == null)
-					abort("Ö÷½ÇÊÂ¼ş:" + eventlist.get(i) + "¶ªÊ§!");
+					abort("ä¸»è§’äº‹ä»¶:" + eventlist.get(i) + "ä¸¢å¤±!");
 				eventnamelist.add(event.getName());
 			}
-			track("Ö÷½ÇÊÂ¼şÁĞ±í³õÊ¼»¯Íê³É.\n");
+			track("ä¸»è§’äº‹ä»¶åˆ—è¡¨åˆå§‹åŒ–å®Œæˆ.\n");
 		}
 	}
 
 	public void initItemName(ItemManager manager) {
 		if (itemnamelist == null) {
-			track("ÕıÔÚ³õÊ¼»¯Ö÷½ÇÎïÆ·ÁĞ±í...");
+			track("æ­£åœ¨åˆå§‹åŒ–ä¸»è§’ç‰©å“åˆ—è¡¨...");
 			itemnamelist = new ArrayList();
 			for (int i = 0; i < itemlist.size(); i++) {
 				Item item = manager.getItem((String) itemlist.get(i));
 				if (item == null)
-					abort("Ö÷½ÇÎïÆ·:" + itemlist.get(i) + "¶ªÊ§!");
+					abort("ä¸»è§’ç‰©å“:" + itemlist.get(i) + "ä¸¢å¤±!");
 				for (int j = 0; j < itemnamelist.size(); j++) {
 					if (item.getName().equals((String) itemnamelist.get(j))) {
 						item.reName();
@@ -950,7 +950,7 @@ public class Hero {
 				}
 				itemnamelist.add(item.getName());
 			}
-			track("Ö÷½ÇÎïÆ·ÁĞ±í³õÊ¼»¯Íê³É.\n");
+			track("ä¸»è§’ç‰©å“åˆ—è¡¨åˆå§‹åŒ–å®Œæˆ.\n");
 		}
 	}
 
@@ -997,12 +997,12 @@ public class Hero {
 
 	public void initMagicName(MagicManager manager) {
 		if (magicnamelist == null) {
-			track("ÕıÔÚ³õÊ¼»¯Ö÷½Ç¼¼ÄÜÁĞ±í...");
+			track("æ­£åœ¨åˆå§‹åŒ–ä¸»è§’æŠ€èƒ½åˆ—è¡¨...");
 			magicnamelist = new ArrayList();
 			for (int i = 0; i < magiclist.size(); i++) {
 				Magic magic = manager.getMagic((String) magiclist.get(i));
 				if (magic == null)
-					abort("Ö÷½Ç¼¼ÄÜ:" + magiclist.get(i) + "¶ªÊ§!");
+					abort("ä¸»è§’æŠ€èƒ½:" + magiclist.get(i) + "ä¸¢å¤±!");
 				for (int j = 0; j < magicnamelist.size(); j++) {
 					if (magic.getName().equals((String) magicnamelist.get(j))) {
 						magic.reName();
@@ -1010,7 +1010,7 @@ public class Hero {
 				}
 				magicnamelist.add(magic.getName());
 			}
-			track("Ö÷½Ç¼¼ÄÜÁĞ±í³õÊ¼»¯Íê³É.\n");
+			track("ä¸»è§’æŠ€èƒ½åˆ—è¡¨åˆå§‹åŒ–å®Œæˆ.\n");
 		}
 	}
 
@@ -1104,10 +1104,10 @@ public class Hero {
 	int y;
 
 	private int face = 0; /*
-	 * 0ÕıÃæ
-	 * 1±³Ãæ
-	 * 2×óÃæ
-	 * 3ÓÒÃæ
+	 * 0æ­£é¢
+	 * 1èƒŒé¢
+	 * 2å·¦é¢
+	 * 3å³é¢
 	 */
 
 	private Image[] mapimage;

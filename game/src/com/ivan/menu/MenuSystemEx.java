@@ -1,6 +1,6 @@
 package com.ivan.menu;
 /*
- * À©Õ¹²Ëµ¥ÏµÍ³,Ö§³Ö¶àÖÖ´ò¿ª×Ó²Ëµ¥Ä£Ê½,¼´Ò»¸öÑ¡Ïî¿ÉÒÔ°üº¬¶à¸ö×Ó²Ëµ¥.
+ * æ‰©å±•èœå•ç³»ç»Ÿ,æ”¯æŒå¤šç§æ‰“å¼€å­èœå•æ¨¡å¼,å³ä¸€ä¸ªé€‰é¡¹å¯ä»¥åŒ…å«å¤šä¸ªå­èœå•.
  */
 public class MenuSystemEx extends MenuSystem{
 	public MenuSystemEx(Menu rootmenu)

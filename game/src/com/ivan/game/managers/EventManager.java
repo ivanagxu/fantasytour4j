@@ -8,7 +8,7 @@ import com.ivan.game.unit.Event;
 public class EventManager {
 	public EventManager()
 	{
-		track("ÕıÔÚÉú³ÉÊÂ¼ş¹ÜÀíÆ÷...");
+		track("æ­£åœ¨ç”Ÿæˆäº‹ä»¶ç®¡ç†å™¨...");
 		eventlist = new ArrayList();
 		eventnamelist = new ArrayList();
 		
@@ -21,16 +21,16 @@ public class EventManager {
 		{
 			if(filelist[i].getName().endsWith(".dat"))
 			{
-				track("Õı¶ÁÈ¡³ÉÊÂ¼şÎÄ¼ş: " + filelist[i].getName());
+				track("æ­£è¯»å–æˆäº‹ä»¶æ–‡ä»¶: " + filelist[i].getName());
 				eventlist.add(new Event(filelist[i]));
 				eventnamelist.add(filelist[i].getName());
 			}
 		}
 		if(eventlist.size() == 0 || eventnamelist.size() == 0 || eventlist.size() != eventnamelist.size())
 		{
-			abort("ÊÂ¼ş¹ÜÀíÆ÷Ã»ÓĞ¶ÁÈ¡µ½ÈÎºÎÊÂ¼ş,ÎŞ·¨½øĞĞÓÎÏ·!");
+			abort("äº‹ä»¶ç®¡ç†å™¨æ²¡æœ‰è¯»å–åˆ°ä»»ä½•äº‹ä»¶,æ— æ³•è¿›è¡Œæ¸¸æˆ!");
 		}
-		track("ÊÂ¼ş¹ÜÀíÆ÷Éú³ÉÍê±Ï\n");
+		track("äº‹ä»¶ç®¡ç†å™¨ç”Ÿæˆå®Œæ¯•\n");
 	}
 	public Event getEvent(String eventname)
 	{

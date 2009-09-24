@@ -34,23 +34,23 @@ public class MagicCreaterPanel extends JPanel {
 		setBackground(Color.GREEN);
 		setLayout(new GridLayout(34, 2));
 
-		add(new JLabel("----------»ù±¾ĞÅÏ¢----------"));
+		add(new JLabel("----------åŸºæœ¬ä¿¡æ¯----------"));
 		add(new JLabel(""));
 
-		add(new JLabel("¼¼ÄÜÃû³Æ:"));
+		add(new JLabel("æŠ€èƒ½åç§°:"));
 		magicnametext = new JTextField(10);
 		add(magicnametext);
 
-		add(new JLabel("¼¼ÄÜÀàĞÍ:"));
+		add(new JLabel("æŠ€èƒ½ç±»å‹:"));
 		magictypecombo = new JComboBox();
-		magictypecombo.addItem("¹¥»÷");
-		magictypecombo.addItem("ÖÎÁÆ");
+		magictypecombo.addItem("æ”»å‡»");
+		magictypecombo.addItem("æ²»ç–—");
 		magictypecombo.addItem("buff");
 		magictypecombo.addItem("debuff");
 		add(magictypecombo);
 
-		add(new JLabel("¶¯»­ÎÄ¼ş:"));
-		magicmotiontext = new JTextField("Ë«»÷´ò¿ªÎÄ¼ş");
+		add(new JLabel("åŠ¨ç”»æ–‡ä»¶:"));
+		magicmotiontext = new JTextField("åŒå‡»æ‰“å¼€æ–‡ä»¶");
 		magicmotiontext.setEditable(false);
 		magicmotiontext.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent event) {
@@ -73,12 +73,12 @@ public class MagicCreaterPanel extends JPanel {
 		});
 		add(magicmotiontext);
 
-		add(new JLabel("ĞèÒª·¨Á¦:"));
+		add(new JLabel("éœ€è¦æ³•åŠ›:"));
 		needmptext = new JTextField("0");
 		add(needmptext);
 
-		add(new JLabel("ĞèÒªÎïÆ·ÎÄ¼ş:"));
-		needitemtext = new JTextField("Ë«»÷´ò¿ªÎÄ¼ş");
+		add(new JLabel("éœ€è¦ç‰©å“æ–‡ä»¶:"));
+		needitemtext = new JTextField("åŒå‡»æ‰“å¼€æ–‡ä»¶");
 		needitemtext.setEditable(false);
 		needitemtext.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent event) {
@@ -101,106 +101,106 @@ public class MagicCreaterPanel extends JPanel {
 		});
 		add(needitemtext);
 
-		add(new JLabel("³ÖĞø»ØºÏ:"));
+		add(new JLabel("æŒç»­å›åˆ:"));
 		magicdelaytext = new JTextField("1");
 		add(magicdelaytext);
 
-		add(new JLabel("¼¼ÄÜËµÃ÷"));
+		add(new JLabel("æŠ€èƒ½è¯´æ˜"));
 		magicinfotext = new JTextField(10);
 		add(magicinfotext);
 
-		add(new JLabel("----------¹¥»÷Ğ§¹û----------"));
+		add(new JLabel("----------æ”»å‡»æ•ˆæœ----------"));
 		add(new JLabel(""));
 
-		add(new JLabel("¹¥»÷ÀàĞÍ:"));
+		add(new JLabel("æ”»å‡»ç±»å‹:"));
 		attacktypecombo = new JComboBox();
-		attacktypecombo.addItem("ÆÕÍ¨¹¥»÷");
-		attacktypecombo.addItem("Ä§·¨¹¥»÷");
+		attacktypecombo.addItem("æ™®é€šæ”»å‡»");
+		attacktypecombo.addItem("é­”æ³•æ”»å‡»");
 		add(attacktypecombo);
 
-		add(new JLabel("¼¼ÄÜÊôĞÔ:"));
+		add(new JLabel("æŠ€èƒ½å±æ€§:"));
 		magicpropertycombo = new JComboBox();
-		magicpropertycombo.addItem("ÆÕ");
-		magicpropertycombo.addItem("È«");
-		magicpropertycombo.addItem("»ğ");
-		magicpropertycombo.addItem("±ù");
-		magicpropertycombo.addItem("Ë®");
+		magicpropertycombo.addItem("æ™®");
+		magicpropertycombo.addItem("å…¨");
+		magicpropertycombo.addItem("ç«");
+		magicpropertycombo.addItem("å†°");
+		magicpropertycombo.addItem("æ°´");
 		add(magicpropertycombo);
 
-		add(new JLabel("¼¼ÄÜÉËº¦:"));
+		add(new JLabel("æŠ€èƒ½ä¼¤å®³:"));
 		dmgtext = new JTextField("0");
 		add(dmgtext);
 
-		add(new JLabel("----------ÔöÒæĞ§¹û----------"));
+		add(new JLabel("----------å¢ç›Šæ•ˆæœ----------"));
 		add(new JLabel(""));
 
-		add(new JLabel("¶ÔHPÔöÒæ:"));
+		add(new JLabel("å¯¹HPå¢ç›Š:"));
 		add(buffhptext = new JTextField("0"));
 
-		add(new JLabel("¶ÔMPÔöÒæ:"));
+		add(new JLabel("å¯¹MPå¢ç›Š:"));
 		add(buffmptext = new JTextField("0"));
 
-		add(new JLabel("¶Ô·ÀÓùÔöÒæ:"));
+		add(new JLabel("å¯¹é˜²å¾¡å¢ç›Š:"));
 		add(buffdeftext = new JTextField("0"));
 
-		add(new JLabel("¶ÔÄ§·ÀÔöÒæ:"));
+		add(new JLabel("å¯¹é­”é˜²å¢ç›Š:"));
 		add(buffmdeftext = new JTextField("0"));
 
-		add(new JLabel("¶ÔÁ¦Á¿ÔöÒæ:"));
+		add(new JLabel("å¯¹åŠ›é‡å¢ç›Š:"));
 		add(buffstrtext = new JTextField("0"));
 
-		add(new JLabel("¶ÔÄ§·¨Á¦Á¿ÔöÒæ:"));
+		add(new JLabel("å¯¹é­”æ³•åŠ›é‡å¢ç›Š:"));
 		add(buffmstrtext = new JTextField("0"));
 
-		add(new JLabel("¶ÔÖÂÃüÒ»»÷ÔöÒæ:"));
+		add(new JLabel("å¯¹è‡´å‘½ä¸€å‡»å¢ç›Š:"));
 		add(buffhstext = new JTextField("0"));
 
-		add(new JLabel("¶Ô¶ãÉÁµÄÔöÒæ:"));
+		add(new JLabel("å¯¹èº²é—ªçš„å¢ç›Š:"));
 		add(buffjouktext = new JTextField("0"));
 
-		add(new JLabel("----------»Ö¸´Ğ§¹û----------"));
+		add(new JLabel("----------æ¢å¤æ•ˆæœ----------"));
 		add(new JLabel(""));
 
-		add(new JLabel("ÖÎÁÆĞ§¹û:"));
+		add(new JLabel("æ²»ç–—æ•ˆæœ:"));
 		add(healhptext = new JTextField("0"));
 
-		add(new JLabel("ÊÇ·ñÄÜ½â¶¾:"));
+		add(new JLabel("æ˜¯å¦èƒ½è§£æ¯’:"));
 		antidotalcombo = new JComboBox();
-		antidotalcombo.addItem("·ñ");
-		antidotalcombo.addItem("ÊÇ");
+		antidotalcombo.addItem("å¦");
+		antidotalcombo.addItem("æ˜¯");
 		add(antidotalcombo);
 
-		add(new JLabel("ÊÇ·ñÇådebuff:"));
+		add(new JLabel("æ˜¯å¦æ¸…debuff:"));
 		cleardebuffcombo = new JComboBox();
-		cleardebuffcombo.addItem("·ñ");
-		cleardebuffcombo.addItem("ÊÇ");
+		cleardebuffcombo.addItem("å¦");
+		cleardebuffcombo.addItem("æ˜¯");
 		add(cleardebuffcombo);
 
-		add(new JLabel("----------¼õÒæĞ§¹û----------"));
+		add(new JLabel("----------å‡ç›Šæ•ˆæœ----------"));
 		add(new JLabel(""));
 
-		add(new JLabel("¶ÔHP¼õÒæ:"));
+		add(new JLabel("å¯¹HPå‡ç›Š:"));
 		add(debuffhptext = new JTextField("0"));
 
-		add(new JLabel("¶ÔMP¼õÒæ:"));
+		add(new JLabel("å¯¹MPå‡ç›Š:"));
 		add(debuffmptext = new JTextField("0"));
 
-		add(new JLabel("¶Ô·ÀÓù¼õÒæ:"));
+		add(new JLabel("å¯¹é˜²å¾¡å‡ç›Š:"));
 		add(debuffdeftext = new JTextField("0"));
 
-		add(new JLabel("¶ÔÄ§·À¼õÒæ:"));
+		add(new JLabel("å¯¹é­”é˜²å‡ç›Š:"));
 		add(debuffmdeftext = new JTextField("0"));
 
-		add(new JLabel("¶ÔÁ¦Á¿¼õÒæ:"));
+		add(new JLabel("å¯¹åŠ›é‡å‡ç›Š:"));
 		add(debuffstrtext = new JTextField("0"));
 
-		add(new JLabel("¶ÔÄ§·¨Á¦Á¿¼õÒæ:"));
+		add(new JLabel("å¯¹é­”æ³•åŠ›é‡å‡ç›Š:"));
 		add(debuffmstrtext = new JTextField("0"));
 
-		add(new JLabel("¶ÔÖÂÃüÒ»»÷¼õÒæ:"));
+		add(new JLabel("å¯¹è‡´å‘½ä¸€å‡»å‡ç›Š:"));
 		add(debuffhstext = new JTextField("0"));
 
-		add(new JLabel("¶Ô¶ãÉÁµÄ¼õÒæ:"));
+		add(new JLabel("å¯¹èº²é—ªçš„å‡ç›Š:"));
 		add(debuffjouktext = new JTextField("0"));
 		init();
 	}
@@ -247,8 +247,8 @@ public class MagicCreaterPanel extends JPanel {
 		magictypecombo.setSelectedIndex(0);
 		attacktypecombo.setSelectedIndex(0);
 		magicpropertycombo.setSelectedIndex(0);
-		magicmotiontext.setText("Ë«»÷´ò¿ªÎÄ¼ş");
-		needitemtext.setText("Ë«»÷´ò¿ªÎÄ¼ş");
+		magicmotiontext.setText("åŒå‡»æ‰“å¼€æ–‡ä»¶");
+		needitemtext.setText("åŒå‡»æ‰“å¼€æ–‡ä»¶");
 		magicdelaytext.setText("1");
 		magicinfotext.setText("");
 
@@ -282,9 +282,9 @@ public class MagicCreaterPanel extends JPanel {
 	}
 
 	public void newFile() {
-		track("µÈ´ı½¨Á¢ĞÂÎÄ¼ş...");
+		track("ç­‰å¾…å»ºç«‹æ–°æ–‡ä»¶...");
 		int result = JOptionPane.showConfirmDialog(MagicCreaterPanel.this,
-				"ÊÇ·ñ±£´æµ±Ç°¼¼ÄÜ?", "µÈ´ıÈ·ÈÏ", JOptionPane.YES_NO_CANCEL_OPTION);
+				"æ˜¯å¦ä¿å­˜å½“å‰æŠ€èƒ½?", "ç­‰å¾…ç¡®è®¤", JOptionPane.YES_NO_CANCEL_OPTION);
 		// System.out.println(result);
 		if (result == 0) {
 			save();
@@ -297,12 +297,12 @@ public class MagicCreaterPanel extends JPanel {
 	}
 
 	public void readFile(File f) {
-		track("¶ÁÈ¡ÎÄ¼ş...");
+		track("è¯»å–æ–‡ä»¶...");
 		init();
 		try {
 			// FileInputStream in = new FileInputStream(f);
 			BufferedReader in = new BufferedReader(new InputStreamReader(
-					new FileInputStream(f),"GBK"));
+					new FileInputStream(f),"utf-8"));
 			magicname = in.readLine();
 			magictype = in.readLine();
 			attacktype = in.readLine();
@@ -344,29 +344,29 @@ public class MagicCreaterPanel extends JPanel {
 	}
 
 	public void update() {
-		track("¸üĞÂ¿Ø¼ş...");
+		track("æ›´æ–°æ§ä»¶...");
 		magicnametext.setText(magicname);
-		if (magictype.equals("¹¥»÷"))
+		if (magictype.equals("æ”»å‡»"))
 			magictypecombo.setSelectedIndex(0);
-		else if (magictype.equals("ÖÎÁÆ"))
+		else if (magictype.equals("æ²»ç–—"))
 			magictypecombo.setSelectedIndex(1);
 		else if (magictype.equals("buff"))
 			magictypecombo.setSelectedIndex(2);
 		else if (magictype.equals("debuff"))
 			magictypecombo.setSelectedIndex(3);
-		if (attacktype.equals("ÆÕÍ¨¹¥»÷"))
+		if (attacktype.equals("æ™®é€šæ”»å‡»"))
 			attacktypecombo.setSelectedIndex(0);
-		else if (attacktype.equals("Ä§·¨¹¥»÷"))
+		else if (attacktype.equals("é­”æ³•æ”»å‡»"))
 			attacktypecombo.setSelectedIndex(1);
-		if (magicproperty.equals("ÆÕ"))
+		if (magicproperty.equals("æ™®"))
 			magicpropertycombo.setSelectedIndex(0);
-		else if (magicproperty.equals("È«"))
+		else if (magicproperty.equals("å…¨"))
 			magicpropertycombo.setSelectedIndex(1);
-		else if (magicproperty.equals("»ğ"))
+		else if (magicproperty.equals("ç«"))
 			magicpropertycombo.setSelectedIndex(2);
-		else if (magicproperty.equals("±ù"))
+		else if (magicproperty.equals("å†°"))
 			magicpropertycombo.setSelectedIndex(3);
-		else if (magicproperty.equals("Ë®"))
+		else if (magicproperty.equals("æ°´"))
 			magicpropertycombo.setSelectedIndex(4);
 
 		magicmotiontext.setText(magicmotion);
@@ -390,13 +390,13 @@ public class MagicCreaterPanel extends JPanel {
 
 		// heal magic
 		healhptext.setText(healhp);
-		if (antidotal.equals("·ñ"))
+		if (antidotal.equals("å¦"))
 			antidotalcombo.setSelectedIndex(0);
-		else if (antidotal.equals("ÊÇ"))
+		else if (antidotal.equals("æ˜¯"))
 			antidotalcombo.setSelectedIndex(1);
-		if (cleardebuff.equals("·ñ"))
+		if (cleardebuff.equals("å¦"))
 			cleardebuffcombo.setSelectedIndex(0);
-		else if (cleardebuff.equals("ÊÇ"))
+		else if (cleardebuff.equals("æ˜¯"))
 			cleardebuffcombo.setSelectedIndex(1);
 		// debuff magic
 		debuffhptext.setText(debuffhp);
@@ -410,7 +410,7 @@ public class MagicCreaterPanel extends JPanel {
 	}
 
 	public boolean checkfalse() {
-		track("¼ì²âÊı¾İ...");
+		track("æ£€æµ‹æ•°æ®...");
 		boolean error = false;
 		String errormsg = "";
 		magicname = magicnametext.getText();
@@ -419,7 +419,7 @@ public class MagicCreaterPanel extends JPanel {
 		magicproperty = (String) magicpropertycombo.getSelectedItem();
 		magicmotion = magicmotiontext.getText();
 		needitem = needitemtext.getText();
-		if (needitem.equals("Ë«»÷´ò¿ªÎÄ¼ş"))
+		if (needitem.equals("åŒå‡»æ‰“å¼€æ–‡ä»¶"))
 			needitem = "data/default.dat";
 		magicdelay = magicdelaytext.getText();
 		magicinfo = magicinfotext.getText();
@@ -485,110 +485,110 @@ public class MagicCreaterPanel extends JPanel {
 
 		NumberTester tester = new NumberTester();
 		if (magicname.length() == 0) {
-			errormsg += "ÇëÊäÈë¼¼ÄÜÃû³Æ\n";
+			errormsg += "è¯·è¾“å…¥æŠ€èƒ½åç§°\n";
 			error = true;
 		}
 		if (magicmotion.length() == 0 || !magicmotion.endsWith(".dat")) {
-			errormsg += "¼¼ÄÜ¶¯»­ÎÄ¼ş´íÎó\n";
+			errormsg += "æŠ€èƒ½åŠ¨ç”»æ–‡ä»¶é”™è¯¯\n";
 			error = true;
 		}
 		if (needitem.length() != 0) {
-			if (!needitem.equals("Ë«»÷´ò¿ªÎÄ¼ş") && !needitem.endsWith(".dat")) {
-				errormsg += "ĞèÒªÎïÆ·ÎÄ¼ş´íÎó\n";
+			if (!needitem.equals("åŒå‡»æ‰“å¼€æ–‡ä»¶") && !needitem.endsWith(".dat")) {
+				errormsg += "éœ€è¦ç‰©å“æ–‡ä»¶é”™è¯¯\n";
 				error = true;
 			}
 		}
 		if (!tester.test(magicdelay) || tester.getInt(magicdelay) < 1) {
-			errormsg += "³ÖĞø»ØºÏÊı¾İ²»ÕıÈ·\n";
+			errormsg += "æŒç»­å›åˆæ•°æ®ä¸æ­£ç¡®\n";
 			error = true;
 		}
 		if (magicinfo.length() == 0) {
-			magicinfo = "ÎŞÏà¹ØËµÃ÷\n";
+			magicinfo = "æ— ç›¸å…³è¯´æ˜\n";
 		}
-		if (magictype.endsWith("¹¥»÷")) {
+		if (magictype.endsWith("æ”»å‡»")) {
 			if (!tester.test(dmg)) {
-				errormsg += "ÉËº¦Êı¾İ²»ÕıÈ·\n";
+				errormsg += "ä¼¤å®³æ•°æ®ä¸æ­£ç¡®\n";
 				error = true;
 			}
 		}
-		if (magictype.equals("ÖÎÁÆ")) {
+		if (magictype.equals("æ²»ç–—")) {
 			if (!tester.test(healhp)) {
-				errormsg += "ÖÎÁÆĞ§¹ûÊı¾İ²»ÕıÈ·\n";
+				errormsg += "æ²»ç–—æ•ˆæœæ•°æ®ä¸æ­£ç¡®\n";
 				error = true;
 			}
 		}
 		if (magictype.equals("buff")) {
 			if (!tester.test(buffhp)) {
-				errormsg += "ÔöÒæHPÊı¾İ²»ÕıÈ·\n";
+				errormsg += "å¢ç›ŠHPæ•°æ®ä¸æ­£ç¡®\n";
 				error = true;
 			}
 			if (!tester.test(buffmp)) {
-				errormsg += "ÔöÒæMPÊı¾İ²»ÕıÈ·\n";
+				errormsg += "å¢ç›ŠMPæ•°æ®ä¸æ­£ç¡®\n";
 				error = true;
 			}
 			if (!tester.test(buffdef)) {
-				errormsg += "ÔöÒæ·ÀÓùÊı¾İ²»ÕıÈ·\n";
+				errormsg += "å¢ç›Šé˜²å¾¡æ•°æ®ä¸æ­£ç¡®\n";
 				error = true;
 			}
 			if (!tester.test(buffmdef)) {
-				errormsg += "ÔöÒæÄ§·ÀÊı¾İ²»ÕıÈ·\n";
+				errormsg += "å¢ç›Šé­”é˜²æ•°æ®ä¸æ­£ç¡®\n";
 				error = true;
 			}
 			if (!tester.test(buffstr)) {
-				errormsg += "ÔöÒæÁ¦Á¿Êı¾İ²»ÕıÈ·\n";
+				errormsg += "å¢ç›ŠåŠ›é‡æ•°æ®ä¸æ­£ç¡®\n";
 				error = true;
 			}
 			if (!tester.test(buffmstr)) {
-				errormsg += "ÔöÒæÄ§Á¦Êı¾İ²»ÕıÈ·\n";
+				errormsg += "å¢ç›Šé­”åŠ›æ•°æ®ä¸æ­£ç¡®\n";
 				error = true;
 			}
 			if (!tester.test(buffhs)) {
-				errormsg += "ÔöÒæÖÂÃüÒ»»÷Êı¾İ²»ÕıÈ·\n";
+				errormsg += "å¢ç›Šè‡´å‘½ä¸€å‡»æ•°æ®ä¸æ­£ç¡®\n";
 				error = true;
 			}
 			if (!tester.test(buffjouk)) {
-				errormsg += "ÔöÒæ¶ãÉÁÊı¾İ²»ÕıÈ·\n";
+				errormsg += "å¢ç›Šèº²é—ªæ•°æ®ä¸æ­£ç¡®\n";
 				error = true;
 			}
 		}
 
 		if (magictype.equals("debuff")) {
 			if (!tester.test(debuffhp)) {
-				errormsg += "¼õÒæHPÊı¾İ²»ÕıÈ·\n";
+				errormsg += "å‡ç›ŠHPæ•°æ®ä¸æ­£ç¡®\n";
 				error = true;
 			}
 			if (!tester.test(debuffmp)) {
-				errormsg += "¼õÒæMPÊı¾İ²»ÕıÈ·\n";
+				errormsg += "å‡ç›ŠMPæ•°æ®ä¸æ­£ç¡®\n";
 				error = true;
 			}
 			if (!tester.test(debuffdef)) {
-				errormsg += "¼õÒæ·ÀÓùÊı¾İ²»ÕıÈ·\n";
+				errormsg += "å‡ç›Šé˜²å¾¡æ•°æ®ä¸æ­£ç¡®\n";
 				error = true;
 			}
 			if (!tester.test(debuffmdef)) {
-				errormsg += "¼õÒæÄ§·ÀÊı¾İ²»ÕıÈ·\n";
+				errormsg += "å‡ç›Šé­”é˜²æ•°æ®ä¸æ­£ç¡®\n";
 				error = true;
 			}
 			if (!tester.test(debuffstr)) {
-				errormsg += "¼õÒæÁ¦Á¿Êı¾İ²»ÕıÈ·\n";
+				errormsg += "å‡ç›ŠåŠ›é‡æ•°æ®ä¸æ­£ç¡®\n";
 				error = true;
 			}
 			if (!tester.test(debuffmstr)) {
-				errormsg += "¼õÒæÄ§Á¦Êı¾İ²»ÕıÈ·\n";
+				errormsg += "å‡ç›Šé­”åŠ›æ•°æ®ä¸æ­£ç¡®\n";
 				error = true;
 			}
 			if (!tester.test(debuffhs)) {
-				errormsg += "¼õÒæÖÂÃüÒ»»÷Êı¾İ²»ÕıÈ·\n";
+				errormsg += "å‡ç›Šè‡´å‘½ä¸€å‡»æ•°æ®ä¸æ­£ç¡®\n";
 				error = true;
 			}
 			if (!tester.test(debuffjouk)) {
-				errormsg += "¼õÒæ¶ãÉÁÊı¾İ²»ÕıÈ·\n";
+				errormsg += "å‡ç›Šèº²é—ªæ•°æ®ä¸æ­£ç¡®\n";
 				error = true;
 			}
 		}
 		if (error) {
 			JOptionPane.showMessageDialog(MagicCreaterPanel.this, errormsg,
-					"´íÎó", JOptionPane.ERROR_MESSAGE);
+					"é”™è¯¯", JOptionPane.ERROR_MESSAGE);
 			return error;
 		}
 		return error;
@@ -612,7 +612,7 @@ public class MagicCreaterPanel extends JPanel {
 				int save = 0;
 				if (f.exists()) {
 					save = JOptionPane.showConfirmDialog(
-							MagicCreaterPanel.this, "´Ë¼¼ÄÜÒÑ¾­´æÔÚ,ÊÇ·ñ¸²¸Ç?", "µÈ´ıÈ·ÈÏ",
+							MagicCreaterPanel.this, "æ­¤æŠ€èƒ½å·²ç»å­˜åœ¨,æ˜¯å¦è¦†ç›–?", "ç­‰å¾…ç¡®è®¤",
 							JOptionPane.YES_NO_CANCEL_OPTION);
 				}
 				if (save == 0) {
@@ -680,9 +680,9 @@ public class MagicCreaterPanel extends JPanel {
 
 					try {
 						FileOutputStream out = new FileOutputStream(f);
-						out.write(saveData.getBytes("GBK"), 0, saveData.length());
+						out.write(saveData.getBytes("utf-8"), 0, saveData.length());
 						out.close();
-						track("±£´æ³É¹¦...");
+						track("ä¿å­˜æˆåŠŸ...");
 					} catch (FileNotFoundException e) {
 						e.printStackTrace();
 					} catch (IOException e) {

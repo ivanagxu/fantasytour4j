@@ -22,7 +22,7 @@ public class Map {
 			BufferedReader(new 
 					InputStreamReader(new 
 							FileInputStream(f)
-							,"GBK"));
+							,"utf-8"));
 			soundfile = in.readLine();
 			soundfile.replace(' ','\0');
 			String tablex = in.readLine();
@@ -38,7 +38,7 @@ public class Map {
 					temp = new MapPoint("");
 					mapstring = in.readLine();
 					if(mapstring == null)
-						abort("µØÍ¼¶ÁÈ¡´íÎó,ÎÄ¼şÃ»ÓĞÄÚÈİ!,»òÎÄ¼şÒÑµ½¾¡Í·!");
+						abort("åœ°å›¾è¯»å–é”™è¯¯,æ–‡ä»¶æ²¡æœ‰å†…å®¹!,æˆ–æ–‡ä»¶å·²åˆ°å°½å¤´!");
 					temp.readFromString(mapstring);
 					map[i][j] = temp;
 					map[i][j].y = new Integer(i).toString();
@@ -79,7 +79,7 @@ public class Map {
 			return map[y][x];
 		else
 		{
-			abort("µØÍ¼: " + mapname + "sizeÃ»ÓĞ(" + x + "," + y + ")µÄ×ø±ê!");
+			abort("åœ°å›¾: " + mapname + "sizeæ²¡æœ‰(" + x + "," + y + ")çš„åæ ‡!");
 			return null;
 		}
 	}

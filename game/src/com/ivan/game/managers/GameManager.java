@@ -77,7 +77,7 @@ public class GameManager {
 		{
 			if(gamestate == GAME_READY)
 			{
-				System.out.println("ÓÎÏ·Æô¶¯.\n");
+				System.out.println("æ¸¸æˆå¯åŠ¨.\n");
 				dlpmgr.playStartMovie();
 
 				gamestate = GAME_RUNNING;
@@ -139,7 +139,7 @@ public class GameManager {
 	public void mainloop()
 	{
 		/*
-		 * ½øÈëÓÎÏ·Ö÷Ñ­»·
+		 * è¿›å…¥æ¸¸æˆä¸»å¾ªç¯
 		 */
 		input = '#';
 		do
@@ -195,12 +195,12 @@ public class GameManager {
 				display = dlpmgr.getDisplay();
 				
 				/*
-				 * ¶ÀÁ¢
+				 * ç‹¬ç«‹
 				 */
 				if(display == GameManager.SAVE_GAME)
 				{
 					hero.save();
-					msgmgr.showMessage(new Msg("¼ÇÂ¼ÒÑ±£´æ."));
+					msgmgr.showMessage(new Msg("è®°å½•å·²ä¿å­˜."));
 					dlpmgr.setDisplay(GameManager.SHOW_MAP);
 				}
 				/*
@@ -226,7 +226,7 @@ public class GameManager {
 		}while(true);
 		
 		/*
-		 * µ½ÕâÀï,Ö÷Ñ­»·ÒÑÍË³ö,³õÊ¼»¯²¢»Øµ½ÓÎÏ·Ö÷¿ªÊ¼²Ëµ¥
+		 * åˆ°è¿™é‡Œ,ä¸»å¾ªç¯å·²é€€å‡º,åˆå§‹åŒ–å¹¶å›åˆ°æ¸¸æˆä¸»å¼€å§‹èœå•
 		 */
 		if(gamestate == GAME_FINISH)
 		{

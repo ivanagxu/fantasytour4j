@@ -57,7 +57,7 @@ public class DisplayManager {
 			sleep(10);
 		}
 		
-		play("data/sound/ʥ��ʿ��ʸ.mid");
+		play("data/sound/圣斗士星矢.mid");
 	}
 	public void changeMapMovie(String mapname,String music)
 	{
