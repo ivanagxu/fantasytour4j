@@ -1,0 +1,22 @@
+//admin app
+
+Ext.application({
+	name : 'admin',
+
+	appFolder : 'admin/app',
+
+	controllers : [ 'c_admin' ,'c_product', 'c_customer', 'c_user', 'c_mold'],
+	launch : function() {
+		Ext.create('Ext.container.Viewport', {
+			layout : 'fit',
+			items : [ {
+				xtype : 'panel',
+				items : [ {
+					xtype : 'header'
+				}, {
+					xtype : 'adminform'
+				} ]
+			} ]
+		});
+	}
+});
