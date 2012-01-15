@@ -1,11 +1,11 @@
-//job app
+//inventory app
 
 Ext.application({
-	name : 'job',
+	name : 'inventory',
 
-	appFolder : 'job/app',
+	appFolder : 'inventory/app',
 
-	controllers : [ 'c_job' ],
+	controllers : [ 'c_inventory' ],
 	launch : function() {
 		Ext.create('Ext.container.Viewport', {
 			layout : 'fit',
@@ -14,7 +14,7 @@ Ext.application({
 				items : [ {
 					xtype : 'header'
 				}, {
-					xtype : 'job_table'
+					xtype : 'inventory_table'
 				} ]
 			} ]
 		});

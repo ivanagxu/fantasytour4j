@@ -16,10 +16,11 @@ Ext.define('master.view.v_master', {
 			items : [ {
 				xtype : 'box',
 				html: '<table><tr><td><img src="resources/images/logo.gif" width=240 height=50/></td>' + 
-				'<td align="center" width="200"><a href="#" onclick="GOTO_ORDER_MODULE();" id="link_order">订单管理</a></td>' + 
-				'<td align="center" width="200"><a href="#" onclick="GOTO_JOB_MODULE();" id="link_job">部门管理</a></td>' +
-				'<td align="center" width="200"><a href="#" onclick="GOTO_ADMIN_MODULE();" id="link_admin">后台管理</a></td>' +
-				'<td align="center" width="200"><a href="#" onclick="LOGOUT();" id="link_logout">系统登出</a></td>' +
+				'<td align="center" width="120"><a href="#" onclick="GOTO_ORDER_MODULE();" id="link_order">订单管理</a></td>' + 
+				'<td align="center" width="120"><a href="#" onclick="GOTO_JOB_MODULE();" id="link_job">部门管理</a></td>' +
+				'<td align="center" width="120"><a href="#" onclick="GOTO_INVENTORY_MODULE();" id="link_job">仓库管理</a></td>' +
+				'<td align="center" width="120"><a href="#" onclick="GOTO_ADMIN_MODULE();" id="link_admin">后台管理</a></td>' +
+				'<td align="center" width="120"><a href="#" onclick="LOGOUT();" id="link_logout">系统登出</a></td>' +
 				'<td align="right" width="60"></td>' +
 				'<td align="left" width="100"><span id="link_user"/></td>' +
 				'</tr></table>'

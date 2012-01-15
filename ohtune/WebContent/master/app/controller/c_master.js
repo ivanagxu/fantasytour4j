@@ -52,6 +52,13 @@ function GOTO_ADMIN_MODULE() {
 	}
 }
 
+function GOTO_INVENTORY_MODULE() {
+	hasPermission = HAS_PERMISSION("销售部");
+	if (hasPermission) {
+		location.href = "inventory.jsp";
+	}
+}
+
 function LOGOUT()
 {
 	location.href="UserACController?action=logout";
