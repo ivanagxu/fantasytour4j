@@ -466,6 +466,101 @@ public class OhtuneService extends OhtuneDA implements IOhtuneService {
 		}
 		return success;
 	}
+
+	@Override
+	public boolean addJobToOrder(Order order, JobType jobType, int iQuantity, UserAC assignedTo,
+			UserAC operator) {
+		
+		OhtuneLogger.info("Add job to order, number=" + order.getNumber() + " by " + operator.getLogin_id());
+		
+		List<Job> jobByOrder = this.getJobByOrder(order);
+		Job existingJob = null;
+		boolean success = true;
+		
+		for(int i = 0 ; i < jobByOrder.size(); i++)
+		{
+			if(jobType.getName().equals(jobByOrder.get(i).getJob_type().getName()))
+			{
+				if(assignedTo == null && jobByOrder.get(i).getAssigned_to() == null)
+				{
+					existingJob = jobByOrder.get(i);
+					break;
+				}
+				else if(assignedTo != null && jobByOrder.get(i).getAssigned_to() != null)
+				{
+					if(assignedTo.getId().longValue() == jobByOrder.get(i).getAssigned_to().getId().longValue())
+					{
+						existingJob = jobByOrder.get(i);
+						break;
+					}
+				}
+			}
+		}
+		
+		if(existingJob == null)
+		{	
+			Job newJob = new Job();
+			newJob.setComplete_date(null);
+			newJob.setDeadline(order.getDeadline());
+			newJob.setFinish_remark("");
+			newJob.setJob_type(jobType);
+			newJob.setOrders(order);
+			newJob.setRemaining(iQuantity);
+			newJob.setStart_date(new Date());
+			newJob.setStatus(Job.STATUS_PROCESSING);
+			newJob.setTotal(iQuantity);
+			newJob.setUserac(operator);
+			newJob.setAssigned_to(assignedTo);
+			newJob.setPrevious_jobid(null);
+			newJob.setTotal_rejected(0);
+			newJob.setFinished(0);
+			
+			if(newJob.getJob_type().getName().equals(JobType.FINISH_DEPOT) || 
+					newJob.getJob_type().getName().equals(JobType.FINISH_SEMI_FINISH))
+			{
+				newJob.setComplete_date(new Date());
+				newJob.setRemaining(0);
+				newJob.setFinished(iQuantity);
+				newJob.setStatus(Job.STATUS_DONE);
+				
+				Product product = this.getProductByName(newJob.getOrders().getProduct_name());
+				if(product != null)
+				{
+					if(newJob.getJob_type().getName().equals(JobType.FINISH_DEPOT))
+					{
+						product.setFinished(product.getFinished() + iQuantity);
+					}
+					else
+					{
+						product.setSemi_finished(product.getSemi_finished() + iQuantity);
+					}
+					this.updateProduct(product);
+				}
+			}
+			success = this.addJob(newJob);
+		}
+		else
+		{
+			if(existingJob.getJob_type().getName().equals(JobType.FINISH_DEPOT) || 
+					existingJob.getJob_type().getName().equals(JobType.FINISH_SEMI_FINISH))
+			{
+				existingJob.setStart_date(new Date());
+				existingJob.setRemaining(0);
+				existingJob.setTotal(existingJob.getTotal() + iQuantity);
+			}
+			else
+			{
+				existingJob.setStart_date(new Date());
+				existingJob.setRemaining(existingJob.getRemaining() + iQuantity);
+				existingJob.setComplete_date(null);
+				existingJob.setStatus(Job.STATUS_PROCESSING);
+				existingJob.setTotal(existingJob.getTotal() + iQuantity);
+			}
+			success = this.updateJob(existingJob);
+		}
+		
+		return success;
+	}
 	
 	
 }

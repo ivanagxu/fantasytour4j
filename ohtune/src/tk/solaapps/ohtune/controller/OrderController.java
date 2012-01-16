@@ -112,6 +112,10 @@ public class OrderController extends HttpServlet implements IOhtuneController{
 		{
 			resumeOrder(request, response);
 		}
+		else if(actionName.equals("addJobToOrder"))
+		{
+			addJobToOrder(request, response);
+		}
 		else
 		{
 			OhtuneLogger.error("Unknow action name in OrderController, action name = " + actionName);
@@ -875,5 +879,84 @@ public class OrderController extends HttpServlet implements IOhtuneController{
 			jr = service.genJsonResponse(false, "恢复订单错误", null);
 			response.getOutputStream().write(gson.toJson(jr).getBytes("utf-8"));
 		}
+	}
+	
+	private void addJobToOrder(HttpServletRequest request, HttpServletResponse response) throws IOException
+	{
+		UserAC sessionUser = new UserAC();
+		if(request.getSession().getAttribute("user") != null)
+			sessionUser = (UserAC)request.getSession().getAttribute("user");
+		
+		IOhtuneService service = (IOhtuneService) OhtuneServiceHolder
+				.getInstence().getBeanFactory().getBean("uhtuneService");
+		
+		Gson gson = service.getGson();
+		JsonResponse jr = null;
+		
+		String sQuantity = "0" + request.getParameter("quantity");
+		String sOrderId = request.getParameter("order_id");
+		String sAssignedTo = request.getParameter("assigned_to");
+		String sJobType = request.getParameter("job_type");
+		
+		Long iOrderId = Long.parseLong(sOrderId);
+		int iQuantity;
+		
+		try
+		{
+			iQuantity = Integer.parseInt(sQuantity);
+		}
+		catch(Exception e)
+		{
+			jr = service.genJsonResponse(false, "补数数量有错", null);
+			response.getOutputStream().write(gson.toJson(jr).getBytes("utf-8"));
+			return;
+		}
+		
+		Order order = service.getOrderById(iOrderId);
+		
+		if(order == null)
+		{
+			jr = service.genJsonResponse(false, "订单不存在", null);
+			response.getOutputStream().write(gson.toJson(jr).getBytes("utf-8"));
+			return;
+		}
+		
+		JobType jobType = service.getJobTypeByName(sJobType);
+		if(jobType == null)
+		{
+			jr = service.genJsonResponse(false, "送交部门有误", null);
+			response.getOutputStream().write(gson.toJson(jr).getBytes("utf-8"));
+			return;
+		}
+		
+		if(order.getStatus().equals(Order.STATUS_CANCELED) || order.getStatus().equals(Order.STATUS_FINISHED)
+				|| order.getStatus().equals(Order.STATUS_APPROVING) || order.getStatus().equals(Order.STATUS_PAUSED))
+		{
+			jr = service.genJsonResponse(false, "只能对进行中的订单进行补数", null);
+			response.getOutputStream().write(gson.toJson(jr).getBytes("utf-8"));
+			return;
+		}
+		
+		UserAC assignedTo = null;
+		try
+		{
+			assignedTo = service.getUserACById(Long.parseLong(sAssignedTo));
+		}catch(Exception e)
+		{
+			assignedTo = null;
+		}
+		
+		boolean success = service.addJobToOrder(order, jobType, iQuantity, assignedTo, sessionUser);
+		
+		if(success)
+		{
+			order.setQuantity(order.getQuantity() + iQuantity);
+			order.setE_quantity(order.getE_quantity() + (int)Math.ceil(iQuantity * order.getProduct_rate()));
+			success = success & service.updateOrder(order);
+		}
+		
+		jr = service.genJsonResponse(success, success ? "补数成功" : "补数失败", null);
+		response.getOutputStream().write(gson.toJson(jr).getBytes("utf-8"));
+		
 	}
 }

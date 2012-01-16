@@ -3,6 +3,7 @@ package tk.solaapps.ohtune.service;
 import java.util.List;
 
 import tk.solaapps.ohtune.model.Job;
+import tk.solaapps.ohtune.model.JobType;
 import tk.solaapps.ohtune.model.Order;
 import tk.solaapps.ohtune.model.Product;
 import tk.solaapps.ohtune.model.ProductRate;
@@ -36,6 +37,7 @@ public interface IOhtuneService extends IOhtuneDA{
 	List<Job> getMyJobList(UserAC user);
 	
 	boolean completeJob(Job job, UserAC assignedTo, String jobType, int complete_count, boolean isCompleted, boolean isRejected, String remark, UserAC operator);
+	boolean addJobToOrder(Order order,JobType jobType, int iQuantity, UserAC assignedTo, UserAC operator);
 	boolean completeOrder(Order order, UserAC operator);
 	
 	//Report Functions

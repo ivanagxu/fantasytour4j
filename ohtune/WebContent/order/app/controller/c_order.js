@@ -972,13 +972,91 @@ Ext.define('order.controller.c_order', {
 							height : 400,
 							renderTo : Ext.getBody(),
 							tbar : [ {
-								text : '添加',
-								hidden: true,
-								type : 'button'
-							} ,{
-								text : '删除',
-								hidden: true,
-								type : 'button'
+								text : '补数',
+								type : 'button',
+								handler : function()
+								{
+									var jobWin = Ext.create('Ext.window.Window', {
+										title : '补数详细' ,
+										height : 150,
+										width : 320,
+										layout : 'fit',
+										modal: true,
+										items : [ Ext.create('Ext.form.Panel', {
+											layout : 'anchor',
+											border : false,
+											containScroll : true,
+											autoScroll : true,
+											defaults : {
+												anchor : '98%'
+											},
+											items : [ 
+								            {
+								            	xtype : 'hiddenfield',
+								            	name : 'order_id',
+								            	value : selected[0].data.id
+								            }, {
+												xtype : 'textfield',
+												anchor : '98%',
+												fieldLabel : '补做数量 *',
+												name : 'quantity'
+											}, Ext.create('Ext.form.ComboBox', {
+											    fieldLabel: '送交部门 *',
+											    editable: false,
+											    store: Ext.data.StoreManager.lookup('jobTypeStore'),
+											    queryMode: 'local',
+											    displayField: 'name',
+											    valueField: 'name',
+											    name : 'job_type',
+											    renderTo: Ext.getBody()
+											}),Ext.create('Ext.form.ComboBox', {
+											    fieldLabel: '送交员工',
+											    editable: false,
+											    store: Ext.data.StoreManager.lookup('allUserACStore'),
+											    queryMode: 'local',
+											    displayField: 'name',
+											    valueField: 'id',
+											    name : 'assigned_to',
+											    renderTo: Ext.getBody()
+											})],
+											buttons : [ {
+												text : '确定',
+												handler : function() {
+													var form = this.up('form').getForm();
+													
+													if(	this.up('form').down('combobox[name="job_type"]').getValue() == null ||
+														Ext.String.trim(this.up('form').down('textfield[name="quantity"]').getValue()) == '')
+													{
+														Ext.Msg.alert('补数结果','带*号资料必须输入');
+														return;
+													}
+													
+													form.submit({
+														url : 'OrderController?action=addJobToOrder',
+														success : function(form, resp) {
+															Ext.Msg.alert('补数结果', resp.result.msg);
+															Ext.data.StoreManager.lookup('jobStore').load();
+															jobWin.close();
+															GetJsonData("OrderController?action=getOrderById",{id: selected[0].data.id}, fillOrderForm);
+														},
+														failure : function(form, resp) {
+															Ext.Msg.alert('补数结果', resp.result.msg);
+															Ext.data.StoreManager.lookup('jobStore').load();
+															GetJsonData("OrderController?action=getOrderById",{id: selected[0].data.id}, fillOrderForm);
+														}
+													});
+												}
+											}, {
+												text : '取消',
+												handler : function() {
+													jobWin.close();
+												}
+											} ]
+										}) ]
+									});
+									jobWin.show();
+									
+								}
 							} ]
 						}) 
 					]
