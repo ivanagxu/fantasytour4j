@@ -199,13 +199,13 @@ public class OhtuneService extends OhtuneDA implements IOhtuneService {
 	}
 
 	@Override
-	public boolean completeJob(Job job, UserAC assignedTo, String jobType, int complete_count,
+	public boolean completeJob(Job job, UserAC assignedTo, String jobType, int complete_count, int disuse_count,
 			boolean isCompleted, boolean isRejected, String remark, UserAC operator) {
 		
 		boolean success = true;
 		
 		job.setFinish_remark(remark);
-		job.setRemaining(job.getRemaining() - complete_count);
+		job.setRemaining(job.getRemaining() - (complete_count + disuse_count));
 		if(isRejected)
 		{
 			job.setTotal(job.getTotal() - complete_count);

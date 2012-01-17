@@ -112,6 +112,7 @@ public class JobController extends HttpServlet implements IOhtuneController{
 			sessionUser = (UserAC)request.getSession().getAttribute("user");
 		
 		String sComplete_count = request.getParameter("complete_count");
+		String sDisuse_count = request.getParameter("disuse_count");
 		String job_type = request.getParameter("job_type");
 		
 		String sIsCompleted = request.getParameter("is_completed");
@@ -126,12 +127,14 @@ public class JobController extends HttpServlet implements IOhtuneController{
 		Gson gson = service.getGson();
 		
 		int iComplete_count = 0;
+		int iDisuse_count = 0;
 		try
 		{
 			iComplete_count = Integer.parseInt(sComplete_count);
+			iDisuse_count = Integer.parseInt(sDisuse_count);
 		}catch(Exception e)
 		{
-			jr = service.genJsonResponse(false, "完成数错误", null);
+			jr = service.genJsonResponse(false, "完成数或废品数错误", null);
 			response.getOutputStream().write(gson.toJson(jr).getBytes("utf-8"));
 			return;
 		}
@@ -174,9 +177,9 @@ public class JobController extends HttpServlet implements IOhtuneController{
 			return;
 		}
 		
-		if(job.getRemaining() < iComplete_count)
+		if(job.getRemaining() < (iComplete_count + iDisuse_count))
 		{
-			jr = service.genJsonResponse(false, "完成数不能大于总数", null);
+			jr = service.genJsonResponse(false, "完成数加废品数不能大于总数", null);
 			response.getOutputStream().write(gson.toJson(jr).getBytes("utf-8"));
 			return;
 		}
@@ -191,6 +194,8 @@ public class JobController extends HttpServlet implements IOhtuneController{
 		}
 		
 		boolean isCompleted = (sIsCompleted + "").equals("on");
+		if(job.getTotal() == (iComplete_count + iDisuse_count))
+			isCompleted = true;
 		boolean isRejected = (sIsRejected + "").equals("on");
 		
 		if(isRejected && (job_type.equals(JobType.FINISH_DEPOT) || job_type.equals(JobType.FINISH_SEMI_FINISH)))
@@ -202,7 +207,7 @@ public class JobController extends HttpServlet implements IOhtuneController{
 		
 		try
 		{
-			boolean success = service.completeJob(job, assignedTo, job_type, iComplete_count, isCompleted, isRejected, finish_remark, sessionUser);
+			boolean success = service.completeJob(job, assignedTo, job_type, iComplete_count, iDisuse_count, isCompleted, isRejected, finish_remark, sessionUser);
 			
 			boolean alldone = true;
 			List<Job> jobByOrder = service.getJobByOrder(job.getOrders());

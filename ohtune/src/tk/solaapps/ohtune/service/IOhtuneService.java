@@ -36,7 +36,7 @@ public interface IOhtuneService extends IOhtuneDA{
 	boolean deleteJobByOrder(Order order, UserAC operator);
 	List<Job> getMyJobList(UserAC user);
 	
-	boolean completeJob(Job job, UserAC assignedTo, String jobType, int complete_count, boolean isCompleted, boolean isRejected, String remark, UserAC operator);
+	boolean completeJob(Job job, UserAC assignedTo, String jobType, int complete_count, int iDisuse_count, boolean isCompleted, boolean isRejected, String remark, UserAC operator);
 	boolean addJobToOrder(Order order,JobType jobType, int iQuantity, UserAC assignedTo, UserAC operator);
 	boolean completeOrder(Order order, UserAC operator);
 	
