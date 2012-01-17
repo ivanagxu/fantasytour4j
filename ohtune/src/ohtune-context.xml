@@ -15,7 +15,7 @@
     	<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
     	<property name="url" value="jdbc:mysql://localhost:3306/soladb?useUnicode=true&amp;characterEncoding=utf8"/>
     	<property name="username" value="root"/>
-    	<property name="password" value=""/>
+    	<property name="password" value="password"/>
   	</bean>
 	
 	<bean id="sessionFactory"	class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
