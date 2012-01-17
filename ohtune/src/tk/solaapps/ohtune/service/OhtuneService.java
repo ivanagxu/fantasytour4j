@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import tk.solaapps.ohtune.model.Dummy;
@@ -13,6 +14,7 @@ import tk.solaapps.ohtune.model.JobType;
 import tk.solaapps.ohtune.model.Order;
 import tk.solaapps.ohtune.model.Post;
 import tk.solaapps.ohtune.model.Product;
+import tk.solaapps.ohtune.model.ProductLog;
 import tk.solaapps.ohtune.model.ProductRate;
 import tk.solaapps.ohtune.model.Role;
 import tk.solaapps.ohtune.model.UserAC;
@@ -343,6 +345,9 @@ public class OhtuneService extends OhtuneDA implements IOhtuneService {
 	@Override
 	public List<ProductRate> generateProductRateByProduct(Product product,
 			UserAC operator) {
+		
+		OhtuneLogger.info("Get product rate by user, product=" + product.getName() + " by " + operator.getLogin_id());
+		
 		String[] columns = new String[] { Order.COLUMN_PRODUCT_NAME, Order.COLUMN_STATUS };
 		String[] values = new String[] { product.getName(), Order.STATUS_FINISHED };
 		
@@ -375,6 +380,90 @@ public class OhtuneService extends OhtuneDA implements IOhtuneService {
 			rates.add(rate);
 		}
 		return rates;
+	}
+	
+	
+
+	@Override
+	public List<ProductLog> generateProductLogByDateAndSection(String sDate,
+			String sJobType, UserAC operator) {
+		
+		OhtuneLogger.info("Get product log by user, section =" + sJobType + ", date = " + sDate + " by " + operator.getLogin_id());
+		
+		Date date = null;
+		JobType jobType = null;
+		List<ProductLog> logs = new ArrayList<ProductLog>();
+		List<Job> jobs = null;
+		ProductLog log = null;
+		
+		ProductLog totalLog = new ProductLog();
+		try
+		{
+			date = new SimpleDateFormat("yyyy-MM-dd").parse(sDate);
+			jobType = this.getJobTypeByName(sJobType);
+			if(jobType == null)
+				return new ArrayList<ProductLog>();
+			
+			jobs = this.getJobByCompDateAndSection(date, jobType);
+			
+			String lastProductName = "";
+			totalLog.setDate(new Date());
+			totalLog.setProductName("总计");
+			totalLog.setJobType(jobType);
+			totalLog.setProductOurName("--");
+			for(int i = 0; i < jobs.size(); i++)
+			{
+				if(!lastProductName.equals(jobs.get(i).getOrders().getProduct_name()))
+				{
+					if(log != null)
+						logs.add(log);
+					
+					lastProductName = jobs.get(i).getOrders().getProduct_name();
+					log = new ProductLog();
+				}
+				log.setDate(date);
+				log.setDisuse(log.getDisuse() + (jobs.get(i).getTotal() - jobs.get(i).getFinished()));
+				log.setFinished(log.getFinished() + jobs.get(i).getFinished());
+				log.setRejected(log.getRejected() + jobs.get(i).getTotal_rejected());
+				log.setTotal(log.getTotal() + jobs.get(i).getTotal());
+				log.setJobType(jobType);
+				log.setProductName(lastProductName);
+				log.setProductOurName(jobs.get(i).getOrders().getProduct_name());
+				
+				totalLog.setDisuse(totalLog.getDisuse() + (jobs.get(i).getTotal() - jobs.get(i).getFinished()));
+				totalLog.setFinished(totalLog.getFinished() + jobs.get(i).getFinished());
+				totalLog.setRejected(totalLog.getRejected() + jobs.get(i).getTotal_rejected());
+				totalLog.setTotal(totalLog.getTotal() + jobs.get(i).getTotal());
+			}
+			if(!lastProductName.equals(""))
+			{
+				logs.add(log);
+				logs.add(totalLog);
+			}
+			else
+			{
+				ProductLog errLog = new ProductLog();
+				errLog.setDate(new Date());
+				errLog.setProductName("没有数据");
+				errLog.setJobType(jobType);
+				errLog.setProductOurName("--");
+				logs.add(errLog);
+				return logs;
+			}
+		}
+		catch(Exception e)
+		{
+			OhtuneLogger.error(e, "Get product log by user failure");
+			logs = new ArrayList<ProductLog>();
+			ProductLog errLog = new ProductLog();
+			errLog.setDate(new Date());
+			errLog.setProductName("出现错误");
+			errLog.setJobType(jobType);
+			errLog.setProductOurName("请查看日志");
+			logs.add(errLog);
+			return logs;
+		}
+		return logs;
 	}
 
 	@Override

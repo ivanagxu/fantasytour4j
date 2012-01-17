@@ -156,6 +156,12 @@ Ext.define('master.controller.c_master', {
 			fields : ['order_number','product_name', 'product_our_name', 'rate']
 		});
 		
+		//ProductLog Data
+		Ext.define('ProductLogData', {
+			extend : 'Ext.data.Model',
+			fields : ['date','product_name', 'product_our_name', 'total', 'finished', 'rejected', 'disuse']
+		});
+		
 		//All role store
 		Ext.create('Ext.data.Store', {
 			storeId : 'allMoldStore',

@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import tk.solaapps.ohtune.model.JobType;
 import tk.solaapps.ohtune.model.Product;
+import tk.solaapps.ohtune.model.ProductLog;
 import tk.solaapps.ohtune.model.ProductRate;
 import tk.solaapps.ohtune.model.UserAC;
 import tk.solaapps.ohtune.pattern.JsonDataWrapper;
@@ -60,6 +62,10 @@ public class ReportController extends HttpServlet implements IOhtuneController{
 		{
 			generateProductRateReportByProduct(request, response);
 		}
+		else if(actionName.equals("generateProductLogReportByDateAndSection"))
+		{
+			generateProductLogReportByDateAndSection(request, response);
+		}
 		else
 		{
 			OhtuneLogger.error("Unknow action name in ReportController, actionName=" + actionName);
@@ -81,6 +87,25 @@ public class ReportController extends HttpServlet implements IOhtuneController{
 		Gson gson = service.getGson();
 		
 		JsonDataWrapper dw = new JsonDataWrapper(rates, JsonDataWrapper.TYPE_PRODUCT_RATE);
+		response.getOutputStream().write(gson.toJson(dw).getBytes("utf-8"));
+	}
+	
+	private void generateProductLogReportByDateAndSection(HttpServletRequest request,	HttpServletResponse response) throws IOException
+	{
+		UserAC sessionUser = new UserAC();
+		if(request.getSession().getAttribute("user") != null)
+			sessionUser = (UserAC)request.getSession().getAttribute("user");
+		
+		String sDate = request.getParameter("date");
+		String sJobType = request.getParameter("job_type");
+		
+		IOhtuneService service = (IOhtuneService)OhtuneServiceHolder.getInstence().getBeanFactory().getBean("uhtuneService");
+		
+		List<ProductLog> logs = service.generateProductLogByDateAndSection(sDate, sJobType, sessionUser);
+		
+		Gson gson = service.getGson();
+		
+		JsonDataWrapper dw = new JsonDataWrapper(logs, JsonDataWrapper.TYPE_PRODUCT_LOG);
 		response.getOutputStream().write(gson.toJson(dw).getBytes("utf-8"));
 	}
 }

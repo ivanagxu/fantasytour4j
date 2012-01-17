@@ -2,14 +2,15 @@ package tk.solaapps.ohtune.dao;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Property;
 import org.hibernate.criterion.Restrictions;
 
-import tk.solaapps.ohtune.model.Customer;
 import tk.solaapps.ohtune.model.Job;
+import tk.solaapps.ohtune.model.JobType;
 import tk.solaapps.ohtune.model.Order;
 
 public class JobDaoImpl extends BaseDao implements IJobDao{
@@ -91,5 +92,34 @@ public class JobDaoImpl extends BaseDao implements IJobDao{
 	@Override
 	protected Class getModelClass() {
 		return Job.class;
+	}
+
+	@Override
+	public List<Job> getJobByCompDateAndSection(Date compDate, JobType jobType) {
+		Date from = new Date();
+		from.setYear(compDate.getYear());
+		from.setMonth(compDate.getMonth());
+		from.setDate(compDate.getDate());
+		from.setHours(0);
+		from.setMinutes(0);
+		from.setSeconds(0);
+		
+		Date to = new Date();
+		to.setYear(compDate.getYear());
+		to.setMonth(compDate.getMonth());
+		to.setDate(compDate.getDate());
+		to.setHours(23);
+		to.setMinutes(59);
+		to.setSeconds(59);
+		
+		Criteria criteria = getSession().createCriteria(Job.class);
+		criteria.add(Restrictions.eq("status", Job.STATUS_DONE)).add(Restrictions.eq("job_type", jobType)).add(Restrictions.between("complete_date", from, to));
+		criteria.createAlias("orders", "o");
+		criteria.addOrder(org.hibernate.criterion.Order.asc("o.product_name"));
+		
+		
+		List<Job> jobs = criteria.list();
+		
+		return jobs;
 	}
 }

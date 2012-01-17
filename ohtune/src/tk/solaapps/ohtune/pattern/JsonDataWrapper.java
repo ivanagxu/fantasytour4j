@@ -7,6 +7,7 @@ import tk.solaapps.ohtune.model.Job;
 import tk.solaapps.ohtune.model.JobType;
 import tk.solaapps.ohtune.model.Order;
 import tk.solaapps.ohtune.model.Product;
+import tk.solaapps.ohtune.model.ProductLog;
 import tk.solaapps.ohtune.model.ProductRate;
 import tk.solaapps.ohtune.model.UserAC;
 
@@ -21,6 +22,7 @@ public class JsonDataWrapper {
 	public static final int TYPE_USER = 4;
 	public static final int TYPE_PRODUCT = 5;
 	public static final int TYPE_PRODUCT_RATE = 6;
+	public static final int TYPE_PRODUCT_LOG = 7;
 	
 	public JsonDataWrapper(List data, int type)
 	{
@@ -79,6 +81,14 @@ public class JsonDataWrapper {
 			for(int i = 0 ; i < data.size(); i++)
 			{
 				this.data.add(new JsonProductRate((ProductRate)data.get(i)));
+			}
+		}
+		else if(type == JsonDataWrapper.TYPE_PRODUCT_LOG)
+		{
+			this.data = new ArrayList<JsonProductLog>();
+			for(int i = 0 ; i < data.size(); i++)
+			{
+				this.data.add(new JsonProductLog((ProductLog)data.get(i)));
 			}
 		}
 	}

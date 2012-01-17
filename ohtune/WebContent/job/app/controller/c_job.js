@@ -392,23 +392,6 @@ Ext.define('job.controller.c_job', {
 							return;
 						}
 						
-						/*
-						if(Ext.String.trim(this.up('form').down('textfield[name="disuse_count"]').getValue()) != '' &&
-								this.up('form').down('checkboxfield[name="is_completed"]').getValue() != true)
-						{
-							Ext.Msg.alert('完成结果','输入废品的工作必须点选完成');
-							return;
-						}*/
-						
-						/*
-						if(Ext.String.trim(this.up('form').down('textfield[name="complete_count"]').getValue()) == '')
-						{
-							this.up('form').down('textfield[name="complete_count"]').setValue(
-								this.up('form').down('textfield[name="total"]').getValue() -
-								this.up('form').down('textfield[name="disuse_count"]').getValue()
-							);
-						}*/
-						
 						form.submit({
 							url : 'JobController?action=completeJob',
 							success : function(form, resp) {

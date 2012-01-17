@@ -2,6 +2,7 @@ package tk.solaapps.ohtune.service;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import tk.solaapps.ohtune.dao.ICustomerDao;
@@ -515,6 +516,11 @@ public class OhtuneDA implements IOhtuneDA{
 		return jobDao.getJobById(id);
 	}
 	
+	
+	@Override
+	public List<Job> getJobByCompDateAndSection(Date compDate, JobType jobType) {
+		return jobDao.getJobByCompDateAndSection(compDate, jobType);
+	}
 	@Override
 	public List<Customer> getAllCustomer() {
 		return customerDao.getAllCustomer();
