@@ -35,6 +35,7 @@ Ext.define('admin.controller.c_user', {
 			modal: true,
 			items : [ Ext.create('Ext.form.Panel', {
 				layout : 'anchor',
+				baseCls: 'x-plain',
 				border : false,
 				containScroll : true,
 				autoScroll : true,
@@ -202,6 +203,7 @@ Ext.define('admin.controller.c_user', {
 			modal: true,
 			items : [ Ext.create('Ext.form.Panel', {
 				layout : 'anchor',
+				baseCls: 'x-plain',
 				border : false,
 				defaults : {
 					anchor : '98%'

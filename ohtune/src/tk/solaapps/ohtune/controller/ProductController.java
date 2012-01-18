@@ -218,6 +218,7 @@ public class ProductController extends HttpServlet implements IOhtuneController 
 			Product oldProduct = service.getProductByName(product.getName());
 			if(oldProduct == null)
 			{
+				response.setContentType("text/html");
 				JsonResponse jr = service.genJsonResponse(false,
 						"修改产品失败， 产品不存在", null);
 				response.getOutputStream().write(gson.toJson(jr).getBytes("utf-8"));
@@ -246,7 +247,7 @@ public class ProductController extends HttpServlet implements IOhtuneController 
 					if(file.exists())
 						file.delete();
 				}
-				
+				response.setContentType("text/html");
 				JsonResponse jr = service.genJsonResponse(success,
 						"修改产品成功", null);
 				response.getOutputStream().write(gson.toJson(jr).getBytes("utf-8"));

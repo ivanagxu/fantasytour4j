@@ -3,6 +3,7 @@ package tk.solaapps.ohtune.pattern;
 public class SystemConfig {
 	private String productImageFolder = "";
 	private String productDrawingFolder = "";
+	private String commonDocumentFolder = "";
 	
 	public String getProductImageFolder() {
 		return productImageFolder;
@@ -15,6 +16,12 @@ public class SystemConfig {
 	}
 	public void setProductDrawingFolder(String productDrawingFolder) {
 		this.productDrawingFolder = productDrawingFolder;
+	}
+	public String getCommonDocumentFolder() {
+		return commonDocumentFolder;
+	}
+	public void setCommonDocumentFolder(String commonDocumentFolder) {
+		this.commonDocumentFolder = commonDocumentFolder;
 	}
 	
 	

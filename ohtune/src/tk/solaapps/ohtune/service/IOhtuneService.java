@@ -4,6 +4,7 @@ import java.util.List;
 
 import tk.solaapps.ohtune.model.Job;
 import tk.solaapps.ohtune.model.JobType;
+import tk.solaapps.ohtune.model.OhtuneDocument;
 import tk.solaapps.ohtune.model.Order;
 import tk.solaapps.ohtune.model.Product;
 import tk.solaapps.ohtune.model.ProductLog;
@@ -40,6 +41,10 @@ public interface IOhtuneService extends IOhtuneDA{
 	boolean completeJob(Job job, UserAC assignedTo, String jobType, int complete_count, int iDisuse_count, boolean isCompleted, boolean isRejected, String remark, UserAC operator);
 	boolean addJobToOrder(Order order,JobType jobType, int iQuantity, UserAC assignedTo, UserAC operator);
 	boolean completeOrder(Order order, UserAC operator);
+	
+	//Document fucntions
+	List<OhtuneDocument> getAllDocument(UserAC operator);
+	boolean deleteDocument(String name, UserAC operator);
 	
 	//Report Functions
 	List<ProductRate> generateProductRateByProduct(Product product, UserAC operator);

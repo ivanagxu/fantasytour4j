@@ -50,6 +50,7 @@ Ext.define('order.controller.c_order', {
 			modal: true,
 			items : [ Ext.create('Ext.form.Panel', {
 				layout : 'anchor',
+				baseCls: 'x-plain',
 				border : false,
 				containScroll: true,
 				autoScroll: true,
@@ -649,6 +650,7 @@ Ext.define('order.controller.c_order', {
 			modal: true,
 			items : [ Ext.create('Ext.form.Panel', {
 				layout : 'anchor',
+				baseCls: 'x-plain',
 				border : false,
 				containScroll: true,
 				autoScroll: true,
@@ -1217,6 +1219,7 @@ Ext.define('order.controller.c_order', {
 			modal: true,
 			items : [ Ext.create('Ext.form.Panel', {
 				layout : 'anchor',
+				baseCls: 'x-plain',
 				border : false,
 				defaults : {
 					anchor : '98%'
@@ -1303,6 +1306,7 @@ Ext.define('order.controller.c_order', {
 			items : [ Ext.create('Ext.form.Panel', {
 				layout : 'anchor',
 				border : false,
+				baseCls: 'x-plain',
 				defaults : {
 					anchor : '98%'
 				},
@@ -1378,6 +1382,7 @@ Ext.define('order.controller.c_order', {
 			modal: true,
 			items : [ Ext.create('Ext.form.Panel', {
 				layout : 'anchor',
+				baseCls: 'x-plain',
 				border : false,
 				defaults : {
 					anchor : '98%'
@@ -1454,6 +1459,7 @@ Ext.define('order.controller.c_order', {
 			modal: true,
 			items : [ Ext.create('Ext.form.Panel', {
 				layout : 'anchor',
+				baseCls: 'x-plain',
 				border : false,
 				defaults : {
 					anchor : '98%'

@@ -135,6 +135,7 @@
   	<bean id="systemConfig" class="tk.solaapps.ohtune.pattern.SystemConfig">
   		<property name="productImageFolder" value="/Users/ivanagxu/Documents/workspace/data/ohtune/product_image" />
   		<property name="productDrawingFolder" value = "/Users/ivanagxu/Documents/workspace/data/ohtune/product_drawing" />
+  		<property name="commonDocumentFolder" value = "/Users/ivanagxu/Documents/workspace/data/ohtune/doc"/>
   	</bean>
   	
 	<bean id="uhtuneService" class="tk.solaapps.ohtune.service.OhtuneService">

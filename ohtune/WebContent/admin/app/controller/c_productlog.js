@@ -15,7 +15,7 @@ Ext.define('admin.controller.c_productlog', {
 			'combobox[name=job_type]' : {
 				select : this.getProductLog
 			},
-			'button[text=刷新]' : {
+			'button[text=刷新记录]' : {
 				click : this.getProductLog
 			}
 		});

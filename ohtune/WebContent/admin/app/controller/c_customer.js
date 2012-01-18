@@ -33,6 +33,7 @@ Ext.define('admin.controller.c_customer', {
 			modal: true,
 			items : [ Ext.create('Ext.form.Panel', {
 				layout : 'anchor',
+				baseCls: 'x-plain',
 				border : false,
 				containScroll : true,
 				autoScroll : true,
@@ -116,6 +117,7 @@ Ext.define('admin.controller.c_customer', {
 			modal: true,
 			items : [ Ext.create('Ext.form.Panel', {
 				layout : 'anchor',
+				baseCls: 'x-plain',
 				border : false,
 				containScroll : true,
 				autoScroll : true,
@@ -234,6 +236,7 @@ Ext.define('admin.controller.c_customer', {
 			items : [ Ext.create('Ext.form.Panel', {
 				layout : 'anchor',
 				border : false,
+				baseCls: 'x-plain',
 				defaults : {
 					anchor : '98%'
 				},

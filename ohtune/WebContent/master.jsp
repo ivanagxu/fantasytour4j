@@ -38,11 +38,13 @@
 		if(request.getRequestURL().toString().indexOf("order.jsp") >=0 && !isOrderUser && isNotLoginPage)
 		{
 			response.sendRedirect("login.jsp");
+			return;
 		}
 		
 		else if(request.getRequestURL().toString().indexOf("admin.jsp") >=0 && !isAdminUser && isNotLoginPage)
 		{
 			response.sendRedirect("login.jsp");
+			return;
 		}
 	}
 %>

@@ -1,16 +1,17 @@
 package tk.solaapps.ohtune.service;
 
+import java.io.File;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
 import tk.solaapps.ohtune.model.Dummy;
 import tk.solaapps.ohtune.model.Job;
 import tk.solaapps.ohtune.model.JobType;
+import tk.solaapps.ohtune.model.OhtuneDocument;
 import tk.solaapps.ohtune.model.Order;
 import tk.solaapps.ohtune.model.Post;
 import tk.solaapps.ohtune.model.Product;
@@ -649,6 +650,73 @@ public class OhtuneService extends OhtuneDA implements IOhtuneService {
 		}
 		
 		return success;
+	}
+	
+	public List<OhtuneDocument> getAllDocument(UserAC operator)
+	{
+		List<OhtuneDocument> docs = new ArrayList<OhtuneDocument>();
+		try
+		{
+			File file = new File(getSystemConfig().getCommonDocumentFolder());
+			if(file.exists() && file.isDirectory())
+			{
+				File[] files = file.listFiles();
+				for(int i = 0 ; i < files.length; i++)
+				{
+					OhtuneDocument doc = new OhtuneDocument();
+					doc.setFull_path(files[i].getAbsolutePath());
+					doc.setName(files[i].getName());
+					if(files[i].getName().lastIndexOf(".") > 0)
+					{
+						doc.setType(files[i].getName().substring(files[i].getName().lastIndexOf(".") + 1).toUpperCase());
+					}
+					else
+					{
+						continue;
+					}
+					docs.add(doc);
+				}
+			}
+			else
+			{
+				OhtuneDocument doc = new OhtuneDocument();
+				doc.setFull_path("请查看日志");
+				doc.setName("出现错误");
+				doc.setType("");
+				docs.add(doc);
+			}
+		}
+		catch(Exception e)
+		{
+			OhtuneLogger.error(e, "获取文件列表失败");
+			OhtuneDocument doc = new OhtuneDocument();
+			doc.setFull_path("请查看日志");
+			doc.setName("出现错误");
+			doc.setType("");
+			docs.add(doc);
+		}
+		
+		return docs;
+	}
+
+	@Override
+	public boolean deleteDocument(String name, UserAC operator) {
+		OhtuneLogger.info("Delete document name =" + name + " by " + operator.getLogin_id());
+		try
+		{
+			String fileName = getSystemConfig().getCommonDocumentFolder() + "/" + name;
+			File file = new File(fileName);
+			if(!file.isDirectory() && file.exists())
+			{
+				return file.delete();
+			}
+		}
+		catch(Exception e)
+		{
+			OhtuneLogger.error(e, "Delete document failed");
+			return false;
+		}
+		return false;
 	}
 	
 	

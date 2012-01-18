@@ -48,6 +48,7 @@ Ext.define('job.controller.c_job', {
 			items : [
 		        Ext.create('Ext.form.Panel', {
 					layout : 'anchor',
+					baseCls: 'x-plain',
 					border : false,
 					containScroll: true,
 					autoScroll: true,
@@ -308,6 +309,7 @@ Ext.define('job.controller.c_job', {
 			items : [ Ext.create('Ext.form.Panel', {
 				layout : 'anchor',
 				border : false,
+				baseCls: 'x-plain',
 				containScroll : true,
 				autoScroll : true,
 				defaults : {

@@ -162,6 +162,12 @@ Ext.define('master.controller.c_master', {
 			fields : ['date','product_name', 'product_our_name', 'total', 'finished', 'rejected', 'disuse']
 		});
 		
+		//Document Data
+		Ext.define('DocumentData', {
+			extend : 'Ext.data.Model',
+			fields : ['name','type', 'full_path']
+		});
+		
 		//All role store
 		Ext.create('Ext.data.Store', {
 			storeId : 'allMoldStore',
@@ -278,6 +284,21 @@ Ext.define('master.controller.c_master', {
 					type : 'json',
 					root : 'data',
 					model : 'UserACData'
+				}
+			}
+		});
+		
+		//All document store
+		Ext.create('Ext.data.Store', {
+			storeId : 'documentStore',
+			model : 'DocumentData',
+			proxy : {
+				type : 'ajax',
+				url : 'DocumentController?action=getAllDocument',
+				reader : {
+					type : 'json',
+					root : 'data',
+					model : 'DocumentData'
 				}
 			}
 		});

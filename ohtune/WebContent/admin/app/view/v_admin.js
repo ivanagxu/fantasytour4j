@@ -14,6 +14,7 @@ Ext.define('admin.view.v_admin', {
 		var sm2 = Ext.create('Ext.selection.CheckboxModel',{mode : 'SINGLE'});
 		var sm3 = Ext.create('Ext.selection.CheckboxModel',{mode : 'SINGLE'});
 		var sm4 = Ext.create('Ext.selection.CheckboxModel',{mode : 'SINGLE'});
+		var sm5 = Ext.create('Ext.selection.CheckboxModel',{mode : 'SINGLE'});
 		
 		Ext.create('Ext.data.Store', {
 			storeId : 'productLogStore',
@@ -313,7 +314,47 @@ Ext.define('admin.view.v_admin', {
 						}),
 						{
 					    	xtype : 'button',
-					    	text : '刷新'
+					    	text : '刷新记录'
+						}
+		            ]
+		        })]
+			},{
+				title : '文档管理',
+				containScroll: true,
+	        	autoScroll: true,
+				items : [ Ext.create('Ext.grid.Panel', { 
+		        	id : 'document-grid',
+		        	height: 600,
+		        	store: Ext.data.StoreManager.lookup('documentStore'),
+		        	selModel : sm5,
+		        	columns : [ {
+						header : '文件类型',
+						dataIndex : 'type'
+					} ,{
+						header : '文件名称',
+						dataIndex : 'name',
+						width : 200
+					}, {
+						header : '文件路径',
+						dataIndex : 'full_path',
+						width : 800
+					}],
+					tbar : [
+						{
+					    	xtype : 'button',
+					    	text : '添加文档'
+						},
+						{
+							xtype : 'button',
+					    	text : '下载文档'
+						},
+						{
+							xtype : 'button',
+					    	text : '删除文档'
+						},
+						{
+							xtype : 'button',
+					    	text : '刷新文档'
 						}
 		            ]
 		        })]

@@ -5,7 +5,7 @@ Ext.application({
 
 	appFolder : 'admin/app',
 
-	controllers : [ 'c_admin' ,'c_product', 'c_customer', 'c_user', 'c_mold', 'c_productlog'],
+	controllers : [ 'c_admin' ,'c_product', 'c_customer', 'c_user', 'c_mold', 'c_productlog', 'c_document'],
 	launch : function() {
 		Ext.create('Ext.container.Viewport', {
 			layout : 'fit',
