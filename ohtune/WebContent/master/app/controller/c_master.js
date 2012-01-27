@@ -59,9 +59,48 @@ function GOTO_INVENTORY_MODULE() {
 	}
 }
 
+function GOTO_DOCUMENT_MODULE() {
+	hasPermission = true;
+	if (hasPermission) {
+		location.href = "document.jsp";
+	} 
+}
+
 function LOGOUT()
 {
 	location.href="UserACController?action=logout";
+}
+
+function DISPLAY_IMAGE_WINDOW(image)
+{
+	var win = Ext.create('Ext.window.Window', {
+		title : '图片',
+		height : 600,
+		width : 1024,
+		layout : 'fit',
+		autoDestory : true,
+		modal: true,
+		items : [ Ext.create('Ext.form.Panel', {
+			layout : 'anchor',
+			baseCls: 'x-plain',
+			border : false,
+			containScroll: true,
+			autoScroll: true,
+			defaults : {
+				anchor : '100%'
+			},
+			items : [
+	     	{
+	    		id : 'image-in-window',
+	    		html: '<img src="" height=100% />'
+	    	}]
+		}
+		)]
+	}
+	);
+	
+	win.show();
+	Ext.getCmp('image-in-window').update('<img src="'+ image + '" height=100%/>');
 }
 
 function GetJsonData(sUrl, xParameter, callback) {

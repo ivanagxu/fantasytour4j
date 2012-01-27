@@ -30,7 +30,7 @@ Ext.define('admin.controller.c_productlog', {
 	{
 		Ext.data.StoreManager.lookup('productLogStore').proxy.url = 
 			'ReportController?action=generateProductLogReportByDateAndSection&date=' + Ext.getCmp('productlog_date').getRawValue() +
-			'&job_type=' + Ext.getCmp('productlog_section').getValue();
+			'&job_type=' + encodeURI(Ext.getCmp('productlog_section').getValue());
 		Ext.data.StoreManager.lookup('productLogStore').load();
 	}
 });

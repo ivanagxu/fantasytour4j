@@ -111,8 +111,8 @@ public class JobController extends HttpServlet implements IOhtuneController{
 		if(request.getSession().getAttribute("user") != null)
 			sessionUser = (UserAC)request.getSession().getAttribute("user");
 		
-		String sComplete_count = request.getParameter("complete_count");
-		String sDisuse_count = request.getParameter("disuse_count");
+		String sComplete_count = "0" + request.getParameter("complete_count");
+		String sDisuse_count = "0" + request.getParameter("disuse_count");
 		String job_type = request.getParameter("job_type");
 		
 		String sIsCompleted = request.getParameter("is_completed");

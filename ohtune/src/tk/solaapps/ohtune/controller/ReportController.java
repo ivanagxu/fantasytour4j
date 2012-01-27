@@ -96,6 +96,9 @@ public class ReportController extends HttpServlet implements IOhtuneController{
 		if(request.getSession().getAttribute("user") != null)
 			sessionUser = (UserAC)request.getSession().getAttribute("user");
 		
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
+		
 		String sDate = request.getParameter("date");
 		String sJobType = request.getParameter("job_type");
 		

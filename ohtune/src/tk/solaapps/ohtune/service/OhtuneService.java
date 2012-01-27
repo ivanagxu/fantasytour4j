@@ -45,6 +45,32 @@ public class OhtuneService extends OhtuneDA implements IOhtuneService {
 	@Override
 	public void setSystemConfig(SystemConfig config) {
 		this.config = config;
+		File file = new File(config.getCommonDocumentFolder());
+		if(true)
+		{
+			if(!file.exists())
+			{
+				file.mkdirs();
+			}
+		}
+		
+		file = new File(config.getProductDrawingFolder());
+		if(true)
+		{
+			if(!file.exists())
+			{
+				file.mkdirs();
+			}
+		}
+		
+		file = new File(config.getProductImageFolder());
+		if(true)
+		{
+			if(!file.exists())
+			{
+				file.mkdirs();
+			}
+		}
 	}
 
 	@Override
@@ -409,7 +435,7 @@ public class OhtuneService extends OhtuneDA implements IOhtuneService {
 			
 			String lastProductName = "";
 			totalLog.setDate(new Date());
-			totalLog.setProductName("总计");
+			totalLog.setProductName("Total");
 			totalLog.setJobType(jobType);
 			totalLog.setProductOurName("--");
 			for(int i = 0; i < jobs.size(); i++)

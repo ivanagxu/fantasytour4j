@@ -44,7 +44,7 @@ Ext.define('admin.controller.c_product', {
 				items : [ {
 					xtype : 'textfield',
 					anchor : '50%',
-					fieldLabel : '他思料号',
+					fieldLabel : '他司料号',
 					name : 'name',
 					readOnly: true
 				}, {
@@ -56,7 +56,7 @@ Ext.define('admin.controller.c_product', {
 				}, {
 					xtype : 'textfield',
 					anchor : '50%',
-					fieldLabel : '我思料号',
+					fieldLabel : '我司料号',
 					name : 'our_name'
 				}, Ext.create('Ext.form.ComboBox', {
 					fieldLabel : '模具号码',
@@ -161,14 +161,30 @@ Ext.define('admin.controller.c_product', {
 							return;
 						}
 						
-						if(this.up('form').down('filefield[name="image"]').getValue().toUpperCase().indexOf('.JPG') <=0 ||
-							this.up('form').down('filefield[name="drawing"]').getValue().toUpperCase().indexOf('.JPG') <=0
-						)
+						var fileImage = this.up('form').down('filefield[name="image"]').getValue().toUpperCase();
+						var fileDrawing = this.up('form').down('filefield[name="drawing"]').getValue().toUpperCase();
+						
+						if(fileImage != "")
 						{
-							Ext.Msg.alert('修改结果','请选择JPG格式的图片');
-							return;
+							var typeImage = /[^.]+$/.exec(fileImage);
+							if(typeImage != "JPG" && typeImage != "JPEG" && typeImage != "GIF" &&
+									typeImage != "BMP" && typeImage != "TIF" && typeImage != "TIFF" && typeImage != "PNG")
+							{
+								Ext.Msg.alert('添加结果','文件格式受限，请重新选择');
+								return;
+							}
 						}
 						
+						if(fileDrawing != "")
+						{
+							var typeDrawing = /[^.]+$/.exec(fileDrawing);
+							if(typeDrawing != "JPG" && typeDrawing != "JPEG" && typeDrawing != "GIF" &&
+									typeDrawing != "BMP" && typeDrawing != "TIF" && typeDrawing != "TIFF" && typeDrawing != "PNG")
+							{
+								Ext.Msg.alert('添加结果','文件格式受限，请重新选择');
+								return;
+							}
+						}
 						form.submit({
 							url : 'ProductController?action=updateProduct',
 							success : function(form, resp) {
@@ -325,7 +341,7 @@ Ext.define('admin.controller.c_product', {
 				items : [ {
 					xtype : 'textfield',
 					anchor : '50%',
-					fieldLabel : '他思料号',
+					fieldLabel : '他司料号',
 					name : 'name'
 				}, {
 					xtype : 'textfield',
@@ -336,7 +352,7 @@ Ext.define('admin.controller.c_product', {
 				}, {
 					xtype : 'textfield',
 					anchor : '50%',
-					fieldLabel : '我思料号',
+					fieldLabel : '我司料号',
 					name : 'our_name'
 				}, Ext.create('Ext.form.ComboBox', {
 					fieldLabel : '模具号码',
@@ -441,6 +457,32 @@ Ext.define('admin.controller.c_product', {
 							return;
 						}
 						
+						var fileImage = this.up('form').down('filefield[name="image"]').getValue().toUpperCase();
+						var fileDrawing = this.up('form').down('filefield[name="drawing"]').getValue().toUpperCase();
+						
+						if(fileImage != "")
+						{
+							var typeImage = /[^.]+$/.exec(fileImage);
+							if(typeImage != "JPG" && typeImage != "JPEG" && typeImage != "GIF" &&
+									typeImage != "BMP" && typeImage != "TIF" && typeImage != "TIFF" && typeImage != "PNG")
+							{
+								Ext.Msg.alert('添加结果','文件格式受限，请重新选择');
+								return;
+							}
+						}
+						
+						if(fileDrawing != "")
+						{
+							var typeDrawing = /[^.]+$/.exec(fileDrawing);
+							if(typeDrawing != "JPG" && typeDrawing != "JPEG" && typeDrawing != "GIF" &&
+									typeDrawing != "BMP" && typeDrawing != "TIF" && typeDrawing != "TIFF" && typeDrawing != "PNG")
+							{
+								Ext.Msg.alert('添加结果','文件格式受限，请重新选择');
+								return;
+							}
+						}
+						
+						/*
 						if(this.up('form').down('filefield[name="image"]').getValue().toUpperCase().indexOf('.JPG') <=0 ||
 							this.up('form').down('filefield[name="drawing"]').getValue().toUpperCase().indexOf('.JPG') <=0
 						)
@@ -448,6 +490,7 @@ Ext.define('admin.controller.c_product', {
 							Ext.Msg.alert('添加结果','请选择JPG格式的图片');
 							return;
 						}
+						*/
 						
 						form.submit({
 							url : 'ProductController?action=addProduct',

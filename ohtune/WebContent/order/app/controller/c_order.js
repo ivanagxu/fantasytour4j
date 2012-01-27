@@ -257,7 +257,7 @@ Ext.define('order.controller.c_order', {
 					    	   		       {
 					    	   		    	   xtype : 'textfield',
 					    	   		    	   name : 'e_quantity',
-					    	   		    	   fieldLabel : '生产数量',
+					    	   		    	   fieldLabel : '订单数量',
 					    	   		    	   width : 160,
 					    	   		    	   listeners:{
 					    	   		    		change: function(e, eq)
@@ -287,7 +287,7 @@ Ext.define('order.controller.c_order', {
 					    	   		    	   name : 'quantity',
 					    	   		    	   readOnly : true,
 					    	   		    	   labelWidth : 120,
-					    	   		    	   fieldLabel : '实际数量(自动生成)'
+					    	   		    	   fieldLabel : '生产数量(自动生成)'
 					    	   		       }
 				    	   		       ]
 							       }
@@ -822,7 +822,7 @@ Ext.define('order.controller.c_order', {
 					    	   		       {
 					    	   		    	   xtype : 'textfield',
 					    	   		    	   name : 'e_quantity',
-					    	   		    	   fieldLabel : '生产数量',
+					    	   		    	   fieldLabel : '订单数量',
 					    	   		    	   readOnly : true,
 					    	   		    	   width : 160,
 					    	   		    	   listeners:{
@@ -853,7 +853,7 @@ Ext.define('order.controller.c_order', {
 					    	   		    	   name : 'quantity',
 					    	   		    	   readOnly : true,
 					    	   		    	   labelWidth : 120,
-					    	   		    	   fieldLabel : '实际数量(自动生成)'
+					    	   		    	   fieldLabel : '生产数量(自动生成)'
 					    	   		       }
 				    	   		       ]
 							       }
@@ -1238,31 +1238,42 @@ Ext.define('order.controller.c_order', {
                  {
             	 	 text : '确定',
             	 	 handler : function(){
-            	 		 
-            	 		 var selected = Ext.getCmp('order-grid').getSelectionModel().getSelection();
-            	 		 if(selected.length == 0)
-        	 			 {
-            	 			 Ext.Msg.alert("删除订单","请选择要删除的订单");
-            	 			 win.close();
-            	 			 return;
-        	 			 }
-            	 		 
-            	 		 this.up('form').down('hiddenfield[name="id"]').setValue(selected[0].data.id);
-            	 		 
-            	 		 this.up('form').getForm().submit({
-            	 			url : 'OrderController?action=deleteOrder',
+            	 		
+            	 		 var selected;
+						if(Ext.getCmp('order-tab').getActiveTab().title == "在线订单")
+						{
+							selected = Ext.getCmp('order-grid').getSelectionModel().getSelection();
+						}
+						else
+						{
+							selected = Ext.getCmp('completed-order-grid').getSelectionModel().getSelection();
+						}
+            	 		
+	        	 		 if(selected.length == 0)
+	    	 			 {
+	        	 			 Ext.Msg.alert("删除订单","请选择要删除的订单");
+	        	 			 win.close();
+	        	 			 return;
+	    	 			 }
+	        	 		 
+	        	 		 this.up('form').down('hiddenfield[name="id"]').setValue(selected[0].data.id);
+	        	 		 
+	        	 		 this.up('form').getForm().submit({
+	        	 			url : 'OrderController?action=deleteOrder',
 							success : function(form, resp) {
 								Ext.Msg.alert('删除结果', resp.result.msg);
 								Ext.data.StoreManager.lookup('orderStore').load();
+								Ext.data.StoreManager.lookup('completedOrderStore').load();
 								win.close();
 							},
 							failure : function(form, resp) {
 								Ext.Msg.alert('删除结果', resp.result.msg);
 								Ext.data.StoreManager.lookup('orderStore').load();
+								Ext.data.StoreManager.lookup('completedOrderStore').load();
 								win.close();
 							}
-            	 		 });
-            	 		 
+	        	 		 });
+	        	 		 
             	 	 }
                  },
                  {

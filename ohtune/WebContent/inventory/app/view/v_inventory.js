@@ -17,18 +17,18 @@ Ext.define('inventory.view.v_inventory', {
 				title : '产品管理',
 				items : [ Ext.create('Ext.grid.Panel', {
 					id : 'inventory-grid',
-					height : 600,
+					height : 500,
 					store : Ext.data.StoreManager.lookup('allProductStore'),
 					selModel : sm1,
 					columns : [ {
-						header : '他思料号',
+						header : '他司料号',
 						dataIndex : 'name'
 					}, {
 						header : '英文名',
 						dataIndex : 'name_eng',
 						hidden: true,
 					}, {
-						header : '我思料号',
+						header : '我司料号',
 						dataIndex : 'our_name'
 					}, {
 						header : '模具率',
@@ -51,14 +51,14 @@ Ext.define('inventory.view.v_inventory', {
 						dataIndex : 'name',
 						renderer: function(val)
 						{
-							return '<a target="_blank" href="ProductController?action=getProductImage&name=' + val + '"><img src="resources/images/picture.png"/></a>';
+							return '<a target="_blank" onclick=DISPLAY_IMAGE_WINDOW("ProductController?action=getProductImage&name=' + val + '")><img src="resources/images/picture.png"/></a>';
 						}
 					}, {
 						header : '产品图纸',
 						dataIndex : 'name',
 						renderer: function(val)
 						{
-							return '<a target="_blank" href="ProductController?action=getProductDrawing&name=' + val + '"><img src="resources/images/picture.png"/></a>';
+							return '<a target="_blank" onclick=DISPLAY_IMAGE_WINDOW("ProductController?action=getProductDrawing&name=' + val + '")><img src="resources/images/picture.png"/></a>';
 						}
 					}, {
 						header : '已有半成品',

@@ -26,6 +26,7 @@ import tk.solaapps.ohtune.pattern.JsonResponse;
 import tk.solaapps.ohtune.pattern.OhtuneLogger;
 import tk.solaapps.ohtune.pattern.OhtuneServiceHolder;
 import tk.solaapps.ohtune.service.IOhtuneService;
+import tk.solaapps.ohtune.util.UtilityFunc;
 
 import com.google.gson.Gson;
 
@@ -193,22 +194,48 @@ public class ProductController extends HttpServlet implements IOhtuneController 
 				}
 
 				else {
-					String fileName = System.currentTimeMillis() + ".jpg";
-					if(item.getFieldName().equals("image"))
+					try
 					{
-						File file = new File(service.getSystemConfig()
-								.getProductImageFolder(), fileName);
-						item.write(file);
-						product.setImage(file.getAbsolutePath());
+						String fileName = new String(item.getName().getBytes(), "utf-8");
+						fileName = System.currentTimeMillis() + "." +  fileName.substring(fileName.lastIndexOf(".") + 1).toLowerCase();
+						if(item.getFieldName().equals("image"))
+						{
+							File file = new File(service.getSystemConfig()
+									.getProductImageFolder(), fileName);
+							item.write(file);
+							product.setImage(file.getAbsolutePath());
+							
+							try
+							{
+								UtilityFunc.compressImage(1024, 768, file.getAbsolutePath());
+							}
+							catch(Exception e)
+							{
+								OhtuneLogger.error(e, "Compress image :" + file.getAbsolutePath() + " failed");
+							}
+						}
+						else if(item.getFieldName().equals("drawing"))
+						{	
+							File file = new File(service.getSystemConfig()
+									.getProductDrawingFolder(), fileName);
+							item.write(file);
+							product.setDrawing(file.getAbsolutePath());
+							
+							try
+							{
+								UtilityFunc.compressImage(1024, 768, file.getAbsolutePath());
+							}
+							catch(Exception e)
+							{
+								OhtuneLogger.error(e, "Compress image :" + file.getAbsolutePath() + " failed");
+							}
+						}
 					}
-					else if(item.getFieldName().equals("drawing"))
-					{	
-						File file = new File(service.getSystemConfig()
-								.getProductDrawingFolder(), fileName);
-						item.write(file);
-						product.setDrawing(file.getAbsolutePath());
+					catch(Exception ex)
+					{
+						product.setImage("");
+						product.setDrawing("");
 					}
-						
 				}
 			}
 			
@@ -248,6 +275,7 @@ public class ProductController extends HttpServlet implements IOhtuneController 
 						file.delete();
 				}
 				response.setContentType("text/html");
+				response.setCharacterEncoding("utf-8");
 				JsonResponse jr = service.genJsonResponse(success,
 						"修改产品成功", null);
 				response.getOutputStream().write(gson.toJson(jr).getBytes("utf-8"));
@@ -258,6 +286,7 @@ public class ProductController extends HttpServlet implements IOhtuneController 
 			JsonResponse jr = service.genJsonResponse(false,
 					"修改产品失败", null);
 			response.setContentType("text/html");
+			response.setCharacterEncoding("utf-8");
 			response.getOutputStream().write(gson.toJson(jr).getBytes("utf-8"));
 		}
 	}
@@ -332,22 +361,48 @@ public class ProductController extends HttpServlet implements IOhtuneController 
 				}
 
 				else {
-					String fileName = System.currentTimeMillis() + ".jpg";
-					if(item.getFieldName().equals("image"))
+					try
 					{
-						File file = new File(service.getSystemConfig()
-								.getProductImageFolder(), fileName);
-						item.write(file);
-						product.setImage(file.getAbsolutePath());
+						String fileName = new String(item.getName().getBytes(), "utf-8");
+						fileName = System.currentTimeMillis() + "." +  fileName.substring(fileName.lastIndexOf(".") + 1).toLowerCase();
+						if(item.getFieldName().equals("image"))
+						{
+							File file = new File(service.getSystemConfig()
+									.getProductImageFolder(), fileName);
+							item.write(file);
+							product.setImage(file.getAbsolutePath());
+							
+							try
+							{
+								UtilityFunc.compressImage(1024, 768, file.getAbsolutePath());
+							}
+							catch(Exception e)
+							{
+								OhtuneLogger.error(e, "Compress image :" + file.getAbsolutePath() + " failed");
+							}
+						}
+						else if(item.getFieldName().equals("drawing"))
+						{	
+							File file = new File(service.getSystemConfig()
+									.getProductDrawingFolder(), fileName);
+							item.write(file);
+							product.setDrawing(file.getAbsolutePath());
+							
+							try
+							{
+								UtilityFunc.compressImage(1024, 768, file.getAbsolutePath());
+							}
+							catch(Exception e)
+							{
+								OhtuneLogger.error(e, "Compress image :" + file.getAbsolutePath() + " failed");
+							}
+						}
 					}
-					else if(item.getFieldName().equals("drawing"))
-					{	
-						File file = new File(service.getSystemConfig()
-								.getProductDrawingFolder(), fileName);
-						item.write(file);
-						product.setDrawing(file.getAbsolutePath());
-					}
-						
+					catch(Exception ex)
+					{
+						product.setImage("");
+						product.setDrawing("");
+					}	
 				}
 			}
 			
@@ -363,6 +418,7 @@ public class ProductController extends HttpServlet implements IOhtuneController 
 					"添加产品成功", null);
 			Gson gson = service.getGson();
 			response.setContentType("text/html");
+			response.setCharacterEncoding("utf-8");
 			response.getOutputStream().write(gson.toJson(jr).getBytes("utf-8"));
 			
 		} catch (Exception e) {
@@ -371,6 +427,7 @@ public class ProductController extends HttpServlet implements IOhtuneController 
 			JsonResponse jr = service.genJsonResponse(false,
 					"添加产品失败", null);
 			response.setContentType("text/html");
+			response.setCharacterEncoding("utf-8");
 			response.getOutputStream().write(gson.toJson(jr).getBytes("utf-8"));
 		}
 	}

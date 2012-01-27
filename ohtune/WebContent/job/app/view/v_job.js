@@ -42,6 +42,7 @@ Ext.define('job.view.v_job', {
 		});
 
 		var sm = Ext.create('Ext.selection.CheckboxModel',{mode : 'SINGLE'});
+		var sm2 = Ext.create('Ext.selection.CheckboxModel',{mode : 'SINGLE'});
 		this.items = [ 
 			Ext.create('Ext.tab.Panel', {
 				anchor : '100%',
@@ -76,6 +77,9 @@ Ext.define('job.view.v_job', {
 							}, {
 								header : '跟单人员',
 								dataIndex : 'order_user'
+							}, {
+								header : '所在部门',
+								dataIndex : 'section'
 							}, {
 								header : '客户名称',
 								dataIndex : 'customer_name',
@@ -120,11 +124,8 @@ Ext.define('job.view.v_job', {
 								dataIndex : 'complete_date',
 								hidden : true
 							}, {
-								header : '开始日期',
+								header : '更新日期',
 								dataIndex : 'start_date'
-							}, {
-								header : '所在部门',
-								dataIndex : 'section'
 							}, {
 								header : '订单状态',
 								dataIndex : 'order_status'
@@ -136,14 +137,14 @@ Ext.define('job.view.v_job', {
 								dataIndex : 'product_image',
 								renderer: function(val)
 								{
-									return '<a target="_blank" href="ProductController?action=getProductImage&name=' + val + '"><img src="resources/images/picture.png"/></a>';
+									return '<a target="_blank" onclick=DISPLAY_IMAGE_WINDOW("ProductController?action=getProductImage&name=' + val + '")><img src="resources/images/picture.png"/></a>';
 								}
 							}, {
 								header : '产品图纸',
 								dataIndex : 'product_drawing',
 								renderer: function(val)
 								{
-									return '<a target="_blank" href="ProductController?action=getProductDrawing&name=' + val + '"><img src="resources/images/picture.png"/></a>';
+									return '<a target="_blank" onclick=DISPLAY_IMAGE_WINDOW("ProductController?action=getProductDrawing&name=' + val + '")><img src="resources/images/picture.png"/></a>';
 								}
 							}, {
 								header : '当天',
@@ -159,7 +160,7 @@ Ext.define('job.view.v_job', {
 								header : '负责人',
 								dataIndex : 'assigned_to'
 							}],
-							height : 600,
+							height : 500,
 							renderTo : Ext.getBody(),
 							tbar : [ {
 								text : '移交工作',
@@ -183,6 +184,36 @@ Ext.define('job.view.v_job', {
 							}
 						}) 
 					]
+				},{
+					title: '模具管理',
+					containScroll: true,
+		        	autoScroll: true,
+					items : [ Ext.create('Ext.grid.Panel', { 
+			        	id : 'mold-grid',
+			        	height: 500,
+			        	store: Ext.data.StoreManager.lookup('allMoldStore'),
+			        	selModel : sm2,
+			        	columns : [ {
+							header : '模具号码',
+							dataIndex : 'code'
+						} ,{
+							header : '模具名称',
+							dataIndex : 'name'
+						}, {
+							header : '所在架号',
+							dataIndex : 'stand_no'
+						}],
+						tbar : [
+						    {
+						    	text : '添加模具',
+						    	xtype : 'button'
+						    },
+						    {
+						    	text : '删除模具',
+						    	xtype : 'button'
+						    }
+			            ]
+			        })]
 				}]
 			})
 		];

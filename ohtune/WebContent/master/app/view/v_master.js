@@ -15,10 +15,11 @@ Ext.define('master.view.v_master', {
 			border : false,
 			items : [ {
 				xtype : 'box',
-				html: '<table><tr><td><img src="resources/images/logo.gif" width=240 height=50/></td>' + 
+				html: '<table><tr><td><img src="resources/images/g-dico.png" width=160 height=50/></td>' + 
 				'<td align="center" width="120"><a href="#" onclick="GOTO_ORDER_MODULE();" id="link_order">订单管理</a></td>' + 
 				'<td align="center" width="120"><a href="#" onclick="GOTO_JOB_MODULE();" id="link_job">部门管理</a></td>' +
 				'<td align="center" width="120"><a href="#" onclick="GOTO_INVENTORY_MODULE();" id="link_job">仓库管理</a></td>' +
+				'<td align="center" width="120"><a href="#" onclick="GOTO_DOCUMENT_MODULE();" id="link_job">文档管理</a></td>' +
 				'<td align="center" width="120"><a href="#" onclick="GOTO_ADMIN_MODULE();" id="link_admin">后台管理</a></td>' +
 				'<td align="center" width="120"><a href="#" onclick="LOGOUT();" id="link_logout">系统登出</a></td>' +
 				'<td align="right" width="60"></td>' +
@@ -49,9 +50,15 @@ Ext.define('master.view.v_master', {
 				{
     				window.location.href = "login.jsp";
 				}
-    			
-    			document.getElementById("link_user").innerHTML = "职位:" + SESSION_USER.post.name + 
+    			try
+    			{
+    				document.getElementById("link_user").innerHTML = "职位:" + SESSION_USER.post.name + 
     				"<br />名称:" + SESSION_USER.name;
+    			}catch(ex)
+    			{
+    				
+    			}
+    			
     				
     				
 			},

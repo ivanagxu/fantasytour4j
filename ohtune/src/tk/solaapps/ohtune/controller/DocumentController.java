@@ -90,6 +90,7 @@ public class DocumentController extends HttpServlet implements IOhtuneController
 	{
 		
 		response.setContentType("text/html");
+		response.setCharacterEncoding("utf-8");
 		
 		UserAC sessionUser = new UserAC();
 		if(request.getSession().getAttribute("user") != null)

@@ -361,6 +361,7 @@ public class OhtuneDA implements IOhtuneDA{
 	{
 		String[] columns = new String[]{ "userac" };
 		Object[] values = new Object[]{userac};
+		String[] values2 = new String[]{userac.getName()};
 		
 		List<Job> jobs = searchJob(columns, values, null, null, 0, 1, null, false);
 		if(jobs.size() > 0)
@@ -378,7 +379,7 @@ public class OhtuneDA implements IOhtuneDA{
 		}
 		
 		columns = new String[]{ "creator" };
-		List<Order> orders = searchOrder(columns, values, null, null, 0, 1, null, false);
+		List<Order> orders = searchOrder(columns, values2, null, null, 0, 1, null, false);
 		if(orders.size() > 0)
 		{
 			OhtuneLogger.error("Delete userac failed, some order created by the user is still in progress");

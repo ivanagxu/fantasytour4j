@@ -124,6 +124,9 @@ Ext.define('order.view.v_order', {
 								dataIndex : 'requirement_2'
 							}, {
 								header : '订单数量',
+								dataIndex : 'e_quantity'
+							}, {
+								header : '生产数量',
 								dataIndex : 'quantity'
 							}, {
 								header : '生产期限',
@@ -136,14 +139,14 @@ Ext.define('order.view.v_order', {
 								dataIndex : 'product_name',
 								renderer: function(val)
 								{
-									return '<a target="_blank" href="ProductController?action=getProductImage&name=' + val + '"><img src="resources/images/picture.png"/></a>';
+									return '<a target="_blank" onclick=DISPLAY_IMAGE_WINDOW("ProductController?action=getProductImage&name=' + val + '")><img src="resources/images/picture.png"/></a>';
 								}
 							}, {
 								header : '产品图纸',
 								dataIndex : 'product_name',
 								renderer: function(val)
 								{
-									return '<a target="_blank" href="ProductController?action=getProductDrawing&name=' + val + '"><img src="resources/images/picture.png"/></a>';
+									return '<a target="_blank" onclick=DISPLAY_IMAGE_WINDOW("ProductController?action=getProductDrawing&name=' + val + '")><img src="resources/images/picture.png"/></a>';
 								}
 							}, {
 								header : '订单状态',
@@ -152,7 +155,7 @@ Ext.define('order.view.v_order', {
 								header : '备注',
 								dataIndex : 'requirement_4'
 							}],
-							height : 600,
+							height : 500,
 							renderTo : Ext.getBody(),
 							tbar : [ {
 								xtype : 'button',
@@ -239,6 +242,9 @@ Ext.define('order.view.v_order', {
 								dataIndex : 'requirement_2'
 							}, {
 								header : '订单数量',
+								dataIndex : 'e_quantity'
+							}, {
+								header : '生产数量',
 								dataIndex : 'quantity'
 							}, {
 								header : '生产期限',
@@ -267,7 +273,7 @@ Ext.define('order.view.v_order', {
 								header : '备注',
 								dataIndex : 'requirement_4'
 							}],
-							height : 600,
+							height : 500,
 							renderTo : Ext.getBody(),
 							tbar : [{
 								xtype : 'button',
