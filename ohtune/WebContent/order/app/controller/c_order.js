@@ -138,32 +138,25 @@ Ext.define('order.controller.c_order', {
 							readOnly: true
 						}, {
 							anchor : '98%',
-							fieldLabel : '生产期限 *',
-							editable : false,
-							name : 'deadline',
-							xtype: 'datefield',
-					        format: 'Y-m-d'
-						}, {
-							anchor : '98%',
 							fieldLabel : '交货日期 *',
 							editable : false,
 							name : 'c_deadline',
 							xtype: 'datefield',
 					        format: 'Y-m-d'
-						}, Ext.create('Ext.form.ComboBox', {
-							fieldLabel : '优先级',
-							editable : false,
-							store : new Ext.data.ArrayStore({
-								autoDestory : true,
-								fields : [ 'name', 'value' ],
-								data : [ [ '紧急','1' ], [ '普通' , '0'] ]
-							}),
-							queryMode : 'local',
-							displayField : 'name',
-							valueField : 'value',
-							value : '0',
-							name : 'priority'
-						}),{
+						}, {
+							xtype : 'container',
+							layout : 'column',
+							items : [ {
+								xtype : 'textfield',
+								fieldLabel : '使用成品个数',
+								name : 'use_finished'
+							}, {
+								xtype : 'textfield',
+								fieldLabel : '使用半成品数',
+								name : 'use_semi_finished'
+							}
+							]
+						}, {
 							anchor : '10%',
 							xtype: 'button',
 							text : '查看成品率',
@@ -218,6 +211,13 @@ Ext.define('order.controller.c_order', {
 								
 								productRateWin.show();
 							}
+						}, {
+							anchor : '98%',
+							fieldLabel : '生产期限',
+							editable : false,
+							name : 'deadline',
+							xtype: 'datefield',
+					        format: 'Y-m-d'
 						}, {
 							xtype : 'container',
 							layout : 'column',
@@ -292,20 +292,20 @@ Ext.define('order.controller.c_order', {
 				    	   		       ]
 							       }
 						       ]
-						}, {
-							xtype : 'container',
-							layout : 'column',
-							items : [ {
-								xtype : 'textfield',
-								fieldLabel : '使用成品个数',
-								name : 'use_finished'
-							}, {
-								xtype : 'textfield',
-								fieldLabel : '使用半成品数',
-								name : 'use_semi_finished'
-							}
-							]
-						}, {
+						}, Ext.create('Ext.form.ComboBox', {
+							fieldLabel : '优先级',
+							editable : false,
+							store : new Ext.data.ArrayStore({
+								autoDestory : true,
+								fields : [ 'name', 'value' ],
+								data : [ [ '紧急','1' ], [ '普通' , '0'] ]
+							}),
+							queryMode : 'local',
+							displayField : 'name',
+							valueField : 'value',
+							value : '0',
+							name : 'priority'
+						}),{
 							xtype : 'textareafield',
 							grow : true,
 							name : 'requirement1',
@@ -445,7 +445,6 @@ Ext.define('order.controller.c_order', {
 								this.up('form').down('combobox[name="customer_name"]').getValue() == null ||
 								this.up('form').down('combobox[name="customer_code"]').getValue() == null ||
 								this.up('form').down('combobox[name="product_name"]').getValue() == null ||
-								this.up('form').down('datefield[name="deadline"]').getValue() == null ||
 								this.up('form').down('datefield[name="c_deadline"]').getValue() == null
 							)
 						{
@@ -475,9 +474,7 @@ Ext.define('order.controller.c_order', {
 						if(this.up('form').down('combobox[name="creator"]').getValue() == null ||
 								this.up('form').down('combobox[name="customer_name"]').getValue() == null ||
 								this.up('form').down('combobox[name="customer_code"]').getValue() == null ||
-								this.up('form').down('combobox[name="product_name"]').getValue() == null ||
-								this.up('form').down('datefield[name="deadline"]').getValue() == null ||
-								this.up('form').down('datefield[name="c_deadline"]').getValue() == null
+								this.up('form').down('combobox[name="product_name"]').getValue() == null
 							)
 						{
 							Ext.Msg.alert("添加订单","带*号资料必须输入");
@@ -521,6 +518,37 @@ Ext.define('order.controller.c_order', {
     	var win = this.createOrderWin();
     	win.down('button[text="提交"]').show();
     	win.down('button[text="审核"]').hide();
+    	
+		
+		win.down('textfield[name="deadline"]').readOnly = true;
+		win.down('textfield[name="deadline"]').disable();
+		win.down('combobox[name="priority"]').readOnly = true;
+		win.down('combobox[name="priority"]').disable();
+		win.down('textfield[name="requirement1"]').readOnly = true;
+		win.down('textfield[name="requirement1"]').disable();
+		win.down('textfield[name="requirement2"]').readOnly = true;
+		win.down('textfield[name="requirement2"]').disable();
+		win.down('textfield[name="requirement4"]').readOnly = true;
+		win.down('textfield[name="requirement4"]').disable();
+		win.down('textfield[name="product_rate"]').readOnly = true;
+		win.down('textfield[name="product_rate"]').disable();
+		win.down('textfield[name="e_quantity"]').readOnly = true;
+		win.down('textfield[name="e_quantity"]').disable();
+		win.down('textfield[name="quantity"]').readOnly = true;
+		win.down('textfield[name="quantity"]').disable();
+		win.down('combobox[name="job_type1"]').readOnly = true;
+		win.down('combobox[name="job_type1"]').disable();
+		win.down('textfield[name="quantity1"]').readOnly = true;
+		win.down('textfield[name="quantity1"]').disable();
+		win.down('combobox[name="job_type2"]').readOnly = true;
+		win.down('combobox[name="job_type2"]').disable();
+		win.down('textfield[name="quantity2"]').readOnly = true;
+		win.down('textfield[name="quantity2"]').disable();
+		win.down('combobox[name="job_type3"]').readOnly = true;
+		win.down('combobox[name="job_type3"]').disable();
+		win.down('textfield[name="quantity3"]').readOnly = true;
+		win.down('textfield[name="quantity3"]').disable();
+    	
     	win.show();
     	win.down('combobox[name=creator]').setValue(SESSION_USER.id);
     },
@@ -569,16 +597,16 @@ Ext.define('order.controller.c_order', {
 				win.down('textfield[name="product_our_name"]').readOnly = true;
 				win.down('textfield[name="product_our_name"]').disable();
 				win.down('textfield[name="use_finished"]').setValue(data.data[0].use_finished);
+				win.down('textfield[name="use_finished"]').readOnly = true;
+				win.down('textfield[name="use_finished"]').disable();
 				win.down('textfield[name="use_semi_finished"]').setValue(data.data[0].use_semi_finished);
+				win.down('textfield[name="use_semi_finished"]').readOnly = true;
+				win.down('textfield[name="use_semi_finished"]').disable();
 				win.down('textfield[name="deadline"]').setValue(data.data[0].deadline);
-				win.down('textfield[name="deadline"]').readOnly = true;
-				win.down('textfield[name="deadline"]').disable();
 				win.down('textfield[name="c_deadline"]').setValue(data.data[0].c_deadline);
 				win.down('textfield[name="c_deadline"]').readOnly = true;
 				win.down('textfield[name="c_deadline"]').disable();
 				win.down('combobox[name="priority"]').setRawValue(data.data[0].priority == 1 ? "紧急" : "普通");
-				win.down('combobox[name="priority"]').readOnly = true;
-				win.down('combobox[name="priority"]').disable();
 				win.down('textfield[name="requirement1"]').setValue(data.data[0].requirement_1);
 				win.down('textfield[name="requirement2"]').setValue(data.data[0].requirement_2);
 				win.down('textfield[name="requirement4"]').setValue(data.data[0].requirement_4);
@@ -602,7 +630,10 @@ Ext.define('order.controller.c_order', {
 			}
 			else
 			{
-				win.down('combobox[name="job_type1"]').setValue("电镀");
+				win.down('combobox[name="job_type1"]').setValue("压铸");
+				win.down('textfield[name="quantity1"]').setValue(
+					win.down('textfield[name="quantity"]').getValue()
+				);
 			}
 			
 			if(data.data.length > 1)
@@ -739,35 +770,13 @@ Ext.define('order.controller.c_order', {
 							readOnly: true
 						}, {
 							anchor : '98%',
-							fieldLabel : '生产期限 *',
-							editable : false,
-							name : 'deadline',
-							xtype: 'datefield',
-					        format: 'Y-m-d',
-					        readOnly : true
-						}, {
-							anchor : '98%',
 							fieldLabel : '交货日期 *',
 							editable : false,
 							name : 'c_deadline',
 							xtype: 'datefield',
 					        format: 'Y-m-d',
 					        readOnly : true
-						}, Ext.create('Ext.form.ComboBox', {
-							fieldLabel : '优先级',
-							editable : false,
-							readOnly: true,
-							store : new Ext.data.ArrayStore({
-								autoDestory : true,
-								fields : [ 'name', 'value' ],
-								data : [ [ '紧急','1' ], [ '普通' , '0'] ]
-							}),
-							queryMode : 'local',
-							displayField : 'name',
-							valueField : 'value',
-							value : '0',
-							name : 'priority'
-						}),{
+						}, {
 							xtype : 'container',
 							layout : 'column',
 							items : [ {
@@ -782,6 +791,14 @@ Ext.define('order.controller.c_order', {
 								readOnly : true
 							}
 							]
+						}, {
+							anchor : '98%',
+							fieldLabel : '生产期限',
+							editable : false,
+							name : 'deadline',
+							xtype: 'datefield',
+					        format: 'Y-m-d',
+					        readOnly : true
 						}, {
 							xtype : 'container',
 							layout : 'column',
@@ -858,7 +875,21 @@ Ext.define('order.controller.c_order', {
 				    	   		       ]
 							       }
 						       ]
-						},
+						}, Ext.create('Ext.form.ComboBox', {
+							fieldLabel : '优先级',
+							editable : false,
+							readOnly: true,
+							store : new Ext.data.ArrayStore({
+								autoDestory : true,
+								fields : [ 'name', 'value' ],
+								data : [ [ '紧急','1' ], [ '普通' , '0'] ]
+							}),
+							queryMode : 'local',
+							displayField : 'name',
+							valueField : 'value',
+							value : '0',
+							name : 'priority'
+						}),
 						{
 							xtype : 'textareafield',
 							grow : true,

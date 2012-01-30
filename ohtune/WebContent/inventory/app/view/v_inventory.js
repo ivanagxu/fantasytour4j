@@ -81,17 +81,11 @@ Ext.define('inventory.view.v_inventory', {
 					}, {
 						header : '状态',
 						dataIndex : 'status'
-					}]/*,
+					}],
 					tbar : [ {
-						text : '添加产品',
+						text : '出仓',
 						xtype: 'button'
-					}, {
-						text : '修改产品',
-						xtype: 'button'
-					}, {
-						text : '删除产品',
-						xtype: 'button'
-					} ]*/
+					}]
 		        })]
 			} ]
 		}) ];

@@ -20,6 +20,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import tk.solaapps.ohtune.model.Mold;
 import tk.solaapps.ohtune.model.Product;
+import tk.solaapps.ohtune.model.UserAC;
 import tk.solaapps.ohtune.pattern.JsonDataWrapper;
 import tk.solaapps.ohtune.pattern.JsonProduct;
 import tk.solaapps.ohtune.pattern.JsonResponse;
@@ -85,6 +86,8 @@ public class ProductController extends HttpServlet implements IOhtuneController 
 			updateProduct(request, response);
 		else if (actionName.equals("getProductByName"))
 			getProductByName(request, response);
+		else if (actionName.equals("sellProduct"))
+			sellProduct(request, response);
 		else {
 			OhtuneLogger
 					.error("Unknow action name in ProductController, action name="
@@ -565,6 +568,55 @@ public class ProductController extends HttpServlet implements IOhtuneController 
 		else
 		{
 			JsonResponse jr = service.genJsonResponse(false, "删除失败， 产品不存在", null);
+			response.getOutputStream().write(gson.toJson(jr).getBytes("utf-8"));
+		}
+	}
+	
+	
+	private void sellProduct(HttpServletRequest request, HttpServletResponse response) throws IOException
+	{
+		UserAC sessionUser = new UserAC();
+		if(request.getSession().getAttribute("user") != null)
+			sessionUser = (UserAC)request.getSession().getAttribute("user");
+		
+		
+		IOhtuneService service = (IOhtuneService) OhtuneServiceHolder
+				.getInstence().getBeanFactory().getBean("uhtuneService");
+		
+		Gson gson = service.getGson();
+		
+		String name = request.getParameter("name");
+		String sQuantity = "0" + request.getParameter("quantity");
+		
+		int iQuantity = 0;
+		
+		try{
+			iQuantity = Integer.parseInt(sQuantity);
+		}catch(Exception e)
+		{
+			JsonResponse jr = service.genJsonResponse(false, "出仓数量错误", null);
+			response.getOutputStream().write(gson.toJson(jr).getBytes("utf-8"));
+			return;
+		}
+		
+		OhtuneLogger.info("Sell product by user, product = " + name + ", user =" + sessionUser.getName() + ", quantity = " + iQuantity);
+		
+		Product product = service.getProductByName(name);
+		if(product != null)
+		{
+			boolean success = false;
+			if(product.getFinished() >= iQuantity)
+			{
+				product.setFinished(product.getFinished() - iQuantity);
+				success = service.updateProduct(product);
+			}
+			
+			JsonResponse jr = service.genJsonResponse(success, success ? "出仓成功":"出仓失败", null);
+			response.getOutputStream().write(gson.toJson(jr).getBytes("utf-8"));
+		}
+		else
+		{
+			JsonResponse jr = service.genJsonResponse(false, "出仓失败， 产品不存在", null);
 			response.getOutputStream().write(gson.toJson(jr).getBytes("utf-8"));
 		}
 	}

@@ -169,7 +169,15 @@ public class UserACController extends HttpServlet implements IOhtuneController{
 		}
 		
 		Role role = service.getRoleById(Long.parseLong(sRole));
-		Role role2 = service.getRoleById(Long.parseLong(sRole2));
+		Role role2 = null;
+		try
+		{
+			 role2 = service.getRoleById(Long.parseLong(sRole2));
+		}catch(Exception e)
+		{
+			role2 = null;
+		}
+		
 		if(role == null)
 		{
 			jr = service.genJsonResponse(false, "添加失败, 角色不存在", null);

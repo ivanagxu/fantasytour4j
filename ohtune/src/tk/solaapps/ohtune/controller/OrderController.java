@@ -325,52 +325,27 @@ public class OrderController extends HttpServlet implements IOhtuneController{
 		String sRequirement2 = request.getParameter("requirement2");
 		String sRequirement3 = request.getParameter("requirement3");
 		String sRequirement4 = request.getParameter("requirement4");
-		String sJobType1 = request.getParameter("job_type1");
-		String sJobType2 = request.getParameter("job_type2");
-		String sJobType3 = request.getParameter("job_type3");
-		String sQuantity1 = "0" + request.getParameter("quantity1");
-		String sQuantity2 = "0" + request.getParameter("quantity2");
-		String sQuantity3 = "0" + request.getParameter("quantity3");
-		String sEQuantity = "0" + request.getParameter("e_quantity");
-		String sQuantity = "0" + request.getParameter("quantity");
-		String sProductRate = request.getParameter("product_rate");
 		String sCDeadline = request.getParameter("c_deadline");
-		String sPriority = request.getParameter("priority");
 		
-		int iQuantity,iQuantity1,iQuantity2,iQuantity3,iUseFinished,iUseSemiFinished,iEQuantity, iPriority;
-		float fProductRate;
+		int iUseFinished,iUseSemiFinished;
 		
 		Enumeration<String> parms = request.getParameterNames();
 		
 		Date create_date = new Date();
-		String sDeadline = request.getParameter("deadline");
+		
 		
 		Gson gson = service.getGson();
 		JsonResponse jr = null;
 		
 		try
 		{
-			iQuantity = Integer.parseInt(sQuantity);
-			iQuantity1 = Integer.parseInt(sQuantity1);
-			iQuantity2 = Integer.parseInt(sQuantity2);
-			iQuantity3 = Integer.parseInt(sQuantity3);
-			iEQuantity = Integer.parseInt(sEQuantity);
 			iUseFinished = Integer.parseInt(sUseFinished);
 			iUseSemiFinished = Integer.parseInt(sUseSemiFinished);
-			iPriority = Integer.parseInt(sPriority);
 		}catch(Exception e)
 		{
 			jr = service.genJsonResponse(false, "部门分配或成品分配数据错误", null);
 			response.getOutputStream().write(gson.toJson(jr).getBytes("utf-8"));
 			return;
-		}
-		
-		try
-		{
-			fProductRate = Float.parseFloat(sProductRate);
-		}catch(Exception e)
-		{
-			fProductRate = 1f;
 		}
 		
 		UserAC creator = service.getUserACById(Long.parseLong(sCreator));
@@ -419,7 +394,6 @@ public class OrderController extends HttpServlet implements IOhtuneController{
 		order.setCustomer_name(customer.getName());
 		try
 		{
-			order.setDeadline(new SimpleDateFormat("yyyy-MM-dd").parse(sDeadline));
 			order.setC_deadline(new SimpleDateFormat("yyyy-MM-dd").parse(sCDeadline) );
 		}catch(Exception e)
 		{
@@ -430,57 +404,17 @@ public class OrderController extends HttpServlet implements IOhtuneController{
 		order.setProduct_name(product.getName());
 		order.setProduct_our_name(product.getOur_name());
 		
-		order.setQuantity(iQuantity1 + iQuantity2 + iQuantity3);
-		order.setProduct_rate(fProductRate);
-		order.setE_quantity(iEQuantity);
-		order.setQuantity(iQuantity);
-		order.setPriority(iPriority);
-		
-		if(iQuantity != iQuantity1 + iQuantity2 + iQuantity3)
-		{
-			jr = service.genJsonResponse(false, "部门分配数量与生产数量不符, 各部门数量总和应为" + iQuantity, null);
-			response.getOutputStream().write(gson.toJson(jr).getBytes("utf-8"));
-			return;
-		}
-		
 		order.setRequirement_1(sRequirement1);
 		order.setRequirement_2(sRequirement2);
 		order.setRequirement_3(sRequirement3);
 		order.setRequirement_4(sRequirement4);
+		order.setPriority(0);
+		order.setQuantity(0);
+		order.setE_quantity(0);
+		order.setProduct_rate(1f);
 		
 		List<JobType> jobTypes = new ArrayList<JobType>();
 		List<Job> jobs = new ArrayList<Job>();
-		Job job;
-		JobType jobType = service.getJobTypeByName(sJobType1);
-		if(jobType != null)
-		{
-			jobTypes.add(jobType);
-			job = new Job();
-			job.setJob_type(jobType);
-			job.setTotal(iQuantity1);
-			job.setRemaining(iQuantity1);
-			jobs.add(job);
-		}
-		jobType = service.getJobTypeByName(sJobType2);
-		if(jobType != null)
-		{
-			jobTypes.add(jobType);
-			job = new Job();
-			job.setJob_type(jobType);
-			job.setTotal(iQuantity2);
-			job.setRemaining(iQuantity2);
-			jobs.add(job);
-		}
-		jobType = service.getJobTypeByName(sJobType3);
-		if(jobType != null)
-		{
-			jobTypes.add(jobType);
-			job = new Job();
-			job.setJob_type(jobType);
-			job.setTotal(iQuantity3);
-			job.setRemaining(iQuantity3);
-			jobs.add(job);
-		}
 
 		for(int i = 0; i < jobTypes.size(); i++)
 		{
@@ -515,8 +449,6 @@ public class OrderController extends HttpServlet implements IOhtuneController{
 		IOhtuneService service = (IOhtuneService) OhtuneServiceHolder
 				.getInstence().getBeanFactory().getBean("uhtuneService");
 		
-		String sUseFinished = "0" + request.getParameter("use_finished");
-		String sUseSemiFinished = "0" + request.getParameter("use_semi_finished");
 		String sRequirement1 = request.getParameter("requirement1");
 		String sRequirement2 = request.getParameter("requirement2");
 		String sRequirement3 = request.getParameter("requirement3");
@@ -531,6 +463,8 @@ public class OrderController extends HttpServlet implements IOhtuneController{
 		String sQuantity = "0" + request.getParameter("quantity");
 		String sProductRate = request.getParameter("product_rate");
 		String sOrderId = request.getParameter("orderid");
+		String sPriority = request.getParameter("priority");
+		String sDeadline = request.getParameter("deadline");
 		
 		int iQuantity,iQuantity1,iQuantity2,iQuantity3,iUseFinished,iUseSemiFinished,iEQuantity;
 		float fProductRate;
@@ -560,11 +494,19 @@ public class OrderController extends HttpServlet implements IOhtuneController{
 			iQuantity2 = Integer.parseInt(sQuantity2);
 			iQuantity3 = Integer.parseInt(sQuantity3);
 			iEQuantity = Integer.parseInt(sEQuantity);
-			iUseFinished = Integer.parseInt(sUseFinished);
-			iUseSemiFinished = Integer.parseInt(sUseSemiFinished);
 		}catch(Exception e)
 		{
 			jr = service.genJsonResponse(false, "部门分配或成品分配数据错误", null);
+			response.getOutputStream().write(gson.toJson(jr).getBytes("utf-8"));
+			return;
+		}
+		
+		try
+		{
+			order.setDeadline(new SimpleDateFormat("yyyy-MM-dd").parse(sDeadline));
+		}catch(Exception e)
+		{
+			jr = service.genJsonResponse(false, "日期错误", null);
 			response.getOutputStream().write(gson.toJson(jr).getBytes("utf-8"));
 			return;
 		}
@@ -592,13 +534,13 @@ public class OrderController extends HttpServlet implements IOhtuneController{
 		}
 		else
 		{
-			if(product.getFinished() < iUseFinished)
+			if(product.getFinished() < order.getUse_finished())
 			{
 				jr = service.genJsonResponse(false, "成品数量不足", null);
 				response.getOutputStream().write(gson.toJson(jr).getBytes("utf-8"));
 				return;
 			}
-			if(product.getSemi_finished() < iUseSemiFinished)
+			if(product.getSemi_finished() < order.getUse_semi_finished())
 			{
 				jr = service.genJsonResponse(false, "半成品数量不足", null);
 				response.getOutputStream().write(gson.toJson(jr).getBytes("utf-8"));
@@ -618,6 +560,7 @@ public class OrderController extends HttpServlet implements IOhtuneController{
 			return;
 		}
 		
+		order.setPriority(((sPriority.equals("紧急") || sPriority.equals("1"))) ? 1: 0);
 		order.setRequirement_1(sRequirement1);
 		order.setRequirement_2(sRequirement2);
 		order.setRequirement_3(sRequirement3);
@@ -676,8 +619,6 @@ public class OrderController extends HttpServlet implements IOhtuneController{
 				}
 			}
 		}
-		order.setUse_finished(iUseFinished);
-		order.setUse_semi_finished(iUseSemiFinished);		
 		service.deleteJobByOrder(order, sessionUser);
 		boolean success = service.approveOrder(order, jobs, sessionUser);
 		
@@ -951,7 +892,7 @@ public class OrderController extends HttpServlet implements IOhtuneController{
 		if(success)
 		{
 			order.setQuantity(order.getQuantity() + iQuantity);
-			order.setE_quantity(order.getE_quantity() + (int)Math.ceil(iQuantity * order.getProduct_rate()));
+			//order.setE_quantity(order.getE_quantity() + (int)Math.ceil(iQuantity * order.getProduct_rate()));
 			success = success & service.updateOrder(order);
 		}
 		
