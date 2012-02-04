@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>系统管理</title>
+<title>奇迪科管理系统</title>
 
 	<%@ include file="extjs.jsp" %>
 	<%@ include file="master.jsp" %>

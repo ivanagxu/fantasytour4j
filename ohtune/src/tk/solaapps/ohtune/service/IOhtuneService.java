@@ -7,8 +7,8 @@ import tk.solaapps.ohtune.model.JobType;
 import tk.solaapps.ohtune.model.OhtuneDocument;
 import tk.solaapps.ohtune.model.Order;
 import tk.solaapps.ohtune.model.Product;
-import tk.solaapps.ohtune.model.ProductLog;
 import tk.solaapps.ohtune.model.ProductRate;
+import tk.solaapps.ohtune.model.ProductionLog;
 import tk.solaapps.ohtune.model.UserAC;
 import tk.solaapps.ohtune.pattern.JsonResponse;
 import tk.solaapps.ohtune.pattern.SystemConfig;
@@ -48,5 +48,5 @@ public interface IOhtuneService extends IOhtuneDA{
 	
 	//Report Functions
 	List<ProductRate> generateProductRateByProduct(Product product, UserAC operator);
-	List<ProductLog> generateProductLogByDateAndSection(String sDate, String sJobType, UserAC operator);
+	List<ProductionLog> generateProductLogByDateAndSection(String sDate, String sJobType, UserAC operator);
 }

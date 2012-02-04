@@ -1,0 +1,19 @@
+CREATE TABLE `productlog` (
+  `section_name` varchar(255) NOT NULL,
+  `product_name` varchar(255) NOT NULL,
+  `quantity` int(10) NOT NULL,
+  `process_date` datetime NOT NULL,
+  `handled_by` varchar(255) DEFAULT NULL,
+  `process_type` varchar(10) DEFAULT NULL,
+  `product_our_name` varchar(255) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `jobid` int(10) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id_UNIQUE` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+insert into job_types values('数控','10021','有效','数控部门')
+
+insert into role values('10021','数控',null,'')
+
+update sequence set value = '10021' where name = 'RoleID'

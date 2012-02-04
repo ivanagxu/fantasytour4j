@@ -17,8 +17,10 @@ Ext.define('master.view.v_master', {
 				xtype : 'box',
 				html: '<table><tr><td><img src="resources/images/g-dico.png" width=160 height=50/></td>' + 
 				'<td align="center" width="120"><a href="#" onclick="GOTO_ORDER_MODULE();" id="link_order">订单管理</a></td>' + 
+				'<td align="center" width="120"><a href="#" onclick="GOTO_PRODUCTION_MODULE();" id="link_job">生产管理</a></td>' +
 				'<td align="center" width="120"><a href="#" onclick="GOTO_JOB_MODULE();" id="link_job">部门管理</a></td>' +
 				'<td align="center" width="120"><a href="#" onclick="GOTO_INVENTORY_MODULE();" id="link_job">仓库管理</a></td>' +
+				'<td align="center" width="120"><a href="#" onclick="GOTO_PRODUCTIONLOG_MODULE();" id="link_job">生产记录</a></td>' +
 				'<td align="center" width="120"><a href="#" onclick="GOTO_DOCUMENT_MODULE();" id="link_job">文档管理</a></td>' +
 				'<td align="center" width="120"><a href="#" onclick="GOTO_ADMIN_MODULE();" id="link_admin">后台管理</a></td>' +
 				'<td align="center" width="120"><a href="#" onclick="LOGOUT();" id="link_logout">系统登出</a></td>' +

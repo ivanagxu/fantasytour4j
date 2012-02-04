@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Ohtune</title>
+<title>奇迪科管理系统</title>
 
 	<%@ include file="master.jsp" %>
 	

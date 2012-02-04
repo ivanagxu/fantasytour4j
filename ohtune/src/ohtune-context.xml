@@ -36,6 +36,7 @@
 				<value>tk.solaapps.ohtune.model.Job</value>
 				<value>tk.solaapps.ohtune.model.Customer</value>
 				<value>tk.solaapps.ohtune.model.Mold</value>
+				<value>tk.solaapps.ohtune.model.ProductLog</value>
 			</list>
 		</property>
 	    <property name="hibernateProperties">
@@ -131,6 +132,10 @@
   		<property name="sessionFactory" ref="sessionFactory"/>
   	</bean>
   	
+  	<bean id="productLogDao" class="tk.solaapps.ohtune.dao.ProductLogDaoImpl">
+  		<property name="sessionFactory" ref="sessionFactory"/>
+  	</bean>
+  	
   	<!-- Service -->
   	<bean id="systemConfig" class="tk.solaapps.ohtune.pattern.SystemConfig">
   		<!-- 
@@ -159,5 +164,6 @@
 		<property name="jobDao" ref="jobDao"/>
 		<property name="customerDao" ref="customerDao"/>
 		<property name="moldDao" ref="moldDao"/>
+		<property name="productLogDao" ref="productLogDao"/>
 	</bean>
 </beans>

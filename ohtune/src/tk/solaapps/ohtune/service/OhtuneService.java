@@ -17,6 +17,7 @@ import tk.solaapps.ohtune.model.Post;
 import tk.solaapps.ohtune.model.Product;
 import tk.solaapps.ohtune.model.ProductLog;
 import tk.solaapps.ohtune.model.ProductRate;
+import tk.solaapps.ohtune.model.ProductionLog;
 import tk.solaapps.ohtune.model.Role;
 import tk.solaapps.ohtune.model.UserAC;
 import tk.solaapps.ohtune.pattern.JsonResponse;
@@ -359,6 +360,33 @@ public class OhtuneService extends OhtuneDA implements IOhtuneService {
 			}
 			success = this.updateJob(existingJob);
 		}
+		ProductLog log = new ProductLog();
+		log.setHandled_by(job.getAssigned_to() == null ? "" : job.getAssigned_to().getName());
+		log.setId(null);
+		log.setJobid(job.getId());
+		log.setProcess_date(new Date());
+		log.setProcess_type(isRejected ? ProductLog.TYPE_REJECTED : ProductLog.TYPE_FINISHED);
+		log.setProduct_name(job.getOrders().getProduct_name());
+		log.setProduct_our_name(job.getOrders().getProduct_our_name());
+		log.setQuantity(complete_count);
+		log.setSection_name(job.getJob_type().getName());
+		
+		success = success & this.addProductLog(log);
+		
+		if(disuse_count > 0){
+			ProductLog dlog = new ProductLog();
+			dlog.setHandled_by(job.getAssigned_to() == null ? "" : job.getAssigned_to().getName());
+			dlog.setId(null);
+			dlog.setJobid(job.getId());
+			dlog.setProcess_date(new Date());
+			dlog.setProcess_type(ProductLog.TYPE_DISUSE);
+			dlog.setProduct_name(job.getOrders().getProduct_name());
+			dlog.setProduct_our_name(job.getOrders().getProduct_our_name());
+			dlog.setQuantity(disuse_count);
+			dlog.setSection_name(job.getJob_type().getName());
+			
+			success = success & this.addProductLog(dlog);
+		}
 		
 		return success;
 	}
@@ -412,7 +440,7 @@ public class OhtuneService extends OhtuneDA implements IOhtuneService {
 	
 
 	@Override
-	public List<ProductLog> generateProductLogByDateAndSection(String sDate,
+	public List<ProductionLog> generateProductLogByDateAndSection(String sDate,
 			String sJobType, UserAC operator) {
 		
 		OhtuneLogger.info("Get product log by user, section =" + sJobType + ", date = " + sDate + " by " + operator.getLogin_id());
@@ -420,77 +448,68 @@ public class OhtuneService extends OhtuneDA implements IOhtuneService {
 		Date date = null;
 		JobType jobType = null;
 		List<ProductLog> logs = new ArrayList<ProductLog>();
-		List<Job> jobs = null;
 		ProductLog log = null;
+		ArrayList<ProductionLog> plogs = new ArrayList<ProductionLog>();
+		ProductionLog plog = new ProductionLog();
 		
-		ProductLog totalLog = new ProductLog();
+		ProductionLog totalLog = new ProductionLog();
+		totalLog.setProduct_our_name("总计");
 		try
 		{
 			date = new SimpleDateFormat("yyyy-MM-dd").parse(sDate);
 			jobType = this.getJobTypeByName(sJobType);
 			if(jobType == null)
-				return new ArrayList<ProductLog>();
+				return new ArrayList<ProductionLog>();
 			
-			jobs = this.getJobByCompDateAndSection(date, jobType);
-			
-			String lastProductName = "";
-			totalLog.setDate(new Date());
-			totalLog.setProductName("Total");
-			totalLog.setJobType(jobType);
-			totalLog.setProductOurName("--");
-			for(int i = 0; i < jobs.size(); i++)
+			logs = this.getProductLogByDateAndSection(date, jobType.getName());
+			String preSection = "";
+			for(int i = 0 ; i < logs.size(); i++)
 			{
-				if(!lastProductName.equals(jobs.get(i).getOrders().getProduct_name()))
+				if(!logs.get(i).getSection_name().equals(preSection))
 				{
-					if(log != null)
-						logs.add(log);
+					if(!plog.getProduct_our_name().equals(""))
+						plogs.add(plog);
+					totalLog.setDisuse(plog.getDisuse());
+					totalLog.setFinished(plog.getFinished());
+					totalLog.setRejected(plog.getRejected());
 					
-					lastProductName = jobs.get(i).getOrders().getProduct_name();
-					log = new ProductLog();
+					plog = new ProductionLog();					
+					preSection = logs.get(i).getSection_name();
 				}
-				log.setDate(date);
-				log.setDisuse(log.getDisuse() + (jobs.get(i).getTotal() - jobs.get(i).getFinished()));
-				log.setFinished(log.getFinished() + jobs.get(i).getFinished());
-				log.setRejected(log.getRejected() + jobs.get(i).getTotal_rejected());
-				log.setTotal(log.getTotal() + jobs.get(i).getTotal());
-				log.setJobType(jobType);
-				log.setProductName(lastProductName);
-				log.setProductOurName(jobs.get(i).getOrders().getProduct_name());
 				
-				totalLog.setDisuse(totalLog.getDisuse() + (jobs.get(i).getTotal() - jobs.get(i).getFinished()));
-				totalLog.setFinished(totalLog.getFinished() + jobs.get(i).getFinished());
-				totalLog.setRejected(totalLog.getRejected() + jobs.get(i).getTotal_rejected());
-				totalLog.setTotal(totalLog.getTotal() + jobs.get(i).getTotal());
+				plog.setProduct_our_name(logs.get(i).getProduct_our_name());
+				if(logs.get(i).getProcess_type().equals(ProductLog.TYPE_FINISHED))
+				{
+					plog.setFinished(plog.getFinished() + logs.get(i).getQuantity());
+				}
+				else if(logs.get(i).getProcess_type().equals(ProductLog.TYPE_REJECTED))
+				{
+					plog.setRejected(plog.getRejected() + logs.get(i).getQuantity());
+				}
+				else if(logs.get(i).getProcess_type().equals(ProductLog.TYPE_DISUSE))
+				{
+					plog.setDisuse(plog.getDisuse() + logs.get(i).getQuantity());
+				}
 			}
-			if(!lastProductName.equals(""))
-			{
-				logs.add(log);
-				logs.add(totalLog);
-			}
-			else
-			{
-				ProductLog errLog = new ProductLog();
-				errLog.setDate(new Date());
-				errLog.setProductName("没有数据");
-				errLog.setJobType(jobType);
-				errLog.setProductOurName("--");
-				logs.add(errLog);
-				return logs;
-			}
+			if(plog.getProduct_our_name().equals(""))
+				plog.setProduct_our_name("没有数据");
+			plogs.add(plog);
+			totalLog.setDisuse(plog.getDisuse());
+			totalLog.setFinished(plog.getFinished());
+			totalLog.setRejected(plog.getRejected());
+			plogs.add(totalLog);
+			
 		}
 		catch(Exception e)
 		{
 			OhtuneLogger.error(e, "Get product log by user failure");
-			logs = new ArrayList<ProductLog>();
-			ProductLog errLog = new ProductLog();
-			errLog.setDate(new Date());
-			errLog.setProductName("出现错误");
-			errLog.setJobType(jobType);
-			errLog.setProductOurName("请查看日志");
-			logs.add(errLog);
-			return logs;
+			plogs = new ArrayList<ProductionLog>();
+			ProductionLog errLog = new ProductionLog();
+			errLog.setProduct_our_name("出现错误");
+			plogs.add(errLog);
+			return plogs;
 		}
-		return logs;
+		return plogs;
 	}
 
 	@Override

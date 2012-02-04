@@ -223,7 +223,7 @@ public class JobController extends HttpServlet implements IOhtuneController{
 				success = success & service.completeOrder(job.getOrders(), sessionUser);
 			}
 			
-			jr = service.genJsonResponse(success, "工作成功完成", null);
+			jr = service.genJsonResponse(success, success ? "工作移交成功" : "工作移交失败", null);
 			response.getOutputStream().write(gson.toJson(jr).getBytes("utf-8"));
 		}
 		catch(RuntimeException e)

@@ -137,6 +137,11 @@ Ext.define('order.controller.c_order', {
 							name : 'product_our_name',
 							readOnly: true
 						}, {
+	    	   		    	   xtype : 'textfield',
+	    	   		    	   name : 'e_quantity',
+	    	   		    	   fieldLabel : '订单数量',
+	    	   		    	   width : 160
+	    	   		    }, {
 							anchor : '98%',
 							fieldLabel : '交货日期 *',
 							editable : false,
@@ -156,6 +161,16 @@ Ext.define('order.controller.c_order', {
 								name : 'use_semi_finished'
 							}
 							]
+						}, {
+							xtype : 'textareafield',
+							grow : true,
+							name : 'requirement1',
+							fieldLabel : '电镀要求'
+						}, {
+							xtype : 'textareafield',
+							grow : true,
+							name : 'requirement2',
+							fieldLabel : '特殊要求'
 						}, {
 							anchor : '10%',
 							xtype: 'button',
@@ -252,34 +267,6 @@ Ext.define('order.controller.c_order', {
 							       },
 							       {
 						    	   		xtype : 'container',
-						    	   		columnWidth : 0.3,
-						    	   		items:[
-					    	   		       {
-					    	   		    	   xtype : 'textfield',
-					    	   		    	   name : 'e_quantity',
-					    	   		    	   fieldLabel : '订单数量',
-					    	   		    	   width : 160,
-					    	   		    	   listeners:{
-					    	   		    		change: function(e, eq)
-					    	   		    		   {
-					    	   		    			   var v = e.up('form').down('textfield[name="product_rate"]').getValue();
-					    	   		    			   if(isNaN(eq) || isNaN(v) || v == 0)
-				    	   		    				   {
-					    	   		    				   e.up('form').down('textfield[name="quantity"]').setValue(0);
-				    	   		    				   }
-					    	   		    			   else
-				    	   		    				   {
-					    	   		    				   e.up('form').down('textfield[name="quantity"]').setValue(
-				    	   		    						   	Math.ceil(eq / v)
-					    	   		    				   );
-				    	   		    				   }
-					    	   		    		   }
-					    	   		    	   }
-					    	   		       }
-				    	   		       ]
-							       },
-							       {
-						    	   		xtype : 'container',
 						    	   		columnWidth : 0.4,
 						    	   		items:[
 					    	   		       {
@@ -306,16 +293,6 @@ Ext.define('order.controller.c_order', {
 							value : '0',
 							name : 'priority'
 						}),{
-							xtype : 'textareafield',
-							grow : true,
-							name : 'requirement1',
-							fieldLabel : '电镀要求'
-						}, {
-							xtype : 'textareafield',
-							grow : true,
-							name : 'requirement2',
-							fieldLabel : '特殊要求'
-						}, {
 							xtype : 'textareafield',
 							grow : true,
 							name : 'requirement3',
@@ -524,16 +501,10 @@ Ext.define('order.controller.c_order', {
 		win.down('textfield[name="deadline"]').disable();
 		win.down('combobox[name="priority"]').readOnly = true;
 		win.down('combobox[name="priority"]').disable();
-		win.down('textfield[name="requirement1"]').readOnly = true;
-		win.down('textfield[name="requirement1"]').disable();
-		win.down('textfield[name="requirement2"]').readOnly = true;
-		win.down('textfield[name="requirement2"]').disable();
 		win.down('textfield[name="requirement4"]').readOnly = true;
 		win.down('textfield[name="requirement4"]').disable();
 		win.down('textfield[name="product_rate"]').readOnly = true;
 		win.down('textfield[name="product_rate"]').disable();
-		win.down('textfield[name="e_quantity"]').readOnly = true;
-		win.down('textfield[name="e_quantity"]').disable();
 		win.down('textfield[name="quantity"]').readOnly = true;
 		win.down('textfield[name="quantity"]').disable();
 		win.down('combobox[name="job_type1"]').readOnly = true;
@@ -590,9 +561,11 @@ Ext.define('order.controller.c_order', {
 				win.down('textfield[name="customer_name"]').setRawValue(data.data[0].customer_name);
 				win.down('textfield[name="customer_name"]').readOnly = true;
 				win.down('textfield[name="customer_name"]').disable();
+				win.down('textfield[name="customer_name"]').hide();
 				win.down('textfield[name="product_name"]').setValue(data.data[0].product_name);
 				win.down('textfield[name="product_name"]').readOnly = true;
 				win.down('textfield[name="product_name"]').disable();
+				win.down('textfield[name="product_name"]').hide();
 				win.down('textfield[name="product_our_name"]').setValue(data.data[0].product_our_name);
 				win.down('textfield[name="product_our_name"]').readOnly = true;
 				win.down('textfield[name="product_our_name"]').disable();
@@ -608,10 +581,16 @@ Ext.define('order.controller.c_order', {
 				win.down('textfield[name="c_deadline"]').disable();
 				win.down('combobox[name="priority"]').setRawValue(data.data[0].priority == 1 ? "紧急" : "普通");
 				win.down('textfield[name="requirement1"]').setValue(data.data[0].requirement_1);
+				win.down('textfield[name="requirement1"]').readOnly = true;
+				win.down('textfield[name="requirement1"]').disable();
 				win.down('textfield[name="requirement2"]').setValue(data.data[0].requirement_2);
+				win.down('textfield[name="requirement2"]').readOnly = true;
+				win.down('textfield[name="requirement2"]').disable();
 				win.down('textfield[name="requirement4"]').setValue(data.data[0].requirement_4);
 				win.down('textfield[name="product_rate"]').setValue(data.data[0].product_rate);
 				win.down('textfield[name="e_quantity"]').setValue(data.data[0].e_quantity);
+				win.down('textfield[name="e_quantity"]').readOnly = true;
+				win.down('textfield[name="e_quantity"]').disable();
 				win.down('textfield[name="quantity"]').setValue(data.data[0].quantity);
 				
 			}
@@ -730,7 +709,8 @@ Ext.define('order.controller.c_order', {
 								{
 									this.up('form').down('[name=customer_code]').setValue(rec[0].data.code);
 								}
-							}
+							},
+							hidden : location.href.indexOf("production.jsp") >= 0
 						}), Ext.create('Ext.form.ComboBox', {
 							fieldLabel : '客户代码 *',
 							editable : false,
@@ -762,13 +742,36 @@ Ext.define('order.controller.c_order', {
 								{
 									this.up('form').down('[name=product_our_name]').setValue(rec[0].data.our_name);
 								}
-							}
+							},
+							hidden : location.href.indexOf("production.jsp") >= 0
 						}),
 						{
 							fieldLabel : '我司料名 *',
 							name : 'product_our_name',
 							readOnly: true
 						}, {
+	    	   		    	   xtype : 'textfield',
+	    	   		    	   name : 'e_quantity',
+	    	   		    	   fieldLabel : '订单数量',
+	    	   		    	   readOnly : true,
+	    	   		    	   width : 160,
+	    	   		    	   listeners:{
+								   change: function(e, v)
+								   {
+									   var eq = e.up('form').down('textfield[name="product_rate"]').getValue();
+									   if(isNaN(eq) || isNaN(v) || v == 0)
+									   {
+										   e.up('form').down('textfield[name="quantity"]').setValue(0);
+									   }
+									   else
+									   {
+										   e.up('form').down('textfield[name="quantity"]').setValue(
+												Math.ceil(v / eq)
+										   );
+									   }
+								   }
+	    	   		    	   }
+	    	   		    }, {
 							anchor : '98%',
 							fieldLabel : '交货日期 *',
 							editable : false,
@@ -791,6 +794,18 @@ Ext.define('order.controller.c_order', {
 								readOnly : true
 							}
 							]
+						}, {
+							xtype : 'textareafield',
+							grow : true,
+							name : 'requirement1',
+							fieldLabel : '电镀要求',
+							readOnly : true
+						}, {
+							xtype : 'textareafield',
+							grow : true,
+							name : 'requirement2',
+							fieldLabel : '特殊要求',
+							readOnly : true
 						}, {
 							anchor : '98%',
 							fieldLabel : '生产期限',
@@ -834,35 +849,6 @@ Ext.define('order.controller.c_order', {
 							       },
 							       {
 						    	   		xtype : 'container',
-						    	   		columnWidth : 0.3,
-						    	   		items:[
-					    	   		       {
-					    	   		    	   xtype : 'textfield',
-					    	   		    	   name : 'e_quantity',
-					    	   		    	   fieldLabel : '订单数量',
-					    	   		    	   readOnly : true,
-					    	   		    	   width : 160,
-					    	   		    	   listeners:{
-					    	   		    		change: function(e, eq)
-					    	   		    		   {
-					    	   		    			   var v = e.up('form').down('textfield[name="product_rate"]').getValue();
-					    	   		    			   if(isNaN(eq) || isNaN(v) || v == 0)
-				    	   		    				   {
-					    	   		    				   e.up('form').down('textfield[name="quantity"]').setValue(0);
-				    	   		    				   }
-					    	   		    			   else
-				    	   		    				   {
-					    	   		    				   e.up('form').down('textfield[name="quantity"]').setValue(
-				    	   		    						   	Math.ceil(eq / v)
-					    	   		    				   );
-				    	   		    				   }
-					    	   		    		   }
-					    	   		    	   }
-					    	   		       }
-				    	   		       ]
-							       },
-							       {
-						    	   		xtype : 'container',
 						    	   		columnWidth : 0.4,
 						    	   		items:[
 					    	   		       {
@@ -891,18 +877,6 @@ Ext.define('order.controller.c_order', {
 							name : 'priority'
 						}),
 						{
-							xtype : 'textareafield',
-							grow : true,
-							name : 'requirement1',
-							fieldLabel : '电镀要求',
-							readOnly : true
-						}, {
-							xtype : 'textareafield',
-							grow : true,
-							name : 'requirement2',
-							fieldLabel : '特殊要求',
-							readOnly : true
-						}, {
 							xtype : 'textareafield',
 							grow : true,
 							name : 'requirement3',
@@ -1007,6 +981,7 @@ Ext.define('order.controller.c_order', {
 							tbar : [ {
 								text : '补数',
 								type : 'button',
+								disabled : location.href.indexOf("order.jsp") >= 0,
 								handler : function()
 								{
 									var jobWin = Ext.create('Ext.window.Window', {
@@ -1090,7 +1065,12 @@ Ext.define('order.controller.c_order', {
 									jobWin.show();
 									
 								}
-							} ]
+							},
+							{
+								text : '减数',
+								type : 'button',
+								disabled : location.href.indexOf("order.jsp") >= 0
+							}]
 						}) 
 					]
 				}
@@ -1122,6 +1102,7 @@ Ext.define('order.controller.c_order', {
 					text : '提交',
 					disabled : true,
 					handler : function() {
+						
 						var form = this.up('form').getForm();
 						if(this.up('form').down('combobox[name="creator"]').getValue() == null ||
 								this.up('form').down('combobox[name="customer_name"]').getValue() == null ||
@@ -1134,6 +1115,26 @@ Ext.define('order.controller.c_order', {
 							Ext.Msg.alert("修改结果","带*号资料必须输入");
 							return;
 						}
+						
+						win.down('textfield[name="ordernumber"]').enable();
+						win.down('textfield[name="deadline"]').enable();
+						win.down('textfield[name="requirement4"]').enable();
+						win.down('textfield[name="product_rate"]').enable();
+						win.down('textfield[name="e_quantity"]').enable();
+						win.down('textfield[name="quantity"]').enable();
+						win.down('combobox[name="priority"]').enable();
+						win.down('combobox[name="priority"]').enable();
+						win.down('textfield[name="ordernumber"]').enable();
+						win.down('textfield[name="creator"]').enable();
+						win.down('textfield[name="customer_code"]').enable();
+						win.down('textfield[name="customer_name"]').enable();
+						win.down('textfield[name="product_name"]').enable();
+						win.down('textfield[name="product_our_name"]').enable();
+						win.down('textfield[name="use_finished"]').enable();
+						win.down('textfield[name="use_semi_finished"]').enable();
+						win.down('textfield[name="c_deadline"]').enable();
+						win.down('textfield[name="requirement1"]').enable();
+						win.down('textfield[name="requirement2"]').enable();
 
 						form.submit({
 							url : 'OrderController?action=updateOrder',
@@ -1145,6 +1146,26 @@ Ext.define('order.controller.c_order', {
 							failure : function(form, action) {
 								Ext.Msg.alert('修改結果', action.result.msg);
 								Ext.data.StoreManager.lookup('orderStore').load();
+								
+								win.down('textfield[name="ordernumber"]').disable();
+								win.down('textfield[name="deadline"]').disable();
+								win.down('textfield[name="requirement4"]').disable();
+								win.down('textfield[name="product_rate"]').disable();
+								win.down('textfield[name="e_quantity"]').disable();
+								win.down('textfield[name="quantity"]').disable();
+								win.down('combobox[name="priority"]').disable();
+								win.down('combobox[name="priority"]').disable();
+								win.down('textfield[name="ordernumber"]').disable();
+								win.down('textfield[name="creator"]').disable();
+								win.down('textfield[name="customer_code"]').disable();
+								win.down('textfield[name="customer_name"]').disable();
+								win.down('textfield[name="product_name"]').disable();
+								win.down('textfield[name="product_our_name"]').disable();
+								win.down('textfield[name="use_finished"]').disable();
+								win.down('textfield[name="use_semi_finished"]').disable();
+								win.down('textfield[name="c_deadline"]').disable();
+								win.down('textfield[name="requirement1"]').disable();
+								win.down('textfield[name="requirement2"]').disable();
 							}
 						});
 						
@@ -1238,6 +1259,32 @@ Ext.define('order.controller.c_order', {
 		GetJsonData("ProductController?action=getProductByName",{name: selected[0].data.product_name}, fillProductForm);
 		Ext.data.StoreManager.lookup('jobStore').proxy.url = 'JobController?action=getJobByOrder&orderid=' + selected[0].data.id;
 		Ext.data.StoreManager.lookup('jobStore').load();
+		
+		if(location.href.indexOf("order.jsp") >= 0)
+		{
+			win.down('textfield[name="ordernumber"]').disable();
+			win.down('textfield[name="deadline"]').disable();
+			win.down('textfield[name="requirement4"]').disable();
+			win.down('textfield[name="product_rate"]').disable();
+			win.down('textfield[name="e_quantity"]').disable();
+			win.down('textfield[name="quantity"]').disable();
+			win.down('combobox[name="priority"]').disable();
+			win.down('combobox[name="priority"]').disable();
+		}
+		else
+		{
+			win.down('textfield[name="ordernumber"]').disable();
+			win.down('textfield[name="creator"]').disable();
+			win.down('textfield[name="customer_code"]').disable();
+			win.down('textfield[name="customer_name"]').disable();
+			win.down('textfield[name="product_name"]').disable();
+			win.down('textfield[name="product_our_name"]').disable();
+			win.down('textfield[name="use_finished"]').disable();
+			win.down('textfield[name="use_semi_finished"]').disable();
+			win.down('textfield[name="c_deadline"]').disable();
+			win.down('textfield[name="requirement1"]').disable();
+			win.down('textfield[name="requirement2"]').disable();
+		}
 		win.show();	
     },
     

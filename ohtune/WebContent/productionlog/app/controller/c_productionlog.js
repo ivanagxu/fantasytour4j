@@ -1,7 +1,7 @@
-Ext.define('admin.controller.c_productlog', {
+Ext.define('productionlog.controller.c_productionlog', {
 	extend : 'Ext.app.Controller',
 
-	views : [ 'v_admin' ],
+	views : [ 'v_productionlog' ],
 
 
 	init : function() {
@@ -28,9 +28,9 @@ Ext.define('admin.controller.c_productlog', {
 	
 	getProductLog : function()
 	{
-		Ext.data.StoreManager.lookup('productLogStore').proxy.url = 
+		Ext.data.StoreManager.lookup('productionLogStore').proxy.url = 
 			'ReportController?action=generateProductLogReportByDateAndSection&date=' + Ext.getCmp('productlog_date').getRawValue() +
 			'&job_type=' + encodeURI(Ext.getCmp('productlog_section').getValue());
-		Ext.data.StoreManager.lookup('productLogStore').load();
+		Ext.data.StoreManager.lookup('productionLogStore').load();
 	}
 });

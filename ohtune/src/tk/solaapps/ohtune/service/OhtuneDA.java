@@ -15,6 +15,7 @@ import tk.solaapps.ohtune.dao.IMoldDao;
 import tk.solaapps.ohtune.dao.IOrderDao;
 import tk.solaapps.ohtune.dao.IPostDao;
 import tk.solaapps.ohtune.dao.IProductDao;
+import tk.solaapps.ohtune.dao.IProductLogDao;
 import tk.solaapps.ohtune.dao.IRoleDao;
 import tk.solaapps.ohtune.dao.ISectionDao;
 import tk.solaapps.ohtune.dao.ISequenceDao;
@@ -29,6 +30,7 @@ import tk.solaapps.ohtune.model.Mold;
 import tk.solaapps.ohtune.model.Order;
 import tk.solaapps.ohtune.model.Post;
 import tk.solaapps.ohtune.model.Product;
+import tk.solaapps.ohtune.model.ProductLog;
 import tk.solaapps.ohtune.model.Role;
 import tk.solaapps.ohtune.model.Section;
 import tk.solaapps.ohtune.model.Sequence;
@@ -50,6 +52,7 @@ public class OhtuneDA implements IOhtuneDA{
 	protected IJobDao jobDao = null;
 	protected ICustomerDao customerDao = null;
 	protected IMoldDao moldDao = null;
+	protected IProductLogDao productLogDao = null;
 	
 	public void setUserACDao(IUserACDao userACDao)
 	{
@@ -106,6 +109,10 @@ public class OhtuneDA implements IOhtuneDA{
 	public void setMoldDao(IMoldDao moldDao)
 	{
 		this.moldDao = moldDao;
+	}
+	public void setProductLogDao(IProductLogDao productLogDao)
+	{
+		this.productLogDao = productLogDao;
 	}
 	
 	@Override
@@ -593,4 +600,17 @@ public class OhtuneDA implements IOhtuneDA{
 			Collection[] in, int start, int limit, String orderby, boolean sortAsc) {
 		return new ArrayList();
 	}
+	
+	@Override
+	public boolean addProductLog(ProductLog log) {
+		return productLogDao.addProductLog(log);
+	}
+	
+	@Override
+	public List<ProductLog> getProductLogByDateAndSection(Date date,
+			String sectionName) {
+		return productLogDao.getProductLogByDateAndSection(date, sectionName);
+	}
+	
+	
 }

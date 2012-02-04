@@ -16,20 +16,6 @@ Ext.define('admin.view.v_admin', {
 		var sm4 = Ext.create('Ext.selection.CheckboxModel',{mode : 'SINGLE'});
 		var sm5 = Ext.create('Ext.selection.CheckboxModel',{mode : 'SINGLE'});
 		
-		Ext.create('Ext.data.Store', {
-			storeId : 'productLogStore',
-			model : 'ProductLogData',
-			proxy : {
-				type : 'ajax',
-				url : 'ReportController?action=generateProductLogReportByDateAndSection',
-				reader : {
-					type : 'json',
-					root : 'data',
-					model : 'ProductLogData'
-				}
-			}
-		});
-		
 		this.items = [ Ext.create('Ext.tab.Panel', {
 			anchor : '100%',
 			items : [ {
@@ -262,64 +248,7 @@ Ext.define('admin.view.v_admin', {
 					    }
 		            ]
 		        })]
-			},{
-				title : '生产记录',
-				containScroll: true,
-	        	autoScroll: true,
-				items : [ Ext.create('Ext.grid.Panel', { 
-		        	id : 'productlog-grid',
-		        	height: 500,
-		        	store: Ext.data.StoreManager.lookup('productLogStore'),
-		        	//selModel : sm5,
-		        	columns : [ {
-						header : '他司料名',
-						dataIndex : 'product_name'
-					} ,{
-						header : '我司料名',
-						dataIndex : 'product_our_name'
-					}, {
-						header : '总生产数',
-						dataIndex : 'total'
-					}, {
-						header : '完成总数',
-						dataIndex : 'finished'
-					}, {
-						header : '废品数',
-						dataIndex : 'disuse'
-					}, {
-						header : '返工数',
-						dataIndex : 'rejected'
-					}],
-					tbar : [
-					    {
-					    	labelAlign : 'right',
-							fieldLabel : '生产日期',
-							editable : false,
-							name : 'date',
-							id : 'productlog_date',
-							xtype: 'datefield',
-					        maxValue: new Date(),
-					        value: new Date(),
-					        format: 'Y-m-d'
-					    },
-					    Ext.create('Ext.form.ComboBox', {
-					    	labelAlign : 'right',
-						    fieldLabel: '部门',
-						    id : 'productlog_section',
-						    editable: false,
-						    store: Ext.data.StoreManager.lookup('jobTypeStore'),
-						    queryMode: 'local',
-						    displayField: 'name',
-						    valueField: 'name',
-						    name : 'job_type'
-						}),
-						{
-					    	xtype : 'button',
-					    	text : '刷新记录'
-						}
-		            ]
-		        })]
-			},{
+			}, {
 				title : '文档管理',
 				containScroll: true,
 	        	autoScroll: true,

@@ -9,10 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import tk.solaapps.ohtune.model.JobType;
 import tk.solaapps.ohtune.model.Product;
-import tk.solaapps.ohtune.model.ProductLog;
 import tk.solaapps.ohtune.model.ProductRate;
+import tk.solaapps.ohtune.model.ProductionLog;
 import tk.solaapps.ohtune.model.UserAC;
 import tk.solaapps.ohtune.pattern.JsonDataWrapper;
 import tk.solaapps.ohtune.pattern.OhtuneLogger;
@@ -104,11 +103,11 @@ public class ReportController extends HttpServlet implements IOhtuneController{
 		
 		IOhtuneService service = (IOhtuneService)OhtuneServiceHolder.getInstence().getBeanFactory().getBean("uhtuneService");
 		
-		List<ProductLog> logs = service.generateProductLogByDateAndSection(sDate, sJobType, sessionUser);
+		List<ProductionLog> logs = service.generateProductLogByDateAndSection(sDate, sJobType, sessionUser);
 		
 		Gson gson = service.getGson();
 		
-		JsonDataWrapper dw = new JsonDataWrapper(logs, JsonDataWrapper.TYPE_PRODUCT_LOG);
+		JsonDataWrapper dw = new JsonDataWrapper(logs, JsonDataWrapper.TYPE_DEFAULT);
 		response.getOutputStream().write(gson.toJson(dw).getBytes("utf-8"));
 	}
 }

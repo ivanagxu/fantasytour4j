@@ -97,43 +97,84 @@ Ext.define('order.view.v_order', {
 										return '紧急';
 									else
 										return '普通';
-								}
+								},
+								filter: {
+					                type: 'string'
+					            }
 							}, {
 								header : '订单号',
-								dataIndex : 'number'
+								dataIndex : 'number',
+								filter: {
+					                type: 'string'
+					            }
 							}, {
 								header : '跟单人员',
-								dataIndex : 'creator'
+								dataIndex : 'creator',
+								filter: {
+					                type: 'string'
+					            }
 							}, {
 								header : '客户名称',
-								dataIndex : 'customer_name'
+								dataIndex : 'customer_name',
+								hidden : location.href.indexOf("production.jsp") >= 0,
+								filter: {
+					                type: 'string'
+					            }
 							}, {
 								header : '客户代码',
-								dataIndex : 'customer_code'
+								dataIndex : 'customer_code',
+								filter: {
+					                type: 'string'
+					            }
 							}, {
 								header : '他司料名',
-								dataIndex : 'product_name'
+								dataIndex : 'product_name',
+								hidden : location.href.indexOf("production.jsp") >= 0,
+								filter: {
+					                type: 'string'
+					            }
 							}, {
 								header : '我司料名',
-								dataIndex : 'product_our_name'
+								dataIndex : 'product_our_name',
+								filter: {
+					                type: 'string'
+					            }
 							}, {
 								header : '电镀要求',
-								dataIndex : 'requirement_1'
+								dataIndex : 'requirement_1',
+								filter: {
+					                type: 'string'
+					            }
 							}, {
 								header : '特殊要求',
-								dataIndex : 'requirement_2'
+								dataIndex : 'requirement_2',
+								filter: {
+					                type: 'string'
+					            }
 							}, {
 								header : '订单数量',
-								dataIndex : 'e_quantity'
+								dataIndex : 'e_quantity',
+								filter: {
+					                type: 'string'
+					            }
 							}, {
 								header : '生产数量',
-								dataIndex : 'quantity'
+								dataIndex : 'quantity',
+								filter: {
+					                type: 'string'
+					            }
 							}, {
 								header : '生产期限',
-								dataIndex : 'deadline'
+								dataIndex : 'deadline',
+								filter: {
+					                type: 'string'
+					            }
 							}, {
 								header : '交货日期',
-								dataIndex : 'c_deadline'
+								dataIndex : 'c_deadline',
+								filter: {
+					                type: 'string'
+					            }
 							}, {
 								header : '产品图片',
 								dataIndex : 'product_name',
@@ -150,10 +191,16 @@ Ext.define('order.view.v_order', {
 								}
 							}, {
 								header : '订单状态',
-								dataIndex : 'status'
+								dataIndex : 'status',
+								filter: {
+					                type: 'string'
+					            }
 							}, {
 								header : '备注',
-								dataIndex : 'requirement_4'
+								dataIndex : 'requirement_4',
+								filter: {
+					                type: 'string'
+					            }
 							}],
 							height : 500,
 							renderTo : Ext.getBody(),
@@ -191,7 +238,12 @@ Ext.define('order.view.v_order', {
 										return '';
 									}
 								}
-							}
+							},
+							features: [{
+				                ftype: 'filters',
+				                encode: true,
+				                local: true
+				            }]
 						})
 			        ]
 				}, {
@@ -215,43 +267,84 @@ Ext.define('order.view.v_order', {
 										return '紧急';
 									else
 										return '普通';
-								}
+								},
+								filter: {
+					                type: 'string'
+					            }
 							}, {
 								header : '订单号',
-								dataIndex : 'number'
+								dataIndex : 'number',
+								filter: {
+					                type: 'string'
+					            }
 							}, {
 								header : '跟单人员',
-								dataIndex : 'creator'
+								dataIndex : 'creator',
+								filter: {
+					                type: 'string'
+					            }
 							}, {
 								header : '客户名称',
-								dataIndex : 'customer_name'
+								dataIndex : 'customer_name',
+								hidden : location.href.indexOf("production.jsp") >= 0,
+								filter: {
+					                type: 'string'
+					            }
 							}, {
 								header : '客户代码',
-								dataIndex : 'customer_code'
+								dataIndex : 'customer_code',
+								filter: {
+					                type: 'string'
+					            }
 							}, {
 								header : '他司料名',
-								dataIndex : 'product_name'
+								dataIndex : 'product_name',
+								hidden : location.href.indexOf("production.jsp") >= 0,
+								filter: {
+					                type: 'string'
+					            }
 							}, {
 								header : '我司料名',
-								dataIndex : 'product_our_name'
+								dataIndex : 'product_our_name',
+								filter: {
+					                type: 'string'
+					            }
 							}, {
 								header : '电镀要求',
-								dataIndex : 'requirement_1'
+								dataIndex : 'requirement_1',
+								filter: {
+					                type: 'string'
+					            }
 							}, {
 								header : '特殊要求',
-								dataIndex : 'requirement_2'
+								dataIndex : 'requirement_2',
+								filter: {
+					                type: 'string'
+					            }
 							}, {
 								header : '订单数量',
-								dataIndex : 'e_quantity'
+								dataIndex : 'e_quantity',
+								filter: {
+					                type: 'string'
+					            }
 							}, {
 								header : '生产数量',
-								dataIndex : 'quantity'
+								dataIndex : 'quantity',
+								filter: {
+					                type: 'string'
+					            }
 							}, {
 								header : '生产期限',
-								dataIndex : 'deadline'
+								dataIndex : 'deadline',
+								filter: {
+					                type: 'string'
+					            }
 							}, {
 								header : '交货日期',
-								dataIndex : 'c_deadline'
+								dataIndex : 'c_deadline',
+								filter: {
+					                type: 'string'
+					            }
 							}, {
 								header : '产品图片',
 								dataIndex : 'product_name',
@@ -268,10 +361,16 @@ Ext.define('order.view.v_order', {
 								}
 							}, {
 								header : '订单状态',
-								dataIndex : 'status'
+								dataIndex : 'status',
+								filter: {
+					                type: 'string'
+					            }
 							}, {
 								header : '备注',
-								dataIndex : 'requirement_4'
+								dataIndex : 'requirement_4',
+								filter: {
+					                type: 'string'
+					            }
 							}],
 							height : 500,
 							renderTo : Ext.getBody(),
@@ -281,7 +380,12 @@ Ext.define('order.view.v_order', {
 							}, {
 								xtype : 'button',
 								text : '删除订单'
-							} ]
+							} ],
+							features: [{
+				                ftype: 'filters',
+				                encode: true,
+				                local: true
+				            }]
 						})
 			        ]
 				}
@@ -291,5 +395,17 @@ Ext.define('order.view.v_order', {
 		];
 
 		this.callParent(arguments);
+		if(location.href.indexOf("production.jsp") >= 0)
+		{
+			this.down('button[text="创建订单"]').hide();
+			this.down('button[text="暂停订单"]').hide();
+			this.down('button[text="取消订单"]').hide();
+			this.down('button[text="恢复订单"]').hide();
+			this.down('button[text="删除订单"]').hide();
+		}
+		else if(location.href.indexOf("order.jsp") >= 0)
+		{
+			this.down('button[text="审核订单"]').hide();
+		}
 	}
 });

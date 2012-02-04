@@ -21,10 +21,11 @@
 		List<Role> roles = sessionUser.getPost().getRole();
 		boolean isAdminUser = false;
 		boolean isOrderUser = false;
+		boolean isProductUser = false;
 		for(int i = 0; i < roles.size(); i++)
 		{
 			if(roles.get(i).getName().equals("管理员") || roles.get(i).getName().equals("经理") || 
-					roles.get(i).getName().equals("生产经理") || roles.get(i).getName().equals("厂长"))
+					roles.get(i).getName().equals("厂长"))
 			{
 				isAdminUser = true;
 				isOrderUser = true;
@@ -33,15 +34,32 @@
 			{
 				isOrderUser = true;
 			}
+			
+			if(roles.get(i).getName().equals("生产经理"))
+			{
+				isProductUser = true;
+			}
 		}
 		
-		if(request.getRequestURL().toString().indexOf("order.jsp") >=0 && !isOrderUser && isNotLoginPage)
+		if(request.getRequestURL().toString().indexOf("order.jsp") >=0 && !isOrderUser && !isAdminUser && isNotLoginPage)
 		{
 			response.sendRedirect("login.jsp");
 			return;
 		}
 		
 		else if(request.getRequestURL().toString().indexOf("admin.jsp") >=0 && !isAdminUser && isNotLoginPage)
+		{
+			response.sendRedirect("login.jsp");
+			return;
+		}
+		
+		else if(request.getRequestURL().toString().indexOf("production.jsp") >=0 && !isAdminUser && !isProductUser && isNotLoginPage)
+		{
+			response.sendRedirect("login.jsp");
+			return;
+		}
+		
+		else if(request.getRequestURL().toString().indexOf("inventory.jsp") >=0 && !isOrderUser && !isProductUser && !isAdminUser && isNotLoginPage)
 		{
 			response.sendRedirect("login.jsp");
 			return;

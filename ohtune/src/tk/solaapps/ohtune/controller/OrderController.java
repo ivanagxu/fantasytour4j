@@ -326,8 +326,9 @@ public class OrderController extends HttpServlet implements IOhtuneController{
 		String sRequirement3 = request.getParameter("requirement3");
 		String sRequirement4 = request.getParameter("requirement4");
 		String sCDeadline = request.getParameter("c_deadline");
+		String sEQuantity = "0" + request.getParameter("e_quantity");
 		
-		int iUseFinished,iUseSemiFinished;
+		int iUseFinished,iUseSemiFinished, iEQuantity;
 		
 		Enumeration<String> parms = request.getParameterNames();
 		
@@ -341,9 +342,10 @@ public class OrderController extends HttpServlet implements IOhtuneController{
 		{
 			iUseFinished = Integer.parseInt(sUseFinished);
 			iUseSemiFinished = Integer.parseInt(sUseSemiFinished);
+			iEQuantity = Integer.parseInt(sEQuantity);
 		}catch(Exception e)
 		{
-			jr = service.genJsonResponse(false, "部门分配或成品分配数据错误", null);
+			jr = service.genJsonResponse(false, "订单数量成品半成品数量错误", null);
 			response.getOutputStream().write(gson.toJson(jr).getBytes("utf-8"));
 			return;
 		}
@@ -410,8 +412,8 @@ public class OrderController extends HttpServlet implements IOhtuneController{
 		order.setRequirement_4(sRequirement4);
 		order.setPriority(0);
 		order.setQuantity(0);
-		order.setE_quantity(0);
-		order.setProduct_rate(1f);
+		order.setE_quantity(iEQuantity);
+		order.setProduct_rate(0f);
 		
 		List<JobType> jobTypes = new ArrayList<JobType>();
 		List<Job> jobs = new ArrayList<Job>();
@@ -459,14 +461,13 @@ public class OrderController extends HttpServlet implements IOhtuneController{
 		String sQuantity1 = "0" + request.getParameter("quantity1");
 		String sQuantity2 = "0" + request.getParameter("quantity2");
 		String sQuantity3 = "0" + request.getParameter("quantity3");
-		String sEQuantity = "0" + request.getParameter("e_quantity");
 		String sQuantity = "0" + request.getParameter("quantity");
 		String sProductRate = request.getParameter("product_rate");
 		String sOrderId = request.getParameter("orderid");
 		String sPriority = request.getParameter("priority");
 		String sDeadline = request.getParameter("deadline");
 		
-		int iQuantity,iQuantity1,iQuantity2,iQuantity3,iUseFinished,iUseSemiFinished,iEQuantity;
+		int iQuantity,iQuantity1,iQuantity2,iQuantity3,iUseFinished,iUseSemiFinished;
 		float fProductRate;
 		
 		Gson gson = service.getGson();
@@ -493,7 +494,6 @@ public class OrderController extends HttpServlet implements IOhtuneController{
 			iQuantity1 = Integer.parseInt(sQuantity1);
 			iQuantity2 = Integer.parseInt(sQuantity2);
 			iQuantity3 = Integer.parseInt(sQuantity3);
-			iEQuantity = Integer.parseInt(sEQuantity);
 		}catch(Exception e)
 		{
 			jr = service.genJsonResponse(false, "部门分配或成品分配数据错误", null);
@@ -550,7 +550,6 @@ public class OrderController extends HttpServlet implements IOhtuneController{
 		
 		order.setQuantity(iQuantity1 + iQuantity2 + iQuantity3);
 		order.setProduct_rate(fProductRate);
-		order.setE_quantity(iEQuantity);
 		order.setQuantity(iQuantity);
 		
 		if(iQuantity != iQuantity1 + iQuantity2 + iQuantity3)
@@ -652,11 +651,19 @@ public class OrderController extends HttpServlet implements IOhtuneController{
 			}
 			else
 			{
-				boolean success = service.deleteJobByOrder(order, sessionUser);
-				if(success)
-					success = success & service.deleteOrder(order);
-				jr = service.genJsonResponse(success, success ? "删除订单成功" : "删除订单失败", null);
-				response.getOutputStream().write(gson.toJson(jr).getBytes("utf-8"));
+				if(order.getStatus().equals(Order.STATUS_APPROVING) || order.getStatus().equals(Order.STATUS_FINISHED))
+				{
+					boolean success = service.deleteJobByOrder(order, sessionUser);
+					if(success)
+						success = success & service.deleteOrder(order);
+					jr = service.genJsonResponse(success, success ? "删除订单成功" : "删除订单失败", null);
+					response.getOutputStream().write(gson.toJson(jr).getBytes("utf-8"));
+				}
+				else
+				{
+					jr = service.genJsonResponse(false, "删除订单失败， 订单已经在进行中", null);
+					response.getOutputStream().write(gson.toJson(jr).getBytes("utf-8"));
+				}
 			}
 		}
 		catch(Exception e)
@@ -766,9 +773,16 @@ public class OrderController extends HttpServlet implements IOhtuneController{
 			}
 			else
 			{
-				boolean success = service.cancelOrder(order, sessionUser);
-				jr = service.genJsonResponse(success, success ? "取消订单成功" : "取消订单失败", null);
-				response.getOutputStream().write(gson.toJson(jr).getBytes("utf-8"));
+				if(order.getStatus().equals(Order.STATUS_APPROVING) || order.getStatus().equals(Order.STATUS_FINISHED))
+				{
+					boolean success = service.cancelOrder(order, sessionUser);
+					jr = service.genJsonResponse(success, success ? "取消订单成功" : "取消订单失败", null);
+					response.getOutputStream().write(gson.toJson(jr).getBytes("utf-8"));
+				}else
+				{
+					jr = service.genJsonResponse(false, "取消订单失败， 订单已经在进行中", null);
+					response.getOutputStream().write(gson.toJson(jr).getBytes("utf-8"));
+				}
 			}
 		}
 		catch(Exception e)

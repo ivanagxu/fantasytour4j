@@ -18,7 +18,7 @@ function HAS_PERMISSION(role, alert) {
 			var roles = SESSION_USER.post.role;
 			for ( var i = 0; i < roles.length; i++) {
 				if (roles[i].name == role || roles[i].name == '管理员' || roles[i].name == '经理' ||
-					roles[i].name == '生产经理' || roles[i].name == '厂长')
+					roles[i].name == '厂长')
 					return true;
 			}
 			if (alert) {
@@ -53,9 +53,13 @@ function GOTO_ADMIN_MODULE() {
 }
 
 function GOTO_INVENTORY_MODULE() {
-	hasPermission = HAS_PERMISSION("销售部");
+	hasPermission = HAS_PERMISSION("销售部", false) || HAS_PERMISSION("生产经理", false);
 	if (hasPermission) {
 		location.href = "inventory.jsp";
+	}
+	else
+	{
+		Ext.Msg.alert('System', "没有权限");
 	}
 }
 
@@ -63,6 +67,20 @@ function GOTO_DOCUMENT_MODULE() {
 	hasPermission = true;
 	if (hasPermission) {
 		location.href = "document.jsp";
+	} 
+}
+
+function GOTO_PRODUCTION_MODULE() {
+	hasPermission = HAS_PERMISSION("生产经理");
+	if (hasPermission) {
+		location.href = "production.jsp";
+	} 
+}
+
+function GOTO_PRODUCTIONLOG_MODULE() {
+	hasPermission = true;
+	if (hasPermission) {
+		location.href = "productionlog.jsp";
 	} 
 }
 
@@ -195,10 +213,10 @@ Ext.define('master.controller.c_master', {
 			fields : ['order_number','product_name', 'product_our_name', 'rate']
 		});
 		
-		//ProductLog Data
-		Ext.define('ProductLogData', {
+		//ProductionLog Data
+		Ext.define('ProductionLogData', {
 			extend : 'Ext.data.Model',
-			fields : ['date','product_name', 'product_our_name', 'total', 'finished', 'rejected', 'disuse']
+			fields : ['product_our_name', 'finished', 'rejected', 'disuse']
 		});
 		
 		//Document Data

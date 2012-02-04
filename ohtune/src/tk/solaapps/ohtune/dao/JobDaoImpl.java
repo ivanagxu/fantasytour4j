@@ -1,12 +1,13 @@
 package tk.solaapps.ohtune.dao;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Criteria;
-import org.hibernate.criterion.Property;
 import org.hibernate.criterion.Restrictions;
 
 import tk.solaapps.ohtune.model.Job;
@@ -112,14 +113,34 @@ public class JobDaoImpl extends BaseDao implements IJobDao{
 		to.setMinutes(59);
 		to.setSeconds(59);
 		
-		Criteria criteria = getSession().createCriteria(Job.class);
-		criteria.add(Restrictions.eq("status", Job.STATUS_DONE)).add(Restrictions.eq("job_type", jobType)).add(Restrictions.between("complete_date", from, to));
-		criteria.createAlias("orders", "o");
-		criteria.addOrder(org.hibernate.criterion.Order.asc("o.product_name"));
+		Criteria criteria1 = getSession().createCriteria(Job.class);
+		criteria1.add(Restrictions.eq("status", Job.STATUS_DONE)).add(Restrictions.eq("job_type", jobType)).add(Restrictions.between("complete_date", from, to));
+		criteria1.createAlias("orders", "o");
+		criteria1.addOrder(org.hibernate.criterion.Order.asc("o.product_name"));
 		
+		List<Job> jobs1 = criteria1.list();
 		
-		List<Job> jobs = criteria.list();
+		Criteria criteria2 = getSession().createCriteria(Job.class);
+		criteria2.add(Restrictions.eq("status", Job.STATUS_PROCESSING)).add(Restrictions.eq("job_type", jobType)).add(Restrictions.between("complete_date", from, to));
+		criteria2.createAlias("orders", "o");
+		criteria2.addOrder(org.hibernate.criterion.Order.asc("o.product_name"));
 		
-		return jobs;
+		List<Job> jobs2 = criteria2.list();
+		
+		jobs1.addAll(jobs2);
+		
+		if(jobs1.size() == 0)
+			return jobs1;
+		
+		Job[] jobs = new Job[jobs1.size()];
+		for(int i = 0; i < jobs1.size(); i++)
+			jobs[i] = jobs1.get(i);
+		Arrays.sort( jobs, new Comparator<Job>(){
+	        public int compare( Job a, Job b ){
+	            return a.getOrders().getProduct_name().compareTo(a.getOrders().getProduct_name());
+	        }
+	    });
+		
+		return new ArrayList<Job>(Arrays.asList(jobs));
 	}
 }

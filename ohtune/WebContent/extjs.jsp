@@ -8,6 +8,11 @@
 <script type="text/javascript">
 	Ext.onReady(function(){
 		Ext.Loader.setConfig({enabled:true});
+		
+		Ext.Loader.setPath('Ext.ux', 'extjs/ux');
+		Ext.require([
+		    'Ext.ux.grid.FiltersFeature'
+		]);
 	});
 </script>
 

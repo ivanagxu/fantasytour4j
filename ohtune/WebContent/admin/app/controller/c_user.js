@@ -74,7 +74,7 @@ Ext.define('admin.controller.c_user', {
 					fieldLabel : '职位 *',
 					name : 'post'
 				}, Ext.create('Ext.form.ComboBox', {
-					fieldLabel : '系统角色1 *',
+					fieldLabel : '所属部门1 *',
 					anchor : '98%',
 					editable : false,
 					store : Ext.data.StoreManager.lookup('allRoleStore'),
@@ -84,7 +84,7 @@ Ext.define('admin.controller.c_user', {
 					name: 'role',
 					renderTo : Ext.getBody()
 				}),Ext.create('Ext.form.ComboBox', {
-					fieldLabel : '系统角色2 *',
+					fieldLabel : '所属部门2 *',
 					anchor : '98%',
 					editable : false,
 					store : Ext.data.StoreManager.lookup('allRoleStore'),

@@ -70,68 +70,128 @@ Ext.define('job.view.v_job', {
 										return '紧急';
 									else
 										return '普通';
-								}
+								},
+								filter: {
+					                type: 'string'
+					            }
 							}, {
 								header : '订单号',
-								dataIndex : 'number'
+								dataIndex : 'number',
+								filter: {
+					                type: 'string'
+					            }
 							}, {
 								header : '跟单人员',
-								dataIndex : 'order_user'
+								dataIndex : 'order_user',
+								filter: {
+					                type: 'string'
+					            }
 							}, {
 								header : '所在部门',
-								dataIndex : 'section'
+								dataIndex : 'section',
+								filter: {
+					                type: 'string'
+					            }
 							}, {
 								header : '客户名称',
 								dataIndex : 'customer_name',
-								hidden: true
+								hidden: true,
+								filter: {
+					                type: 'string'
+					            }
 							}, {
 								header : '客户代码',
-								dataIndex : 'customer_code'
+								dataIndex : 'customer_code',
+								filter: {
+					                type: 'string'
+					            }
 							}, {
 								header : '他司料名',
 								dataIndex : 'product_name',
 								hidden: true,
+								filter: {
+					                type: 'string'
+					            }
 							}, {
 								header : '我司料名',
-								dataIndex : 'product_our_name'
+								dataIndex : 'product_our_name',
+								filter: {
+					                type: 'string'
+					            }
 							}, {
 								header : '电镀要求',
-								dataIndex : 'requirement1'
+								dataIndex : 'requirement1',
+								filter: {
+					                type: 'string'
+					            }
 							}, {
 								header : '特殊要求',
-								dataIndex : 'requirement2'
+								dataIndex : 'requirement2',
+								filter: {
+					                type: 'string'
+					            }
 							}, {
 								header : '生产总数',
-								dataIndex : 'total'
+								dataIndex : 'total',
+								filter: {
+					                type: 'string'
+					            }
 							}, {
 								header : '未完成数',
-								dataIndex : 'remaining'
+								dataIndex : 'remaining',
+								filter: {
+					                type: 'string'
+					            }
 							}, {
 								header : '返工总数',
-								dataIndex : 'total_rejected'
+								dataIndex : 'total_rejected',
+								filter: {
+					                type: 'string'
+					            }
 							}, {
 								header : '完成总数',
-								dataIndex : 'finished'
+								dataIndex : 'finished',
+								filter: {
+					                type: 'string'
+					            }
 							}, {
 								header : '生产期限',
-								dataIndex : 'order_deadline'
+								dataIndex : 'order_deadline',
+								filter: {
+					                type: 'string'
+					            }
 							}, {
 								header : '交货日期',
 								dataIndex : 'order_c_deadline',
-								hidden: true
+								hidden: true,
+								filter: {
+					                type: 'string'
+					            }
 							}, {
 								header : '完成日期',
 								dataIndex : 'complete_date',
-								hidden : true
+								hidden : true,
+								filter: {
+					                type: 'string'
+					            }
 							}, {
 								header : '更新日期',
-								dataIndex : 'start_date'
+								dataIndex : 'start_date',
+								filter: {
+					                type: 'string'
+					            }
 							}, {
 								header : '订单状态',
-								dataIndex : 'order_status'
+								dataIndex : 'order_status',
+								filter: {
+					                type: 'string'
+					            }
 							}, {
 								header : '备注',
-								dataIndex : 'order_remark'
+								dataIndex : 'order_remark',
+								filter: {
+					                type: 'string'
+					            }
 							}, {
 								header : '产品图片',
 								dataIndex : 'product_image',
@@ -150,15 +210,27 @@ Ext.define('job.view.v_job', {
 								header : '当天',
 								dataIndex : 'isNew',
 								hidden: true,
+								filter: {
+					                type: 'string'
+					            }
 							}, {
 								header : '工作状态',
-								dataIndex : 'status'
+								dataIndex : 'status',
+								filter: {
+					                type: 'string'
+					            }
 							}, {
 								header : '前负责人',
-								dataIndex : 'handled_by'
+								dataIndex : 'handled_by',
+								filter: {
+					                type: 'string'
+					            }
 							}, {
 								header : '负责人',
-								dataIndex : 'assigned_to'
+								dataIndex : 'assigned_to',
+								filter: {
+					                type: 'string'
+					            }
 							}],
 							height : 500,
 							renderTo : Ext.getBody(),
@@ -181,7 +253,12 @@ Ext.define('job.view.v_job', {
 										return '';
 									}
 								}
-							}
+							},
+							features: [{
+				                ftype: 'filters',
+				                encode: true,
+				                local: true
+				            }]
 						}) 
 					]
 				},{
