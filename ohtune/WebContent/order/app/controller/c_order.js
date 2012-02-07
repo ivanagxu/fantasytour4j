@@ -260,6 +260,9 @@ Ext.define('order.controller.c_order', {
 					    	   		    						Math.ceil(eq / v)
 					    	   		    				   );
 				    	   		    				   }
+						    	   		    		   win.down('textfield[name="quantity1"]').setValue(
+						    	   		 			   win.down('textfield[name="quantity"]').getValue()
+						    	   		 			   );
 					    	   		    		   }
 					    	   		    	   }
 					    	   		       }
