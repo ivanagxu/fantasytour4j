@@ -117,7 +117,7 @@ Ext.define('order.controller.c_order', {
 								}
 							}
 						}), Ext.create('Ext.form.ComboBox', {
-							fieldLabel : '他司料名 *',
+							fieldLabel : '客户料号 *',
 							editable : false,
 							store : Ext.data.StoreManager.lookup('productStore'),
 							queryMode : 'local',
@@ -133,7 +133,7 @@ Ext.define('order.controller.c_order', {
 							}
 						}),
 						{
-							fieldLabel : '我司料名 *',
+							fieldLabel : '料号 *',
 							name : 'product_our_name',
 							readOnly: true
 						}, {
@@ -208,10 +208,10 @@ Ext.define('order.controller.c_order', {
 													header : '订单号',
 													dataIndex : 'order_number'
 												}, {
-													header : '他司料名',
+													header : '客户料号',
 													dataIndex : 'product_name'
 												}, {
-													header : '我司料名',
+													header : '料号',
 													dataIndex : 'product_our_name'
 												}, {
 													header : '成品率',
@@ -728,7 +728,7 @@ Ext.define('order.controller.c_order', {
 								}
 							}
 						}), Ext.create('Ext.form.ComboBox', {
-							fieldLabel : '他司料名 *',
+							fieldLabel : '客户料号 *',
 							editable : false,
 							store : Ext.data.StoreManager.lookup('productStore'),
 							queryMode : 'local',
@@ -746,7 +746,7 @@ Ext.define('order.controller.c_order', {
 							hidden : location.href.indexOf("production.jsp") >= 0
 						}),
 						{
-							fieldLabel : '我司料名 *',
+							fieldLabel : '料号 *',
 							name : 'product_our_name',
 							readOnly: true
 						}, {

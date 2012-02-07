@@ -37,7 +37,7 @@ Ext.define('productionlog.view.v_productionlog', {
 		        	height: 500,
 		        	store: Ext.data.StoreManager.lookup('productionLogStore'),
 		        	columns : [{
-						header : '我司料名',
+						header : '料号',
 						dataIndex : 'product_our_name'
 					}, {
 						header : '完成总数',

@@ -127,14 +127,14 @@ Ext.define('order.view.v_order', {
 					                type: 'string'
 					            }
 							}, {
-								header : '他司料名',
+								header : '客户料号',
 								dataIndex : 'product_name',
 								hidden : location.href.indexOf("production.jsp") >= 0,
 								filter: {
 					                type: 'string'
 					            }
 							}, {
-								header : '我司料名',
+								header : '料号',
 								dataIndex : 'product_our_name',
 								filter: {
 					                type: 'string'
@@ -297,14 +297,14 @@ Ext.define('order.view.v_order', {
 					                type: 'string'
 					            }
 							}, {
-								header : '他司料名',
+								header : '客户料号',
 								dataIndex : 'product_name',
 								hidden : location.href.indexOf("production.jsp") >= 0,
 								filter: {
 					                type: 'string'
 					            }
 							}, {
-								header : '我司料名',
+								header : '料号',
 								dataIndex : 'product_our_name',
 								filter: {
 					                type: 'string'

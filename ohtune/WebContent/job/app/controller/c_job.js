@@ -92,7 +92,7 @@ Ext.define('job.controller.c_job', {
 								readOnly : true
 							}, {
 								xtype : 'textfield',
-								fieldLabel : '我司料名',
+								fieldLabel : '料号',
 								name : 'product_our_name',
 								readOnly : true
 							}, {

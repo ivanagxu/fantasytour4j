@@ -44,7 +44,7 @@ Ext.define('admin.controller.c_product', {
 				items : [ {
 					xtype : 'textfield',
 					anchor : '50%',
-					fieldLabel : '他司料号',
+					fieldLabel : '客户料号',
 					name : 'name',
 					readOnly: true
 				}, {
@@ -56,7 +56,7 @@ Ext.define('admin.controller.c_product', {
 				}, {
 					xtype : 'textfield',
 					anchor : '50%',
-					fieldLabel : '我司料号',
+					fieldLabel : '料号',
 					name : 'our_name'
 				}, Ext.create('Ext.form.ComboBox', {
 					fieldLabel : '模具号码',
@@ -341,7 +341,7 @@ Ext.define('admin.controller.c_product', {
 				items : [ {
 					xtype : 'textfield',
 					anchor : '50%',
-					fieldLabel : '他司料号',
+					fieldLabel : '客户料号',
 					name : 'name'
 				}, {
 					xtype : 'textfield',
@@ -352,7 +352,7 @@ Ext.define('admin.controller.c_product', {
 				}, {
 					xtype : 'textfield',
 					anchor : '50%',
-					fieldLabel : '我司料号',
+					fieldLabel : '料号',
 					name : 'our_name'
 				}, Ext.create('Ext.form.ComboBox', {
 					fieldLabel : '模具号码',

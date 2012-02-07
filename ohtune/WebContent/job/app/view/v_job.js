@@ -75,24 +75,6 @@ Ext.define('job.view.v_job', {
 					                type: 'string'
 					            }
 							}, {
-								header : '订单号',
-								dataIndex : 'number',
-								filter: {
-					                type: 'string'
-					            }
-							}, {
-								header : '跟单人员',
-								dataIndex : 'order_user',
-								filter: {
-					                type: 'string'
-					            }
-							}, {
-								header : '所在部门',
-								dataIndex : 'section',
-								filter: {
-					                type: 'string'
-					            }
-							}, {
 								header : '客户名称',
 								dataIndex : 'customer_name',
 								hidden: true,
@@ -106,14 +88,14 @@ Ext.define('job.view.v_job', {
 					                type: 'string'
 					            }
 							}, {
-								header : '他司料名',
+								header : '客户料号',
 								dataIndex : 'product_name',
 								hidden: true,
 								filter: {
 					                type: 'string'
 					            }
 							}, {
-								header : '我司料名',
+								header : '料号',
 								dataIndex : 'product_our_name',
 								filter: {
 					                type: 'string'
@@ -175,12 +157,6 @@ Ext.define('job.view.v_job', {
 					                type: 'string'
 					            }
 							}, {
-								header : '更新日期',
-								dataIndex : 'start_date',
-								filter: {
-					                type: 'string'
-					            }
-							}, {
 								header : '订单状态',
 								dataIndex : 'order_status',
 								filter: {
@@ -210,6 +186,30 @@ Ext.define('job.view.v_job', {
 								header : '当天',
 								dataIndex : 'isNew',
 								hidden: true,
+								filter: {
+					                type: 'string'
+					            }
+							}, {
+								header : '订单号',
+								dataIndex : 'number',
+								filter: {
+					                type: 'string'
+					            }
+							}, {
+								header : '跟单人员',
+								dataIndex : 'order_user',
+								filter: {
+					                type: 'string'
+					            }
+							}, {
+								header : '所在部门',
+								dataIndex : 'section',
+								filter: {
+					                type: 'string'
+					            }
+							}, {
+								header : '更新日期',
+								dataIndex : 'start_date',
 								filter: {
 					                type: 'string'
 					            }
