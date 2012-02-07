@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <link rel="stylesheet" type="text/css" href="extjs/resources/css/ext-all.css">
+<link rel="stylesheet" type="text/css" href="extjs/ux/grid/css/GridFilters.css" />
 
 <script type="text/javascript" src="extjs/ext-all.js"></script>
 

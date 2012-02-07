@@ -51,7 +51,7 @@ public class JsonJob {
 		if(job.getUserac() == null)
 			order_user = "";
 		else
-			order_user = job.getUserac().getName();
+			order_user = job.getOrders().getCreator();
 		
 		customer_name = job.getOrders().getCustomer_name();
 		customer_code = job.getOrders().getCustomer_code();

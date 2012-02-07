@@ -5,6 +5,7 @@
 .ux-filtered-column {
     font-style: italic;  
     font-weight: bold;
+    color : red;
 }
 
 .ux-gridfilter-text-icon {

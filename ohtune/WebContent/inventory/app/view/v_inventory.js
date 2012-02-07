@@ -22,7 +22,8 @@ Ext.define('inventory.view.v_inventory', {
 					selModel : sm1,
 					columns : [ {
 						header : '他司料号',
-						dataIndex : 'name'
+						dataIndex : 'name',
+						hidden : true
 					}, {
 						header : '英文名',
 						dataIndex : 'name_eng',

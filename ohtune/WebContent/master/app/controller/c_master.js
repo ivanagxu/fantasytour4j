@@ -53,7 +53,7 @@ function GOTO_ADMIN_MODULE() {
 }
 
 function GOTO_INVENTORY_MODULE() {
-	hasPermission = HAS_PERMISSION("销售部", false) || HAS_PERMISSION("生产经理", false);
+	hasPermission = HAS_PERMISSION("销售部", false) || HAS_PERMISSION("生产部", false);
 	if (hasPermission) {
 		location.href = "inventory.jsp";
 	}
@@ -71,7 +71,7 @@ function GOTO_DOCUMENT_MODULE() {
 }
 
 function GOTO_PRODUCTION_MODULE() {
-	hasPermission = HAS_PERMISSION("生产经理");
+	hasPermission = HAS_PERMISSION("生产部");
 	if (hasPermission) {
 		location.href = "production.jsp";
 	} 

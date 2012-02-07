@@ -35,7 +35,7 @@
 				isOrderUser = true;
 			}
 			
-			if(roles.get(i).getName().equals("生产经理"))
+			if(roles.get(i).getName().equals("生产部"))
 			{
 				isProductUser = true;
 			}

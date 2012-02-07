@@ -13,7 +13,7 @@ public class Role {
 	
 	public static final String SUPERUSER_ADMIN = "管理员";
 	public static final String SUPERUSER_MANAGER = "经理";
-	public static final String SUPERUSER_MANAGER2 = "生产经理";
+	public static final String SUPERUSER_MANAGER2 = "生产部";
 	public static final String SUPERUSER_MANAGER3 = "厂长";
 	
 	private Long id;

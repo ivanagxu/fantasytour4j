@@ -40,7 +40,7 @@ Ext.define('login.controller.c_login', {
 					{
     					location.href = 'order.jsp';
 					}
-    				else if(HAS_PERMISSION("生产经理", false))
+    				else if(HAS_PERMISSION("生产部", false))
 					{
     					location.href = 'production.jsp';
 					}
