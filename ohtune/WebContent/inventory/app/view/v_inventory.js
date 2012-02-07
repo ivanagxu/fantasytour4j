@@ -21,14 +21,6 @@ Ext.define('inventory.view.v_inventory', {
 					store : Ext.data.StoreManager.lookup('allProductStore'),
 					selModel : sm1,
 					columns : [ {
-						header : '客户料号',
-						dataIndex : 'name',
-						hidden : true
-					}, {
-						header : '英文名',
-						dataIndex : 'name_eng',
-						hidden: true,
-					}, {
 						header : '料号',
 						dataIndex : 'our_name'
 					}, {

@@ -75,22 +75,8 @@ Ext.define('job.view.v_job', {
 					                type: 'string'
 					            }
 							}, {
-								header : '客户名称',
-								dataIndex : 'customer_name',
-								hidden: true,
-								filter: {
-					                type: 'string'
-					            }
-							}, {
 								header : '客户代码',
 								dataIndex : 'customer_code',
-								filter: {
-					                type: 'string'
-					            }
-							}, {
-								header : '客户料号',
-								dataIndex : 'product_name',
-								hidden: true,
 								filter: {
 					                type: 'string'
 					            }

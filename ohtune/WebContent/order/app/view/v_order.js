@@ -115,7 +115,7 @@ Ext.define('order.view.v_order', {
 					            }
 							}, {
 								header : '客户名称',
-								dataIndex : 'customer_name',
+								dataIndex : location.href.indexOf("production.jsp") >= 0 ? '' : 'customer_name',
 								hidden : location.href.indexOf("production.jsp") >= 0,
 								filter: {
 					                type: 'string'
@@ -128,7 +128,7 @@ Ext.define('order.view.v_order', {
 					            }
 							}, {
 								header : '客户料号',
-								dataIndex : 'product_name',
+								dataIndex : location.href.indexOf("production.jsp") >= 0 ? '' : 'product_name',
 								hidden : location.href.indexOf("production.jsp") >= 0,
 								filter: {
 					                type: 'string'
@@ -285,7 +285,7 @@ Ext.define('order.view.v_order', {
 					            }
 							}, {
 								header : '客户名称',
-								dataIndex : 'customer_name',
+								dataIndex : location.href.indexOf("production.jsp") >= 0 ? '' : 'customer_name',
 								hidden : location.href.indexOf("production.jsp") >= 0,
 								filter: {
 					                type: 'string'
@@ -298,7 +298,7 @@ Ext.define('order.view.v_order', {
 					            }
 							}, {
 								header : '客户料号',
-								dataIndex : 'product_name',
+								dataIndex : location.href.indexOf("production.jsp") >= 0 ? '' : 'product_name',
 								hidden : location.href.indexOf("production.jsp") >= 0,
 								filter: {
 					                type: 'string'
