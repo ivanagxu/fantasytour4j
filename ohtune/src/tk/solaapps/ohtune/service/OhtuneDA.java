@@ -423,7 +423,7 @@ public class OhtuneDA implements IOhtuneDA{
 	@Override
 	public boolean deleteOrder(Order order) {
 		Product product = this.getProductByName(order.getProduct_name());
-		if(product != null && !order.getStatus().equals(Order.STATUS_APPROVING))
+		if(product != null && !order.getStatus().equals(Order.STATUS_APPROVING) && !order.getStatus().equals(Order.STATUS_FINISHED))
 		{
 			product.setFinished(product.getFinished() + order.getUse_finished());
 			product.setSemi_finished(product.getSemi_finished() + order.getUse_semi_finished());

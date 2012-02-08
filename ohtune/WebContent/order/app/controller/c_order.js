@@ -140,7 +140,13 @@ Ext.define('order.controller.c_order', {
 	    	   		    	   xtype : 'textfield',
 	    	   		    	   name : 'e_quantity',
 	    	   		    	   fieldLabel : '订单数量',
-	    	   		    	   width : 160
+	    	   		    	   width : 160,
+	    	   		    	   listeners: {
+	    	   		    		   change : function(){
+	    	   		    			win.down('textfield[name="use_finished"]').setValue(0);
+									win.down('textfield[name="use_semi_finished"]').setValue(0);
+	    	   		    		   }
+	    	   		    	   }
 	    	   		    }, {
 							anchor : '98%',
 							fieldLabel : '交货日期 *',
@@ -159,6 +165,48 @@ Ext.define('order.controller.c_order', {
 								xtype : 'textfield',
 								fieldLabel : '使用半成品数',
 								name : 'use_semi_finished'
+							}, {
+								xtype : 'box',
+								html : '&nbsp;&nbsp;'
+							},{
+								xtype : 'button',
+								text : '查看库存',
+								handler : function()
+								{
+									var eq = win.down('textfield[name="e_quantity"]').getValue();
+									function fillUseProductCount(data)
+									{
+										if(eq <= data.finished)
+										{
+											win.down('textfield[name="use_finished"]').setValue(eq);
+										}
+										else if(eq > data.finished && eq <= data.finished + data.semi_finished)
+										{
+											win.down('textfield[name="use_finished"]').setValue(data.finished);
+											win.down('textfield[name="use_semi_finished"]').setValue(data.semi_finished);
+										}
+										else if(eq > data.finished + data.semi_finished)
+										{
+											win.down('textfield[name="use_finished"]').setValue(data.finished);
+											win.down('textfield[name="use_semi_finished"]').setValue(data.semi_finished);
+										}
+									}
+									
+									var product_name = win.down('combobox[name="product_name"]').getValue();
+									if(product_name == "" || product_name == null)
+									{
+										Ext.Msg.alert("创建订单","请先选择产品");
+										return;
+									}
+									
+									if(isNaN(eq) || eq < 0 || eq == "")
+									{
+										Ext.Msg.alert("创建订单", "请先输入正确的订单数量");
+										return;
+									}
+									
+									GetJsonData("ProductController?action=getProductByName",{name: product_name}, fillUseProductCount);
+								}
 							}
 							]
 						}, {
@@ -249,19 +297,27 @@ Ext.define('order.controller.c_order', {
 					    	   		    	   listeners:{
 					    	   		    		   change: function(e, v)
 					    	   		    		   {
+					    	   		    			   var usefinish = win.down('textfield[name="use_finished"]').getValue();
+					    	   		    			   var usesemifinish = win.down('textfield[name="use_semi_finished"]').getValue();
+					    	   		    			   if(isNaN(usefinish))
+					    	   		    				   usefinish = 0;
+				    	   		    				   if(isNaN(usesemifinish))
+				    	   		    					   usesemifinish = 0;
+				    	   		    				   
 					    	   		    			   var eq = e.up('form').down('textfield[name="e_quantity"]').getValue();
-					    	   		    			   if(isNaN(eq) || isNaN(v) || v == 0)
+					    	   		    			   if(isNaN(eq) || isNaN(v) || v == 0 || eq == 0)
 				    	   		    				   {
 					    	   		    				   e.up('form').down('textfield[name="quantity"]').setValue(0);
 				    	   		    				   }
 					    	   		    			   else
 				    	   		    				   {
-					    	   		    				   e.up('form').down('textfield[name="quantity"]').setValue(
-					    	   		    						Math.ceil(eq / v)
-					    	   		    				   );
+					    	   		    				   //生产数量（自动生成）=（订单数量-使用成品数）/成品率 - 半成品数
+					    	   		    				   var pq = Math.ceil((eq - usefinish) / v - usesemifinish);
+					    	   		    				   if(pq < 0) pq = 0;
+					    	   		    				   e.up('form').down('textfield[name="quantity"]').setValue(pq);
 				    	   		    				   }
 						    	   		    		   win.down('textfield[name="quantity1"]').setValue(
-						    	   		 			   win.down('textfield[name="quantity"]').getValue()
+						    	   		    				   win.down('textfield[name="quantity"]').getValue()
 						    	   		 			   );
 					    	   		    		   }
 					    	   		    	   }
@@ -555,6 +611,9 @@ Ext.define('order.controller.c_order', {
 				win.down('textfield[name="ordernumber"]').setValue(data.data[0].number);
 				win.down('textfield[name="ordernumber"]').readOnly = true;
 				win.down('textfield[name="ordernumber"]').disable();
+				win.down('textfield[name="e_quantity"]').setValue(data.data[0].e_quantity);
+				win.down('textfield[name="e_quantity"]').readOnly = true;
+				win.down('textfield[name="e_quantity"]').disable();
 				win.down('textfield[name="creator"]').setRawValue(data.data[0].creator);
 				win.down('textfield[name="creator"]').readOnly = true;
 				win.down('textfield[name="creator"]').disable();
@@ -591,10 +650,8 @@ Ext.define('order.controller.c_order', {
 				win.down('textfield[name="requirement2"]').disable();
 				win.down('textfield[name="requirement4"]').setValue(data.data[0].requirement_4);
 				win.down('textfield[name="product_rate"]').setValue(data.data[0].product_rate);
-				win.down('textfield[name="e_quantity"]').setValue(data.data[0].e_quantity);
-				win.down('textfield[name="e_quantity"]').readOnly = true;
-				win.down('textfield[name="e_quantity"]').disable();
 				win.down('textfield[name="quantity"]').setValue(data.data[0].quantity);
+				win.down('button[text="查看库存"]').disable();
 				
 			}
     		else
@@ -761,16 +818,23 @@ Ext.define('order.controller.c_order', {
 	    	   		    	   listeners:{
 								   change: function(e, v)
 								   {
+									   var usefinish = win.down('textfield[name="use_finished"]').getValue();
+	    	   		    			   var usesemifinish = win.down('textfield[name="use_semi_finished"]').getValue();
+	    	   		    			   if(isNaN(usefinish))
+	    	   		    				   usefinish = 0;
+    	   		    				   if(isNaN(usesemifinish))
+    	   		    					   usesemifinish = 0;
+    	   		    				   
 									   var eq = e.up('form').down('textfield[name="product_rate"]').getValue();
-									   if(isNaN(eq) || isNaN(v) || v == 0)
+									   if(isNaN(eq) || isNaN(v) || v == 0 || eq == 0)
 									   {
 										   e.up('form').down('textfield[name="quantity"]').setValue(0);
 									   }
 									   else
 									   {
-										   e.up('form').down('textfield[name="quantity"]').setValue(
-												Math.ceil(v / eq)
-										   );
+										   var pq = Math.ceil((v - usefinish) / eq - usesemifinish);
+	    	   		    				   if(pq < 0) pq = 0;
+	    	   		    				   e.up('form').down('textfield[name="quantity"]').setValue(pq);
 									   }
 								   }
 	    	   		    	   }
@@ -834,16 +898,24 @@ Ext.define('order.controller.c_order', {
 					    	   		    	   listeners:{
 					    	   		    		   change: function(e, v)
 					    	   		    		   {
+					    	   		    			   var usefinish = win.down('textfield[name="use_finished"]').getValue();
+					    	   		    			   var usesemifinish = win.down('textfield[name="use_semi_finished"]').getValue();
+					    	   		    			   if(isNaN(usefinish))
+					    	   		    				   usefinish = 0;
+				    	   		    				   if(isNaN(usesemifinish))
+				    	   		    					   usesemifinish = 0;
+				    	   		    				   
 					    	   		    			   var eq = e.up('form').down('textfield[name="e_quantity"]').getValue();
-					    	   		    			   if(isNaN(eq) || isNaN(v) || v == 0)
+					    	   		    			   if(isNaN(eq) || isNaN(v) || v == 0 || eq == 0)
 				    	   		    				   {
 					    	   		    				   e.up('form').down('textfield[name="quantity"]').setValue(0);
 				    	   		    				   }
 					    	   		    			   else
 				    	   		    				   {
-					    	   		    				   e.up('form').down('textfield[name="quantity"]').setValue(
-					    	   		    						Math.ceil(eq / v)
-					    	   		    				   );
+					    	   		    				   //生产数量（自动生成）=（订单数量-使用成品数）/成品率 - 半成品数
+					    	   		    				   var pq = Math.ceil((eq - usefinish) / v - usesemifinish);
+					    	   		    				   if(pq < 0) pq = 0;
+					    	   		    				   e.up('form').down('textfield[name="quantity"]').setValue(pq);
 				    	   		    				   }
 					    	   		    		   }
 					    	   		    	   }

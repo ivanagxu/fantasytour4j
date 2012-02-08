@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import tk.solaapps.ohtune.model.Job;
 import tk.solaapps.ohtune.model.JobType;
 import tk.solaapps.ohtune.model.Order;
+import tk.solaapps.ohtune.model.Product;
 import tk.solaapps.ohtune.model.UserAC;
 import tk.solaapps.ohtune.pattern.JsonDataWrapper;
 import tk.solaapps.ohtune.pattern.JsonResponse;
@@ -220,6 +221,12 @@ public class JobController extends HttpServlet implements IOhtuneController{
 			}
 			if(alldone)
 			{
+				if(job.getOrders().getUse_finished() > 0)
+				{
+					Product p = service.getProductByName(job.getOrders().getProduct_name());
+					p.setFinished(p.getFinished() + job.getOrders().getUse_finished());
+					success = success & service.updateProduct(p);
+				}
 				success = success & service.completeOrder(job.getOrders(), sessionUser);
 			}
 			

@@ -536,6 +536,25 @@ public class OhtuneService extends OhtuneDA implements IOhtuneService {
 				jobs.get(i).setUserac(operator);
 				success = success & this.addJob(jobs.get(i));
 			}
+			if(order.getUse_semi_finished() > 0)
+			{
+				Job job = new Job();
+				job.setAssigned_to(null);
+				job.setComplete_date(null);
+				job.setDeadline(order.getDeadline());
+				job.setFinish_remark("");
+				job.setFinished(0);
+				job.setJob_type(this.getJobTypeByName(JobType.FINISH_SEMI_FINISH));
+				job.setOrders(order);
+				job.setPrevious_jobid(null);
+				job.setRemaining(order.getUse_semi_finished());
+				job.setStart_date(new Date());
+				job.setStatus(Job.STATUS_PROCESSING);
+				job.setTotal(order.getUse_semi_finished());
+				job.setTotal_rejected(0);
+				job.setUserac(operator);
+				success = success & this.addJob(job);
+			}
 			return success;
 		}
 		else
@@ -566,7 +585,7 @@ public class OhtuneService extends OhtuneDA implements IOhtuneService {
 		OhtuneLogger.info("Cancel order, number=" + order.getNumber() + " by " + operator.getLogin_id());
 		
 		Product product = this.getProductByName(order.getProduct_name());
-		if(product != null && !order.getStatus().equals(Order.STATUS_APPROVING))
+		if(product != null && !order.getStatus().equals(Order.STATUS_APPROVING) && !order.getStatus().equals(Order.STATUS_FINISHED))
 		{
 			product.setFinished(product.getFinished() + order.getUse_finished());
 			product.setSemi_finished(product.getSemi_finished() + order.getUse_semi_finished());
