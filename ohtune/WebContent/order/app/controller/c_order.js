@@ -255,15 +255,15 @@ Ext.define('order.controller.c_order', {
 												columns : [ {
 													header : '订单号',
 													dataIndex : 'order_number'
-												}, {
-													header : '客户料号',
-													dataIndex : 'product_name'
-												}, {
+												},{
 													header : '料号',
 													dataIndex : 'product_our_name'
 												}, {
 													header : '成品率',
 													dataIndex : 'rate'
+												},{
+													header : '备注',
+													dataIndex : 'remark'
 												}],
 												height : 280,
 												renderTo : Ext.getBody()
@@ -1144,7 +1144,70 @@ Ext.define('order.controller.c_order', {
 							{
 								text : '减数',
 								type : 'button',
-								disabled : location.href.indexOf("order.jsp") >= 0
+								disabled : location.href.indexOf("order.jsp") >= 0,
+								handler : function()
+								{
+									var selectedJob;
+									selectedJob = Ext.getCmp('job-grid').getSelectionModel().getSelection();
+									if(selectedJob.length == 0)
+									{
+										Ext.Msg.alert("减数结果", "请选择要减数的工作");
+										return;
+									}
+									var jobWin = Ext.create('Ext.window.Window', {
+										title : '减数详细' ,
+										height : 150,
+										width : 320,
+										layout : 'fit',
+										modal: true,
+										items : [ Ext.create('Ext.form.Panel', {
+											layout : 'anchor',
+											border : false,
+											containScroll : true,
+											autoScroll : true,
+											defaults : {
+												anchor : '98%'
+											},
+											items : [ 
+								            {
+								            	xtype : 'hiddenfield',
+								            	name : 'id',
+								            	value : selectedJob[0].data.id
+								            }, {
+												xtype : 'textfield',
+												anchor : '98%',
+												fieldLabel : '减去数量 *',
+												name : 'delete_count'
+											}],
+											buttons : [ {
+												text : '确定',
+												handler : function() {
+													var form = this.up('form').getForm();
+													form.submit({
+														url : 'JobController?action=deleteJobFromOrder',
+														success : function(form, resp) {
+															Ext.Msg.alert('减数结果', resp.result.msg);
+															Ext.data.StoreManager.lookup('jobStore').load();
+															jobWin.close();
+															GetJsonData("OrderController?action=getOrderById",{id: selected[0].data.id}, fillOrderForm);
+														},
+														failure : function(form, resp) {
+															Ext.Msg.alert('减数结果', resp.result.msg);
+															Ext.data.StoreManager.lookup('jobStore').load();
+															GetJsonData("OrderController?action=getOrderById",{id: selected[0].data.id}, fillOrderForm);
+														}
+													});
+												}
+											}, {
+												text : '取消',
+												handler : function() {
+													jobWin.close();
+												}
+											} ]
+										}) ]
+									});
+									jobWin.show();
+								}
 							}]
 						}) 
 					]

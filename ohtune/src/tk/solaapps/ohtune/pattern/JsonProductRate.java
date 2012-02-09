@@ -8,6 +8,7 @@ public class JsonProductRate {
 	private String product_name;
 	private String product_our_name;
 	private String rate;
+	private String remark;
 	public JsonProductRate(ProductRate rate)
 	{
 		if(rate.getOrder() == null)
@@ -26,5 +27,6 @@ public class JsonProductRate {
 			this.product_our_name = rate.getProduct().getOur_name();
 		}
 		this.rate = rate.getRate();
+		this.remark = rate.getOrder() == null ? "" : rate.getOrder().getRequirement_4();
 	}
 }

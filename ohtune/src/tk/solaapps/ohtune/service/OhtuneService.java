@@ -1,7 +1,7 @@
 package tk.solaapps.ohtune.service;
 
 import java.io.File;
-import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -413,7 +413,8 @@ public class OhtuneService extends OhtuneDA implements IOhtuneService {
 		List<Job> jobs;
 		int total;
 		int finished;
-		DecimalFormat twoDForm = new DecimalFormat("#.##");
+		NumberFormat percentFormatter =
+		        NumberFormat.getPercentInstance();
 		for(int i = 0 ; i < orders.size(); i++)
 		{
 			total = orders.get(i).getQuantity();
@@ -427,11 +428,21 @@ public class OhtuneService extends OhtuneDA implements IOhtuneService {
 					finished += jobs.get(j).getTotal();
 				}
 			}
-			double dRate = (double)(((double)finished) / ((double)total));
-			rate = new ProductRate();
-			rate.setOrder(orders.get(i));
-			rate.setProduct(this.getProductByName(orders.get(i).getProduct_name()));
-			rate.setRate("" + (Double.valueOf(twoDForm.format(dRate * 100))) + "%");
+			if(total == 0)
+			{
+				rate = new ProductRate();
+				rate.setOrder(orders.get(i));
+				rate.setProduct(this.getProductByName(orders.get(i).getProduct_name()));
+				rate.setRate("N/A");
+			}
+			else
+			{
+				double dRate = (double)(((double)finished) / ((double)total));
+				rate = new ProductRate();
+				rate.setOrder(orders.get(i));
+				rate.setProduct(this.getProductByName(orders.get(i).getProduct_name()));
+				rate.setRate(percentFormatter.format(dRate));	
+			}
 			rates.add(rate);
 		}
 		return rates;

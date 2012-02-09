@@ -1,6 +1,7 @@
 package tk.solaapps.ohtune.controller;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -69,6 +70,14 @@ public class JobController extends HttpServlet implements IOhtuneController{
 		else if(actionName.equals("completeJob"))
 		{
 			completeJob(request,response);
+		}
+		else if(actionName.equals("addJobToOrder"))
+		{
+			deleteJobFromOrder(request, response);
+		}
+		else if(actionName.equals("deleteJobFromOrder"))
+		{
+			deleteJobFromOrder(request, response);
 		}
 		else
 		{
@@ -231,6 +240,107 @@ public class JobController extends HttpServlet implements IOhtuneController{
 			}
 			
 			jr = service.genJsonResponse(success, success ? "工作移交成功" : "工作移交失败", null);
+			response.getOutputStream().write(gson.toJson(jr).getBytes("utf-8"));
+		}
+		catch(RuntimeException e)
+		{
+			jr = service.genJsonResponse(false, e.getMessage(), null);
+			response.getOutputStream().write(gson.toJson(jr).getBytes("utf-8"));
+		}
+	}
+	
+	private void deleteJobFromOrder(HttpServletRequest request, HttpServletResponse response) throws IOException
+	{
+		UserAC sessionUser = new UserAC();
+		if(request.getSession().getAttribute("user") != null)
+			sessionUser = (UserAC)request.getSession().getAttribute("user");
+		
+		String sId = request.getParameter("id");
+		String sDeleteCount = "0" + request.getParameter("delete_count");
+		int iDeleteCount;
+		
+		IOhtuneService service = (IOhtuneService)OhtuneServiceHolder.getInstence().getBeanFactory().getBean("uhtuneService");
+		
+		JsonResponse jr = null;
+		Gson gson = service.getGson();
+		
+		Job job = service.getJobById(Long.parseLong(sId));
+		try
+		{
+			iDeleteCount = Integer.parseInt(sDeleteCount);
+		}
+		catch(Exception e)
+		{
+			jr = service.genJsonResponse(false, "减数数量错误", null);
+			response.getOutputStream().write(gson.toJson(jr).getBytes("utf-8"));
+			return;
+		}
+		
+		try
+		{
+			boolean success = true;
+			Order order = service.getOrderById(job.getOrders().getId());
+			
+			if(!order.getStatus().equals(Order.STATUS_PROCESSING) || !job.getStatus().equals(Job.STATUS_PROCESSING))
+			{
+				jr = service.genJsonResponse(false, "减数的订单必须时进行中的订单而且被减的工作必须是进行中的", null);
+				response.getOutputStream().write(gson.toJson(jr).getBytes("utf-8"));
+				return;
+			}
+			
+			JobType jt = job.getJob_type();
+			if(jt.getName().equals(JobType.FINISH_DEPOT) || jt.getName().equals(JobType.FINISH_SEMI_FINISH))
+			{
+				jr = service.genJsonResponse(false, "减数的部门不能是仓库或者半成品仓库", null);
+				response.getOutputStream().write(gson.toJson(jr).getBytes("utf-8"));
+				return;
+			}
+			
+			if(iDeleteCount > job.getRemaining() || order.getE_quantity() > (order.getQuantity() - iDeleteCount))
+			{
+				jr = service.genJsonResponse(false, "减数数量不能超过该工作剩余数量, 也不能让减数后生产数量小于订单数量", null);
+				response.getOutputStream().write(gson.toJson(jr).getBytes("utf-8"));
+				return;
+			}
+			
+			order.setQuantity(order.getQuantity() - iDeleteCount);
+			
+			order.setProduct_rate(((float)order.getE_quantity()) / ((float)order.getQuantity()));
+			
+			success = success & service.updateOrder(order);
+			job.setRemaining(job.getRemaining() - iDeleteCount);
+			job.setTotal(job.getTotal() - iDeleteCount);
+			
+			if(job.getRemaining() == 0)
+			{
+				success = success & service.completeJob(job, null, JobType.FINISH_DEPOT, 0, 0, true, false, "减数", sessionUser);
+			}
+			else
+			{
+				success = success & service.updateJob(job);
+			}
+			
+			boolean alldone = true;
+			List<Job> jobByOrder = service.getJobByOrder(job.getOrders());
+			for(int i = 0 ; i < jobByOrder.size(); i++)
+			{
+				if(!jobByOrder.get(i).getStatus().equals(Job.STATUS_DONE))
+				{
+					alldone = false;
+				}
+			}
+			if(alldone)
+			{
+				if(job.getOrders().getUse_finished() > 0)
+				{
+					Product p = service.getProductByName(job.getOrders().getProduct_name());
+					p.setFinished(p.getFinished() + job.getOrders().getUse_finished());
+					success = success & service.updateProduct(p);
+				}
+				success = success & service.completeOrder(job.getOrders(), sessionUser);
+			}
+			
+			jr = service.genJsonResponse(success, success ? "减数成功" : "减数失败", null);
 			response.getOutputStream().write(gson.toJson(jr).getBytes("utf-8"));
 		}
 		catch(RuntimeException e)

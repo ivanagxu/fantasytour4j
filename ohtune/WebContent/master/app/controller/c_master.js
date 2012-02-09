@@ -210,7 +210,7 @@ Ext.define('master.controller.c_master', {
 		//ProductRate Data
 		Ext.define('ProductRate', {
 			extend : 'Ext.data.Model',
-			fields : ['order_number','product_name', 'product_our_name', 'rate']
+			fields : ['order_number','product_name', 'product_our_name', 'rate', 'remark']
 		});
 		
 		//ProductionLog Data

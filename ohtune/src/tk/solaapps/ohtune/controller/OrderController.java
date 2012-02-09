@@ -906,6 +906,7 @@ public class OrderController extends HttpServlet implements IOhtuneController{
 		if(success)
 		{
 			order.setQuantity(order.getQuantity() + iQuantity);
+			order.setProduct_rate(((float)order.getE_quantity()) / ((float)order.getQuantity()));
 			//order.setE_quantity(order.getE_quantity() + (int)Math.ceil(iQuantity * order.getProduct_rate()));
 			success = success & service.updateOrder(order);
 		}
