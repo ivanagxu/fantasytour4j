@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello</string>
+    <string name="app_name">Mobile Achievement</string>
+    <string name="reload">Reload</string>
+    <string name="ach_battery_full">Battery full</string>
+    <string name="ach_contact_10">Contact 10</string>
+    <string name="ach_contact_50">Contact 50</string>
+    <string name="ach_contact_100">Contact 100</string>
+
+</resources>

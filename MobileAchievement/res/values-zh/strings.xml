@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">你好</string>
+    <string name="app_name">移动成就系统</string>
+    <string name="reload">重新载入</string>
+    <string name="ach_battery_full">充满电源</string>
+    <string name="ach_contact_10">联系人10</string>
+    <string name="ach_contact_50">联系人50</string>
+    <string name="ach_contact_100">联系人100</string>
+
+</resources>
