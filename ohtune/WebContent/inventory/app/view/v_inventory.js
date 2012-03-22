@@ -17,7 +17,6 @@ Ext.define('inventory.view.v_inventory', {
 				title : '产品管理',
 				items : [ Ext.create('Ext.grid.Panel', {
 					id : 'inventory-grid',
-					height : 500,
 					store : Ext.data.StoreManager.lookup('allProductStore'),
 					selModel : sm1,
 					columns : [ {

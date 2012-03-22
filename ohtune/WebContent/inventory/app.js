@@ -8,7 +8,6 @@ Ext.application({
 	controllers : [ 'c_inventory' ],
 	launch : function() {
 		Ext.create('Ext.container.Viewport', {
-			layout : 'fit',
 			items : [ {
 				xtype : 'panel',
 				items : [ {

@@ -22,7 +22,6 @@ Ext.define('admin.view.v_admin', {
 				title : '产品管理',
 				items : [ Ext.create('Ext.grid.Panel', {
 					id : 'product-grid',
-					height : 500,
 					store : Ext.data.StoreManager.lookup('allProductStore'),
 					selModel : sm1,
 					columns : [ {
@@ -96,7 +95,6 @@ Ext.define('admin.view.v_admin', {
 				items : [ 
 		        Ext.create('Ext.grid.Panel', { 
 		        	id : 'customer-grid',
-		        	height: 500,
 		        	store: Ext.data.StoreManager.lookup('allCustomerStore'),
 		        	selModel : sm2,
 		        	columns : [ {
@@ -146,7 +144,6 @@ Ext.define('admin.view.v_admin', {
 				items : [ 
 			        Ext.create('Ext.grid.Panel', { 
 			        	id : 'user-grid',
-			        	height: 500,
 			        	containScroll: true,
 			        	autoScroll: true,
 			        	store: Ext.data.StoreManager.lookup('allUserACStore'),
@@ -224,7 +221,6 @@ Ext.define('admin.view.v_admin', {
 	        	autoScroll: true,
 				items : [ Ext.create('Ext.grid.Panel', { 
 		        	id : 'mold-grid',
-		        	height: 500,
 		        	store: Ext.data.StoreManager.lookup('allMoldStore'),
 		        	selModel : sm4,
 		        	columns : [ {
@@ -254,7 +250,6 @@ Ext.define('admin.view.v_admin', {
 	        	autoScroll: true,
 				items : [ Ext.create('Ext.grid.Panel', { 
 		        	id : 'document-grid',
-		        	height: 500,
 		        	store: Ext.data.StoreManager.lookup('documentStore'),
 		        	selModel : sm5,
 		        	columns : [ {

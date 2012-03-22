@@ -34,7 +34,6 @@ Ext.define('productionlog.view.v_productionlog', {
 	        	autoScroll: true,
 				items : [ Ext.create('Ext.grid.Panel', { 
 		        	id : 'productlog-grid',
-		        	height: 500,
 		        	store: Ext.data.StoreManager.lookup('productionLogStore'),
 		        	columns : [{
 						header : '料号',

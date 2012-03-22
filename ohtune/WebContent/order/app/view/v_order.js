@@ -202,7 +202,6 @@ Ext.define('order.view.v_order', {
 					                type: 'string'
 					            }
 							}],
-							height : 500,
 							renderTo : Ext.getBody(),
 							tbar : [ {
 								xtype : 'button',
@@ -372,7 +371,6 @@ Ext.define('order.view.v_order', {
 					                type: 'string'
 					            }
 							}],
-							height : 500,
 							renderTo : Ext.getBody(),
 							tbar : [{
 								xtype : 'button',

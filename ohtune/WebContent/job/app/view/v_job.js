@@ -218,7 +218,6 @@ Ext.define('job.view.v_job', {
 					                type: 'string'
 					            }
 							}],
-							height : 500,
 							renderTo : Ext.getBody(),
 							tbar : [ {
 								text : '移交工作',
@@ -253,7 +252,6 @@ Ext.define('job.view.v_job', {
 		        	autoScroll: true,
 					items : [ Ext.create('Ext.grid.Panel', { 
 			        	id : 'mold-grid',
-			        	height: 500,
 			        	store: Ext.data.StoreManager.lookup('allMoldStore'),
 			        	selModel : sm2,
 			        	columns : [ {
