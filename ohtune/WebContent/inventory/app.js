@@ -8,6 +8,8 @@ Ext.application({
 	controllers : [ 'c_inventory' ],
 	launch : function() {
 		Ext.create('Ext.container.Viewport', {
+			containScroll : true,
+			autoScroll : true,
 			items : [ {
 				xtype : 'panel',
 				items : [ {

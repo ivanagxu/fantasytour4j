@@ -9,6 +9,8 @@ Ext.application({
 	
 	launch : function() {
 		Ext.create('Ext.container.Viewport', {
+			containScroll : true,
+			autoScroll : true,
 			items : [ {
 				xtype : 'panel',
 				items : [ {

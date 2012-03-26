@@ -75,7 +75,7 @@ Ext.define('order.controller.c_order', {
 							fieldLabel : '订单号',
 							name : 'ordernumber',
 							readOnly : true,
-							hidden: true,
+							hidden: true
 						}, Ext.create('Ext.form.ComboBox', {
 							fieldLabel : '跟单人员 *',
 							editable : false,
@@ -356,7 +356,7 @@ Ext.define('order.controller.c_order', {
 							grow : true,
 							name : 'requirement3',
 							fieldLabel : '其他要求',
-							hidden: true,
+							hidden: true
 						}, {
 							xtype : 'textareafield',
 							grow : true,
