@@ -451,9 +451,9 @@ public class OrderController extends HttpServlet implements IOhtuneController{
 		IOhtuneService service = (IOhtuneService) OhtuneServiceHolder
 				.getInstence().getBeanFactory().getBean("uhtuneService");
 		
-		String sRequirement1 = request.getParameter("requirement1");
-		String sRequirement2 = request.getParameter("requirement2");
-		String sRequirement3 = request.getParameter("requirement3");
+		//String sRequirement1 = request.getParameter("requirement1");
+		//String sRequirement2 = request.getParameter("requirement2");
+		//String sRequirement3 = request.getParameter("requirement3");
 		String sRequirement4 = request.getParameter("requirement4");
 		String sJobType1 = request.getParameter("job_type1");
 		String sJobType2 = request.getParameter("job_type2");
@@ -560,9 +560,9 @@ public class OrderController extends HttpServlet implements IOhtuneController{
 		}
 		
 		order.setPriority(((sPriority.equals("紧急") || sPriority.equals("1"))) ? 1: 0);
-		order.setRequirement_1(sRequirement1);
-		order.setRequirement_2(sRequirement2);
-		order.setRequirement_3(sRequirement3);
+		//order.setRequirement_1(sRequirement1);
+		//order.setRequirement_2(sRequirement2);
+		//order.setRequirement_3(sRequirement3);
 		order.setRequirement_4(sRequirement4);
 		
 		List<JobType> jobTypes = new ArrayList<JobType>();
