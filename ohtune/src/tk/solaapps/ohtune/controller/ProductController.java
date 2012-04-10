@@ -124,6 +124,7 @@ public class ProductController extends HttpServlet implements IOhtuneController 
 		Gson gson = service.getGson();
 		JsonDataWrapper dw = new JsonDataWrapper(products,
 				JsonDataWrapper.TYPE_PRODUCT);
+		UtilityFunc.fillImageDrawingForProduct(dw.getData(), service);
 		response.getOutputStream().write(gson.toJson(dw).getBytes("utf-8"));
 	}
 	
@@ -144,6 +145,10 @@ public class ProductController extends HttpServlet implements IOhtuneController 
 		try {
 
 			Product product = new Product();
+			product.setImage("");
+			product.setDrawing("");
+			boolean updateImage = false;
+			boolean updateDrawing = false;
 			
 			List<FileItem> items = uploadHandler.parseRequest(request);
 
@@ -200,14 +205,15 @@ public class ProductController extends HttpServlet implements IOhtuneController 
 					try
 					{
 						String fileName = new String(item.getName().getBytes(), "utf-8");
+						long size = item.getSize();
 						fileName = System.currentTimeMillis() + "." +  fileName.substring(fileName.lastIndexOf(".") + 1).toLowerCase();
-						if(item.getFieldName().equals("image"))
+						if(item.getFieldName().equals("image") && size > 0)
 						{
 							File file = new File(service.getSystemConfig()
 									.getProductImageFolder(), fileName);
 							item.write(file);
 							product.setImage(file.getAbsolutePath());
-							
+							updateImage = true;
 							try
 							{
 								UtilityFunc.compressImage(1024, 768, file.getAbsolutePath());
@@ -217,13 +223,13 @@ public class ProductController extends HttpServlet implements IOhtuneController 
 								OhtuneLogger.error(e, "Compress image :" + file.getAbsolutePath() + " failed");
 							}
 						}
-						else if(item.getFieldName().equals("drawing"))
+						else if(item.getFieldName().equals("drawing") && size > 0)
 						{	
 							File file = new File(service.getSystemConfig()
 									.getProductDrawingFolder(), fileName);
 							item.write(file);
 							product.setDrawing(file.getAbsolutePath());
-							
+							updateDrawing = true;
 							try
 							{
 								UtilityFunc.compressImage(1024, 768, file.getAbsolutePath());
@@ -263,20 +269,30 @@ public class ProductController extends HttpServlet implements IOhtuneController 
 				
 				Mold mold = service.getMoldByCode(product.getMold().getCode());
 				product.setMold(mold);
+				
+				if(updateImage)
+				{
+					File file = new File("" + oldProduct.getImage());
+					if(file.exists())
+						file.delete();
+				}
+				else
+				{
+					product.setImage(oldProduct.getImage());
+				}
+				
+				if(updateDrawing)
+				{
+					File file = new File("" + oldProduct.getDrawing());
+					if(file.exists())
+						file.delete();
+				}
+				else
+				{
+					product.setDrawing(oldProduct.getDrawing());
+				}
 				boolean success = service.updateProduct(product);
 				
-				if(success && oldProduct.getImage() != null)
-				{
-					File file = new File(oldProduct.getImage());
-					if(file.exists())
-						file.delete();
-				}
-				if(success && oldProduct.getDrawing() != null)
-				{
-					File file = new File(oldProduct.getDrawing());
-					if(file.exists())
-						file.delete();
-				}
 				response.setContentType("text/html");
 				response.setCharacterEncoding("utf-8");
 				JsonResponse jr = service.genJsonResponse(success,
@@ -311,6 +327,8 @@ public class ProductController extends HttpServlet implements IOhtuneController 
 		try {
 
 			Product product = new Product();
+			product.setImage("");
+			product.setDrawing("");
 			
 			List<FileItem> items = uploadHandler.parseRequest(request);
 
@@ -367,8 +385,9 @@ public class ProductController extends HttpServlet implements IOhtuneController 
 					try
 					{
 						String fileName = new String(item.getName().getBytes(), "utf-8");
+						long size = item.getSize();
 						fileName = System.currentTimeMillis() + "." +  fileName.substring(fileName.lastIndexOf(".") + 1).toLowerCase();
-						if(item.getFieldName().equals("image"))
+						if(item.getFieldName().equals("image") && size > 0)
 						{
 							File file = new File(service.getSystemConfig()
 									.getProductImageFolder(), fileName);
@@ -377,14 +396,14 @@ public class ProductController extends HttpServlet implements IOhtuneController 
 							
 							try
 							{
-								UtilityFunc.compressImage(1024, 768, file.getAbsolutePath());
+								UtilityFunc.compressImage(1280, 800, file.getAbsolutePath());
 							}
 							catch(Exception e)
 							{
 								OhtuneLogger.error(e, "Compress image :" + file.getAbsolutePath() + " failed");
 							}
 						}
-						else if(item.getFieldName().equals("drawing"))
+						else if(item.getFieldName().equals("drawing") && size > 0)
 						{	
 							File file = new File(service.getSystemConfig()
 									.getProductDrawingFolder(), fileName);
@@ -393,7 +412,7 @@ public class ProductController extends HttpServlet implements IOhtuneController 
 							
 							try
 							{
-								UtilityFunc.compressImage(1024, 768, file.getAbsolutePath());
+								UtilityFunc.compressImage(1280, 800, file.getAbsolutePath());
 							}
 							catch(Exception e)
 							{

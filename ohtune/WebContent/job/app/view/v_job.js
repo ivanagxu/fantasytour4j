@@ -51,6 +51,7 @@ Ext.define('job.view.v_job', {
 					items : [
 						Ext.create('Ext.grid.Panel', {
 							id : 'job-grid',
+							height : GET_HEIGHT(), 
 							store : Ext.data.StoreManager.lookup('jobStore'),
 							selModel : sm,
 							columns : [ {
@@ -156,17 +157,23 @@ Ext.define('job.view.v_job', {
 					            }
 							}, {
 								header : '产品图片',
-								dataIndex : 'product_image',
+								dataIndex : 'image',
 								renderer: function(val)
 								{
-									return '<a target="_blank" onclick=DISPLAY_IMAGE_WINDOW("ProductController?action=getProductImage&name=' + val + '")><img src="resources/images/picture.png"/></a>';
+									if(val == '')
+										return '';
+									else
+										return '<a target="_blank" onclick=DISPLAY_IMAGE_WINDOW("ProductController?action=getProductImage&name=' + val + '")><img src="resources/images/picture.png"/></a>';
 								}
 							}, {
 								header : '产品图纸',
-								dataIndex : 'product_drawing',
+								dataIndex : 'drawing',
 								renderer: function(val)
 								{
-									return '<a target="_blank" onclick=DISPLAY_IMAGE_WINDOW("ProductController?action=getProductDrawing&name=' + val + '")><img src="resources/images/picture.png"/></a>';
+									if(val == '')
+										return '';
+									else
+										return '<a target="_blank" onclick=DISPLAY_IMAGE_WINDOW("ProductController?action=getProductDrawing&name=' + val + '")><img src="resources/images/picture.png"/></a>';
 								}
 							}, {
 								header : '当天',
@@ -248,8 +255,7 @@ Ext.define('job.view.v_job', {
 					]
 				},{
 					title: '模具管理',
-					containScroll: true,
-		        	autoScroll: true,
+					height : GET_HEIGHT(), 
 					items : [ Ext.create('Ext.grid.Panel', { 
 			        	id : 'mold-grid',
 			        	store: Ext.data.StoreManager.lookup('allMoldStore'),

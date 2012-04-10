@@ -17,6 +17,7 @@ Ext.define('inventory.view.v_inventory', {
 				title : '产品管理',
 				items : [ Ext.create('Ext.grid.Panel', {
 					id : 'inventory-grid',
+					height : GET_HEIGHT(), 
 					store : Ext.data.StoreManager.lookup('allProductStore'),
 					selModel : sm1,
 					columns : [ {
@@ -40,17 +41,23 @@ Ext.define('inventory.view.v_inventory', {
 						hidden : true
 					}, {
 						header : '产品图片',
-						dataIndex : 'name',
+						dataIndex : 'image',
 						renderer: function(val)
 						{
-							return '<a target="_blank" onclick=DISPLAY_IMAGE_WINDOW("ProductController?action=getProductImage&name=' + val + '")><img src="resources/images/picture.png"/></a>';
+							if(val == '')
+								return '';
+							else
+								return '<a target="_blank" onclick=DISPLAY_IMAGE_WINDOW("ProductController?action=getProductImage&name=' + val + '")><img src="resources/images/picture.png"/></a>';
 						}
 					}, {
 						header : '产品图纸',
-						dataIndex : 'name',
+						dataIndex : 'drawing',
 						renderer: function(val)
 						{
-							return '<a target="_blank" onclick=DISPLAY_IMAGE_WINDOW("ProductController?action=getProductDrawing&name=' + val + '")><img src="resources/images/picture.png"/></a>';
+							if(val == '')
+								return '';
+							else
+								return '<a target="_blank" onclick=DISPLAY_IMAGE_WINDOW("ProductController?action=getProductDrawing&name=' + val + '")><img src="resources/images/picture.png"/></a>';
 						}
 					}, {
 						header : '已有半成品',

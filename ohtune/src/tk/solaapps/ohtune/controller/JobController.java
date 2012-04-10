@@ -20,6 +20,7 @@ import tk.solaapps.ohtune.pattern.JsonResponse;
 import tk.solaapps.ohtune.pattern.OhtuneLogger;
 import tk.solaapps.ohtune.pattern.OhtuneServiceHolder;
 import tk.solaapps.ohtune.service.IOhtuneService;
+import tk.solaapps.ohtune.util.UtilityFunc;
 
 import com.google.gson.Gson;
 
@@ -96,6 +97,9 @@ public class JobController extends HttpServlet implements IOhtuneController{
 		List<Job> jobs = service.getMyJobList(sessionUser);
 		Gson gson = service.getGson();
 		JsonDataWrapper dw = new JsonDataWrapper(jobs, JsonDataWrapper.TYPE_JOB);
+		
+		UtilityFunc.fillImageDrawingForJob(dw.getData(), service);
+		
 		response.getOutputStream().write(gson.toJson(dw).getBytes("utf-8"));
 	}
 	

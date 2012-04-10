@@ -5,41 +5,44 @@ import java.util.Date;
 import tk.solaapps.ohtune.model.Job;
 
 public class JsonJob {
-	private Long order_id;
-	private Long id;
-	private String number;
-	private String order_user;
-	private String customer_name;
-	private String customer_code;
-	private String product_name;
-	private String product_our_name;
+	public Long order_id;
+	public Long id;
+	public String number;
+	public String order_user;
+	public String customer_name;
+	public String customer_code;
+	public String product_name;
+	public String product_our_name;
 	
-	private String requirement1;
-	private String requirement2;
+	public String requirement1;
+	public String requirement2;
 	
-	private Integer total;
-	private Integer remaining;
-	private Date order_deadline;
-	private Date order_c_deadline;
-	private Date start_date;
-	private Date complete_date;
-	private String section;
-	private String order_status;
-	private String order_remark;
+	public Integer total;
+	public Integer remaining;
+	public Date order_deadline;
+	public Date order_c_deadline;
+	public Date start_date;
+	public Date complete_date;
+	public String section;
+	public String order_status;
+	public String order_remark;
 	
-	private boolean isNew;
+	public boolean isNew;
 	
-	private Integer finished;
-	private Integer finished_remark;
-	private String status;
-	private String handled_by;
-	private String product_image;
-	private String product_drawing;
+	public Integer finished;
+	public Integer finished_remark;
+	public String status;
+	public String handled_by;
+	public String product_image;
+	public String product_drawing;
 	
-	private Integer total_rejected;
-	private String assigned_to;
+	public Integer total_rejected;
+	public String assigned_to;
 	
-	private Integer priority;
+	public Integer priority;
+	
+	public String image = "";
+	public String drawing = "";
 	
 	public JsonJob(Job job)
 	{

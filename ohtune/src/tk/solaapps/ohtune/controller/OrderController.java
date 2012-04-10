@@ -21,10 +21,12 @@ import tk.solaapps.ohtune.model.Order;
 import tk.solaapps.ohtune.model.Product;
 import tk.solaapps.ohtune.model.UserAC;
 import tk.solaapps.ohtune.pattern.JsonDataWrapper;
+import tk.solaapps.ohtune.pattern.JsonOrder;
 import tk.solaapps.ohtune.pattern.JsonResponse;
 import tk.solaapps.ohtune.pattern.OhtuneLogger;
 import tk.solaapps.ohtune.pattern.OhtuneServiceHolder;
 import tk.solaapps.ohtune.service.IOhtuneService;
+import tk.solaapps.ohtune.util.UtilityFunc;
 
 import com.google.gson.Gson;
 
@@ -158,6 +160,9 @@ public class OrderController extends HttpServlet implements IOhtuneController{
 		
 		List<Order> orders = service.searchOrder(null, null ,inClause,in, 0, 10000, "id", true);
 		JsonDataWrapper dw = new JsonDataWrapper(orders, JsonDataWrapper.TYPE_ORDER);
+		
+		UtilityFunc.fillImageDrawingForOrder(dw.getData(), service);
+		
 		response.getOutputStream().write(gson.toJson(dw).getBytes("utf-8"));
 	}
 	private void getCompletedOrderList(HttpServletRequest request, HttpServletResponse response) throws IOException
@@ -179,6 +184,9 @@ public class OrderController extends HttpServlet implements IOhtuneController{
 		
 		List<Order> orders = service.searchOrder(null, null ,inClause,in, 0, 10000, "id", true);
 		JsonDataWrapper dw = new JsonDataWrapper(orders, JsonDataWrapper.TYPE_ORDER);
+		
+		UtilityFunc.fillImageDrawingForOrder(dw.getData(), service);
+		
 		response.getOutputStream().write(gson.toJson(dw).getBytes("utf-8"));
 	}
 	private void updateOrder(HttpServletRequest request, HttpServletResponse response) throws IOException
@@ -280,8 +288,10 @@ public class OrderController extends HttpServlet implements IOhtuneController{
 		order.setPriority(iPriority);
 		
 		order.setCreator(sCreator);
-		order.setCustomer_code(sCustomerName);
-		order.setCustomer_name(sCustomerCode);
+		//order.setCustomer_code(sCustomerName);
+		//order.setCustomer_name(sCustomerCode);
+		order.setCustomer_code(sCustomerCode);
+		order.setCustomer_name(sCustomerName);
 		try
 		{
 			order.setDeadline(new SimpleDateFormat("yyyy-MM-dd").parse(sDeadline));

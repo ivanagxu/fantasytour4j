@@ -20,6 +20,7 @@ Ext.define('document.view.v_document', {
 	        	autoScroll: true,
 				items : [ Ext.create('Ext.grid.Panel', { 
 		        	id : 'document-grid',
+		        	height : GET_HEIGHT(), 
 		        	store: Ext.data.StoreManager.lookup('documentStore'),
 		        	selModel : sm5,
 		        	columns : [ {

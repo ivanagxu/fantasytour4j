@@ -17,6 +17,7 @@ import tk.solaapps.ohtune.pattern.JsonDataWrapper;
 import tk.solaapps.ohtune.pattern.OhtuneLogger;
 import tk.solaapps.ohtune.pattern.OhtuneServiceHolder;
 import tk.solaapps.ohtune.service.IOhtuneService;
+import tk.solaapps.ohtune.util.UtilityFunc;
 
 import com.google.gson.Gson;
 
@@ -108,6 +109,7 @@ public class ReportController extends HttpServlet implements IOhtuneController{
 		Gson gson = service.getGson();
 		
 		JsonDataWrapper dw = new JsonDataWrapper(logs, JsonDataWrapper.TYPE_DEFAULT);
+		UtilityFunc.fillImageDrawingForProductLog(dw.getData(), service);
 		response.getOutputStream().write(gson.toJson(dw).getBytes("utf-8"));
 	}
 }

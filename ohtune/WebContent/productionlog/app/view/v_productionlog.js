@@ -30,8 +30,7 @@ Ext.define('productionlog.view.v_productionlog', {
 			anchor : '100%',
 			items : [{
 				title : '生产记录',
-				containScroll: true,
-	        	autoScroll: true,
+				height : GET_HEIGHT(), 
 				items : [ Ext.create('Ext.grid.Panel', { 
 		        	id : 'productlog-grid',
 		        	store: Ext.data.StoreManager.lookup('productionLogStore'),
@@ -47,6 +46,34 @@ Ext.define('productionlog.view.v_productionlog', {
 					}, {
 						header : '返工数',
 						dataIndex : 'rejected'
+					}, {
+						header : '订单',
+						dataIndex : 'orders',
+						width : 400
+					}, {
+						header : '生产期限',
+						dataIndex : 'deadlines',
+						width : 400
+					}, {
+						header : '产品图片',
+						dataIndex : 'image',
+						renderer: function(val)
+						{
+							if(val == '')
+								return '';
+							else
+								return '<a target="_blank" onclick=DISPLAY_IMAGE_WINDOW("ProductController?action=getProductImage&name=' + val + '")><img src="resources/images/picture.png"/></a>';
+						}
+					}, {
+						header : '产品图纸',
+						dataIndex : 'drawing',
+						renderer: function(val)
+						{
+							if(val == '')
+								return '';
+							else
+								return '<a target="_blank" onclick=DISPLAY_IMAGE_WINDOW("ProductController?action=getProductDrawing&name=' + val + '")><img src="resources/images/picture.png"/></a>';
+						}
 					}],
 					tbar : [
 					    {

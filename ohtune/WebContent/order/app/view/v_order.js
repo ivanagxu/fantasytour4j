@@ -69,7 +69,6 @@ Ext.define('order.view.v_order', {
 				}
 			}
 		});
-		
 		var sm = Ext.create('Ext.selection.CheckboxModel',{mode : 'SINGLE'});
 		var sm2 = Ext.create('Ext.selection.CheckboxModel',{mode : 'SINGLE'});
 		this.items = [
@@ -81,6 +80,7 @@ Ext.define('order.view.v_order', {
 					items : [
 						Ext.create('Ext.grid.Panel', {
 							id : 'order-grid',
+							height : GET_HEIGHT(),  
 							store : Ext.data.StoreManager.lookup('orderStore'),
 							selModel : sm,
 							columns : [
@@ -177,17 +177,23 @@ Ext.define('order.view.v_order', {
 					            }
 							}, {
 								header : '产品图片',
-								dataIndex : 'product_name',
+								dataIndex : 'image',
 								renderer: function(val)
 								{
-									return '<a target="_blank" onclick=DISPLAY_IMAGE_WINDOW("ProductController?action=getProductImage&name=' + val + '")><img src="resources/images/picture.png"/></a>';
+									if(val == '')
+										return '';
+									else
+										return '<a target="_blank" onclick=DISPLAY_IMAGE_WINDOW("ProductController?action=getProductImage&name=' + val + '")><img src="resources/images/picture.png"/></a>';
 								}
 							}, {
 								header : '产品图纸',
-								dataIndex : 'product_name',
+								dataIndex : 'drawing',
 								renderer: function(val)
 								{
-									return '<a target="_blank" onclick=DISPLAY_IMAGE_WINDOW("ProductController?action=getProductDrawing&name=' + val + '")><img src="resources/images/picture.png"/></a>';
+									if(val == '')
+										return '';
+									else
+										return '<a target="_blank" onclick=DISPLAY_IMAGE_WINDOW("ProductController?action=getProductDrawing&name=' + val + '")><img src="resources/images/picture.png"/></a>';
 								}
 							}, {
 								header : '订单状态',
@@ -250,6 +256,7 @@ Ext.define('order.view.v_order', {
 					items: [
 						Ext.create('Ext.grid.Panel', {
 							id : 'completed-order-grid',
+							height : GET_HEIGHT(), 
 							store : Ext.data.StoreManager.lookup('completedOrderStore'),
 							selModel : sm2,
 							columns : [
@@ -346,17 +353,23 @@ Ext.define('order.view.v_order', {
 					            }
 							}, {
 								header : '产品图片',
-								dataIndex : 'product_name',
+								dataIndex : 'image',
 								renderer: function(val)
 								{
-									return '<a target="_blank" href="ProductController?action=getProductImage&name=' + val + '"><img src="resources/images/picture.png"/></a>';
+									if(val == '')
+										return '';
+									else
+										return '<a target="_blank" href="ProductController?action=getProductImage&name=' + val + '"><img src="resources/images/picture.png"/></a>';
 								}
 							}, {
 								header : '产品图纸',
-								dataIndex : 'product_name',
+								dataIndex : 'drawing',
 								renderer: function(val)
 								{
-									return '<a target="_blank" href="ProductController?action=getProductDrawing&name=' + val + '"><img src="resources/images/picture.png"/></a>';
+									if(val == '')
+										return '';
+									else
+										return '<a target="_blank" href="ProductController?action=getProductDrawing&name=' + val + '"><img src="resources/images/picture.png"/></a>';
 								}
 							}, {
 								header : '订单状态',

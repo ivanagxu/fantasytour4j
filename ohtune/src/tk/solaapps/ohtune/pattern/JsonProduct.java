@@ -3,21 +3,21 @@ package tk.solaapps.ohtune.pattern;
 import tk.solaapps.ohtune.model.Product;
 
 public class JsonProduct {
-	private String name;
-	private String name_eng;
-	private String status;
-	private String image;
-	private String drawing;
-	private String our_name;
-	private String mold_rate;
-	private String machining_pos;
-	private String handwork_pos;
-	private String polishing;
-	private Integer finished;
-	private Integer semi_finished;
-	private String mold_code;
-	private String mold_name;
-	private String mold_stand_no;
+	public String name;
+	public String name_eng;
+	public String status;
+	public String image;
+	public String drawing;
+	public String our_name;
+	public String mold_rate;
+	public String machining_pos;
+	public String handwork_pos;
+	public String polishing;
+	public Integer finished;
+	public Integer semi_finished;
+	public String mold_code;
+	public String mold_name;
+	public String mold_stand_no;
 	
 	public JsonProduct(Product product)
 	{

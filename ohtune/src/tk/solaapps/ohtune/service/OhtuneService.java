@@ -473,22 +473,44 @@ public class OhtuneService extends OhtuneDA implements IOhtuneService {
 				return new ArrayList<ProductionLog>();
 			
 			logs = this.getProductLogByDateAndSection(date, jobType.getName());
-			String preSection = "";
+			String preProductName = "";
+			String orders = "";
+			String deadlines = "";
+			Order order = null;
+			Job job = null;
 			for(int i = 0 ; i < logs.size(); i++)
 			{
-				if(!logs.get(i).getSection_name().equals(preSection))
+				job = this.getJobById(logs.get(i).getJobid());
+				if(job != null)
+				{
+					if(orders.indexOf(job.getOrders().getNumber()) < 0)
+					{
+						orders = job.getOrders().getNumber() + " " + orders;
+						deadlines = new SimpleDateFormat("yyyy-MM-dd").format(job.getOrders().getDeadline()) + " " + deadlines;
+					}
+				}
+					
+				if(!logs.get(i).getProduct_name().equals(preProductName))
 				{
 					if(!plog.getProduct_our_name().equals(""))
+					{
+						plog.deadlines = deadlines;
+						plog.orders = orders;
 						plogs.add(plog);
-					totalLog.setDisuse(plog.getDisuse());
-					totalLog.setFinished(plog.getFinished());
-					totalLog.setRejected(plog.getRejected());
+					}
+					//totalLog.setDisuse(plog.getDisuse());
+					//totalLog.setFinished(plog.getFinished());
+					//totalLog.setRejected(plog.getRejected());
 					
 					plog = new ProductionLog();					
-					preSection = logs.get(i).getSection_name();
+					preProductName = logs.get(i).getProduct_name();
+					deadlines = "";
+					orders = "";
 				}
 				
 				plog.setProduct_our_name(logs.get(i).getProduct_our_name());
+				plog.setProduct_name(logs.get(i).getProduct_name());
+				
 				if(logs.get(i).getProcess_type().equals(ProductLog.TYPE_FINISHED))
 				{
 					plog.setFinished(plog.getFinished() + logs.get(i).getQuantity());
@@ -502,12 +524,22 @@ public class OhtuneService extends OhtuneDA implements IOhtuneService {
 					plog.setDisuse(plog.getDisuse() + logs.get(i).getQuantity());
 				}
 			}
+			
 			if(plog.getProduct_our_name().equals(""))
 				plog.setProduct_our_name("没有数据");
+			plog.deadlines = deadlines;
+			plog.orders = orders;
 			plogs.add(plog);
-			totalLog.setDisuse(plog.getDisuse());
-			totalLog.setFinished(plog.getFinished());
-			totalLog.setRejected(plog.getRejected());
+			
+			//totalLog.setDisuse(plog.getDisuse());
+			//totalLog.setFinished(plog.getFinished());
+			//totalLog.setRejected(plog.getRejected());
+			for(int i = 0; i < plogs.size(); i++)
+			{
+				totalLog.setDisuse(totalLog.getDisuse() + plogs.get(i).getDisuse());
+				totalLog.setFinished(totalLog.getFinished() + plogs.get(i).getFinished());
+				totalLog.setRejected(totalLog.getRejected() + plogs.get(i).getRejected());
+			}
 			plogs.add(totalLog);
 			
 		}

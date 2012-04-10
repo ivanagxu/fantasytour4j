@@ -5,27 +5,29 @@ import java.util.Date;
 import tk.solaapps.ohtune.model.Order;
 
 public class JsonOrder {
-	private Long id;
-	private String number;
-	private String creator;
-	private String product_name;
-	private String requirement_1;
-	private String requirement_2;
-	private String requirement_3;
-	private String requirement_4;
-	private Date create_date;
-	private Date deadline;
-	private String status;
-	private String product_our_name;
-	private Integer quantity;
-	private Integer use_finished;
-	private Integer use_semi_finished;
-	private String customer_name;
-	private String customer_code;
-	private Float product_rate;
-	private Date c_deadline;
-	private Integer e_quantity;
-	private Integer priority;
+	public Long id;
+	public String number;
+	public String creator;
+	public String product_name;
+	public String requirement_1;
+	public String requirement_2;
+	public String requirement_3;
+	public String requirement_4;
+	public Date create_date;
+	public Date deadline;
+	public String status;
+	public String product_our_name;
+	public Integer quantity;
+	public Integer use_finished;
+	public Integer use_semi_finished;
+	public String customer_name;
+	public String customer_code;
+	public Float product_rate;
+	public Date c_deadline;
+	public Integer e_quantity;
+	public Integer priority;
+	public String image;
+	public String drawing;
 	
 	
 	public JsonOrder(Order order)

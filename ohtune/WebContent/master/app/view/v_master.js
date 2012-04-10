@@ -21,7 +21,7 @@ Ext.define('master.view.v_master', {
 				'<td align="center" width="120"><a href="#" onclick="GOTO_JOB_MODULE();" id="link_job">部门管理</a></td>' +
 				'<td align="center" width="120"><a href="#" onclick="GOTO_INVENTORY_MODULE();" id="link_job">仓库管理</a></td>' +
 				'<td align="center" width="120"><a href="#" onclick="GOTO_PRODUCTIONLOG_MODULE();" id="link_job">生产记录</a></td>' +
-				'<td align="center" width="120"><a href="#" onclick="GOTO_DOCUMENT_MODULE();" id="link_job">文档管理</a></td>' +
+				//'<td align="center" width="120"><a href="#" onclick="GOTO_DOCUMENT_MODULE();" id="link_job">文档管理</a></td>' +
 				'<td align="center" width="120"><a href="#" onclick="GOTO_ADMIN_MODULE();" id="link_admin">后台管理</a></td>' +
 				'<td align="center" width="120"><a href="#" onclick="LOGOUT();" id="link_logout">系统登出</a></td>' +
 				'<td align="right" width="60"></td>' +

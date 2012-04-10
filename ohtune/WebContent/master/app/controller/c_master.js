@@ -89,12 +89,52 @@ function LOGOUT()
 	location.href="UserACController?action=logout";
 }
 
+function GET_HEIGHT() {
+	  var myWidth = 0, myHeight = 0;
+	  if( typeof( window.innerWidth ) == 'number' ) {
+	//Non-IE
+	    myWidth = window.innerWidth;
+	    myHeight = window.innerHeight;
+	  } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+	    //IE 6+ in 'standards compliant mode'
+	    myWidth = document.documentElement.clientWidth;
+	    myHeight = document.documentElement.clientHeight;
+	  } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+	    //IE 4 compatible
+	    myWidth = document.body.clientWidth;
+	    myHeight = document.body.clientHeight;
+	  }
+	  //window.alert( 'Width = ' + myWidth );
+	  //window.alert( 'Height = ' + myHeight );
+	  return myHeight - 130 -  Math.random() * 20;
+}
+
+function GET_WIDTH() {
+	  var myWidth = 0, myHeight = 0;
+	  if( typeof( window.innerWidth ) == 'number' ) {
+	//Non-IE
+	    myWidth = window.innerWidth;
+	    myHeight = window.innerHeight;
+	  } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+	    //IE 6+ in 'standards compliant mode'
+	    myWidth = document.documentElement.clientWidth;
+	    myHeight = document.documentElement.clientHeight;
+	  } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+	    //IE 4 compatible
+	    myWidth = document.body.clientWidth;
+	    myHeight = document.body.clientHeight;
+	  }
+	  //window.alert( 'Width = ' + myWidth );
+	  //window.alert( 'Height = ' + myHeight );
+	  return myWidth;
+}
+
 function DISPLAY_IMAGE_WINDOW(image)
 {
 	var win = Ext.create('Ext.window.Window', {
 		title : '图片',
-		height : 600,
-		width : 1024,
+		height : GET_HEIGHT(),
+		width : GET_WIDTH() * 0.8,
 		layout : 'fit',
 		autoDestory : true,
 		modal: true,
@@ -110,7 +150,7 @@ function DISPLAY_IMAGE_WINDOW(image)
 			items : [
 	     	{
 	    		id : 'image-in-window',
-	    		html: '<img src="" height=100% />'
+	    		html: '<img src="" height=800 width=1280 />'
 	    	}]
 		}
 		)]
@@ -120,6 +160,7 @@ function DISPLAY_IMAGE_WINDOW(image)
 	win.show();
 	Ext.getCmp('image-in-window').update('<img src="'+ image + '" height=100%/>');
 }
+
 
 function GetJsonData(sUrl, xParameter, callback) {
 	Ext.Ajax.request({
@@ -147,7 +188,7 @@ Ext.define('master.controller.c_master', {
 			extend : 'Ext.data.Model',
 			fields : [ 'name', 'name_eng', 'our_name', 'status', 'image',
 					'drawing', 'mold_rate', 'machining_pos', 'handwork_pos',
-					'polishing' , 'finished', 'semi_finished','mold_code', 'mold_name', 'mold_stand_no']
+					'polishing' , 'finished', 'semi_finished','mold_code', 'mold_name', 'mold_stand_no','image', 'drawing']
 		});
 
 		//Order Data
@@ -157,7 +198,7 @@ Ext.define('master.controller.c_master', {
 					'requirement_1', 'requirement_2', 'requirement_3',
 					'requirement_4', 'create_date', 'deadline', 'status' ,
 					'product_our_name', 'quantity', 'use_finished', 'use_semi_finished', 'customer_name', 
-					'customer_code', 'product_rate', 'e_quantity', 'c_deadline', 'priority']
+					'customer_code', 'product_rate', 'e_quantity', 'c_deadline', 'priority', 'image', 'drawing']
 		});
 		
 		//Job Data
@@ -166,7 +207,7 @@ Ext.define('master.controller.c_master', {
 			fields : [ 'order_id', 'id', 'number', 'order_user', 'customer_name' , 'customer_code', 'product_name', 'product_our_name'
 			           , 'requirement1', 'requirement2', 'total', 'order_c_deadline', 'order_deadline', 'start_date','complete_date'
 			           , 'section', 'order_status', 'order_remark', 'isNew', 'finished', 'status', 'handled_by', 
-			           'product_image', 'product_drawing', 'finish_remark', 'remaining', 'total_rejected', 'assigned_to', 'priority']
+			           'product_image', 'product_drawing', 'finish_remark', 'remaining', 'total_rejected', 'assigned_to', 'priority', 'image', 'drawing']
 		});
 
 		//JobType Data
@@ -216,7 +257,7 @@ Ext.define('master.controller.c_master', {
 		//ProductionLog Data
 		Ext.define('ProductionLogData', {
 			extend : 'Ext.data.Model',
-			fields : ['product_our_name', 'finished', 'rejected', 'disuse']
+			fields : ['product_name','product_our_name', 'finished', 'rejected', 'disuse', 'orders', 'deadlines', 'image', 'drawing']
 		});
 		
 		//Document Data

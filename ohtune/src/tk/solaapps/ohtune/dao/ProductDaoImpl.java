@@ -2,6 +2,7 @@ package tk.solaapps.ohtune.dao;
 
 import java.util.List;
 
+import org.hibernate.criterion.Property;
 import org.hibernate.criterion.Restrictions;
 
 import tk.solaapps.ohtune.model.Customer;
@@ -12,9 +13,9 @@ public class ProductDaoImpl extends BaseDao implements IProductDao{
 	@Override
 	public List<Product> getAllProduct(boolean includeDisabled) {
 		if(includeDisabled)
-			return getSession().createCriteria(Product.class).list();
+			return getSession().createCriteria(Product.class).addOrder(Property.forName("name").asc()).list();
 		else
-			return getSession().createCriteria(Product.class).add(Restrictions.eq("status", Product.STATUS_ENABLE)).list();
+			return getSession().createCriteria(Product.class).add(Restrictions.eq("status", Product.STATUS_ENABLE)).addOrder(Property.forName("name").asc()).list();
 	}
 
 	@Override
@@ -32,7 +33,8 @@ public class ProductDaoImpl extends BaseDao implements IProductDao{
 
 	@Override
 	public Product getProductByName(String name) {
-		List<Product> products = getSession().createCriteria(Product.class).add(Restrictions.eq("name", name)).list();
+		List<Product> products = getSession().createCriteria(Product.class).add(Restrictions.eq("name", name))
+				.addOrder(Property.forName("name").asc()).list();
 		if(products.size() == 0)
 			return null;
 		else
