@@ -183,17 +183,18 @@ Ext.define('order.view.v_order', {
 									if(val == '')
 										return '';
 									else
-										return '<a target="_blank" onclick=DISPLAY_IMAGE_WINDOW("ProductController?action=getProductImage&name=' + val + '")><img src="resources/images/picture.png"/></a>';
+										return '<a target="_blank" onclick=DISPLAY_IMAGE_WINDOW("ProductController?action=getProductImage&name=' + val + '",' + '"ProductController?action=getProductDrawing&name=' + val + '"' + ')><img src="resources/images/picture.png"/></a>';
 								}
 							}, {
 								header : '产品图纸',
 								dataIndex : 'drawing',
+								hidden : true,
 								renderer: function(val)
 								{
 									if(val == '')
 										return '';
 									else
-										return '<a target="_blank" onclick=DISPLAY_IMAGE_WINDOW("ProductController?action=getProductDrawing&name=' + val + '")><img src="resources/images/picture.png"/></a>';
+										return '<a target="_blank" onclick=DISPLAY_IMAGE_WINDOW("ProductController?action=getProductImage&name=' + val + '",' + '"ProductController?action=getProductDrawing&name=' + val + '"' + ')><img src="resources/images/picture.png"/></a>';
 								}
 							}, {
 								header : '订单状态',
@@ -359,17 +360,18 @@ Ext.define('order.view.v_order', {
 									if(val == '')
 										return '';
 									else
-										return '<a target="_blank" href="ProductController?action=getProductImage&name=' + val + '"><img src="resources/images/picture.png"/></a>';
+										return '<a target="_blank" onclick=DISPLAY_IMAGE_WINDOW("ProductController?action=getProductImage&name=' + val + '",' + '"ProductController?action=getProductDrawing&name=' + val + '"' + ')><img src="resources/images/picture.png"/></a>';
 								}
 							}, {
 								header : '产品图纸',
 								dataIndex : 'drawing',
+								hidden : true,
 								renderer: function(val)
 								{
 									if(val == '')
 										return '';
 									else
-										return '<a target="_blank" href="ProductController?action=getProductDrawing&name=' + val + '"><img src="resources/images/picture.png"/></a>';
+										return '<a target="_blank" onclick=DISPLAY_IMAGE_WINDOW("ProductController?action=getProductImage&name=' + val + '",' + '"ProductController?action=getProductDrawing&name=' + val + '"' + ')><img src="resources/images/picture.png"/></a>';
 								}
 							}, {
 								header : '订单状态',

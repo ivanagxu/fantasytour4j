@@ -129,7 +129,7 @@ function GET_WIDTH() {
 	  return myWidth;
 }
 
-function DISPLAY_IMAGE_WINDOW(image)
+function DISPLAY_IMAGE_WINDOW(image,drawing)
 {
 	var win = Ext.create('Ext.window.Window', {
 		title : '图片',
@@ -150,7 +150,7 @@ function DISPLAY_IMAGE_WINDOW(image)
 			items : [
 	     	{
 	    		id : 'image-in-window',
-	    		html: '<img src="" height=800 width=1280 />'
+	    		html: '<img src="" height=1600 width=1280 />'
 	    	}]
 		}
 		)]
@@ -158,7 +158,8 @@ function DISPLAY_IMAGE_WINDOW(image)
 	);
 	
 	win.show();
-	Ext.getCmp('image-in-window').update('<img src="'+ image + '" height=100%/>');
+	Ext.getCmp('image-in-window').update('产品图片<br/><img src="'+ image + '" height=50%/><br/>' + 
+			'产品图纸<br/><img src="'+ drawing + '" height=50%/>');
 }
 
 

@@ -661,7 +661,38 @@ public class OrderController extends HttpServlet implements IOhtuneController{
 			}
 			else
 			{
-				if(order.getStatus().equals(Order.STATUS_APPROVING) || order.getStatus().equals(Order.STATUS_FINISHED))
+				if(order.getStatus().equals(Order.STATUS_PROCESSING))
+				{
+					boolean success = true;
+					List<Job> jobs = service.getJobByOrder(order);
+					for(int i = 0; i < jobs.size(); i++)
+					{
+						if(jobs.get(i).getJob_type().getName().equals(JobType.FINISH_DEPOT) || 
+								jobs.get(i).getJob_type().getName().equals(JobType.FINISH_SEMI_FINISH))
+						{
+							jr = service.genJsonResponse(false, "删除订单失败，改订单已进行并有成品到达仓库或半成品仓", null);
+							response.getOutputStream().write(gson.toJson(jr).getBytes("utf-8"));
+							return;
+						}
+					}
+					
+					if(success)
+					{
+						success = service.deleteJobByOrder(order, sessionUser);
+						if(success)
+							success = success & service.deleteOrder(order);
+						jr = service.genJsonResponse(success, success ? "删除订单成功" : "删除订单失败", null);
+						response.getOutputStream().write(gson.toJson(jr).getBytes("utf-8"));
+					}
+					else
+					{
+						jr = service.genJsonResponse(success, success ? "删除订单成功" : "删除进行中订单失败", null);
+						response.getOutputStream().write(gson.toJson(jr).getBytes("utf-8"));
+					}
+					
+					
+				}
+				else if(order.getStatus().equals(Order.STATUS_APPROVING) || order.getStatus().equals(Order.STATUS_FINISHED))
 				{
 					boolean success = service.deleteJobByOrder(order, sessionUser);
 					if(success)
