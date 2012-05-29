@@ -176,7 +176,7 @@ public class ReportController extends HttpServlet implements IOhtuneController{
 
         response.setContentType("text/csv;charset=UTF-8");
         response.setHeader("Content-Disposition", "attachment; filename=data.csv");
-        response.setContentLength(str.getBytes().length);
+        response.setContentLength(str.getBytes("utf-8").length);
 		response.getOutputStream().write(str.getBytes("utf-8"));
 	}
 }
