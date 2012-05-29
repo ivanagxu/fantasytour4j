@@ -21,7 +21,7 @@ public class ProductLogDaoImpl extends BaseDao implements IProductLogDao{
 	}
 
 	@Override
-	public List<ProductLog> getProductLogByDateAndSection(Date date,
+	public List<ProductLog> getProductLogByDateAndSection(Date date, Date endDate,
 			String sectionName) {
 		
 		Date from = new Date();
@@ -33,9 +33,9 @@ public class ProductLogDaoImpl extends BaseDao implements IProductLogDao{
 		from.setSeconds(0);
 		
 		Date to = new Date();
-		to.setYear(date.getYear());
-		to.setMonth(date.getMonth());
-		to.setDate(date.getDate());
+		to.setYear(endDate.getYear());
+		to.setMonth(endDate.getMonth());
+		to.setDate(endDate.getDate());
 		to.setHours(23);
 		to.setMinutes(59);
 		to.setSeconds(59);

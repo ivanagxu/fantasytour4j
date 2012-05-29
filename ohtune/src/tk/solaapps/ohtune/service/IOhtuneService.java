@@ -48,5 +48,5 @@ public interface IOhtuneService extends IOhtuneDA{
 	
 	//Report Functions
 	List<ProductRate> generateProductRateByProduct(Product product, UserAC operator);
-	List<ProductionLog> generateProductLogByDateAndSection(String sDate, String sJobType, UserAC operator);
+	List<ProductionLog> generateProductLogByDateAndSection(String sDate, String sEndDate, String sJobType, UserAC operator);
 }

@@ -9,5 +9,5 @@ import tk.solaapps.ohtune.model.ProductLog;
 
 public interface IProductLogDao {
 	boolean addProductLog(ProductLog log);
-	List<ProductLog> getProductLogByDateAndSection(Date date, String sectionName);
+	List<ProductLog> getProductLogByDateAndSection(Date date, Date endDate, String sectionName);
 }

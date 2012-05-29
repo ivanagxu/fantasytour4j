@@ -79,10 +79,21 @@ Ext.define('productionlog.view.v_productionlog', {
 					tbar : [
 					    {
 					    	labelAlign : 'right',
-							fieldLabel : '生产日期',
+							fieldLabel : '起始生产日期',
 							editable : false,
 							name : 'date',
 							id : 'productlog_date',
+							xtype: 'datefield',
+					        maxValue: new Date(),
+					        value: new Date(),
+					        format: 'Y-m-d'
+					    },
+					    {
+					    	labelAlign : 'right',
+							fieldLabel : '到生产日期',
+							editable : false,
+							name : 'end_date',
+							id : 'productlog_end_date',
 							xtype: 'datefield',
 					        maxValue: new Date(),
 					        value: new Date(),
@@ -102,6 +113,10 @@ Ext.define('productionlog.view.v_productionlog', {
 						{
 					    	xtype : 'button',
 					    	text : '刷新记录'
+						},
+						{
+					    	xtype : 'button',
+					    	text : '汇出记录'
 						}
 		            ]
 		        })]

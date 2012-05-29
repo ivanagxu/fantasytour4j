@@ -451,12 +451,13 @@ public class OhtuneService extends OhtuneDA implements IOhtuneService {
 	
 
 	@Override
-	public List<ProductionLog> generateProductLogByDateAndSection(String sDate,
+	public List<ProductionLog> generateProductLogByDateAndSection(String sDate, String sEndDate,
 			String sJobType, UserAC operator) {
 		
-		OhtuneLogger.info("Get product log by user, section =" + sJobType + ", date = " + sDate + " by " + operator.getLogin_id());
+		OhtuneLogger.info("Get product log by user, section =" + sJobType + ", date = " + sDate + " to " + sEndDate + " by " + operator.getLogin_id());
 		
 		Date date = null;
+		Date endDate = null;
 		JobType jobType = null;
 		List<ProductLog> logs = new ArrayList<ProductLog>();
 		ProductLog log = null;
@@ -468,11 +469,12 @@ public class OhtuneService extends OhtuneDA implements IOhtuneService {
 		try
 		{
 			date = new SimpleDateFormat("yyyy-MM-dd").parse(sDate);
+			endDate = new SimpleDateFormat("yyyy-MM-dd").parse(sEndDate);
 			jobType = this.getJobTypeByName(sJobType);
 			if(jobType == null)
 				return new ArrayList<ProductionLog>();
 			
-			logs = this.getProductLogByDateAndSection(date, jobType.getName());
+			logs = this.getProductLogByDateAndSection(date, endDate, jobType.getName());
 			String preProductName = "";
 			String orders = "";
 			String deadlines = "";

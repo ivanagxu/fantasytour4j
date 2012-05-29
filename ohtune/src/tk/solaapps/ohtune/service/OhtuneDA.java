@@ -607,9 +607,9 @@ public class OhtuneDA implements IOhtuneDA{
 	}
 	
 	@Override
-	public List<ProductLog> getProductLogByDateAndSection(Date date,
+	public List<ProductLog> getProductLogByDateAndSection(Date date, Date endDate,
 			String sectionName) {
-		return productLogDao.getProductLogByDateAndSection(date, sectionName);
+		return productLogDao.getProductLogByDateAndSection(date, endDate, sectionName);
 	}
 	
 	
