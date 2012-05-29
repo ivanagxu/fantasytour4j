@@ -231,7 +231,20 @@ Ext.define('order.view.v_order', {
 							}, {
 								xtype : 'button',
 								text : '删除订单'
-							} ],
+							}, {
+								xtype : 'button',
+								text : '统计',
+								menu: {
+									showSeparator: true,
+									items: [{
+										text: '订单总数',
+										iconCls: 'task-icon'
+									},{
+										text: '生产总数',
+										iconCls: 'task-icon'
+									}]
+								}
+							}],
 							viewConfig:{
 								getRowClass : function(rec, index)
 								{

@@ -28,7 +28,10 @@ Ext.define('job.controller.c_job', {
 			},
 			'button[text=删除模具]' : {
 				click : this.onDeleteMoldClick
-			}
+			},
+            'menuitem[text="未完成数"]' : {
+            	click : this.onSummaryIncompleteTotalClicked
+            }
         });
     },
 
@@ -592,5 +595,21 @@ Ext.define('job.controller.c_job', {
 		{
 			win.show();	
 		}
+	},
+	onSummaryIncompleteTotalClicked : function()
+	{
+		Ext.data.StoreManager.lookup('jobStore').on('load', function countTotal() {
+    		var total = 0;
+    		Ext.data.StoreManager.lookup('jobStore').each(
+				function(item, index, totalItems ) {
+					if(item.data ['status'] == "进行中")
+						total += item.data ['remaining'];
+				}
+			);
+    		Ext.data.StoreManager.lookup('jobStore').removeListener('load', countTotal);
+    		Ext.Msg.alert("统计","未完成总数为 : " + total);
+    	});
+    	
+    	Ext.data.StoreManager.lookup('jobStore').load();
 	}
 });

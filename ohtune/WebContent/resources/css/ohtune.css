@@ -11,3 +11,5 @@ a {
 .green-row {
 	border-color : green !important; color : Green !important;
 }
+
+.task-icon { background-image: url(../images/task.png); }

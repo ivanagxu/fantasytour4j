@@ -34,6 +34,12 @@ Ext.define('order.controller.c_order', {
             },
             'button[text="恢复订单"]' : {
             	click : this.onResumeOrderClicked
+            },
+            'menuitem[text="生产总数"]' : {
+            	click : this.onSummaryTotalClicked
+            },
+            'menuitem[text="订单总数"]' : {
+            	click : this.onSummaryOrderTotalClicked
             }
         });
         
@@ -1752,5 +1758,37 @@ Ext.define('order.controller.c_order', {
 		{
 			win.show();	
 		}
+    },
+    onSummaryTotalClicked : function()
+    {
+    	Ext.data.StoreManager.lookup('orderStore').on('load', function countTotal() {
+    		var total = 0;
+    		Ext.data.StoreManager.lookup('orderStore').each(
+				function(item, index, totalItems ) {
+					if(item.data ['status'] == "进行中")
+						total += item.data ['quantity'];
+				}
+			);
+    		Ext.data.StoreManager.lookup('orderStore').removeListener('load', countTotal);
+    		Ext.Msg.alert("统计","生产总数为 : " + total);
+    	});
+    	
+    	Ext.data.StoreManager.lookup('orderStore').load();
+    },
+    onSummaryOrderTotalClicked : function()
+    {
+    	Ext.data.StoreManager.lookup('orderStore').on('load', function countTotal() {
+    		var total = 0;
+    		Ext.data.StoreManager.lookup('orderStore').each(
+				function(item, index, totalItems ) {
+					if(item.data ['status'] == "进行中")
+						total += item.data ['e_quantity'];
+				}
+			);
+    		Ext.data.StoreManager.lookup('orderStore').removeListener('load', countTotal);
+    		Ext.Msg.alert("统计","订单总数为 : " + total);
+    	});
+    	
+    	Ext.data.StoreManager.lookup('orderStore').load();
     }
 });

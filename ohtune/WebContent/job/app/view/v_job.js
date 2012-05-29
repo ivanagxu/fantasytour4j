@@ -233,7 +233,17 @@ Ext.define('job.view.v_job', {
 							}, {
 								text : '查看订单',
 								type : 'button'
-							} ],
+							}, {
+								xtype : 'button',
+								text : '统计',
+								menu: {
+									showSeparator: true,
+									items: [{
+										text: '未完成数',
+										iconCls: 'task-icon'
+									}]
+								}
+							}],
 							viewConfig:{
 								getRowClass : function(rec, index)
 								{
