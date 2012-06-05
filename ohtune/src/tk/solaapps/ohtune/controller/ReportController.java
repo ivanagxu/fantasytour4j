@@ -9,6 +9,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.CellStyle;
+
 import tk.solaapps.ohtune.model.JobType;
 import tk.solaapps.ohtune.model.Product;
 import tk.solaapps.ohtune.model.ProductRate;
@@ -132,51 +138,82 @@ public class ReportController extends HttpServlet implements IOhtuneController{
 		String sEndDate = request.getParameter("end_date");
 		
 		IOhtuneService service = (IOhtuneService)OhtuneServiceHolder.getInstence().getBeanFactory().getBean("uhtuneService");
-		String line = "";
-		String str = "统计数据从 " + sDate + " 到 " + sEndDate + ",,,,,\n";
+		
+		int rowNum = 0;
+		HSSFWorkbook wb = new HSSFWorkbook();
+		HSSFSheet sheet;
+		HSSFRow row;
+		HSSFCell cell; 
+		
+		CellStyle cs = wb.createCellStyle();
+	    cs.setWrapText(true);
+	    
 		List<JobType> jobTypes = service.getAllJobType(false);
 		List<ProductionLog> logs;
+		
 		for(int ji = 0; ji < jobTypes.size(); ji++)
 		{
 			if(jobTypes.get(ji).getName().equals(JobType.FINISH_DEPOT) || 
 					jobTypes.get(ji).getName().equals(JobType.FINISH_SEMI_FINISH))
 				continue;
 			
+			rowNum = 0;
+			sheet = wb.createSheet(jobTypes.get(ji).getName());
+			row = sheet.createRow((short)(rowNum++));
+			cell = row.createCell((short)0); 
+			cell.setCellValue("统计数据从 " + sDate + " 到 " + sEndDate);
+			
 			logs = service.generateProductLogByDateAndSection(sDate, sEndDate, jobTypes.get(ji).getName(), sessionUser);
-			str += "部门," + jobTypes.get(ji).getName() + ",,,,\n";
-			str += "产品名称,完成总数,废品数,返工数,订单,生产期限\n";
+			
+			row = sheet.createRow((short)(rowNum++));
+			row.createCell((short)0).setCellValue("部门");
+			row.createCell((short)1).setCellValue(jobTypes.get(ji).getName());
+			
+			row = sheet.createRow((short)rowNum++);
+			row.createCell((short)0).setCellValue("产品名称");
+			row.createCell((short)1).setCellValue("完成总数");
+			row.createCell((short)2).setCellValue("废品数");
+			row.createCell((short)3).setCellValue("返工数");
+			row.createCell((short)4).setCellValue("订单");
+			row.createCell((short)5).setCellValue("生产期限");
+			
 			for (int i = 0; i < logs.size(); i++) {
-	            line = "";
-	            line +=  "\"" + logs.get(i).getProduct_our_name() + "\"" + ',';
-	            line +=  "\"" + logs.get(i).getFinished().toString() + "\"" + ',';
-	            line +=  "\"" + logs.get(i).getDisuse().toString() + "\"" + ',';
-	            line +=  "\"" + logs.get(i).getRejected().toString() + "\"" + ',';
+				row = sheet.createRow((short)rowNum++);
+				row.createCell((short)0).setCellValue(logs.get(i).getProduct_our_name());
+				row.createCell((short)1).setCellValue(logs.get(i).getFinished().toString());
+				row.createCell((short)2).setCellValue(logs.get(i).getDisuse().toString());
+				row.createCell((short)3).setCellValue(logs.get(i).getRejected().toString());
+				
 	            String[] orderStr = logs.get(i).orders.split(" ");
-	            line += "\"";
+	            String order = ""; 
 	            for(int n = 0; n < orderStr.length; n++)
 	            {
-	            	line += orderStr[n] + "\n\r";
+	            	order += orderStr[n] + "\n";
 	            }
-	            line += "\"";
-	            line += ",";
-	            line += "\"";
+	            cell = row.createCell((short)4);
+	            cell.setCellStyle(cs);
+	            cell.setCellValue(order);
 	            
 	            String[] deadlineStr = logs.get(i).deadlines.split(" ");
+	            String deadline = "";
 	            for(int n = 0; n < deadlineStr.length; n++)
 	            {
-	            	line += deadlineStr[n] + "\n\r";
+	            	deadline += deadlineStr[n] + "\n";
 	            }
-	            line += "\"";
-	            if(i !=  logs.size() - 1)
-	            	line += "\n";
-	            str += line;
+	            cell = row.createCell((short)5);
+	            cell.setCellStyle(cs);
+	            cell.setCellValue(deadline);
+	            
+	            row.setHeightInPoints((( deadlineStr.length + 1) *sheet.getDefaultRowHeightInPoints()));
 	        }
-			str += ",,,,,\n\r";
+			row = sheet.createRow((short)rowNum++);
+			sheet.autoSizeColumn((short)4);
+			sheet.autoSizeColumn((short)5);
 		}
-
-        response.setContentType("text/csv;charset=UTF-8");
-        response.setHeader("Content-Disposition", "attachment; filename=data.csv");
-        response.setContentLength(str.getBytes("utf-8").length);
-		response.getOutputStream().write(str.getBytes("utf-8"));
+        
+        response.setHeader("Content-Disposition", "attachment; filename=data.xls");
+		wb.write(response.getOutputStream());
+		response.getOutputStream().flush();
+		response.getOutputStream().close();
 	}
 }
