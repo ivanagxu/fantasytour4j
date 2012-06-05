@@ -1,0 +1,93 @@
+@CHARSET "utf-8";
+
+label {
+    display:block;
+    margin-top:50px;
+    letter-spacing:1px;
+    font-family:Arial;
+}
+ 
+.messageform {
+    width: 420px;
+}
+ 
+/* Applying styles to our text boxes */
+input, textarea {
+         width:400px;
+         height:27px;
+         background:#666666;
+         border:2px solid #f6f6f6;
+         padding:10px;
+         margin-top:10px;
+         font-size:0.7em;
+         color:#ffffff;
+         autoComplete: false;
+}
+
+input[title]{
+	color: white;
+}
+
+textarea {
+         height:100px;
+         font-family:Arial;
+}
+
+.submitbtn {
+    width:60px;
+    height:30px;
+    background:url(../images/send.gif);
+    text-indent:-9999px;
+    border:none;
+    cursor:pointer;
+	background-repeat: no-repeat;
+}
+
+.deletebtn {
+    width:20px;
+    height:20px;
+    background:url(../images/delete.gif);
+    text-indent:-9999px;
+    border:none;
+    cursor:pointer;
+	background-repeat: no-repeat;
+}
+
+div#rotate1 {
+	width: 100px;
+	text-shadow: 5px 5px 5px #888888;
+}
+
+div#rotatey1 {
+	width: 100px;
+	text-shadow: 5px 5px 5px #FF0000;
+}
+
+.emailtable {
+	border: 1px solid black;
+	width: 50%;
+}
+
+.emailtabletr
+{
+	border: 1px solid black;
+	align: center;
+}
+.emailtableth
+{
+	font-family: Arial;
+	font-weight: bold;
+	border: 1px solid black;
+	align: center;
+}
+.emailtabletd
+{
+	font-family:Arial;
+	border: 1px solid black;
+	align: center;
+}
+
+.emailsection
+{
+	align: centre;
+}
