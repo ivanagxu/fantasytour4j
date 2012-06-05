@@ -1,0 +1,32 @@
+.container{
+	margin: 0 auto;
+	width : 950px;
+}
+
+.homelink
+{
+	position: relative;
+	top: 5px;
+}
+
+.contactlink
+{
+	position: relative;
+	left: 100px;
+	top: -13px;
+}
+
+a.normal:link {color:#666666;}
+a.normal:visited {color:#666666;}
+a.normal:hover {color:#FFFFFF;}
+a.normal:active {color:#FFFFFF;}
+
+a.active:link {color:#FFFFFF;}
+a.active:visited {color:#FFFFFF;}
+a.active:hover {color:#FFFFFF;}
+a.active:active {color:#FFFFFF;}
+
+.activelink
+{
+	color: #FFFFFF;
+}
