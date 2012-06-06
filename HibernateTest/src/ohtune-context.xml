@@ -54,19 +54,6 @@
                     <tx:method name="*" propagation="REQUIRED"/>
             </tx:attributes>
     </tx:advice>
-    
-    <aop:config>
-            <aop:pointcut id="ohtuneServiceMethods2"
-                    expression="execution(* tk.solaapps.ohtune.service.OhtuneService.test2(..))" />
-            <aop:advisor advice-ref="txAdvice2" pointcut-ref="ohtuneServiceMethods2" />
-    </aop:config>
-    
-    <tx:advice id="txAdvice2" transaction-manager="transactionManager">
-            <tx:attributes>
-                    <tx:method name="*" propagation="REQUIRED" />
-                    <!-- <tx:method name="*" propagation="SUPPORTS" read-only="true" />  -->
-            </tx:attributes>
-    </tx:advice>
  
  	<!-- DAO -->
  	<bean id="userACDao" class="tk.solaapps.ohtune.dao.UserACDaoImpl">
