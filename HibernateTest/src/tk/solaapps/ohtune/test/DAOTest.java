@@ -41,7 +41,7 @@ public class DAOTest {
 		annotatedSessionFactoryBean.setDataSource(dataSource);
 		Properties prop = new Properties();
 		prop.setProperty("hibernate.dialect", HSQLDialect.class.getName());
-		prop.setProperty("SHOW_SQL", "true");
+		prop.setProperty("hibernate.show_sql", "true");
 		prop.setProperty("hibernate.hbm2ddl.auto", "create-drop");
 		annotatedSessionFactoryBean.setHibernateProperties(prop);
 		annotatedSessionFactoryBean.setAnnotatedClasses(new Class[]{Post.class, UserAC.class});
