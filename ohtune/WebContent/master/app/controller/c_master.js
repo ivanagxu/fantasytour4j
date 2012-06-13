@@ -158,8 +158,8 @@ function DISPLAY_IMAGE_WINDOW(image,drawing)
 	);
 	
 	win.show();
-	Ext.getCmp('image-in-window').update('产品图片<br/><img src="'+ image + '" height=50%/><br/>' + 
-			'产品图纸<br/><img src="'+ drawing + '" height=50%/>');
+	Ext.getCmp('image-in-window').update('产品图片<br/><img src="'+ image + '" height=50% alt="没有图片"/><br/>' + 
+			'产品图纸<br/><img src="'+ drawing + '" height=50% alt="没有图纸" />');
 }
 
 

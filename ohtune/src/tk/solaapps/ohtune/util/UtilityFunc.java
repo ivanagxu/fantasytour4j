@@ -89,6 +89,16 @@ public class UtilityFunc {
 				 {
 					 orders.get(i).drawing = product.getName();
 				 }
+				 if(!orders.get(i).image.equals("") && !orders.get(i).image.equals(" "))
+				 {
+					 if(orders.get(i).drawing.equals(""))
+						 orders.get(i).drawing = " ";
+				 }
+				 if(!orders.get(i).drawing.equals("") && !orders.get(i).drawing.equals(" "))
+				 {
+					 if(orders.get(i).image.equals(""))
+						 orders.get(i).image = " ";
+				 }
 			}
 		}
 	}
@@ -127,6 +137,16 @@ public class UtilityFunc {
 				 {
 					 jobs.get(i).drawing = product.getName();
 				 }
+				 if(!jobs.get(i).image.equals("") && !jobs.get(i).image.equals(" "))
+				 {
+					 if(jobs.get(i).drawing.equals(""))
+						 jobs.get(i).drawing = " ";
+				 }
+				 if(!jobs.get(i).drawing.equals("") && !jobs.get(i).drawing.equals(" "))
+				 {
+					 if(jobs.get(i).image.equals(""))
+						 jobs.get(i).image = " ";
+				 }
 			}
 		}
 	}
@@ -154,8 +174,6 @@ public class UtilityFunc {
 				 {
 					 products.get(i).image = product.getName();
 				 }
-				 
-				 
 				 file = new File(product.getDrawing());
 				 if(!file.exists())
 				 {
@@ -164,6 +182,16 @@ public class UtilityFunc {
 				 else
 				 {
 					 products.get(i).drawing = product.getName();
+				 }
+				 if(!products.get(i).image.equals("") && !products.get(i).image.equals(" "))
+				 {
+					 if(products.get(i).drawing.equals(""))
+						 products.get(i).drawing = " ";
+				 }
+				 if(!products.get(i).drawing.equals("") && !products.get(i).drawing.equals(" "))
+				 {
+					 if(products.get(i).image.equals(""))
+						 products.get(i).image = " ";
 				 }
 			}
 		}
@@ -192,8 +220,6 @@ public class UtilityFunc {
 				 {
 					 products.get(i).image = product.getName();
 				 }
-				 
-				 
 				 file = new File(product.getDrawing());
 				 if(!file.exists())
 				 {
@@ -202,6 +228,16 @@ public class UtilityFunc {
 				 else
 				 {
 					 products.get(i).drawing = product.getName();
+				 }
+				 if(!products.get(i).image.equals("") && !products.get(i).image.equals(" "))
+				 {
+					 if(products.get(i).drawing.equals(""))
+						 products.get(i).drawing = " ";
+				 }
+				 if(!products.get(i).drawing.equals("") && !products.get(i).drawing.equals(" "))
+				 {
+					 if(products.get(i).image.equals(""))
+						 products.get(i).image = " ";
 				 }
 			}
 		}
