@@ -4,13 +4,14 @@
 <?php include '../shared/include.php';?>
 </head>
 	<body>
-		<div id="header">
+		<header>
 			<?php include '../shared/navigation.php';?>
-		</div>
+		</header>
 		<section>
+			<img src="../../res/images/flower.jpg" height="600"/>
 		</section>
-		<div id="footer">
+		<footer>
 			<?php include '../shared/footer.php';?>
-		</div>
+		</footer>
 	</body>
 </html>

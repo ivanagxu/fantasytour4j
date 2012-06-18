@@ -30,12 +30,12 @@ if($_POST)
 ?>
 </head>
 <body>
-	<div id="header">
+	<header>
 		<?php include '../shared/navigation.php';?>
-	</div>
-	<section>
+	</header>
+	<section class="emailsection">
 		<div align="center">
-		<?php if(!$_POST) {?>
+			<?php if(!$_POST) {?>
 			<form class="messageform" method="post" action="index.php"
 				autocomplete="off">
 				<label>Your Name:</label> <input name="name" placeholder="Goes Here"
@@ -47,9 +47,7 @@ if($_POST)
 			</form>
 			<?php }?>
 		</div>
-	</section>
-	<section class="emailsection">
-	<?php if($_POST) { //Show the message table after submit ?>
+		<?php if($_POST) { //Show the message table after submit ?>
 		<table class="emailtable">
 			<tr>
 				<td width="10%" class="emailtableth">Edit</td>
@@ -84,14 +82,12 @@ if($_POST)
 			?>
 		</table>
 		<?php }?>
-	</section>
-	<section>
-	<?php if($_POST) { //Show the back button after submit ?>
+		<?php if($_POST) { //Show the back button after submit ?>
 		<a href="index.php"><img src="../../res/images/back.gif" /> </a>
 		<?php }?>
 	</section>
-	<div id="footer">
+	<footer>
 		<?php include '../shared/footer.php';?>
-	</div>
+	</footer>
 </body>
 </html>

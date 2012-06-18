@@ -1,19 +1,50 @@
-.container{
-	margin: 0 auto;
-	width : 950px;
+.header{
+	background: url(../../res/images/hdr-bkg.png) repeat-x scroll;
+	height: 30px;
+	z-index :100;
+	top: 0px;
+	left: 0px;
+	width: 100%;
 }
 
 .homelink
 {
 	position: relative;
+	left: 100px;
 	top: 5px;
+	width: 100px;
+}
+
+.aboutlink
+{
+	position: relative;
+	left: 200px;
+	top: -13px;
+	width: 100px;
+}
+
+.servicelink
+{
+	position: relative;
+	left: 300px;
+	top: -31px;
+	width: 100px;
+}
+
+.solutionlink
+{
+	position: relative;
+	left: 400px;
+	top: -49px;
+	width: 100px;
 }
 
 .contactlink
 {
 	position: relative;
-	left: 100px;
-	top: -13px;
+	left: 500px;
+	top: -67px;
+	width: 100px;
 }
 
 a.normal:link {color:#666666;}

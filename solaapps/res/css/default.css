@@ -7,18 +7,50 @@ html, body {
 	width: 100%;
 }
 
-#header{
-	background: url(../../res/images/hdr-bkg.png) repeat-x scroll;
-	height: 30px;
-	z-index :100;
-	top: 0px;
-	left: 0px;
-	width: 100%;
+/*HTML 5 specific*/
+header,section,article,aside,footer{
+	display: block;
 }
 
-#footer{
+aside {
+	float: left;
+	width: 20%;
+	margin: 20px 0 20px 0;
+}
+
+section {
+	float: right;
+	width: 80%;
+	padding-left: 20px;
+	margin: 20px 0 20px 0px;
+	border-left: 2px dotted #b2a497;
+}
+
+
+footer {
+	clear:both !important;
 	width: 100%;
-	align: center;
+	height: 40px;
+	color:#200f08 ;
+	background:#ddd3bf;
+	padding-left: 20%;
+	
+	/*Opacity*/
+	filter:alpha(opacity=50); /* msie */  
+	-moz-opacity: 0.50; /* firefox 1.0 */  
+	-khtml-opacity: 0.50; /* webkit */  
+	opacity: 0.50; /* css 3 */
+
+	/*Gradient*/
+	background-image: -moz-linear-gradient(top, #ddd3bf, #bcae91); /* FF3.6 */
+	background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #ddd3bf),color-stop(1, #bcae91)); /* Saf4+, Chrome *
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorStr='#ddd3bf', EndColorStr='#bcae91'); /* IE6,IE7 */
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#ddd3bf', EndColorStr='#bcae91')"; /* IE8 */
+
+	/*Round corners*/
+	-moz-border-radius: 12px; /* FF1+ */
+	-webkit-border-radius: 12px; /* Saf3+, Chrome */
+	border-radius: 12px; /* Opera 10.5, IE 9 */
 }
 
 label {
