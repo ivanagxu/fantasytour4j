@@ -19,6 +19,9 @@ Ext.define('job.controller.c_job', {
             'button[text="查看订单"]' :{
             	click: this.onViewJobClick
             },
+            'menuitem[text="汇出工作列表"]' : {
+            	click : this.onExportJobClicked
+            },
             /////////For mold module
             'panel[id=mold-grid]' : {
 				render : this.onMoldGridRendered
@@ -611,5 +614,9 @@ Ext.define('job.controller.c_job', {
     	});
     	
     	Ext.data.StoreManager.lookup('jobStore').load();
+	},
+	onExportJobClicked : function()
+	{
+		window.open('ReportController?action=generateExcelByMyJob');
 	}
 });

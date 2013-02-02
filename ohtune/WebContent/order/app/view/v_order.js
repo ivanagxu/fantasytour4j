@@ -242,9 +242,23 @@ Ext.define('order.view.v_order', {
 									},{
 										text: '生产总数',
 										iconCls: 'task-icon'
+									},{
+										text: '汇出在线订单',
+										iconCls: 'task-icon'
+									},{
+										text : '汇出生产订单',
+										iconCls: 'task-icon'
 									}]
 								}
-							}],
+							}],/*
+							dockedItems : [ {
+						        xtype : 'pagingtoolbar',
+						        pageSize : 5,
+						        store : Ext.data.StoreManager.lookup('orderStore'),
+						        dock : 'bottom', 
+						        displayInfo : true,
+						        emptyMsg : 'No data to display',
+						    }] ,*/
 							viewConfig:{
 								getRowClass : function(rec, index)
 								{
@@ -406,6 +420,16 @@ Ext.define('order.view.v_order', {
 							}, {
 								xtype : 'button',
 								text : '删除订单'
+							}, {
+								xtype : 'button',
+								text : '统计',
+								menu: {
+									showSeparator: true,
+									items: [{
+										text: '汇出完成订单',
+										iconCls: 'task-icon'
+									}]
+								}
 							} ],
 							features: [{
 				                ftype: 'filters',
@@ -428,10 +452,12 @@ Ext.define('order.view.v_order', {
 			this.down('button[text="取消订单"]').hide();
 			this.down('button[text="恢复订单"]').hide();
 			this.down('button[text="删除订单"]').hide();
+			this.down('menuitem[text="汇出在线订单"]').hide();
 		}
 		else if(location.href.indexOf("order.jsp") >= 0)
 		{
 			this.down('button[text="审核订单"]').hide();
+			this.down('menuitem[text="汇出生产订单"]').hide();
 		}
 	}
 });

@@ -182,7 +182,7 @@ public class OrderController extends HttpServlet implements IOhtuneController{
 		String[] inClause = new String[] { Order.COLUMN_STATUS };
 		Collection[] in = new Collection[] { status };
 		
-		List<Order> orders = service.searchOrder(null, null ,inClause,in, 0, 10000, "id", true);
+		List<Order> orders = service.searchOrder(null, null ,inClause,in, 0, 100, "number", false);
 		JsonDataWrapper dw = new JsonDataWrapper(orders, JsonDataWrapper.TYPE_ORDER);
 		
 		UtilityFunc.fillImageDrawingForOrder(dw.getData(), service);

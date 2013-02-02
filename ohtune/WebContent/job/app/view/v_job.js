@@ -241,6 +241,9 @@ Ext.define('job.view.v_job', {
 									items: [{
 										text: '未完成数',
 										iconCls: 'task-icon'
+									},{
+										text: '汇出工作列表',
+										iconCls: 'task-icon'
 									}]
 								}
 							}],

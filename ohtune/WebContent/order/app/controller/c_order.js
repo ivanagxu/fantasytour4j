@@ -40,6 +40,15 @@ Ext.define('order.controller.c_order', {
             },
             'menuitem[text="订单总数"]' : {
             	click : this.onSummaryOrderTotalClicked
+            },
+            'menuitem[text="汇出在线订单"]' : {
+            	click : this.onExpoetOnlineOrderClicked
+            },
+            'menuitem[text="汇出完成订单"]' : {
+            	click : this.onExportCompletedOrderClicked
+            },
+            'menuitem[text="汇出生产订单"]' : {
+            	click : this.onExportProductionOrderClicked
             }
         });
         
@@ -1790,5 +1799,17 @@ Ext.define('order.controller.c_order', {
     	});
     	
     	Ext.data.StoreManager.lookup('orderStore').load();
+    },
+    onExpoetOnlineOrderClicked : function()
+    {
+    	window.open('ReportController?action=generateExcelByMyOrderList');
+    },
+    onExportCompletedOrderClicked : function()
+    {
+    	window.open('ReportController?action=generateExcelByCompletedOrderList');
+    },
+    onExportProductionOrderClicked : function()
+    {
+    	window.open('ReportController?action=generateExcelByProductionOrderList');
     }
 });

@@ -1,6 +1,9 @@
 package tk.solaapps.ohtune.controller;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -15,12 +18,16 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.CellStyle;
 
+import tk.solaapps.ohtune.model.Job;
 import tk.solaapps.ohtune.model.JobType;
+import tk.solaapps.ohtune.model.Order;
 import tk.solaapps.ohtune.model.Product;
 import tk.solaapps.ohtune.model.ProductRate;
 import tk.solaapps.ohtune.model.ProductionLog;
 import tk.solaapps.ohtune.model.UserAC;
 import tk.solaapps.ohtune.pattern.JsonDataWrapper;
+import tk.solaapps.ohtune.pattern.JsonJob;
+import tk.solaapps.ohtune.pattern.JsonOrder;
 import tk.solaapps.ohtune.pattern.OhtuneLogger;
 import tk.solaapps.ohtune.pattern.OhtuneServiceHolder;
 import tk.solaapps.ohtune.service.IOhtuneService;
@@ -76,6 +83,22 @@ public class ReportController extends HttpServlet implements IOhtuneController{
 		else if(actionName.equals("generateProductLogCSVReportByDate"))
 		{
 			generateProductLogCSVReportByDate(request, response);
+		}
+		else if(actionName.equals("generateExcelByMyOrderList"))
+		{
+			generateExcelByMyOrderList(request, response);
+		}
+		else if(actionName.equals("generateExcelByCompletedOrderList"))
+		{
+			generateExcelByCompletedOrderList(request, response);
+		}
+		else if(actionName.equals("generateExcelByProductionOrderList"))
+		{
+			generateExcelByProductionOrderList(request, response);
+		}
+		else if(actionName.equals("generateExcelByMyJob"))
+		{
+			generateExcelByMyJob(request, response);
 		}
 		else
 		{
@@ -212,6 +235,323 @@ public class ReportController extends HttpServlet implements IOhtuneController{
 		}
         
         response.setHeader("Content-Disposition", "attachment; filename=data.xls");
+		wb.write(response.getOutputStream());
+		response.getOutputStream().flush();
+		response.getOutputStream().close();
+	}
+	private void generateExcelByMyOrderList(HttpServletRequest request,	HttpServletResponse response) throws IOException
+	{
+		UserAC sessionUser = new UserAC();
+		if(request.getSession().getAttribute("user") != null)
+			sessionUser = (UserAC)request.getSession().getAttribute("user");
+		
+		SimpleDateFormat sm = new SimpleDateFormat("yyyy-MM-dd");
+		
+		IOhtuneService service = (IOhtuneService) OhtuneServiceHolder
+				.getInstence().getBeanFactory().getBean("uhtuneService");
+
+		Gson gson = service.getGson();
+		
+		List<String> status = new ArrayList<String>();
+		status.add(Order.STATUS_APPROVING);
+		status.add(Order.STATUS_PROCESSING);
+		status.add(Order.STATUS_PAUSED);
+		String[] inClause = new String[] { Order.COLUMN_STATUS };
+		Collection[] in = new Collection[] { status };
+		
+		List<Order> orders = service.searchOrder(null, null ,inClause,in, 0, 10000, "id", true);
+		JsonDataWrapper dw = new JsonDataWrapper(orders, JsonDataWrapper.TYPE_ORDER);
+		List<JsonOrder> jorders = dw.getData();
+		
+		HSSFWorkbook wb = new HSSFWorkbook();
+		HSSFSheet sheet;
+		HSSFRow row;
+		HSSFCell cell; 
+		
+		CellStyle cs = wb.createCellStyle();
+	    cs.setWrapText(true);
+	    
+	    int rowNum = 0;
+		sheet = wb.createSheet("在线订单");
+		row = sheet.createRow((short)(rowNum++));
+		row.createCell((short)0).setCellValue("优先级");
+		row.createCell((short)1).setCellValue("订单号");
+		row.createCell((short)2).setCellValue("跟单人员");
+		row.createCell((short)3).setCellValue("客户名称");
+		row.createCell((short)4).setCellValue("客户代码");
+		row.createCell((short)5).setCellValue("客户料号");
+		row.createCell((short)6).setCellValue("料号");
+		row.createCell((short)7).setCellValue("电镀要求");
+		row.createCell((short)8).setCellValue("特殊要求");
+		row.createCell((short)9).setCellValue("订单数量");
+		row.createCell((short)10).setCellValue("生产数量");
+		row.createCell((short)11).setCellValue("生产日期");
+		row.createCell((short)12).setCellValue("交货日期");
+		row.createCell((short)13).setCellValue("订单状态");
+		row.createCell((short)14).setCellValue("备注");
+		
+		for(int i = 0; i< jorders.size(); i++)
+		{
+			row = sheet.createRow((short)(rowNum++));
+			row.createCell((short)0).setCellValue(jorders.get(i).priority == 1 ? "紧急" : "普通");
+			row.createCell((short)1).setCellValue(jorders.get(i).number);
+			row.createCell((short)2).setCellValue(jorders.get(i).creator);
+			row.createCell((short)3).setCellValue(jorders.get(i).customer_name);
+			row.createCell((short)4).setCellValue(jorders.get(i).customer_name);
+			row.createCell((short)5).setCellValue(jorders.get(i).product_name);
+			row.createCell((short)6).setCellValue(jorders.get(i).product_our_name);
+			row.createCell((short)7).setCellValue(jorders.get(i).requirement_1);
+			row.createCell((short)8).setCellValue(jorders.get(i).requirement_2);
+			row.createCell((short)9).setCellValue(jorders.get(i).e_quantity);
+			row.createCell((short)10).setCellValue(jorders.get(i).quantity);
+			row.createCell((short)11).setCellValue(jorders.get(i).deadline == null ? "" : sm.format(jorders.get(i).deadline));
+			row.createCell((short)12).setCellValue(jorders.get(i).c_deadline == null ? "" : sm.format(jorders.get(i).c_deadline));
+			row.createCell((short)13).setCellValue(jorders.get(i).status);
+			row.createCell((short)14).setCellValue(jorders.get(i).requirement_4);
+		}
+		for(int i = 0; i < 15; i++)
+		{
+			sheet.autoSizeColumn((short)i);
+		}
+		
+		response.setHeader("Content-Disposition", "attachment; filename=Online Orders.xls");
+		wb.write(response.getOutputStream());
+		response.getOutputStream().flush();
+		response.getOutputStream().close();
+	}
+	private void generateExcelByCompletedOrderList(HttpServletRequest request,	HttpServletResponse response) throws IOException
+	{
+		UserAC sessionUser = new UserAC();
+		if(request.getSession().getAttribute("user") != null)
+			sessionUser = (UserAC)request.getSession().getAttribute("user");
+		
+		SimpleDateFormat sm = new SimpleDateFormat("yyyy-MM-dd");
+		
+		IOhtuneService service = (IOhtuneService) OhtuneServiceHolder
+				.getInstence().getBeanFactory().getBean("uhtuneService");
+
+		Gson gson = service.getGson();
+		
+		List<String> status = new ArrayList<String>();
+		status.add(Order.STATUS_FINISHED);
+		String[] inClause = new String[] { Order.COLUMN_STATUS };
+		Collection[] in = new Collection[] { status };
+		
+		List<Order> orders = service.searchOrder(null, null ,inClause,in, 0, 10000, "id", true);
+		JsonDataWrapper dw = new JsonDataWrapper(orders, JsonDataWrapper.TYPE_ORDER);
+		List<JsonOrder> jorders = dw.getData();
+		
+		HSSFWorkbook wb = new HSSFWorkbook();
+		HSSFSheet sheet;
+		HSSFRow row;
+		HSSFCell cell; 
+		
+		CellStyle cs = wb.createCellStyle();
+	    cs.setWrapText(true);
+	    
+	    int rowNum = 0;
+		sheet = wb.createSheet("在线订单");
+		row = sheet.createRow((short)(rowNum++));
+		row.createCell((short)0).setCellValue("优先级");
+		row.createCell((short)1).setCellValue("订单号");
+		row.createCell((short)2).setCellValue("跟单人员");
+		row.createCell((short)3).setCellValue("客户名称");
+		row.createCell((short)4).setCellValue("客户代码");
+		row.createCell((short)5).setCellValue("客户料号");
+		row.createCell((short)6).setCellValue("料号");
+		row.createCell((short)7).setCellValue("电镀要求");
+		row.createCell((short)8).setCellValue("特殊要求");
+		row.createCell((short)9).setCellValue("订单数量");
+		row.createCell((short)10).setCellValue("生产数量");
+		row.createCell((short)11).setCellValue("生产日期");
+		row.createCell((short)12).setCellValue("交货日期");
+		row.createCell((short)13).setCellValue("订单状态");
+		row.createCell((short)14).setCellValue("备注");
+		
+		for(int i = 0; i< jorders.size(); i++)
+		{
+			row = sheet.createRow((short)(rowNum++));
+			row.createCell((short)0).setCellValue(jorders.get(i).priority == 1 ? "紧急" : "普通");
+			row.createCell((short)1).setCellValue(jorders.get(i).number);
+			row.createCell((short)2).setCellValue(jorders.get(i).creator);
+			row.createCell((short)3).setCellValue(jorders.get(i).customer_name);
+			row.createCell((short)4).setCellValue(jorders.get(i).customer_name);
+			row.createCell((short)5).setCellValue(jorders.get(i).product_name);
+			row.createCell((short)6).setCellValue(jorders.get(i).product_our_name);
+			row.createCell((short)7).setCellValue(jorders.get(i).requirement_1);
+			row.createCell((short)8).setCellValue(jorders.get(i).requirement_2);
+			row.createCell((short)9).setCellValue(jorders.get(i).e_quantity);
+			row.createCell((short)10).setCellValue(jorders.get(i).quantity);
+			row.createCell((short)11).setCellValue(jorders.get(i).deadline == null ? "" : sm.format(jorders.get(i).deadline));
+			row.createCell((short)12).setCellValue(jorders.get(i).c_deadline == null ? "" : sm.format(jorders.get(i).c_deadline));
+			row.createCell((short)13).setCellValue(jorders.get(i).status);
+			row.createCell((short)14).setCellValue(jorders.get(i).requirement_4);
+		}
+		for(int i = 0; i < 15; i++)
+		{
+			sheet.autoSizeColumn((short)i);
+		}
+		
+		response.setHeader("Content-Disposition", "attachment; filename=Completed Orders.xls");
+		wb.write(response.getOutputStream());
+		response.getOutputStream().flush();
+		response.getOutputStream().close();
+	}
+	
+	private void generateExcelByProductionOrderList(HttpServletRequest request,	HttpServletResponse response) throws IOException
+	{
+		UserAC sessionUser = new UserAC();
+		if(request.getSession().getAttribute("user") != null)
+			sessionUser = (UserAC)request.getSession().getAttribute("user");
+		
+		SimpleDateFormat sm = new SimpleDateFormat("yyyy-MM-dd");
+		
+		IOhtuneService service = (IOhtuneService) OhtuneServiceHolder
+				.getInstence().getBeanFactory().getBean("uhtuneService");
+
+		Gson gson = service.getGson();
+		
+		List<String> status = new ArrayList<String>();
+		status.add(Order.STATUS_APPROVING);
+		status.add(Order.STATUS_PROCESSING);
+		status.add(Order.STATUS_PAUSED);
+		String[] inClause = new String[] { Order.COLUMN_STATUS };
+		Collection[] in = new Collection[] { status };
+		
+		List<Order> orders = service.searchOrder(null, null ,inClause,in, 0, 10000, "id", true);
+		JsonDataWrapper dw = new JsonDataWrapper(orders, JsonDataWrapper.TYPE_ORDER);
+		List<JsonOrder> jorders = dw.getData();
+		
+		HSSFWorkbook wb = new HSSFWorkbook();
+		HSSFSheet sheet;
+		HSSFRow row;
+		HSSFCell cell; 
+		
+		CellStyle cs = wb.createCellStyle();
+	    cs.setWrapText(true);
+	    
+	    int rowNum = 0;
+		sheet = wb.createSheet("在线订单");
+		row = sheet.createRow((short)(rowNum++));
+		row.createCell((short)0).setCellValue("优先级");
+		row.createCell((short)1).setCellValue("订单号");
+		row.createCell((short)2).setCellValue("跟单人员");
+		row.createCell((short)3).setCellValue("客户名称");
+		row.createCell((short)4).setCellValue("客户代码");
+		row.createCell((short)5).setCellValue("客户料号");
+		row.createCell((short)6).setCellValue("料号");
+		row.createCell((short)7).setCellValue("电镀要求");
+		row.createCell((short)8).setCellValue("特殊要求");
+		row.createCell((short)9).setCellValue("订单数量");
+		row.createCell((short)10).setCellValue("生产数量");
+		row.createCell((short)11).setCellValue("生产日期");
+		row.createCell((short)12).setCellValue("交货日期");
+		row.createCell((short)13).setCellValue("订单状态");
+		row.createCell((short)14).setCellValue("备注");
+		
+		for(int i = 0; i< jorders.size(); i++)
+		{
+			row = sheet.createRow((short)(rowNum++));
+			row.createCell((short)0).setCellValue(jorders.get(i).priority == 1 ? "紧急" : "普通");
+			row.createCell((short)1).setCellValue(jorders.get(i).number);
+			row.createCell((short)2).setCellValue(jorders.get(i).creator);
+			row.createCell((short)3).setCellValue(jorders.get(i).customer_name);
+			row.createCell((short)4).setCellValue(jorders.get(i).customer_name);
+			row.createCell((short)5).setCellValue(jorders.get(i).product_name);
+			row.createCell((short)6).setCellValue(jorders.get(i).product_our_name);
+			row.createCell((short)7).setCellValue(jorders.get(i).requirement_1);
+			row.createCell((short)8).setCellValue(jorders.get(i).requirement_2);
+			row.createCell((short)9).setCellValue(jorders.get(i).e_quantity);
+			row.createCell((short)10).setCellValue(jorders.get(i).quantity);
+			row.createCell((short)11).setCellValue(jorders.get(i).deadline == null ? "" : sm.format(jorders.get(i).deadline));
+			row.createCell((short)12).setCellValue(jorders.get(i).c_deadline == null ? "" : sm.format(jorders.get(i).c_deadline));
+			row.createCell((short)13).setCellValue(jorders.get(i).status);
+			row.createCell((short)14).setCellValue(jorders.get(i).requirement_4);
+		}
+		for(int i = 0; i < 15; i++)
+		{
+			sheet.autoSizeColumn((short)i);
+		}
+		
+		response.setHeader("Content-Disposition", "attachment; filename=Production Orders.xls");
+		wb.write(response.getOutputStream());
+		response.getOutputStream().flush();
+		response.getOutputStream().close();
+	}
+	private void generateExcelByMyJob(HttpServletRequest request,	HttpServletResponse response) throws IOException
+	{
+		UserAC sessionUser = new UserAC();
+		if(request.getSession().getAttribute("user") != null)
+			sessionUser = (UserAC)request.getSession().getAttribute("user");
+		
+		SimpleDateFormat sm = new SimpleDateFormat("yyyy-MM-dd");
+		
+		IOhtuneService service = (IOhtuneService)OhtuneServiceHolder.getInstence().getBeanFactory().getBean("uhtuneService");
+		List<Job> jobs = service.getMyJobList(sessionUser);
+		Gson gson = service.getGson();
+		JsonDataWrapper dw = new JsonDataWrapper(jobs, JsonDataWrapper.TYPE_JOB);
+		List<JsonJob> jorders = dw.getData();
+		
+		HSSFWorkbook wb = new HSSFWorkbook();
+		HSSFSheet sheet;
+		HSSFRow row;
+		HSSFCell cell; 
+		
+		CellStyle cs = wb.createCellStyle();
+	    cs.setWrapText(true);
+	    
+	    int rowNum = 0;
+		sheet = wb.createSheet("在线订单");
+		row = sheet.createRow((short)(rowNum++));
+		row.createCell((short)0).setCellValue("优先级");
+		row.createCell((short)1).setCellValue("客户代码");
+		row.createCell((short)2).setCellValue("料号");
+		row.createCell((short)3).setCellValue("电镀要求");
+		row.createCell((short)4).setCellValue("特殊要求");
+		row.createCell((short)5).setCellValue("生产总数");
+		row.createCell((short)6).setCellValue("未完成数");
+		row.createCell((short)7).setCellValue("返工总数");
+		row.createCell((short)8).setCellValue("完成总数");
+		row.createCell((short)9).setCellValue("生产期限");
+		row.createCell((short)10).setCellValue("订单状态");
+		row.createCell((short)11).setCellValue("备注");
+		row.createCell((short)12).setCellValue("订单号");
+		row.createCell((short)13).setCellValue("跟单人员");
+		row.createCell((short)14).setCellValue("所在部门");
+		row.createCell((short)15).setCellValue("更新日期");
+		row.createCell((short)16).setCellValue("工作状态");
+		row.createCell((short)17).setCellValue("前负责人");
+		row.createCell((short)18).setCellValue("负责人");
+		
+		for(int i = 0; i< jorders.size(); i++)
+		{
+			row = sheet.createRow((short)(rowNum++));
+			row.createCell((short)0).setCellValue(jorders.get(i).priority == 1 ? "紧急" : "普通");
+			row.createCell((short)1).setCellValue(jorders.get(i).customer_code);
+			row.createCell((short)2).setCellValue(jorders.get(i).product_our_name);
+			row.createCell((short)3).setCellValue(jorders.get(i).requirement1);
+			row.createCell((short)4).setCellValue(jorders.get(i).requirement2);
+			row.createCell((short)5).setCellValue(jorders.get(i).total);
+			row.createCell((short)6).setCellValue(jorders.get(i).remaining);
+			row.createCell((short)7).setCellValue(jorders.get(i).total_rejected);
+			row.createCell((short)8).setCellValue(jorders.get(i).finished);
+			row.createCell((short)9).setCellValue(jorders.get(i).order_deadline == null ? "" : sm.format(jorders.get(i).order_deadline));
+			row.createCell((short)10).setCellValue(jorders.get(i).order_status);
+			row.createCell((short)11).setCellValue(jorders.get(i).order_remark);
+			row.createCell((short)12).setCellValue(jorders.get(i).number);
+			row.createCell((short)13).setCellValue(jorders.get(i).order_user);
+			row.createCell((short)14).setCellValue(jorders.get(i).section);
+			row.createCell((short)15).setCellValue(jorders.get(i).start_date == null ? "" : sm.format(jorders.get(i).start_date));
+			row.createCell((short)16).setCellValue(jorders.get(i).status);
+			row.createCell((short)17).setCellValue(jorders.get(i).handled_by);
+			row.createCell((short)18).setCellValue(jorders.get(i).assigned_to);
+		}
+		for(int i = 0; i < 19; i++)
+		{
+			sheet.autoSizeColumn((short)i);
+		}
+		
+		response.setHeader("Content-Disposition", "attachment; filename=Production Jobs.xls");
 		wb.write(response.getOutputStream());
 		response.getOutputStream().flush();
 		response.getOutputStream().close();

@@ -89,6 +89,13 @@ public class UtilityFunc {
 				 {
 					 orders.get(i).drawing = product.getName();
 				 }
+				 if(!orders.get(i).image.equals("") || !orders.get(i).drawing.equals(""))
+				 {
+					 orders.get(i).drawing = product.getName();
+					 orders.get(i).image = product.getName();
+				 }
+				 
+				 /*
 				 if(!orders.get(i).image.equals("") && !orders.get(i).image.equals(" "))
 				 {
 					 if(orders.get(i).drawing.equals(""))
@@ -99,6 +106,7 @@ public class UtilityFunc {
 					 if(orders.get(i).image.equals(""))
 						 orders.get(i).image = " ";
 				 }
+				 */
 			}
 		}
 	}
@@ -137,6 +145,14 @@ public class UtilityFunc {
 				 {
 					 jobs.get(i).drawing = product.getName();
 				 }
+				 
+				 if(!jobs.get(i).image.equals("") || !jobs.get(i).drawing.equals(""))
+				 {
+					 jobs.get(i).drawing = product.getName();
+					 jobs.get(i).image = product.getName();
+				 }
+					 
+				 /*
 				 if(!jobs.get(i).image.equals("") && !jobs.get(i).image.equals(" "))
 				 {
 					 if(jobs.get(i).drawing.equals(""))
@@ -147,6 +163,7 @@ public class UtilityFunc {
 					 if(jobs.get(i).image.equals(""))
 						 jobs.get(i).image = " ";
 				 }
+				 */
 			}
 		}
 	}
@@ -183,6 +200,13 @@ public class UtilityFunc {
 				 {
 					 products.get(i).drawing = product.getName();
 				 }
+				 
+				 if(!products.get(i).image.equals("") || !products.get(i).drawing.equals(""))
+				 {
+					 products.get(i).drawing = product.getName();
+					 products.get(i).image = product.getName();
+				 }
+				 /*
 				 if(!products.get(i).image.equals("") && !products.get(i).image.equals(" "))
 				 {
 					 if(products.get(i).drawing.equals(""))
@@ -193,6 +217,7 @@ public class UtilityFunc {
 					 if(products.get(i).image.equals(""))
 						 products.get(i).image = " ";
 				 }
+				 */
 			}
 		}
 	}
@@ -229,6 +254,12 @@ public class UtilityFunc {
 				 {
 					 products.get(i).drawing = product.getName();
 				 }
+				 if(!products.get(i).image.equals("") || !products.get(i).drawing.equals(""))
+				 {
+					 products.get(i).drawing = product.getName();
+					 products.get(i).image = product.getName();
+				 }
+				 /*
 				 if(!products.get(i).image.equals("") && !products.get(i).image.equals(" "))
 				 {
 					 if(products.get(i).drawing.equals(""))
@@ -239,6 +270,7 @@ public class UtilityFunc {
 					 if(products.get(i).image.equals(""))
 						 products.get(i).image = " ";
 				 }
+				 */
 			}
 		}
 	}

@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.net.URL;
 import java.util.Iterator;
 import java.util.List;
 
@@ -465,6 +466,12 @@ public class ProductController extends HttpServlet implements IOhtuneController 
 			File file = new File(product.getImage());
 			if(!file.exists())
 			{
+				URL url = Thread.currentThread().getContextClassLoader().getResource("nopic.png");
+			    String fullFileName = url.getFile();
+			    file = new File(fullFileName);
+			}
+			if(!file.exists())
+			{
 				response.getOutputStream().write("产品图片不存在".getBytes("utf-8"));
 			}
 			else
@@ -515,6 +522,12 @@ public class ProductController extends HttpServlet implements IOhtuneController 
 		if(product != null && product.getDrawing() != null)
 		{
 			File file = new File(product.getDrawing());
+			if(!file.exists())
+			{
+				URL url = Thread.currentThread().getContextClassLoader().getResource("nopic.png");
+			    String fullFileName = url.getFile();
+			    file = new File(fullFileName);
+			}
 			if(!file.exists())
 			{
 				response.getOutputStream().write("产品图纸不存在".getBytes("utf-8"));

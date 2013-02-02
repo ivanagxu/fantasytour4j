@@ -90,6 +90,7 @@ function LOGOUT()
 }
 
 function GET_HEIGHT() {
+	/*
 	  var myWidth = 0, myHeight = 0;
 	  if( typeof( window.innerWidth ) == 'number' ) {
 	//Non-IE
@@ -106,7 +107,9 @@ function GET_HEIGHT() {
 	  }
 	  //window.alert( 'Width = ' + myWidth );
 	  //window.alert( 'Height = ' + myHeight );
-	  return myHeight - 130 -  Math.random() * 20;
+	  return myHeight - 150 -  Math.random() * 20;
+	  */
+	  return window.innerHeight - 200;
 }
 
 function GET_WIDTH() {
