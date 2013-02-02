@@ -3,24 +3,25 @@ Ext.define('job.view.v_job', {
 
 	alias : 'widget.job_table',
 
-	title : '',
-
 	id : 'job_table',
 	
-	layout: 'fit',
 
 	initComponent : function() {
+		
+		this.layout = 'anchor';
 
 		Ext.create('Ext.data.Store', {
 			storeId : 'jobStore',
 			model : 'JobData',
+			pageSize : 100,
 			proxy : {
 				type : 'ajax',
 				url : 'JobController?action=getMyJobList',
 				reader : {
 					type : 'json',
 					root : 'data',
-					model : 'JobData'
+					model : 'JobData',
+					totalProperty: 'total'
 				}
 			},
 			sortOnLoad: true ,
@@ -30,13 +31,15 @@ Ext.define('job.view.v_job', {
 		Ext.create('Ext.data.Store', {
 			storeId : 'orderJobStore',
 			model : 'JobData',
+			pageSize : 100,
 			proxy : {
 				type : 'ajax',
 				url : 'JobController?action=getMyJobList',
 				reader : {
 					type : 'json',
 					root : 'data',
-					model : 'JobData'
+					model : 'JobData',
+					totalProperty: 'total'
 				}
 			}
 		});
@@ -247,6 +250,12 @@ Ext.define('job.view.v_job', {
 									}]
 								}
 							}],
+							bbar: Ext.create('Ext.PagingToolbar', {
+					            store: Ext.data.StoreManager.lookup('jobStore'),
+					            displayInfo: true,
+					            displayMsg: '第 {0} - {1}条记录， 总数{2}',
+					            emptyMsg: "没有记录"
+					        }),
 							viewConfig:{
 								getRowClass : function(rec, index)
 								{

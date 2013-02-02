@@ -6,10 +6,9 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Property;
 import org.hibernate.criterion.Restrictions;
-
-import tk.solaapps.ohtune.model.Job;
 
 public abstract class BaseDao {
 	protected SessionFactory sessionFactory;
@@ -61,4 +60,26 @@ public abstract class BaseDao {
 		
 		return data;
 	}
+    
+    public long count(String[] columns, Object[] values, String[] inClause, Collection[] in)
+    {
+    	Criteria c = getSession().createCriteria(getModelClass());
+		
+		if(columns != null && values != null)
+		{
+			for(int i = 0; i < columns.length; i++)
+			{
+				c.add(Restrictions.eq(columns[i], values[i]));
+			}
+		}
+		
+		if(in != null && inClause != null)
+		{
+			for(int i = 0; i < inClause.length; i++)
+			{
+				c.add(Restrictions.in(inClause[i], in[i]));
+			}
+		}
+		return (Long)c.setProjection(Projections.rowCount()).uniqueResult();
+    }
 }

@@ -10,15 +10,59 @@ import javaQuery.j2ee.ImageResize;
 import javax.imageio.ImageIO;
 import javax.imageio.ImageReader;
 import javax.imageio.stream.ImageInputStream;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.http.HttpRequest;
 
 import tk.solaapps.ohtune.model.Product;
 import tk.solaapps.ohtune.model.ProductionLog;
 import tk.solaapps.ohtune.pattern.JsonJob;
 import tk.solaapps.ohtune.pattern.JsonOrder;
 import tk.solaapps.ohtune.pattern.JsonProduct;
+import tk.solaapps.ohtune.pattern.OhtuneLogger;
 import tk.solaapps.ohtune.service.IOhtuneService;
 
 public class UtilityFunc {
+	public static List ExtJsPagingWrapper(HttpServletRequest request, HttpServletResponse response, List data)
+	{
+		if(request == null || response == null || data == null)
+			return data;
+		
+		if(request.getParameter("start") == null || request.getParameter("limit") == null)
+			return data;
+		
+		if(data.size() == 0)
+			return data;
+		
+		try
+		{
+			int start = Integer.parseInt(request.getParameter("start"));
+			int limit = Integer.parseInt(request.getParameter("limit"));
+			
+			if(start < 0)
+				start = 0;
+			if(limit < 0)
+				limit = 0;
+			
+			if(start > data.size() - 1)
+			{
+				data.clear();
+				return data;
+			}
+			else
+			{
+				if(start + limit > data.size() - 1)
+					return data.subList(start, data.size() - 1);
+				else
+					return data.subList(start, start + limit - 1);
+			}
+		}catch(Exception e)
+		{
+			OhtuneLogger.logger.error("Paging error for url=" + request.getRequestURL() + ", ex=" + e.getMessage());
+			return data;
+		}
+	}
 	public static void compressImage(int toWidth, int toHeight, String filePath) throws IOException
 	{
 		int height = 0;

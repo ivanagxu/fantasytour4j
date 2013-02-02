@@ -12,7 +12,7 @@ import tk.solaapps.ohtune.model.ProductRate;
 import tk.solaapps.ohtune.model.UserAC;
 
 public class JsonDataWrapper {
-	private int total;
+	private long total;
 	private List data;
 	
 	public static final int TYPE_DEFAULT = 0;
@@ -93,11 +93,11 @@ public class JsonDataWrapper {
 		}
 	}
 
-	public int getTotal() {
+	public long getTotal() {
 		return total;
 	}
 
-	public void setTotal(int total) {
+	public void setTotal(long total) {
 		this.total = total;
 	}
 

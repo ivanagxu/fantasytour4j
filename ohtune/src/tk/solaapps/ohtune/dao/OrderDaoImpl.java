@@ -75,4 +75,10 @@ public class OrderDaoImpl extends BaseDao implements IOrderDao{
 	protected Class getModelClass() {
 		return Order.class;
 	}
+	
+	@Override 
+	public long countOrder(String[] columns, Object[] values, String[] inClause, Collection[] in)
+	{
+		return this.count(columns, values, inClause, in);
+	}
 }

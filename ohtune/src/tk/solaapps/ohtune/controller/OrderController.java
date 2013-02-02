@@ -149,7 +149,6 @@ public class OrderController extends HttpServlet implements IOhtuneController{
 				.getInstence().getBeanFactory().getBean("uhtuneService");
 
 		Gson gson = service.getGson();
-
 		
 		List<String> status = new ArrayList<String>();
 		status.add(Order.STATUS_APPROVING);
@@ -158,8 +157,15 @@ public class OrderController extends HttpServlet implements IOhtuneController{
 		String[] inClause = new String[] { Order.COLUMN_STATUS };
 		Collection[] in = new Collection[] { status };
 		
-		List<Order> orders = service.searchOrder(null, null ,inClause,in, 0, 10000, "id", true);
+		int start = Integer.parseInt(request.getParameter("start"));
+		int limit = Integer.parseInt(request.getParameter("limit"));
+		
+		List<Order> orders = service.searchOrder(null, null ,inClause,in, start, limit, "id", true);
 		JsonDataWrapper dw = new JsonDataWrapper(orders, JsonDataWrapper.TYPE_ORDER);
+		dw.setTotal(service.countOrder(null, null ,inClause,in));
+		
+		//Common Paging
+		//dw.setData(UtilityFunc.ExtJsPagingWrapper(request, response, dw.getData()));
 		
 		UtilityFunc.fillImageDrawingForOrder(dw.getData(), service);
 		
@@ -182,8 +188,15 @@ public class OrderController extends HttpServlet implements IOhtuneController{
 		String[] inClause = new String[] { Order.COLUMN_STATUS };
 		Collection[] in = new Collection[] { status };
 		
-		List<Order> orders = service.searchOrder(null, null ,inClause,in, 0, 100, "number", false);
+		int start = Integer.parseInt(request.getParameter("start"));
+		int limit = Integer.parseInt(request.getParameter("limit"));
+		
+		List<Order> orders = service.searchOrder(null, null ,inClause,in, start, limit, "number", false);
 		JsonDataWrapper dw = new JsonDataWrapper(orders, JsonDataWrapper.TYPE_ORDER);
+		dw.setTotal(service.countOrder(null, null ,inClause,in));
+		
+		//Common Paging
+		//dw.setData(UtilityFunc.ExtJsPagingWrapper(request, response, dw.getData()));
 		
 		UtilityFunc.fillImageDrawingForOrder(dw.getData(), service);
 		

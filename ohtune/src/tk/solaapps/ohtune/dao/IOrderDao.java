@@ -11,4 +11,5 @@ public interface IOrderDao extends IBaseDao{
 	boolean deleteOrder(Order order);
 	List<Order> searchOrder(String[] columns, Object[] values, String[] inClause, Collection[] in, int start, int limit, String orderby, boolean sortAsc);
 	Order getOrderById(Long id);
+	long countOrder(String[] columns, Object[] values, String[] inClause, Collection[] in);
 }

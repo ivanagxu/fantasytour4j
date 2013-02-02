@@ -612,5 +612,8 @@ public class OhtuneDA implements IOhtuneDA{
 		return productLogDao.getProductLogByDateAndSection(date, endDate, sectionName);
 	}
 	
-	
+	public long countOrder(String[] columns, Object[] values, String[] inClause, Collection[] in)
+	{
+		return orderDao.countOrder(columns, values, inClause, in);
+	}
 }

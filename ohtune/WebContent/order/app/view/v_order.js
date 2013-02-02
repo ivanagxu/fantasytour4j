@@ -19,7 +19,8 @@ Ext.define('order.view.v_order', {
 				reader : {
 					type : 'json',
 					root : 'data',
-					model : 'OrderData'
+					model : 'OrderData',
+					totalProperty: 'total'
 				}
 			},
 			sortOnLoad: true ,
@@ -29,13 +30,15 @@ Ext.define('order.view.v_order', {
 		Ext.create('Ext.data.Store', {
 			storeId : 'completedOrderStore',
 			model : 'OrderData',
+			pageSize : 100,
 			proxy : {
 				type : 'ajax',
 				url : 'OrderController?action=getCompletedOrderList',
 				reader : {
 					type : 'json',
 					root : 'data',
-					model : 'OrderData'
+					model : 'OrderData',
+					totalProperty: 'total'
 				}
 			},
 			sortOnLoad: true ,
@@ -250,15 +253,13 @@ Ext.define('order.view.v_order', {
 										iconCls: 'task-icon'
 									}]
 								}
-							}],/*
-							dockedItems : [ {
-						        xtype : 'pagingtoolbar',
-						        pageSize : 5,
-						        store : Ext.data.StoreManager.lookup('orderStore'),
-						        dock : 'bottom', 
-						        displayInfo : true,
-						        emptyMsg : 'No data to display',
-						    }] ,*/
+							}],
+							bbar: Ext.create('Ext.PagingToolbar', {
+					            store: Ext.data.StoreManager.lookup('orderStore'),
+					            displayInfo: true,
+					            displayMsg: '第 {0} - {1}条记录， 总数{2}',
+					            emptyMsg: "没有记录"
+					        }),
 							viewConfig:{
 								getRowClass : function(rec, index)
 								{
@@ -431,6 +432,12 @@ Ext.define('order.view.v_order', {
 									}]
 								}
 							} ],
+							bbar: Ext.create('Ext.PagingToolbar', {
+					            store: Ext.data.StoreManager.lookup('completedOrderStore'),
+					            displayInfo: true,
+					            displayMsg: '第 {0} - {1}条记录， 总数{2}',
+					            emptyMsg: "没有记录"
+					        }),
 							features: [{
 				                ftype: 'filters',
 				                encode: true,

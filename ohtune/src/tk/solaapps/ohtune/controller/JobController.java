@@ -92,11 +92,13 @@ public class JobController extends HttpServlet implements IOhtuneController{
 		if(request.getSession().getAttribute("user") != null)
 			sessionUser = (UserAC)request.getSession().getAttribute("user");
 		
-		
 		IOhtuneService service = (IOhtuneService)OhtuneServiceHolder.getInstence().getBeanFactory().getBean("uhtuneService");
 		List<Job> jobs = service.getMyJobList(sessionUser);
 		Gson gson = service.getGson();
 		JsonDataWrapper dw = new JsonDataWrapper(jobs, JsonDataWrapper.TYPE_JOB);
+		
+		//Use common Paging
+		dw.setData(UtilityFunc.ExtJsPagingWrapper(request, response, dw.getData()));
 		
 		UtilityFunc.fillImageDrawingForJob(dw.getData(), service);
 		
