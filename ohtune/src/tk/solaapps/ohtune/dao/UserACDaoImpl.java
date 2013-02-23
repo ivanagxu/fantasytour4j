@@ -59,7 +59,7 @@ public class UserACDaoImpl extends BaseDao implements IUserACDao{
 	@Override
 	public boolean updateUserAC(UserAC userac)
 	{
-		getSession().saveOrUpdate(userac);
+		getSession().update(userac);
 		return true;
 	}
 	

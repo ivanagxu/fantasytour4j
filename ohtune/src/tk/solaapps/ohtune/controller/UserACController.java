@@ -82,6 +82,10 @@ public class UserACController extends HttpServlet implements IOhtuneController{
 		{
 			deleteUser(request, response);
 		}
+		else if(actionName.equals("enableUser"))
+		{
+			enableUser(request, response);
+		}
 		else if(actionName.equals("logout"))
 		{
 			logout(request, response);
@@ -263,14 +267,40 @@ public class UserACController extends HttpServlet implements IOhtuneController{
 		JsonResponse jr = null;
 		if(user == null)
 		{
-			jr = service.genJsonResponse(false, "删除失败， 用户不存在", null);
+			jr = service.genJsonResponse(false, "注销失败， 用户不存在", null);
 			response.getOutputStream().write(gson.toJson(jr).getBytes("utf-8"));
 			return;
 		}
 		else
 		{
 			boolean success = service.deleteUser(user, sessionUser);
-			jr = service.genJsonResponse(success, success ? "删除成功" : "删除失败", null);
+			jr = service.genJsonResponse(success, success ? "注销成功" : "注销失败", null);
+			response.getOutputStream().write(gson.toJson(jr).getBytes("utf-8"));
+			return;
+		}
+	}
+	
+	private void enableUser(HttpServletRequest request, HttpServletResponse response) throws IOException
+	{
+		UserAC sessionUser = new UserAC();
+		if(request.getSession().getAttribute("user") != null)
+			sessionUser = (UserAC)request.getSession().getAttribute("user");
+		
+		String id = request.getParameter("id");
+		IOhtuneService service = (IOhtuneService)OhtuneServiceHolder.getInstence().getBeanFactory().getBean("uhtuneService");
+		UserAC user = service.getUserACById(Long.parseLong(id));
+		Gson gson = service.getGson();	
+		JsonResponse jr = null;
+		if(user == null)
+		{
+			jr = service.genJsonResponse(false, "启用失败， 用户不存在", null);
+			response.getOutputStream().write(gson.toJson(jr).getBytes("utf-8"));
+			return;
+		}
+		else
+		{
+			boolean success = service.enableUser(user, sessionUser);
+			jr = service.genJsonResponse(success, success ? "启用成功" : "启用失败", null);
 			response.getOutputStream().write(gson.toJson(jr).getBytes("utf-8"));
 			return;
 		}

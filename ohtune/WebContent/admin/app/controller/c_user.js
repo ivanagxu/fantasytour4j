@@ -15,8 +15,11 @@ Ext.define('admin.controller.c_user', {
 			'button[text=修改用户]' : {
 				click : this.onEditUserButtonClick
 			},
-			'button[text=删除用户]' : {
+			'button[text=注销用户]' : {
 				click : this.onDeleteUserButtonClick
+			},
+			'button[text=启用用户]' : {
+				click : this.onEnableUserButtonClick
 			}
 		});
 	},
@@ -196,7 +199,7 @@ Ext.define('admin.controller.c_user', {
 	},
 	onDeleteUserButtonClick : function() {
 		var win = Ext.create('Ext.window.Window', {
-			title : '删除用户',
+			title : '注销用户',
 			height : 60,
 			width : 80,
 			layout : 'fit',
@@ -211,7 +214,7 @@ Ext.define('admin.controller.c_user', {
 				items : [
 			         {
 			        	 xtype : 'box',
-			        	 html: '<table><tr height=10><td></td></tr><tr><td>是否删除该用户?</td></tr></table>'
+			        	 html: '<table><tr height=10><td></td></tr><tr><td>是否注销该用户?</td></tr></table>'
 			         },
 			         {
 			        	 xtype : 'hiddenfield',
@@ -226,7 +229,7 @@ Ext.define('admin.controller.c_user', {
             	 		 var selected = Ext.getCmp('user-grid').getSelectionModel().getSelection();
             	 		 if(selected.length == 0)
         	 			 {
-            	 			 Ext.Msg.alert("删除用户","请选择要删除的用户");
+            	 			 Ext.Msg.alert("注销用户","请选择要注销的用户");
             	 			 win.close();
             	 			 return;
         	 			 }
@@ -236,12 +239,12 @@ Ext.define('admin.controller.c_user', {
             	 		 this.up('form').getForm().submit({
             	 			url : 'UserACController?action=deleteUser',
 							success : function(form, resp) {
-								Ext.Msg.alert('删除结果', resp.result.msg);
+								Ext.Msg.alert('注销结果', resp.result.msg);
 								Ext.data.StoreManager.lookup('allUserACStore').load();
 								win.close();
 							},
 							failure : function(form, resp) {
-								Ext.Msg.alert('删除结果', resp.result.msg);
+								Ext.Msg.alert('注销结果', resp.result.msg);
 								Ext.data.StoreManager.lookup('allUserACStore').load();
 								win.close();
 							}
@@ -262,7 +265,83 @@ Ext.define('admin.controller.c_user', {
 		var selected = Ext.getCmp('user-grid').getSelectionModel().getSelection();
 		if(selected.length == 0)
 		{
-			Ext.Msg.alert("删除用户","请选择要删除的用户");
+			Ext.Msg.alert("注销用户","请选择要注销的用户");
+			return;
+		}
+		else
+		{
+			win.show();	
+		}
+	},
+	onEnableUserButtonClick : function() {
+		var win = Ext.create('Ext.window.Window', {
+			title : '启用用户',
+			height : 60,
+			width : 80,
+			layout : 'fit',
+			modal: true,
+			items : [ Ext.create('Ext.form.Panel', {
+				layout : 'anchor',
+				baseCls: 'x-plain',
+				border : false,
+				defaults : {
+					anchor : '98%'
+				},
+				items : [
+			         {
+			        	 xtype : 'box',
+			        	 html: '<table><tr height=10><td></td></tr><tr><td>是否启用该用户?</td></tr></table>'
+			         },
+			         {
+			        	 xtype : 'hiddenfield',
+			        	 name: 'id'
+			         }
+		         ],
+		         buttons: [
+                 {
+            	 	 text : '确定',
+            	 	 handler : function(){
+            	 		 
+            	 		 var selected = Ext.getCmp('user-grid').getSelectionModel().getSelection();
+            	 		 if(selected.length == 0)
+        	 			 {
+            	 			 Ext.Msg.alert("启用用户","请选择要启用的用户");
+            	 			 win.close();
+            	 			 return;
+        	 			 }
+            	 		 
+            	 		 this.up('form').down('hiddenfield[name="id"]').setValue(selected[0].data.id);
+            	 		 
+            	 		 this.up('form').getForm().submit({
+            	 			url : 'UserACController?action=enableUser',
+							success : function(form, resp) {
+								Ext.Msg.alert('启用结果', resp.result.msg);
+								Ext.data.StoreManager.lookup('allUserACStore').load();
+								win.close();
+							},
+							failure : function(form, resp) {
+								Ext.Msg.alert('启用结果', resp.result.msg);
+								Ext.data.StoreManager.lookup('allUserACStore').load();
+								win.close();
+							}
+            	 		 });
+            	 		 
+            	 	 }
+                 },
+                 {
+                	 text : '取消',
+                	 handler : function(){
+                		 win.close();
+                	 }
+                 }
+		         ]
+			})]
+		});
+		
+		var selected = Ext.getCmp('user-grid').getSelectionModel().getSelection();
+		if(selected.length == 0)
+		{
+			Ext.Msg.alert("启用用户","请选择要启用的用户");
 			return;
 		}
 		else

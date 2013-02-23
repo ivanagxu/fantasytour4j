@@ -116,12 +116,22 @@ public class OhtuneService extends OhtuneDA implements IOhtuneService {
 
 	@Override
 	public boolean deleteUser(UserAC user, UserAC operator) {
-		Post post = user.getPost();
-		
-		OhtuneLogger.info("Delete user, userid=" + user.getLogin_id() + " by " + operator.getLogin_id());
-		
-		return this.deleteUserAC(user) & this.deletePost(post);
+		OhtuneLogger.info("Disable user, userid=" + user.getLogin_id() + " by " + operator.getLogin_id());
+		boolean success = false;
+		user.setStatus("无效");
+		success = this.updateUserAC(user);
+		return success;
 	}
+	
+	@Override
+	public boolean enableUser(UserAC user, UserAC operator) {
+		OhtuneLogger.info("Enable user, userid=" + user.getLogin_id() + " by " + operator.getLogin_id());
+		boolean success = false;
+		user.setStatus("有效");
+		success = this.updateUserAC(user);
+		return success;
+	}
+
 
 	@Override
 	public boolean createOrder(Order order, List<Job> jobs, UserAC operator) {

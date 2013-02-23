@@ -217,7 +217,11 @@ Ext.define('admin.view.v_admin', {
 						    	hidden : true
 						    },
 						    {
-						    	text : '删除用户',
+						    	text : '注销用户',
+						    	xtype : 'button'
+						    },
+						    {
+						    	text: '启用用户',
 						    	xtype : 'button'
 						    }
 			            ]

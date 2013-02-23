@@ -28,6 +28,7 @@ public interface IOhtuneService extends IOhtuneDA{
 	
 	boolean createUser(UserAC user, UserAC operator);
 	boolean deleteUser(UserAC user, UserAC operator);
+	boolean enableUser(UserAC user, UserAC operator);
 	boolean createOrder(Order order, List<Job> jobs, UserAC operator);
 	boolean approveOrder(Order order, List<Job> jobs, UserAC operator);
 	boolean updateOrder(Order order, Product product, List<Job> newJobs, List<Job> deleteJobs, UserAC operator);
