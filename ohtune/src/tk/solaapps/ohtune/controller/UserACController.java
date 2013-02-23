@@ -106,9 +106,16 @@ public class UserACController extends HttpServlet implements IOhtuneController{
 		JsonResponse jr;
 		if(user != null)
 		{
-			request.getSession().setAttribute("user", user);
-			jr = service.genJsonResponse(true, "登入成功", user);
-			OhtuneLogger.info("UserController login successfully, login_id=" + login_id);
+			if (user.getStatus().equals("有效"))
+			{
+				request.getSession().setAttribute("user", user);
+				jr = service.genJsonResponse(true, "登入成功", user);
+				OhtuneLogger.info("UserController login successfully, login_id=" + login_id);
+			}
+			else
+			{
+				jr = service.genJsonResponse(false, "登入失败， 用户已经被注销", user);
+			}
 		}
 		else
 		{
