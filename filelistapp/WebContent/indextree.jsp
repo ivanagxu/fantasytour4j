@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import = "com.ivan.buildindexsheet.IndexFile" %>
+<%@ page import = "java.net.URLEncoder" %>
 <%@ taglib prefix="template" tagdir="/WEB-INF/tags" %>
 <% 
 String path = request.getParameter("path");
+System.out.println("path=" + path);
 String strLv = request.getParameter("level");
 int lv = 3;
 
@@ -58,7 +60,11 @@ session.setAttribute("iconMap", indexFile.getIdMap());
 	</form>
 	
 	<ul id="menu">
-		<li><a href='#' title='<%=indexFile.getName() %>' <%if(!indexFile.isDirectory()) {%> onclick="window.open('DownloadFileServlet?Id=<%=indexFile.getId().toString() %>')" <%} %>><img src="IndexFileIconServlet?Id=<%=indexFile.getId().toString() %>"/><%=indexFile.getName()%></a>
+		<li><a href='#' title='<%=indexFile.getName() %>' 
+				<%if(!indexFile.isDirectory()) {%> onclick="window.open('DownloadFileServlet?Id=<%=indexFile.getId().toString() %>')" <%} else if(indexFile.getParentFile() != null) { %> onclick="location.href='indextree.jsp?path=<%=URLEncoder.encode(indexFile.getAbsolutePath()) %>&level=3'" <% } %>>
+				<img src="IndexFileIconServlet?Id=<%=indexFile.getId().toString() %>"/>
+				<%=indexFile.getName()%>
+			</a>
 			<% if(indexFile.childFiles() != null) { %>
 			<ul>
 			<% for(int i = 0; i < indexFile.childFiles().length; i++) { %>
