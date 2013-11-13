@@ -71,15 +71,15 @@ public class ExchangeClient {
 			
 			if(!newUnread.equals(existingUnread))
 			{
-				System.out.print("New email arrived.");
+				System.out.println("New email arrived.");
 				client.sendToGmail(unreadEmails);
 				
 				FileOutputStream fos = new FileOutputStream(EMAIL_LOG_FILE);
 				fos.write(newUnread.getBytes());
 				fos.close();
-				System.out.print("Email log updated.");
+				System.out.println("Email log updated.");
 			}else{
-				System.out.print("No new email found.");
+				System.out.println("No new email found.");
 			}
 		}catch(Exception e){
 			e.printStackTrace();
@@ -229,6 +229,11 @@ public class ExchangeClient {
 			//message.setContent(contentHTML, "text/html; charset=utf-8");
  
 			Transport.send(message);
+			
+			tmpPDF = new File(PDF_TMP_FOLDER).listFiles();
+			for(int i = 0 ; i < tmpPDF.length; i++){
+				tmpPDF[i].delete();
+			}
  
 			System.out.println("Done");
  
