@@ -69,18 +69,18 @@ public class ExchangeClient {
 			
 			String newUnread = "" + unreadEmails.size();
 			
-			if(!newUnread.equals(existingUnread))
+			if(!newUnread.equals(existingUnread) && unreadEmails.size() > 0)
 			{
 				System.out.println("New email arrived.");
 				client.sendToGmail(unreadEmails);
-				
-				FileOutputStream fos = new FileOutputStream(EMAIL_LOG_FILE);
-				fos.write(newUnread.getBytes());
-				fos.close();
-				System.out.println("Email log updated.");
 			}else{
 				System.out.println("No new email found.");
 			}
+			
+			FileOutputStream fos = new FileOutputStream(EMAIL_LOG_FILE);
+			fos.write(newUnread.getBytes());
+			fos.close();
+			System.out.println("Email log updated.");
 		}catch(Exception e){
 			e.printStackTrace();
 		}
