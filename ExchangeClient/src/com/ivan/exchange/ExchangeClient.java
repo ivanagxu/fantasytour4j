@@ -212,7 +212,7 @@ public class ExchangeClient {
 				Document doc = new Document(PageSize.A4);
 				PdfWriter.getInstance(doc, new FileOutputStream(pdfFile));
 				doc.open();
-				doc.add(new Paragraph("[" + messages.get(i).getSubject() + "]")); 
+				doc.add(new Paragraph("[" + messages.get(i).getCreationTime().toString() + "][" + messages.get(i).getSubject() + "]")); 
 				HTMLWorker hw = new HTMLWorker(doc);
 				hw.parse(new StringReader(messages.get(i).getBodyHTML()));
 				doc.close();
