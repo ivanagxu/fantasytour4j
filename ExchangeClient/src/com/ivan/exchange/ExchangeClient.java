@@ -44,7 +44,7 @@ public class ExchangeClient {
 	private String password;
 	public static final String EMAIL_LOG_FILE = "email.log";
 	public static final String PDF_TMP_FOLDER = "tmp";
-	public static boolean debug = true;
+	public static boolean debug = false;
 
 	public static void main(String[] args) {
 		if(args.length != 3)
