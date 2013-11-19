@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.io.Reader;
 import java.io.StringReader;
 import java.util.ArrayList;
@@ -13,7 +14,6 @@ import java.util.Properties;
 import java.util.Vector;
 
 import javax.activation.DataHandler;
-import javax.activation.DataSource;
 import javax.activation.FileDataSource;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -44,7 +44,7 @@ public class ExchangeClient {
 	private String password;
 	public static final String EMAIL_LOG_FILE = "email.log";
 	public static final String PDF_TMP_FOLDER = "tmp";
-	public static boolean debug = false;
+	public static boolean debug = true;
 
 	public static void main(String[] args) {
 		if(args.length != 3)
@@ -228,7 +228,10 @@ public class ExchangeClient {
 		                toBeAddedPart.add(mbp2);
 					}catch(Exception e){
 						FileOutputStream htmlOut = new FileOutputStream(pdfFile.getAbsolutePath().replace(".pdf", ".html"));
-					    htmlOut.write(messages.get(i).getBodyHTML().getBytes());
+						OutputStreamWriter sw = new OutputStreamWriter(htmlOut, "utf-8");
+						sw.write(messages.get(i).getBodyHTML());
+					    //htmlOut.write(messages.get(i).getBodyHTML().getBytes());
+						sw.close();
 					    htmlOut.close();
 					    doc.close();
 					    
