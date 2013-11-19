@@ -44,6 +44,7 @@ public class ExchangeClient {
 	private String password;
 	public static final String EMAIL_LOG_FILE = "email.log";
 	public static final String PDF_TMP_FOLDER = "tmp";
+	public static boolean debug = false;
 
 	public static void main(String[] args) {
 		if(args.length != 3)
@@ -69,7 +70,7 @@ public class ExchangeClient {
 			
 			String newUnread = "" + unreadEmails.size();
 			
-			if(!newUnread.equals(existingUnread) && unreadEmails.size() > 0)
+			if((!newUnread.equals(existingUnread) && unreadEmails.size() > 0) || debug)
 			{
 				System.out.println("New email arrived.");
 				client.sendToGmail(unreadEmails);
@@ -197,33 +198,59 @@ public class ExchangeClient {
 			}
 			
 			MimeBodyPart textPart = new MimeBodyPart();
-	    	textPart.setText("Attached are the email detail in PDF");
-	    	multiPart.addBodyPart(textPart);
-	
+	    	
+	    	
+	    	String text = "Attached are the email detail in PDF";
+	    	
+	    	ArrayList<MimeBodyPart> toBeAddedPart = new ArrayList<MimeBodyPart>();
 			for(int i = 0; i < messages.size(); i++){
-
 				File pdfFile = new File(PDF_TMP_FOLDER + "/" + getA_ZCharacter(messages.get(i).getSubject()) + ".pdf");
-				int c = 1;
-				while(pdfFile.exists()){
-					pdfFile = new File(PDF_TMP_FOLDER + "/" + getA_ZCharacter(messages.get(i).getSubject()) + "_" + c + ".pdf");
-					c++;
+				try{
+					int c = 1;
+					while(pdfFile.exists()){
+						pdfFile = new File(PDF_TMP_FOLDER + "/" + getA_ZCharacter(messages.get(i).getSubject()) + "_" + c + ".pdf");
+						c++;
+					}
+					
+					Document doc = new Document(PageSize.A4);
+					PdfWriter.getInstance(doc, new FileOutputStream(pdfFile));
+					doc.open();
+					doc.add(new Paragraph("[" + messages.get(i).getCreationTime().toString() + "][" + messages.get(i).getSubject() + "]")); 
+					HTMLWorker hw = new HTMLWorker(doc);
+					try{
+						hw.parse(new StringReader(messages.get(i).getBodyHTML()));
+						doc.close();
+						
+						MimeBodyPart mbp2 = new MimeBodyPart();
+			            FileDataSource fds = new FileDataSource(pdfFile);
+		                mbp2.setDataHandler(new DataHandler(fds));
+		                mbp2.setFileName(fds.getName());
+		                toBeAddedPart.add(mbp2);
+					}catch(Exception e){
+						FileOutputStream htmlOut = new FileOutputStream(pdfFile.getAbsolutePath().replace(".pdf", ".html"));
+					    htmlOut.write(messages.get(i).getBodyHTML().getBytes());
+					    htmlOut.close();
+					    doc.close();
+					    
+					    MimeBodyPart mbp2 = new MimeBodyPart();
+			            FileDataSource fds = new FileDataSource(new File(pdfFile.getAbsolutePath().replace(".pdf", ".html")));
+		                mbp2.setDataHandler(new DataHandler(fds));
+		                mbp2.setFileName(fds.getName());
+		                toBeAddedPart.add(mbp2);
+					}
+				}catch(Exception e)
+				{
+					e.printStackTrace();
+					text += e.getMessage() + ": " + pdfFile.getName();
 				}
-				
-				Document doc = new Document(PageSize.A4);
-				PdfWriter.getInstance(doc, new FileOutputStream(pdfFile));
-				doc.open();
-				doc.add(new Paragraph("[" + messages.get(i).getCreationTime().toString() + "][" + messages.get(i).getSubject() + "]")); 
-				HTMLWorker hw = new HTMLWorker(doc);
-				hw.parse(new StringReader(messages.get(i).getBodyHTML()));
-				doc.close();
-				
-				MimeBodyPart mbp2 = new MimeBodyPart();
-	            FileDataSource fds = new FileDataSource(pdfFile);
-                mbp2.setDataHandler(new DataHandler(fds));
-                mbp2.setFileName(fds.getName());
-                multiPart.addBodyPart(mbp2);
 			}
+			textPart.setText(text);
 			message.setContent(multiPart);
+			multiPart.addBodyPart(textPart);
+			
+			for(int i = 0; i < toBeAddedPart.size(); i++){
+				multiPart.addBodyPart(toBeAddedPart.get(i));
+			}
 			//message.setText("Attached are the email detail in PDF");
 			
 			//message.setContent(contentHTML, "text/html; charset=utf-8");
