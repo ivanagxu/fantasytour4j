@@ -26,6 +26,8 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
+import sun.misc.BASE64Decoder;
+
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.PageSize;
@@ -44,7 +46,7 @@ public class ExchangeClient {
 	private String password;
 	public static final String EMAIL_LOG_FILE = "email.log";
 	public static final String PDF_TMP_FOLDER = "tmp";
-	public static boolean debug = false;
+	public static boolean debug = true;
 
 	public static void main(String[] args) {
 		if(args.length != 3)
@@ -55,9 +57,13 @@ public class ExchangeClient {
 		
 		ExchangeClient client = new ExchangeClient();
 		try{
-			//client.testConnect();
+			BASE64Decoder decoder = new BASE64Decoder();
 			
-			client.setPassword(args[1]);
+			String encryptedPwd = args[1];
+			
+			String password = new String(decoder.decodeBuffer(encryptedPwd), "utf-8");
+			
+			client.setPassword(password);
 			
 			client.setGmail(args[0]);
 			
