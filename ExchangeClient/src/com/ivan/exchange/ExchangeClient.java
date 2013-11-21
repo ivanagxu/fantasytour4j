@@ -117,7 +117,7 @@ public class ExchangeClient {
             if (depth > 0) {
                     //printDepth();
             		//Print folder name
-                    //System.out.println(folder.getDisplayName());
+                    System.out.println(folder.getDisplayName());
             }
             
 
@@ -125,7 +125,7 @@ public class ExchangeClient {
             if (folder.hasSubfolders()) {
                     Vector<PSTFolder> childFolders = folder.getSubFolders();
                     for (PSTFolder childFolder : childFolders) {
-                    	if(childFolder.getDisplayName().equals("Root - Mailbox") || childFolder.getDisplayName().equals("IPM_SUBTREE") || childFolder.getDisplayName().equals("收件匣"))
+                    	if(childFolder.getDisplayName().equals("Root - Mailbox") || childFolder.getDisplayName().equals("IPM_SUBTREE") || childFolder.getDisplayName().equals("收件匣") || childFolder.getDisplayName().equals("Inbox"))
                             processFolder(childFolder, showUnread);
                     }
             }
