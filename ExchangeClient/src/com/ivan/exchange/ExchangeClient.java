@@ -9,7 +9,9 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.Reader;
 import java.io.StringReader;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Properties;
 import java.util.Vector;
 
@@ -25,6 +27,8 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+
+import org.apache.commons.lang3.StringEscapeUtils;
 
 import sun.misc.BASE64Decoder;
 
@@ -42,11 +46,14 @@ import com.pff.PSTMessage;
 public class ExchangeClient {
 	
 	private ArrayList<PSTMessage> messages = new ArrayList<PSTMessage>();
+	private ArrayList<PSTMessage> commands = new ArrayList<PSTMessage>();
 	private String gmail;
 	private String password;
 	public static final String EMAIL_LOG_FILE = "email.log";
 	public static final String PDF_TMP_FOLDER = "tmp";
-	public static boolean debug = false;
+	public static final String EMAIL_COMMAND_SUBJECT_CONTAIN = "[Email notification from HP inbox]";
+	public static boolean debug = true;
+	public static boolean tryPDF = false;
 
 	public static void main(String[] args) {
 		if(args.length != 3)
@@ -69,6 +76,9 @@ public class ExchangeClient {
 			
 			ArrayList<PSTMessage> unreadEmails = client.readOst(args[2], true);
 			
+			//Process fwd command, only unread email will be processed
+			client.processCommand(unreadEmails);
+			
 			String existingUnread = "0";
 			if(new File(EMAIL_LOG_FILE).exists()){
 				existingUnread = client.readText(EMAIL_LOG_FILE);
@@ -79,7 +89,7 @@ public class ExchangeClient {
 			if((!newUnread.equals(existingUnread) && unreadEmails.size() > 0) || debug)
 			{
 				System.out.println("New email arrived.");
-				client.sendToGmail(unreadEmails);
+				//client.sendToGmail(unreadEmails);
 			}else{
 				System.out.println("No new email found.");
 			}
@@ -97,6 +107,7 @@ public class ExchangeClient {
 	public ArrayList<PSTMessage> readOst(String file, boolean showUnread){
 		try {
 			this.messages = new ArrayList<PSTMessage>();
+			this.commands = new ArrayList<PSTMessage>();
 			
             PSTFile pstFile = new PSTFile(file);
             //System.out.println(pstFile.getMessageStore().getDisplayName());
@@ -135,23 +146,30 @@ public class ExchangeClient {
                     depth++;
                     PSTMessage email = (PSTMessage)folder.getNextChild();
                     while (email != null) {
-                    	if(showUnread)
+                    	
+                    	if(email.getSubject().indexOf(EMAIL_COMMAND_SUBJECT_CONTAIN) >= 0)
                     	{
-                    		if(!email.isRead())
-                    		{
-                    			//printDepth();
+                    		commands.add(email);
+                    	}
+                    	else{
+                        	if(showUnread)
+                        	{
+                        		if(!email.isRead())
+                        		{
+                        			//printDepth();
+                        			System.out.println("Email: " + email.getSubject());
+                        			//System.out.println("Content:");
+                        			//System.out.println(email.getBodyHTML());
+                        			messages.add(email);
+                        			
+                        			//sendToGmail(email.getSubject(), email.getBodyHTML());
+                        		}
+                        	}else
+                        	{
+                        		//printDepth();
                     			System.out.println("Email: " + email.getSubject());
-                    			//System.out.println("Content:");
-                    			//System.out.println(email.getBodyHTML());
                     			messages.add(email);
-                    			
-                    			//sendToGmail(email.getSubject(), email.getBodyHTML());
-                    		}
-                    	}else
-                    	{
-                    		//printDepth();
-                			System.out.println("Email: " + email.getSubject());
-                			messages.add(email);
+                        	}
                     	}
                         email = (PSTMessage)folder.getNextChild();
                     }
@@ -167,11 +185,111 @@ public class ExchangeClient {
             System.out.print(" |- ");
     }
     
+    public void processCommand(ArrayList<PSTMessage> unreadMsgs){
+    	System.out.println("Processing email command");
+    	if(commands.size() == 0)
+    	{
+    		System.out.println("No email command");
+    		return;
+    	}
+    	
+    	ArrayList<String> notedEmails = new ArrayList<String>();
+    	ArrayList<String> followedEmails = new ArrayList<String>();
+    	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+    		
+    	//Prepare command list
+    	for(int i = 0; i < commands.size(); i++){
+    		System.out.println("Found command:");
+    		String commandStr = StringEscapeUtils.unescapeHtml3(commands.get(i).getBodyHTML());
+    		//System.out.println(commandStr);
+    		
+    		String emailsStr = "";
+    		
+    		String notedAction = "";
+    		String followedAction = "";
+    		
+    		int endIdx = commandStr.indexOf("<End>");
+    		int beginIdx = commandStr.indexOf("<Begin>");
+    		
+    		int notedIdx = commandStr.indexOf("Noted");
+    		int followedIdx = commandStr.indexOf("Followed");
+    		
+    		if(endIdx > beginIdx && beginIdx > 0)
+    		{
+    			emailsStr = commandStr.substring(beginIdx, endIdx).replace("<Begin>\n", "").replace("\r", "").replace("<br>\n", "\n");
+    			//System.out.println(emailsStr);
+    			
+    			//Get noted email
+    			if(notedIdx > 0 && notedIdx < beginIdx){
+    				notedAction = commandStr.substring(notedIdx);
+    				notedAction = notedAction.substring(0, notedAction.indexOf("<"));
+    				
+    				System.out.println("Noted Action: " + notedAction);
+    				
+    				String[] notedEmail = notedAction.replace("Noted", "").trim().split(",");
+    				
+    				if(notedAction.trim().equalsIgnoreCase("noted all")){
+    					notedEmail = emailsStr.split("\n");
+    					notedEmails.addAll(Arrays.asList(notedEmail));
+    				}
+    				else{
+    					for(int j = 0 ; j < notedEmail.length; j++){
+        					if(emailsStr.indexOf("[" + notedEmail[j].trim() + "][") >= 0){
+        						String val = emailsStr.substring(emailsStr.indexOf("[" + notedEmail[j].trim() + "]["), emailsStr.indexOf("\n", emailsStr.indexOf("[" + notedEmail[j].trim() + "]["))).trim();
+        						notedEmails.add(val);
+            					System.out.println(val);
+        					}
+        				}
+    				}
+    			}
+    			
+    			//Get followed email
+    			if(followedIdx > 0 && followedIdx < beginIdx){
+    				followedAction = commandStr.substring(followedIdx);
+    				followedAction = followedAction.substring(0, followedAction.indexOf("<"));
+    				
+    				System.out.println("Followed Action: " + followedAction);
+    				
+    				String[] followedEmail = followedAction.replace("Followed", "").trim().split(",");
+    				if(followedAction.trim().equalsIgnoreCase("followed all")){
+    					followedEmail = emailsStr.split("\n");
+    					followedEmails.addAll(Arrays.asList(followedEmail));
+    				}
+    				else{
+    					for(int j = 0 ; j < followedEmail.length; j++){
+        					if(emailsStr.indexOf("[" + followedEmail[j].trim() + "][") >= 0){
+        						String val = emailsStr.substring(emailsStr.indexOf("[" + followedEmail[j].trim() + "]["), emailsStr.indexOf("\n", emailsStr.indexOf("[" + followedEmail[j].trim() + "]["))).trim();
+        						followedEmails.add(val);
+            					System.out.println(val);
+        					}
+        				}
+    				}
+    			}
+    		}
+    	}
+    	//End preparing
+    	
+    	//Process noted email
+    	for(int i = 0; i < unreadMsgs.size(); i++){
+    		
+    		System.out.println(unreadMsgs.get(i).getDescriptorNodeId());
+    		
+			for(int j = 0; j < notedEmails.size(); j++){
+				//Process noted
+				if(notedEmails.get(j).indexOf("[" + sdf.format(unreadMsgs.get(i).getCreationTime()) + "][" + unreadMsgs.get(i).getSubject() + "]") > 0){
+					com.pff.PSTObject obj = (com.pff.PSTObject) unreadMsgs.get(i);
+					
+					//How to? this part moved to Macro of outlook
+				}
+			}
+		}
+    }
+    
     public void sendToGmail(ArrayList<PSTMessage> messages) throws DocumentException, IOException{
     	
-    	String subject = "Notification from HP email, " + messages.size() + " unread email";
+    	String subject = "[Email notification from HP inbox]";
     	
-		
+    	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
     	
     	Properties props = new Properties();
 		props.put("mail.smtp.host", "smtp.gmail.com");
@@ -206,7 +324,9 @@ public class ExchangeClient {
 			MimeBodyPart textPart = new MimeBodyPart();
 	    	
 	    	
-	    	String text = "Attached are the email detail in PDF";
+	    	String text = "Belows are the email subjects and attached are the detail(s)" + "\n\n";
+	    	
+	    	text += "<Begin>\n";
 	    	
 	    	ArrayList<MimeBodyPart> toBeAddedPart = new ArrayList<MimeBodyPart>();
 			for(int i = 0; i < messages.size(); i++){
@@ -221,18 +341,37 @@ public class ExchangeClient {
 					Document doc = new Document(PageSize.A4);
 					PdfWriter.getInstance(doc, new FileOutputStream(pdfFile));
 					doc.open();
-					doc.add(new Paragraph("[" + messages.get(i).getCreationTime().toString() + "][" + messages.get(i).getSubject() + "]")); 
+					doc.add(new Paragraph("[" + sdf.format(messages.get(i).getCreationTime()) + "][" + messages.get(i).getSubject() + "]")); 
 					HTMLWorker hw = new HTMLWorker(doc);
+					
+					text += "[" + (i+1)+ "]" + "[" + sdf.format(messages.get(i).getCreationTime()) + "][" + getA_ZCharacter(messages.get(i).getSubject()) + "]\n";
+					//boolean tryPDF = false;
 					try{
-						hw.parse(new StringReader(messages.get(i).getBodyHTML()));
-						doc.close();
-						
-						MimeBodyPart mbp2 = new MimeBodyPart();
-			            FileDataSource fds = new FileDataSource(pdfFile);
-		                mbp2.setDataHandler(new DataHandler(fds));
-		                mbp2.setFileName(fds.getName());
-		                toBeAddedPart.add(mbp2);
-					}catch(Exception e){
+						if(tryPDF){
+							hw.parse(new StringReader(messages.get(i).getBodyHTML()));
+							doc.close();
+							
+							MimeBodyPart mbp2 = new MimeBodyPart();
+				            FileDataSource fds = new FileDataSource(pdfFile);
+			                mbp2.setDataHandler(new DataHandler(fds));
+			                mbp2.setFileName(fds.getName());
+			                toBeAddedPart.add(mbp2);
+						} else{
+							FileOutputStream htmlOut = new FileOutputStream(pdfFile.getAbsolutePath().replace(".pdf", ".html"));
+							OutputStreamWriter sw = new OutputStreamWriter(htmlOut, "utf-8");
+							sw.write(messages.get(i).getBodyHTML());
+						    //htmlOut.write(messages.get(i).getBodyHTML().getBytes());
+							sw.close();
+						    htmlOut.close();
+						    doc.close();
+						    
+						    MimeBodyPart mbp2 = new MimeBodyPart();
+				            FileDataSource fds = new FileDataSource(new File(pdfFile.getAbsolutePath().replace(".pdf", ".html")));
+			                mbp2.setDataHandler(new DataHandler(fds));
+			                mbp2.setFileName(fds.getName());
+			                toBeAddedPart.add(mbp2);
+						}
+					}catch(Exception e){//Use HTML in exception
 						FileOutputStream htmlOut = new FileOutputStream(pdfFile.getAbsolutePath().replace(".pdf", ".html"));
 						OutputStreamWriter sw = new OutputStreamWriter(htmlOut, "utf-8");
 						sw.write(messages.get(i).getBodyHTML());
@@ -250,9 +389,17 @@ public class ExchangeClient {
 				}catch(Exception e)
 				{
 					e.printStackTrace();
-					text += e.getMessage() + ": " + pdfFile.getName();
+					System.out.println("Error:");
+					System.out.println(e.getMessage() + ": " + pdfFile.getName());
 				}
 			}
+			
+			text += "<End>\n\n";
+			text += "If you want to send commands for processing the below email(s), please forward this original message to your Exchange account with command:\n";
+			text += "Noted {index of your email separated by comma}/{all}\n";
+			text += "Followed {index of your email separated by comma}/{all}\n";
+			text += "If the processing emails have been read or removed from inbox, command will be skipped\n\nThanks";
+			
 			textPart.setText(text);
 			message.setContent(multiPart);
 			multiPart.addBodyPart(textPart);
@@ -317,6 +464,9 @@ public class ExchangeClient {
 		for(int i = 0; i < val.length(); i++){
 			if((val.charAt(i) <= '9' && val.charAt(i) >= '0') || (val.charAt(i) <= 'z' && val.charAt(i) >= 'A') || val.charAt(i) == ' '){
 				res += val.charAt(i);
+			}
+			else{
+				res += ' ';
 			}
 		}
 		return res;
