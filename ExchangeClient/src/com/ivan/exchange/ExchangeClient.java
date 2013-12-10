@@ -42,6 +42,7 @@ import com.pff.PSTException;
 import com.pff.PSTFile;
 import com.pff.PSTFolder;
 import com.pff.PSTMessage;
+import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 
 public class ExchangeClient {
 	
@@ -80,13 +81,20 @@ public class ExchangeClient {
 			//client.processCommand(unreadEmails);
 			
 			String existingUnread = "0";
+			String[] existingUnreadId = null;
 			if(new File(EMAIL_LOG_FILE).exists()){
 				existingUnread = client.readText(EMAIL_LOG_FILE);
+				existingUnreadId = existingUnread.split(",");
 			}
 			
 			String newUnread = "" + unreadEmails.size();
-			
-			if((!newUnread.equals(existingUnread) && unreadEmails.size() > 0) || debug)
+			String[] newUnreadid = new String[unreadEmails.size()];
+			for(int i = 0; i < unreadEmails.size(); i++)
+				newUnreadid[i] = "" + unreadEmails.get(i).getInternetArticleNumber();
+				
+			//Change compare method
+			//if((!newUnread.equals(existingUnread) && unreadEmails.size() > 0) || debug)
+			if((!Arrays.equals(existingUnreadId, newUnreadid) && unreadEmails.size() > 0) || debug)
 			{
 				System.out.println("New email arrived.");
 				client.sendToGmail(unreadEmails);
@@ -95,7 +103,11 @@ public class ExchangeClient {
 			}
 			
 			FileOutputStream fos = new FileOutputStream(EMAIL_LOG_FILE);
-			fos.write(newUnread.getBytes());
+			for(int i = 0 ; i < newUnreadid.length; i++){
+				fos.write(newUnreadid[i].getBytes());
+				if(i < newUnreadid.length - 1)
+					fos.write(",".getBytes());
+			}
 			fos.close();
 			System.out.println("Email log updated.");
 		}catch(Exception e){
