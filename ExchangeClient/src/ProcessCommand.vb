@@ -148,7 +148,11 @@ Dim olApp As Outlook.Application
                     If InStr(Replace(followedEmails, Chr(160), " "), Replace(key, Chr(160), " ")) > 0 Then
                         'MsgBox "Processing Followed: " & key
                         olMail.UnRead = False
-                        olMail.FlagStatus = olFlagMarked
+                        'olMail.FlagStatus = olFlagMarked
+                        olMail.MarkAsTask olMarkToday
+                        olMail.TaskDueDate = Now()
+                        olMail.TaskStartDate = Now()
+                        olMail.FlagRequest = "Follow Up"
                         'olMail.FlagIcon = 6
                         olMail.Save
                     End If
