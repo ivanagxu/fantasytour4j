@@ -1,47 +1,9 @@
-Private WithEvents Items As Outlook.Items
-Private Sub Application_Startup()
-  Dim olApp As Outlook.Application
-  Dim objNS As Outlook.NameSpace
-  Set olApp = Outlook.Application
-  Set objNS = olApp.GetNamespace("MAPI")
-  ' default local Inbox
-  Set Items = objNS.GetDefaultFolder(olFolderInbox).Items
-End Sub
-
-Private Sub Items_ItemAdd(ByVal item As Object)
-
-  On Error GoTo ErrorHandler
-  Dim Msg As Outlook.MailItem
-  If TypeName(item) = "MailItem" Then
-    Set Msg = item
-    ' Process command
-    If InStr(1, Msg.Subject, "[Email notification from HP inbox]") > 1 Then
-        'MsgBox "Command Received!"
-        Call ProcessCommand.Process(Msg)
-    End If
-    ' End Process
-    
-    
-    
-  End If
-ProgramExit:
-  Exit Sub
-ErrorHandler:
-  MsgBox Err.Number & " - " & Err.Description
-  Resume ProgramExit
-End Sub
-
-
-
-
-
-
 Sub Process(ByRef cmdItem As MailItem)
 
 Dim olApp As Outlook.Application
-    'MsgBox cmdItem.SenderEmailAddress
-    If InStr(1, cmdItem.Subject, "[Email notification from HP inbox]") > 0 And cmdItem.SenderEmailAddress = "ivan.xu.hp@gmail.com" Then
     
+    If InStr(1, cmdItem.Subject, "[Email notification from HP inbox]") > 0 And cmdItem.SenderEmailAddress = "ivan.xu.hp@gmail.com" Then
+        'MsgBox cmdItem.SenderEmailAddress
         Dim beginIdx
         Dim endIdx
         Dim notedIdx
@@ -81,7 +43,7 @@ Dim olApp As Outlook.Application
                     Dim tmp As Variant
                     For Each tmp In notedEmail
                         If Len(tmp) > 2 Then
-                            notedEmails = notedEmails & tmp
+                            notedEmails = notedEmails & getA_zCharacter(tmp)
                             'MsgBox "Noted :" & tmp ' Add to list
                         End If
                     Next tmp
@@ -94,7 +56,7 @@ Dim olApp As Outlook.Application
                             'MsgBox tmp2
                             Dim val As String
                             tmp2 = "[" & Trim(tmp2) & "]["
-                            val = Mid(emailsStr, InStr(1, emailsStr, tmp2, vbTextCompare), InStr(InStr(1, emailsStr, tmp2, vbTextCompare), emailsStr, Chr(13)) - InStr(1, emailsStr, tmp2, vbTextCompare))
+                            val = getA_zCharacter(Mid(emailsStr, InStr(1, emailsStr, tmp2, vbTextCompare), InStr(InStr(1, emailsStr, tmp2, vbTextCompare), emailsStr, Chr(13)) - InStr(1, emailsStr, tmp2, vbTextCompare)))
                             notedEmails = notedEmails & val
                             'MsgBox val ' Add to list
                         End If
@@ -116,7 +78,7 @@ Dim olApp As Outlook.Application
                     Dim tmp3 As Variant
                     For Each tmp3 In followedEmail
                         If Len(tmp3) > 2 Then
-                            followedEmails = followedEmails & tmp3
+                            followedEmails = followedEmails & getA_zCharacter(tmp3)
                             'MsgBox "Followed :" & tmp3 ' Add to list
                         End If
                     Next tmp3
@@ -129,7 +91,7 @@ Dim olApp As Outlook.Application
                         If InStr(1, emailsStr, "[" & Trim(tmp4) & "][") > 0 Then
                             Dim val2 As String
                             tmp4 = "[" & Trim(tmp4) & "]["
-                            val2 = Mid(emailsStr, InStr(1, emailsStr, tmp4, vbTextCompare), InStr(InStr(1, emailsStr, tmp4, vbTextCompare), emailsStr, Chr(13)) - InStr(1, emailsStr, tmp4, vbTextCompare))
+                            val2 = getA_zCharacter(Mid(emailsStr, InStr(1, emailsStr, tmp4, vbTextCompare), InStr(InStr(1, emailsStr, tmp4, vbTextCompare), emailsStr, Chr(13)) - InStr(1, emailsStr, tmp4, vbTextCompare)))
                             followedEmails = followedEmails & val2
                             'MsgBox val2 ' Add to list
                         End If
@@ -163,19 +125,19 @@ Dim olApp As Outlook.Application
                     Dim minutestr As String
                     Dim secondstr As String
                     
-                    yearstr = Format(year(olMail.CreationTime), "0000")
-                    monthstr = Format(month(olMail.CreationTime), "00")
-                    daystr = Format(day(olMail.CreationTime), "00")
-                    hourstr = Format(hour(olMail.CreationTime), "00")
-                    minutestr = Format(minute(olMail.CreationTime), "00")
-                    secondstr = Format(second(olMail.CreationTime) - 1, "00")
+                    yearstr = Format(year(olMail.SentOn), "0000")
+                    monthstr = Format(month(olMail.SentOn), "00")
+                    daystr = Format(day(olMail.SentOn), "00")
+                    hourstr = Format(hour(olMail.SentOn), "00")
+                    minutestr = Format(minute(olMail.SentOn), "00")
+                    secondstr = Format(second(olMail.SentOn), "00")
                     
-                    key = "[" & yearstr & "-" & monthstr & "-" & daystr & " " & hourstr & ":" & minutestr & ":" & secondstr & "][" & getA_zCharacter(olMail.Subject) & "]"
+                    key = getA_zCharacter("[" & yearstr & "-" & monthstr & "-" & daystr & " " & hourstr & ":" & minutestr & ":" & secondstr & "][" & olMail.Subject & "]")
                     'key = getA_zCharacter(olMail.Subject)
                     
                     'MsgBox olMail.
                     
-                    'MsgBox notedEmails
+                    'MsgBox followedEmails
                     'MsgBox key
                     'MsgBox notedEmails & Chr(13) & key
                     If InStr(Replace(notedEmails, Chr(160), " "), Replace(key, Chr(160), " ")) > 0 Then
@@ -211,7 +173,7 @@ Function getA_zCharacter(ByVal str As String) As String
         ch = Mid(str, i, 1)
         
         'If (ch <= "9" And ch >= "0") Or (ch <= "z" And ch >= "a") Or (ch <= "Z" And ch >= "A") Or ch = " ") Then
-        If (ch <= "9" And ch >= "0") Or (ch <= "z" And ch >= "a") Or (ch <= "Z" And ch >= "A") Or ch = " " Then
+        If (ch <= "9" And ch >= "0") Or (ch <= "z" And ch >= "a") Or (ch <= "Z" And ch >= "A") Then
             res = res & ch
         Else
             res = res & " "
