@@ -52,7 +52,7 @@ public class ExchangeClient {
 	public static final String EMAIL_LOG_FILE = "email.log";
 	public static final String PDF_TMP_FOLDER = "tmp";
 	public static final String EMAIL_COMMAND_SUBJECT_CONTAIN = "[Email notification from HP inbox]";
-	public static boolean debug = true;
+	public static boolean debug = false;
 	public static boolean tryPDF = false;
 
 	public static void main(String[] args) {
@@ -89,7 +89,7 @@ public class ExchangeClient {
 			if((!newUnread.equals(existingUnread) && unreadEmails.size() > 0) || debug)
 			{
 				System.out.println("New email arrived.");
-				//client.sendToGmail(unreadEmails);
+				client.sendToGmail(unreadEmails);
 			}else{
 				System.out.println("No new email found.");
 			}
@@ -186,6 +186,9 @@ public class ExchangeClient {
     }
     
     public void processCommand(ArrayList<PSTMessage> unreadMsgs){
+    	if(!debug)
+    		return;
+    	
     	System.out.println("Processing email command");
     	if(commands.size() == 0)
     	{
@@ -195,7 +198,7 @@ public class ExchangeClient {
     	
     	ArrayList<String> notedEmails = new ArrayList<String>();
     	ArrayList<String> followedEmails = new ArrayList<String>();
-    	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+    	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     		
     	//Prepare command list
     	for(int i = 0; i < commands.size(); i++){
@@ -272,7 +275,7 @@ public class ExchangeClient {
     	//Process noted email
     	for(int i = 0; i < unreadMsgs.size(); i++){
     		
-    		System.out.println(unreadMsgs.get(i).getDescriptorNodeId());
+    		//System.out.println(unreadMsgs.get(i).getDescriptorNodeId());
     		
 			for(int j = 0; j < notedEmails.size(); j++){
 				//Process noted
@@ -289,7 +292,7 @@ public class ExchangeClient {
     	
     	String subject = "[Email notification from HP inbox]";
     	
-    	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+    	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     	
     	Properties props = new Properties();
 		props.put("mail.smtp.host", "smtp.gmail.com");
@@ -462,7 +465,7 @@ public class ExchangeClient {
 			return "";
 		String res = "";
 		for(int i = 0; i < val.length(); i++){
-			if((val.charAt(i) <= '9' && val.charAt(i) >= '0') || (val.charAt(i) <= 'z' && val.charAt(i) >= 'A') || val.charAt(i) == ' '){
+			if((val.charAt(i) <= '9' && val.charAt(i) >= '0') || (val.charAt(i) <= 'z' && val.charAt(i) >= 'a') || (val.charAt(i) <= 'Z' && val.charAt(i) >= 'A') || val.charAt(i) == ' '){
 				res += val.charAt(i);
 			}
 			else{
