@@ -160,6 +160,8 @@ public class ExchangeClient {
                         			System.out.println("Email: " + email.getSubject());
                         			//System.out.println("Content:");
                         			//System.out.println(email.getBodyHTML());
+                        			//SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                        			//System.out.println(sdf.format(email.getClientSubmitTime()));
                         			messages.add(email);
                         			
                         			//sendToGmail(email.getSubject(), email.getBodyHTML());
@@ -279,7 +281,7 @@ public class ExchangeClient {
     		
 			for(int j = 0; j < notedEmails.size(); j++){
 				//Process noted
-				if(notedEmails.get(j).indexOf("[" + sdf.format(unreadMsgs.get(i).getCreationTime()) + "][" + unreadMsgs.get(i).getSubject() + "]") > 0){
+				if(notedEmails.get(j).indexOf("[" + sdf.format(unreadMsgs.get(i).getClientSubmitTime()) + "][" + unreadMsgs.get(i).getSubject() + "]") > 0){
 					com.pff.PSTObject obj = (com.pff.PSTObject) unreadMsgs.get(i);
 					
 					//How to? this part moved to Macro of outlook
@@ -344,10 +346,10 @@ public class ExchangeClient {
 					Document doc = new Document(PageSize.A4);
 					PdfWriter.getInstance(doc, new FileOutputStream(pdfFile));
 					doc.open();
-					doc.add(new Paragraph("[" + sdf.format(messages.get(i).getCreationTime()) + "][" + messages.get(i).getSubject() + "]")); 
+					doc.add(new Paragraph("[" + sdf.format(messages.get(i).getClientSubmitTime()) + "][" + messages.get(i).getSubject() + "]")); 
 					HTMLWorker hw = new HTMLWorker(doc);
 					
-					text += "[" + (i+1)+ "]" + "[" + sdf.format(messages.get(i).getCreationTime()) + "][" + getA_ZCharacter(messages.get(i).getSubject()) + "]\n";
+					text += "[" + (i+1)+ "]" + "[" + sdf.format(messages.get(i).getClientSubmitTime()) + "][" + getA_ZCharacter(messages.get(i).getSubject()) + "]\n";
 					//boolean tryPDF = false;
 					try{
 						if(tryPDF){
