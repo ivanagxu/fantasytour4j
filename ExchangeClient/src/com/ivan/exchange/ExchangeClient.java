@@ -76,8 +76,8 @@ public class ExchangeClient {
 			
 			ArrayList<PSTMessage> unreadEmails = client.readOst(args[2], true);
 			
-			//Process fwd command, only unread email will be processed
-			client.processCommand(unreadEmails);
+			//Process fwd command, only unread email will be processed, skipped
+			//client.processCommand(unreadEmails);
 			
 			String existingUnread = "0";
 			if(new File(EMAIL_LOG_FILE).exists()){
