@@ -12,6 +12,7 @@ import java.io.StringReader;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Properties;
 import java.util.Vector;
 
@@ -42,7 +43,6 @@ import com.pff.PSTException;
 import com.pff.PSTFile;
 import com.pff.PSTFolder;
 import com.pff.PSTMessage;
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 
 public class ExchangeClient {
 	
@@ -74,6 +74,8 @@ public class ExchangeClient {
 			client.setPassword(password);
 			
 			client.setGmail(args[0]);
+			
+			System.out.println("Start at " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
 			
 			ArrayList<PSTMessage> unreadEmails = client.readOst(args[2], true);
 			
@@ -169,7 +171,7 @@ public class ExchangeClient {
                         		if(!email.isRead())
                         		{
                         			//printDepth();
-                        			System.out.println("Email: " + email.getSubject());
+                        			System.out.println("Email: (" + email.getInternetArticleNumber() + ")" + email.getSubject());
                         			//System.out.println("Content:");
                         			//System.out.println(email.getBodyHTML());
                         			//SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
