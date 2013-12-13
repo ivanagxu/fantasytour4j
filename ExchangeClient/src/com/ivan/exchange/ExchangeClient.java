@@ -91,12 +91,17 @@ public class ExchangeClient {
 			
 			String newUnread = "" + unreadEmails.size();
 			String[] newUnreadid = new String[unreadEmails.size()];
+			boolean existing = true;
 			for(int i = 0; i < unreadEmails.size(); i++)
+			{
 				newUnreadid[i] = "" + unreadEmails.get(i).getInternetArticleNumber();
+				if(existingUnread.indexOf(newUnreadid[i]) < 0)
+					existing = false;
+			}
 				
 			//Change compare method
 			//if((!newUnread.equals(existingUnread) && unreadEmails.size() > 0) || debug)
-			if((!Arrays.equals(existingUnreadId, newUnreadid) && unreadEmails.size() > 0) || debug)
+			if((!Arrays.equals(existingUnreadId, newUnreadid) && unreadEmails.size() > 0 && !existing) || debug)
 			{
 				System.out.println("New email arrived.");
 				client.sendToGmail(unreadEmails);
