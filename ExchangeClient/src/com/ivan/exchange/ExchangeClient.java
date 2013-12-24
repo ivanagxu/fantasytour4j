@@ -50,6 +50,15 @@ public class ExchangeClient {
 	private ArrayList<PSTMessage> commands = new ArrayList<PSTMessage>();
 	private String gmail;
 	private String password;
+	private String folders;
+	public String getFolders() {
+		return folders;
+	}
+
+	public void setFolders(String folders) {
+		this.folders = folders;
+	}
+
 	public static final String EMAIL_LOG_FILE = "email.log";
 	public static final String PDF_TMP_FOLDER = "tmp";
 	public static final String EMAIL_COMMAND_SUBJECT_CONTAIN = "[Email notification from HP inbox]";
@@ -57,9 +66,9 @@ public class ExchangeClient {
 	public static boolean tryPDF = false;
 
 	public static void main(String[] args) {
-		if(args.length != 3)
+		if(args.length != 4)
 		{
-			System.out.println("Usage: ExchangeClient ?gmail ?pwd ?outlookfile");
+			System.out.println("Usage: ExchangeClient ?gmail ?pwd ?outlookfile ?folder");
 			return;
 		}
 		
@@ -74,6 +83,8 @@ public class ExchangeClient {
 			client.setPassword(password);
 			
 			client.setGmail(args[0]);
+			
+			client.setFolders(args[3]);
 			
 			System.out.println("Start at " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
 			
@@ -139,6 +150,11 @@ public class ExchangeClient {
 	}
 	
 	int depth = -1;
+	
+	public boolean checkFolder(String folderName){
+		return ("," + folders + ",").indexOf("," + folderName + ",") >= 0;
+	}
+	
     public void processFolder(PSTFolder folder, boolean showUnread)
                     throws PSTException, java.io.IOException
     {
@@ -147,7 +163,7 @@ public class ExchangeClient {
             if (depth > 0) {
                     //printDepth();
             		//Print folder name
-                    System.out.println(folder.getDisplayName());
+                    System.out.println("Checking email in folder: " + folder.getDisplayName());
             }
             
 
@@ -155,7 +171,8 @@ public class ExchangeClient {
             if (folder.hasSubfolders()) {
                     Vector<PSTFolder> childFolders = folder.getSubFolders();
                     for (PSTFolder childFolder : childFolders) {
-                    	if(childFolder.getDisplayName().equals("Root - Mailbox") || childFolder.getDisplayName().equals("IPM_SUBTREE") || childFolder.getDisplayName().equals("收件匣") || childFolder.getDisplayName().equals("Inbox"))
+                    	//Root - Mailbox,IPM_SUBTREE,收件匣,
+                    	if(checkFolder(childFolder.getDisplayName()) || childFolder.getDisplayName().indexOf("Root - Mailbox") >= 0 || childFolder.getDisplayName().indexOf("IPM_SUBTREE") >= 0 ||childFolder.getDisplayName().indexOf("收件匣") >= 0)
                             processFolder(childFolder, showUnread);
                     }
             }
@@ -383,7 +400,15 @@ public class ExchangeClient {
 						} else{
 							FileOutputStream htmlOut = new FileOutputStream(pdfFile.getAbsolutePath().replace(".pdf", ".html"));
 							OutputStreamWriter sw = new OutputStreamWriter(htmlOut, "utf-8");
-							sw.write(messages.get(i).getBodyHTML());
+							
+							String from = "<b>From : " + messages.get(i).getSenderName() + "</b><br/>";
+							String to = "<b>To : " + messages.get(i).getDisplayTo() +  "</b><br/>";
+							String cc = "<b>Cc : " + messages.get(i).getDisplayCC() +  "</b><br/><br/>";
+							System.out.println(from);
+							System.out.println(to);
+							System.out.println(cc);
+							//sw.write(messages.get(i).getBodyHTML());
+							sw.write(from + to + cc + messages.get(i).getBodyHTML());
 						    //htmlOut.write(messages.get(i).getBodyHTML().getBytes());
 							sw.close();
 						    htmlOut.close();
@@ -419,10 +444,10 @@ public class ExchangeClient {
 			}
 			
 			text += "<End>\n\n";
-			text += "If you want to send commands for processing the below email(s), please forward this original message to your Exchange account with command:\n";
+			text += "If you want to send commands for processing the above email(s), please forward this original message to your Exchange account with command:\n";
 			text += "Noted {index of your email separated by comma}/{all}\n";
 			text += "Followed {index of your email separated by comma}/{all}\n";
-			text += "If the processing emails have been read or removed from inbox, command will be skipped\n\nThanks";
+			text += "This command will process unread email only.\n\nThanks";
 			
 			textPart.setText(text);
 			message.setContent(multiPart);
