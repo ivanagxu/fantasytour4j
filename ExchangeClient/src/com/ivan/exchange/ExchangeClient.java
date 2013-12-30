@@ -60,12 +60,44 @@ public class ExchangeClient {
 	}
 
 	public static final String EMAIL_LOG_FILE = "email.log";
+	public static final String NOTIFICATION_FILE = "notification.dat";
 	public static final String PDF_TMP_FOLDER = "tmp";
 	public static final String EMAIL_COMMAND_SUBJECT_CONTAIN = "[Email notification from HP inbox]";
 	public static boolean debug = false;
 	public static boolean tryPDF = false;
 
 	public static void main(String[] args) {
+		//Check is actived by file "notification.dat"
+		boolean skipRun = true;
+		File notificationFile = new File(NOTIFICATION_FILE);
+		if(!notificationFile.exists()){
+			System.out.println("Checking last run time...");
+			File emailLogFile = new File(EMAIL_LOG_FILE);
+			if(emailLogFile.exists())
+			{
+				Date lastModified = new Date(emailLogFile.lastModified());
+				System.out.println("Last run time : " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(lastModified));
+				
+				Date now = new Date();
+				if(now.before(new Date(emailLogFile.lastModified() + (30 * 60000)))) {
+					skipRun = true;
+				} else
+				{
+					skipRun = false;
+				}
+			}
+			else{
+				skipRun = false;
+			}
+		} else {
+			notificationFile.delete();
+			skipRun = false;
+		}
+		
+		System.out.println("Skip run = " + skipRun);
+		if (skipRun)
+			return;
+		
 		if(args.length != 4)
 		{
 			System.out.println("Usage: ExchangeClient ?gmail ?pwd ?outlookfile ?folder");
