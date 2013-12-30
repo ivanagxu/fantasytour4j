@@ -67,6 +67,13 @@ public class ExchangeClient {
 	public static boolean tryPDF = false;
 
 	public static void main(String[] args) {
+		
+		if(args.length != 5)
+		{
+			System.out.println("Usage: ExchangeClient ?gmail ?pwd ?outlookfile ?folder ?minutes");
+			return;
+		}
+		
 		//Check is actived by file "notification.dat"
 		boolean skipRun = true;
 		File notificationFile = new File(NOTIFICATION_FILE);
@@ -79,7 +86,8 @@ public class ExchangeClient {
 				System.out.println("Last run time : " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(lastModified));
 				
 				Date now = new Date();
-				if(now.before(new Date(emailLogFile.lastModified() + (30 * 60000)))) {
+				int intervalInMinute = Integer.parseInt(args[4]);
+				if(now.before(new Date(emailLogFile.lastModified() + (intervalInMinute * 60000)))) {
 					skipRun = true;
 				} else
 				{
@@ -97,13 +105,7 @@ public class ExchangeClient {
 		System.out.println("Skip run = " + skipRun);
 		if (skipRun)
 			return;
-		
-		if(args.length != 4)
-		{
-			System.out.println("Usage: ExchangeClient ?gmail ?pwd ?outlookfile ?folder");
-			return;
-		}
-		
+
 		ExchangeClient client = new ExchangeClient();
 		try{
 			BASE64Decoder decoder = new BASE64Decoder();
