@@ -437,6 +437,7 @@ public class ExchangeClient {
 							FileOutputStream htmlOut = new FileOutputStream(pdfFile.getAbsolutePath().replace(".pdf", ".html"));
 							OutputStreamWriter sw = new OutputStreamWriter(htmlOut, "utf-8");
 							
+							String sentOn = "<b>Sent : " + sdf.format(messages.get(i).getClientSubmitTime()) + "</b><br/>";
 							String from = "<b>From : " + messages.get(i).getSenderName() + "</b><br/>";
 							String to = "<b>To : " + messages.get(i).getDisplayTo() +  "</b><br/>";
 							String cc = "<b>Cc : " + messages.get(i).getDisplayCC() +  "</b><br/><br/>";
@@ -444,7 +445,7 @@ public class ExchangeClient {
 							System.out.println(to);
 							System.out.println(cc);
 							//sw.write(messages.get(i).getBodyHTML());
-							sw.write(from + to + cc + messages.get(i).getBodyHTML());
+							sw.write(sentOn + from + to + cc + messages.get(i).getBodyHTML());
 						    //htmlOut.write(messages.get(i).getBodyHTML().getBytes());
 							sw.close();
 						    htmlOut.close();
