@@ -98,7 +98,6 @@ public class ExchangeClient {
 				skipRun = false;
 			}
 		} else {
-			notificationFile.delete();
 			skipRun = false;
 		}
 		
@@ -150,6 +149,9 @@ public class ExchangeClient {
 			{
 				System.out.println("New email arrived.");
 				client.sendToGmail(unreadEmails);
+				if(notificationFile.exists()){
+					notificationFile.delete();
+				}
 			}else{
 				System.out.println("No new email found.");
 			}
