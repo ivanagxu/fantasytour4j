@@ -12,6 +12,8 @@ import java.io.StringReader;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.Properties;
 import java.util.Vector;
@@ -406,6 +408,11 @@ public class ExchangeClient {
 	    	text += "<Begin>\n";
 	    	
 	    	ArrayList<MimeBodyPart> toBeAddedPart = new ArrayList<MimeBodyPart>();
+	    	Collections.sort(messages, new Comparator<PSTMessage>() {
+	    	    public int compare(PSTMessage msg1, PSTMessage msg2) {
+	    	    	return msg1.getClientSubmitTime().compareTo(msg2.getClientSubmitTime());
+	    	    }
+	    	});
 			for(int i = 0; i < messages.size(); i++){
 				File pdfFile = new File(PDF_TMP_FOLDER + "/" + getA_ZCharacter(messages.get(i).getSubject()) + ".pdf");
 				try{
