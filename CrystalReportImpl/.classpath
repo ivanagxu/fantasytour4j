@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
+	<classpathentry kind="lib" path="lib/activation.jar"/>
+	<classpathentry kind="lib" path="lib/aspectjrt.jar"/>
+	<classpathentry kind="lib" path="lib/axiom-api-1.2.13.jar"/>
+	<classpathentry kind="lib" path="lib/axiom-impl-1.2.13.jar"/>
+	<classpathentry kind="lib" path="lib/axis2-adb-1.6.2.jar"/>
+	<classpathentry kind="lib" path="lib/axis2-kernel-1.6.2.jar"/>
+	<classpathentry kind="lib" path="lib/axis2-saaj-1.6.2.jar"/>
+	<classpathentry kind="lib" path="lib/bcm.jar"/>
+	<classpathentry kind="lib" path="lib/biarengine.jar"/>
+	<classpathentry kind="lib" path="lib/ceaspect.jar"/>
+	<classpathentry kind="lib" path="lib/celib.jar"/>
+	<classpathentry kind="lib" path="lib/ceplugins_core.jar"/>
+	<classpathentry kind="lib" path="lib/cereports.jar"/>
+	<classpathentry kind="lib" path="lib/certjFIPS.jar"/>
+	<classpathentry kind="lib" path="lib/cesession.jar"/>
+	<classpathentry kind="lib" path="lib/com.sap.js.passport.api.jar"/>
+	<classpathentry kind="lib" path="lib/commons-logging.jar"/>
+	<classpathentry kind="lib" path="lib/corbaidl.jar"/>
+	<classpathentry kind="lib" path="lib/cryptojFIPS.jar"/>
+	<classpathentry kind="lib" path="lib/CrystalReportsSDK.jar"/>
+	<classpathentry kind="lib" path="lib/derby.jar"/>
+	<classpathentry kind="lib" path="lib/ebus405.jar"/>
+	<classpathentry kind="lib" path="lib/freessl201.jar"/>
+	<classpathentry kind="lib" path="lib/log4j.jar"/>
+	<classpathentry kind="lib" path="lib/logging.jar"/>
+	<classpathentry kind="lib" path="lib/ssljFIPS.jar"/>
+	<classpathentry kind="lib" path="lib/cecore.jar"/>
+	<classpathentry kind="lib" path="lib/CrystalEnterpriseRepository.jar"/>
+	<classpathentry kind="lib" path="lib/CrystalEnterpriseRepositoryService.jar"/>
+	<classpathentry kind="lib" path="lib/CrystalReportsRuntime.jar"/>
+	<classpathentry kind="lib" path="SL_plugins.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
