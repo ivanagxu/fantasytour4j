@@ -1,0 +1,1 @@
+http://agivan.blogcn.com/diary,24367991.shtml
